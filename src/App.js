@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import { Home, Login, Feed } from './containers/public'
+import { System, General } from './containers/system'
+import { path } from './ultils/constant'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-screen h-screen">
+      <Routes>
+
+        {/*Public routes */}
+        <Route path={path.HOME} element={<Home />}>
+          <Route path={path.FEED} element={<Feed />} />
+        </Route>
+
+        {/*Login route */}
+        <Route path={path.LOGIN} element={<Login />} />
+
+        {/*Private routes */}
+        <Route path={path.SYSTEM} element={<System />} >
+          <Route path={path.GENERAL} element={<General />} />
+        </Route>
+
+      </Routes>
     </div>
   );
 }
