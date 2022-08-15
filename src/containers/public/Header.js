@@ -9,10 +9,10 @@ const Header = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoggedIn } = useSelector(state => state.auth)
+    const { isLoggedIn, userCurrent } = useSelector(state => state.auth)
     return (
         <div className='w-full flex items-center gap-5 py-5 justify-center' >
-            Header here
+            {isLoggedIn && <small>{`xin chào ${userCurrent?.name}`}</small>}
             {!isLoggedIn && <>
                 <Button
                     text={'Đăng nhập'}
@@ -26,12 +26,20 @@ const Header = () => {
                     textColor='text-white'
                     onClick={() => navigate('/login', { state: { flag: true } })}
                 /></>}
-            {isLoggedIn && <Button
-                text={'Đăng xuất'}
-                bgColor='bg-red-700'
-                textColor='text-white'
-                onClick={() => dispatch(actions.logout())}
-            />}
+            {isLoggedIn && <>
+                <Button
+                    text={'Đăng xuất'}
+                    bgColor='bg-red-700'
+                    textColor='text-white'
+                    onClick={() => dispatch(actions.logout())}
+                />
+                <Button
+                    text={'Quản lý'}
+                    bgColor='bg-sky-700'
+                    textColor='text-white'
+                    onClick={() => navigate('/system/')}
+                />
+            </>}
         </div>
     )
 }

@@ -5,6 +5,7 @@ const actionTypes = {
     LOGOUT: 'LOGOUT',
     REGISTER_SUCCESS: 'REGISTER_SUCCESS',
     REGISTER_FAIL: 'REGISTER_FAIL',
+    GET_CURRENT: 'GET_CURRENT'
 
     // user
     // product

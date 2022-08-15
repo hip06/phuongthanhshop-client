@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import introVideo from '../../assets/intro.mp4'
-import { InputField, Button } from '../../components'
+import { InputField, Button, Loading } from '../../components'
 import * as actions from '../../store/actions'
 import { validateLogin } from '../../ultils/validate'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,9 @@ import { useNavigate, Link, useLocation } from 'react-router-dom'
 import swal from 'sweetalert2'
 
 const Login = () => {
+    const location = useLocation()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [payload, setPayload] = useState({
         email: '',
         password: '',
@@ -15,15 +18,14 @@ const Login = () => {
         password2: '',
         name: ''
     })
-    const location = useLocation()
     const [isRegister, setIsRegister] = useState(location?.state?.flag)
     const [isPhone, setIsPhone] = useState(false)
     const [invalidFields, setInvalidFields] = useState([])
     const { isLoggedIn, msg } = useSelector(state => state.auth)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        setIsLoading(false)
         isLoggedIn && setPayload({
             email: '',
             password: '',
@@ -34,6 +36,7 @@ const Login = () => {
         isLoggedIn && navigate('/')
     }, [isLoggedIn])
     useEffect(() => {
+        setIsLoading(false)
         msg && swal.fire('Oops!', msg, 'error')
     }, [msg])
 
@@ -50,11 +53,14 @@ const Login = () => {
             password: payload.password
         }
         let result = validateLogin(finalPayload, setInvalidFields, payload)
-        if (result === 0) dispatch(actions.register(finalPayload))
+        if (result === 0) {
+            setIsLoading(true)
+            isRegister ? dispatch(actions.register(finalPayload)) : dispatch(actions.login(finalPayload))
+        }
     }
-
     return (
         <div className='w-full h-full relative' >
+            {isLoading && <Loading />}
             <video
                 src={introVideo}
                 muted

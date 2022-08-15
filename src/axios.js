@@ -6,7 +6,10 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use(function (config) {
-    // Do something before request is sent
+    let token = window.localStorage.getItem('persist:auth') && JSON.parse(window.localStorage.getItem('persist:auth'))?.accessToken
+    if (token) config.headers = {
+        authorization: token
+    }
     return config;
 }, function (error) {
     // Do something with request error

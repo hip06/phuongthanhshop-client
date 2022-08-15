@@ -13,8 +13,13 @@ module.exports = {
         'overlay-70': 'rgba(0,0,0,0.7)',
         'overlay-30': 'rgba(0,0,0,0.3)',
         'overlay-80': 'rgba(0,0,0,0.8)',
+      },
+      width: {
+        '256': '256px',
+        'r256': 'calc(100% - 256px)'
       }
     },
   },
   plugins: [],
+  mode: 'jit'
 }
