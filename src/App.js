@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, Feed } from './containers/public'
-import { System, General, CreateProduct, ManageProduct } from './containers/system'
+import { System, General, CreateProduct, ManageProduct,ManageCategory } from './containers/system'
 import { path } from './ultils/constant'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from './store/actions'
@@ -32,6 +32,7 @@ function App() {
           <Route path={path.GENERAL} element={<General />} />
           <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
           <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
+          <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
         </Route>
 
       </Routes>

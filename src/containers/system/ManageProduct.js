@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+
 
 const ManageProduct = () => {
+    
     return (
-        <div>ManageProduct</div>
-    )
+        <>
+           <p>ManageProduct</p>
+        </>
+    );
 }
 
 export default ManageProduct
