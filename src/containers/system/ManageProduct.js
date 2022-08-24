@@ -5,7 +5,10 @@ import searchIcon from "../../assets/icon/search.svg";
 import sortIcon from "../../assets/icon/sort.svg";
 import { FiSearch } from "react-icons/fi";
 import { BiSortAlt2 } from "react-icons/bi";
+import { useState } from "react";
+
 const ManageProduct = () => {
+  const [addAll, setAddAll] = useState(false);
   const tempData = [
     {
       image: "",
@@ -27,6 +30,20 @@ const ManageProduct = () => {
     },
   ];
 
+  if (addAll) {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    console.log(checkboxs);
+    checkboxs.map((checkbox) => {
+      checkbox.checked = "checked";
+    });
+  } else {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    console.log(checkboxs);
+    checkboxs.map((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
+
   const renderProductList = tempData.map((product, i) => {
     return (
       <div
@@ -34,7 +51,10 @@ const ManageProduct = () => {
         className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px] font-bold text-xl "
       >
         <div className="w-[10%] flex justify-center">
-          <input type="checkbox" className="h-[17.5px] w-[17.5px]"></input>
+          <input
+            type="checkbox"
+            className="h-[17.5px] w-[17.5px] checkbox"
+          ></input>
         </div>
         <div className=" w-[10%] flex justify-center">
           <img src={image} />
@@ -61,7 +81,13 @@ const ManageProduct = () => {
 
       <div className="flex w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
         <div className="w-[25%] pl-[30px] flex items-center justify-around">
-          <input type="checkbox" className="h-[17.5px] w-[17.5px]"></input>
+          <input
+            type="checkbox"
+            className="h-[17.5px] w-[17.5px]"
+            onClick={() => {
+              setAddAll(!addAll);
+            }}
+          ></input>
           <div className="font-bold text-xl">
             <p> Đã chọn: 0</p>
           </div>
