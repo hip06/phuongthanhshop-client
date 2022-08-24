@@ -3,8 +3,10 @@ import { ButtonMedium, ButtonSmall } from '../../components/Button';
 import image from '../../assets/temp.png';
 import searchIcon from "../../assets/icon/search.svg";
 import sortIcon from "../../assets/icon/sort.svg";
+import {useState} from 'react'
 
 const ManageProduct = () => {
+    const [isCheckAll,setIsCheckAll] =useState(false);  
     const tempData = [{
         image: '',
         name: 'Hop com cua anh Hiep',
@@ -21,12 +23,12 @@ const ManageProduct = () => {
         category: 'Gia dung',
         price: '150.000d'
     }]
-
+    const checkbox= isCheckAll?<input type='checkbox' className='h-[17.5px] w-[17.5px]' checked></input>: <input type='checkbox' className='h-[17.5px] w-[17.5px]' ></input>
     const renderProductList = tempData.map((product, i) => {
         return (
             <div key={i} className='flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px] font-bold text-xl'>
                 <div className='w-[3%] pl-[30px] '>
-                    <input type='checkbox' className='h-[17.5px] w-[17.5px]'></input>
+                    {checkbox}
                 </div>
                 <div className=' w-[15%] pl-[70px]'>
                     <img src={image} />
@@ -51,7 +53,7 @@ const ManageProduct = () => {
             <h1 className='text-3xl'>Quản lí sản phẩm</h1>
             <div className='flex w-full items-center'>
                 <div className='w-[10%] pl-[30px] '>
-                    <input type='checkbox' className='h-[28px] w-[28px]'></input>
+                    <input type='checkbox' className='h-[28px] w-[28px]' onClick={()=>{setIsCheckAll(!isCheckAll)}}></input>
                 </div>
                 <div className='font-bold text-2xl'>
                     <p> Đã chọn: 0</p>
