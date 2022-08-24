@@ -8,7 +8,7 @@ const System = () => {
     const [isShowSidebar, setIsShowSidebar] = useState(true)
 
     return (
-        <div className='flex h-screen w-screen bg-gray-100' >
+        <div className='flex h-screen w-screen bg-white' >
             {isShowSidebar && <Sidebar />}
             <div className={`${isShowSidebar ? 'w-r256' : 'w-full'} h-full`} >
                 <Header setIsShowSidebar={setIsShowSidebar} />
