@@ -11,6 +11,12 @@ const Button = ({ text, bgColor, textColor, onClick, fullWidth }) => {
         </button>
     )
 }
+export const ButtonSmall=({content,color})=>{
+    
+    return (  
+        <button className="text-base text-white px-[15px] py-[9px] rounded-lg hover:-translate-y-0.5 transition-all ease-in-out active:translate-y-0.5 mr-[20px]" style={{backgroundColor:color}}>{content}</button>
+    );
+}
 
 export const ButtonMedium=({content,color})=>{
     

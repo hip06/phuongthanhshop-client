@@ -21,7 +21,7 @@ const ManageCategory = () => {
                     <p className=' text-xl font-bold '>{cate.date}</p>
                 </div>
                 <ButtonMedium content='Sửa' color='#4ED14B'></ButtonMedium>
-                <ButtonMedium content='Mua' color='#CF2B2B'></ButtonMedium>
+                <ButtonMedium content='Xóa' color='#CF2B2B'></ButtonMedium>
             </div>
         )
     });
