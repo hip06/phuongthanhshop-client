@@ -26,13 +26,15 @@ export const register = (payload) => async (dispatch) => {
 export const login = (payload) => async (dispatch) => {
   try {
     const response = await apiLogin.post(payload);
-    if (response?.data.status === 0)
+    console.log(response);
+    if (response?.status === 0) {
+      console.log(1);
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
-        token: response.data.token,
-        userCurrent: response.data.dataCurrent,
+        token: response.token,
+        userCurrent: response.dataCurrent,
       });
-    else
+    } else
       dispatch({
         type: actionTypes.LOGIN_FAIL,
         message: response.data.message,
