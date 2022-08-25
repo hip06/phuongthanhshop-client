@@ -1,13 +1,8 @@
-import axios from '../axios'
+import axiosClients from "../axiosClients";
 
-export const apiGetCurrent = () => new Promise(async (resolve, reject) => {
-    try {
-        const response = await axios({
-            method: 'get',
-            url: '/api/v1/user/get-current',
-        })
-        resolve(response)
-    } catch (error) {
-        reject(error)
-    }
-})
+export const apiGetCurrent = {
+  get: (data) => {
+    const url = "/api/v1/user/get-current";
+    return axiosClients.post(url, data);
+  },
+};

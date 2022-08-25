@@ -1,26 +1,15 @@
-import axios from '../axios'
+import axiosClients from "../axiosClients";
 
-export const apiRegister = (data) => new Promise(async (resolve, reject) => {
-    try {
-        const response = await axios({
-            method: 'post',
-            url: '/api/v1/auth/register',
-            data
-        })
-        resolve(response)
-    } catch (error) {
-        reject(error)
-    }
-})
-export const apiLogin = (data) => new Promise(async (resolve, reject) => {
-    try {
-        const response = await axios({
-            method: 'post',
-            url: '/api/v1/auth/login',
-            data
-        })
-        resolve(response)
-    } catch (error) {
-        reject(error)
-    }
-})
+export const apiLogin = {
+  post: (data) => {
+    const url = "/api/v1/auth/login";
+    return axiosClients.post(url, data);
+  },
+};
+
+export const apiRegister = {
+  post: (data) => {
+    const url = "/api/v1/auth/register";
+    return axiosClients.post(url, data);
+  },
+};
