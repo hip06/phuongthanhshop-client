@@ -11,6 +11,7 @@ export const path = {
   CREATE_PRODUCT: "create",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
+  USER:'user'
 };
 export const adminMenu = [
   {
