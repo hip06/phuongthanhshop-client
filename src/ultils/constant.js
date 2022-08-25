@@ -1,21 +1,48 @@
-import icons from "./icons"
+import icons from "./icons";
 
-const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons
+const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 
 export const path = {
-    HOME: '/*',
-    LOGIN: '/login',
-    SYSTEM: '/system/*',
-    FEED: '*',
-    GENERAL: '*',
-    CREATE_PRODUCT: 'create',
-    MANAGE_PRODUCT: 'manage-product',
-    MANAGE_CATEGORY: 'manage-category',
-}
+  HOME: "/*",
+  LOGIN: "/login",
+  SYSTEM: "/system/*",
+  FEED: "*",
+  GENERAL: "*",
+  CREATE_PRODUCT: "create",
+  MANAGE_PRODUCT: "manage-product",
+  MANAGE_CATEGORY: "manage-category",
+};
 export const adminMenu = [
-    { name: 'Dashboard', path: '/system/', icon: <BsSpeedometer2 size={24} /> },
-    { name: 'Quản lý sản phẩm', path: '/system/manage-product', icon: <RiProductHuntLine size={24} /> },
-    // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
-    { name: 'Thêm sản phẩm', path: '/system/create', icon: <IoIosCreate size={24} /> },
-    { name: 'Quản lí gian hàng', path: '/system/manage-category', icon: <IoIosCreate size={24} /> },
-]
+  {
+    name: "Tổng sản phẩm",
+    path: "/system/",
+    icon: <BsSpeedometer2 size={24} />,
+  },
+  {
+    name: "Sản phẩm",
+    path: "/system/manage-product",
+    icon: <RiProductHuntLine size={24} />,
+  },
+  {
+    name: "Người dùng",
+    path: "/system/user",
+    icon: <RiProductHuntLine size={24} />,
+  },
+  {
+    name: "Hóa đơn",
+    path: "/system/bill",
+    icon: <RiProductHuntLine size={24} />,
+  },
+  {
+    name: "Quản lý gian hàng",
+    path: "/system/manage-category",
+    icon: <RiProductHuntLine size={24} />,
+  },
+  { name: "Thống kê", path: "/system/", icon: <RiProductHuntLine size={24} /> },
+  // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
+  {
+    name: "Thêm sản phẩm",
+    path: "/system/create",
+    icon: <IoIosCreate size={24} />,
+  },
+];
