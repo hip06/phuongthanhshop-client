@@ -1,20 +1,4 @@
 import React, { memo } from 'react'
-import ApiCategory from '../apis/category';
-
-const handlerAction = (action) => {
-    switch (action.type) {
-        case "DELETE":
-            const id = action.id
-            const deleteCategory = async () => {
-                const res = await ApiCategory.delete({ id });
-                console.log(res);
-            }
-            deleteCategory();
-            break;
-        default:
-
-    }
-}
 
 const Button = ({ text, bgColor, textColor, onClick, fullWidth }) => {
     return (
@@ -27,24 +11,35 @@ const Button = ({ text, bgColor, textColor, onClick, fullWidth }) => {
         </button>
     )
 }
-export const ButtonSmall = ({ content, color, onAction }) => {
+export const ButtonSmall = ({ content, color }) => {
+
     return (
         <button className="text-base text-white px-[15px] py-[9px] rounded-lg hover:-translate-y-0.5 transition-all ease-in-out active:translate-y-0.5 mr-[20px]" style={{ backgroundColor: color }}>{content}</button>
     );
 }
 
-export const ButtonMedium = ({ content, color, onAction }) => {
-
+export const ButtonMedium = ({ content, color }) => {
 
     return (
-        <button onClick={() => { handlerAction(onAction) }} className="text-base text-white px-10 py-5 rounded-lg hover:-translate-y-0.5 transition-all ease-in-out active:translate-y-0.5 mr-[20px]" style={{ backgroundColor: color }}>{content}</button>
+        <button className="text-base text-white px-10 py-5 rounded-lg hover:-translate-y-0.5 transition-all ease-in-out active:translate-y-0.5 mr-[20px]" style={{ backgroundColor: color }}>{content}</button>
     );
 }
-export const ButtonLarge = ({ content, color, onAction }) => {
-
+export const ButtonLarge = ({ content, color }) => {
 
     return (
         <button className="text-base text-white px-16 py-5 rounded-lg hover:-translate-y-0.5 transition-all ease-in-out active:translate-y-0.5 mr-[20px]" style={{ backgroundColor: color }}>{content}</button>
+    );
+}
+
+export const ButtonCtWidth = ({ content, color, width, height, onAction }) => {
+
+    return (
+        <button className={`text-base text-white 
+        px-${width} py-${height} rounded-lg 
+        hover:-translate-y-0.5 transition-all 
+        ease-in-out active:translate-y-0.5 
+        mr-[20px] bg-[${color}]`}
+            onClick={() => onAction()}>{content}</button>
     );
 }
 
