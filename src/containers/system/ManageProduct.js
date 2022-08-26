@@ -5,46 +5,37 @@ import searchIcon from "../../assets/icon/search.svg";
 import sortIcon from "../../assets/icon/sort.svg";
 import { FiSearch } from "react-icons/fi";
 import { BiSortAlt2 } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ApiGetProduct from '../../apis/product';
+import { BsCheckLg } from "react-icons/bs";
 
 const ManageProduct = () => {
   const [addAll, setAddAll] = useState(false);
-  const tempData = [
-    {
-      image: "",
-      name: "Hop com cua anh Hiep",
-      category: "Gia dung",
-      price: "150.000d",
-    },
-    {
-      image: "",
-      name: "Hop com cua anh Hiep",
-      category: "Gia dung",
-      price: "150.000d",
-    },
-    {
-      image: "",
-      name: "Hop com cua anh Hiep",
-      category: "Gia dung",
-      price: "150.000d",
-    },
-  ];
-
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await ApiGetProduct.getAll();
+      const data = (Object.values(res.data['0']));
+      setProducts(data[0]);
+      console.log(products);
+    }
+    fetchProducts();
+  }, [])
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
-    console.log(checkboxs);
     checkboxs.map((checkbox) => {
       checkbox.checked = "checked";
     });
   } else {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
-    console.log(checkboxs);
     checkboxs.map((checkbox) => {
       checkbox.checked = false;
     });
   }
-
-  const renderProductList = tempData.map((product, i) => {
+  products.map((product) => {return <div>
+    <p>{product.id}</p>
+  </div>})
+  const renderProductList = products.map((product, i) => {
     return (
       <div
         key={i}
@@ -63,10 +54,10 @@ const ManageProduct = () => {
           <p>{product.name}</p>
         </div>
         <div className="w-[20%] flex justify-center">
-          <p>{product.category}</p>
+          <p>{product.category.value}</p>
         </div>
         <div className="w-[15%] flex justify-center">
-          <p>{product.price}</p>
+          <p>{product.costPerUnit}</p>
         </div>
         <div className="flex w-[20%] justify-around ">
           <ButtonMedium content="Sửa" color="#4ED14B"></ButtonMedium>

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Feed } from "./containers/public";
+import { Home, Login, Feed, Detail } from "./containers/public";
 import {
   System,
   General,
@@ -28,6 +28,7 @@ function App() {
         {/*Public routes */}
         <Route path={path.HOME} element={<Home />}>
           <Route path={path.FEED} element={<Feed />} />
+          <Route path={path.DETAILS} element={<Detail />} />
         </Route>
 
         {/*Login route */}

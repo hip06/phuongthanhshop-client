@@ -3,9 +3,10 @@ import icons from "./icons";
 const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 
 export const path = {
-  HOME: "/*",
   LOGIN: "/login",
   SYSTEM: "/system/*",
+  DETAILS: "/details",
+  HOME: "/:slug",
   FEED: "*",
   GENERAL: "*",
   CREATE_PRODUCT: "create",
