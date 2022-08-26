@@ -6,13 +6,13 @@ export const path = {
   LOGIN: "/login",
   SYSTEM: "/system/*",
   DETAILS: "/details",
-  HOME: "/:slug",
+  HOME: "/",
   FEED: "*",
   GENERAL: "*",
   CREATE_PRODUCT: "create",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
-  USER:'user'
+  USER: "user",
 };
 export const adminMenu = [
   {
@@ -40,7 +40,7 @@ export const adminMenu = [
     path: "/system/manage-category",
     icon: <RiProductHuntLine size={24} />,
   },
-  { name: "Thống kê", path: "/system/", icon: <RiProductHuntLine size={24} /> },
+  { name: "Thống kê", path: "", icon: <RiProductHuntLine size={24} /> },
   // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
   {
     name: "Thêm sản phẩm",
