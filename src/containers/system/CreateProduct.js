@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
+import InputCustomWidth from '../../components/InputCtWidth'
 
 const CreateProduct = () => {
+    const [test, setTest] = useState('this is test value')
+
     return (
-        <div>CreateProduct</div>
+        <>
+            <InputCustomWidth
+                value={test}
+                lable='test field'
+            />
+        </>
     )
 }
 
