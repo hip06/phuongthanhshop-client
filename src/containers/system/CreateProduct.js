@@ -87,7 +87,10 @@ const CreateProduct = () => {
                                 />
                             </div>
                             <div className=" w-[50%]">
-                                <InputFileCustomWidth />
+                                <InputFileCustomWidth 
+                                    lable='Main image'
+                                    widthP='full'
+                                />
                             </div>
                         </div>
                     </div>

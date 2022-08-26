@@ -158,7 +158,7 @@ const TextCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
     PLarge : large or small padding
     @Anhtd
 */
-const InputFileCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
+const InputFileCustomWidth = React.memo(({ lable, widthP }) => {
     const [value, setValue] = useState('')
     const onAction = useCallback((newvalue) => setValue(newvalue), [])
     return (
@@ -170,7 +170,6 @@ const InputFileCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md'
                 value={value}
-                placeholder={placeholder}
                 onChange={e => onAction(e.target.value)}
             />
         </div>
