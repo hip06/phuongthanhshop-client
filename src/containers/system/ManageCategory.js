@@ -8,8 +8,8 @@ const ManageCategory = () => {
     console.log(1);
     const fetchCategory = async () => {
       const tempCate = await ApiCategory.getAll();
-      console.log(tempCate.response);
-      setCategory(tempCate.response);
+      console.log(tempCate);
+      setCategory(tempCate.response.rows);
     };
     fetchCategory();
   }, []);
@@ -36,13 +36,13 @@ const ManageCategory = () => {
             text="Sửa"
             bgColor="#4ed14b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
           ></Button>
           <Button
             text="Xóa"
             bgColor="#cf2b2b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             height="2"
           ></Button>
         </div>

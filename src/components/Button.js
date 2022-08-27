@@ -11,8 +11,15 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={`outline-none bg-[${bgColor}] text-[${textColor}] rounded-md opacity-80 hover:opacity-100 w-2/5 py-${height}`}
+      className={`outline-none rounded-md opacity-80 hover:opacity-100 `}
       onClick={onClick}
+      style={{
+        backgroundColor: `${bgColor}`,
+        color: `${textColor}`,
+        width: `${width}`,
+        height: `${height}`,
+        padding: `${height * 4}px 0`,
+      }}
     >
       {text}
     </button>
