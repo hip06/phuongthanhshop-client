@@ -43,9 +43,10 @@ axiosClients.interceptors.request.use(async (config) => {
     window.localStorage.getItem("persist:auth") &&
     JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken;
   if (token)
-    config.headers = {
-      authorization: token,
-    };
+    token = token.slice(1, token.length - 1);
+  config.headers = {
+    authorization: token,
+  };
   return config;
 });
 

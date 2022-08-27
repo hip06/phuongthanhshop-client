@@ -5,11 +5,9 @@ import { useEffect, useState } from "react";
 const ManageCategory = () => {
   const [category, setCategory] = useState([]);
   useEffect(() => {
-    console.log(1);
     const fetchCategory = async () => {
       const tempCate = await ApiCategory.getAll();
-      console.log(tempCate.response);
-      setCategory(tempCate.response);
+      setCategory(tempCate.response.rows);
     };
     fetchCategory();
   }, []);
