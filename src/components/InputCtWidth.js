@@ -42,13 +42,15 @@ const SelectCustomWidth = React.memo(
       setSelectValue(newValue);
     }, []);
     return (
-      <div className={`w-${widthP} my-3 mr-4 h-full`}>
+      <div className={`w-${widthP} h-full`}>
         <label htmlFor="field" className="font-bold text-l">
           {lable}
         </label>
-        <div className="flex items-center w-full h-full">
+        <div
+          className={`flex items-center w-full ${lable ? "h-1/2" : "h-full"}`}
+        >
           <select
-            className=" mr-3 w-[80%] h-[32px] focus:ring-indigo-500 
+            className="mr-3 w-[90%] focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md h-full"
             onChange={(e) => onAction(e.target.value)}
@@ -96,17 +98,17 @@ const HashTagCustomWidth = React.memo(
       setTags([]);
     };
     return (
-      <div className={`w-${widthP} my-3 mr-4`}>
+      <div className={`w-${widthP} h-[120%]`}>
         <label htmlFor="field" className="font-bold text-l">
           {lable}
         </label>
-        <div className="flex">
+        <div className="flex h-[42%]">
           <input
             className="focus:ring-indigo-500 
                 focus:border-indigo-500 block 
                 w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md
-                h-[32px] mr-[12px]"
+                h-full mr-[12px]"
             value={value}
             placeholder={placeholder}
             onChange={(e) => onAction(e.target.value)}
@@ -116,14 +118,14 @@ const HashTagCustomWidth = React.memo(
             text="Sửa"
             bgColor="#4ed14b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             onClick={handleAction}
           ></Button>
           <Button
             text="Xóa"
             bgColor="#cf2b2b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             onClick={handleClear}
           ></Button>
         </div>

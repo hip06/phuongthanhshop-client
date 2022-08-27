@@ -26,7 +26,8 @@ const ManageProduct = () => {
   }, []);
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await ApiGetProduct.getAll({ page: 1 });
+      const res = await ApiGetProduct.getAll();
+      console.log(res);
       const data = Object.values(res.data["0"]);
       setProducts(data[0]);
     };
@@ -79,13 +80,13 @@ const ManageProduct = () => {
             text="Sửa"
             bgColor="#4ed14b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
           ></Button>
           <Button
             text="Xóa"
             bgColor="#cf2b2b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             height="2"
           ></Button>
         </div>
@@ -112,18 +113,19 @@ const ManageProduct = () => {
             text="Xóa"
             bgColor="#cf2b2b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             height="2"
           ></Button>
         </div>
-        <div className="flex justify-around w-[50%] h-[40px]">
+        <div className="flex justify-between w-[50%] h-[40px]">
           <div className="flex items-center w-[50%] ">
             <InputCustomWidth />
 
             <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" />
           </div>
-          <div className="flex items-center w-[30%] ">
+          <div className="flex items-center w-[40%] ">
             <SelectCustomWidth
+              widthP="full"
               options={options}
               selectValue={selectValue}
               setSelectValue={setSelectValue}

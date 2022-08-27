@@ -2,7 +2,18 @@ import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
 import { InputCustomWidth } from "../../components/InputCtWidth";
+import { useEffect, useState } from "react";
+import { apiAllUsers } from "../../apis/user";
 const User = () => {
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    console.log(1);
+    const fetchCategory = async () => {
+      const res = await apiAllUsers.get();
+      console.log(res);
+    };
+    fetchCategory();
+  }, []);
   const tempUser = [
     {
       avata: "",
@@ -24,7 +35,7 @@ const User = () => {
     },
   ];
 
-  const renderUser = tempUser.map((user, i) => (
+  const renderUser = tempUser?.map((user, i) => (
     <div
       key={i}
       className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
@@ -51,13 +62,13 @@ const User = () => {
           text="Sửa"
           bgColor="#4ed14b"
           textColor="#fff"
-          width="2/5"
+          width="40%"
         ></Button>
         <Button
           text="Xóa"
           bgColor="#cf2b2b"
           textColor="#fff"
-          width="2/5"
+          width="40%"
           height="2"
         ></Button>
       </div>

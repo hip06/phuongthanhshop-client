@@ -11,9 +11,15 @@ export const Button = ({
   return (
     <button
       type="button"
-      style={{ backgroundColor: bgColor,color: textColor }}
-      className={`outline-none text-[${textColor}] rounded-md opacity-80 hover:opacity-100 w-2/5 py-${height}`}
+      className={`outline-none rounded-md opacity-80 hover:opacity-100 `}
       onClick={onClick}
+      style={{
+        backgroundColor: `${bgColor}`,
+        color: `${textColor}`,
+        width: `${width}`,
+        height: `${height}`,
+        padding: `${height * 4}px 0`,
+      }}
     >
       {text}
     </button>
@@ -23,7 +29,6 @@ export const Button = ({
 export const ButtonCtWidth = ({ content, color, width, height, onAction }) => {
   return (
     <button
-      style={{ backgroundColor: color,color:'white'}}
       className={`text-base text-white 
         px-${width} py-${height} rounded-lg 
         hover:-translate-y-0.5 transition-all 

@@ -44,19 +44,17 @@ const CreateProduct = () => {
               />
             </div>
 
-            <div className="flex w-[100%]">
-              <div className="flex">
+            <div className="flex h-1/5 justify-between">
+              <div className="flex w-[60%] ">
                 <SelectCustomWidth
-                  widthP="[300px]"
+                  widthP="[30%]"
                   lable="Loại hàng"
                   options={options}
                   selectValue={selectValue}
                   setSelectValue={setSelectValue}
                 />
-              </div>
-              <div className="flex w-[220px] ml-[24px] mr-[24px]">
                 <InputCustomWidth
-                  widthP={"full"}
+                  widthP="[30%]"
                   lable="Giá"
                   placeholder="Giá: VND"
                   PLarge={false}
@@ -64,27 +62,27 @@ const CreateProduct = () => {
                   setPrice={setPrice}
                 />
               </div>
-              <div className="flex w-[580px] ml-[12px]">
-                <HashTagCustomWidth
-                  widthP={"full"}
-                  lable="Hash_Tag"
-                  placeholder="Tag..."
-                  tags={tags}
-                  setTags={setTags}
-                />
-              </div>
+
+              <HashTagCustomWidth
+                widthP="[40%]"
+                lable="Hash_Tag"
+                placeholder="Tag..."
+                tags={tags}
+                setTags={setTags}
+              />
             </div>
             <div className="flex">
               <div className=" w-[46%] mr-[24px]">
-                <InputCustomWidth
-                  widthP={"full"}
-                  lable="Miêu tả ngắn gọn"
-                  placeholder="Miêu tả..."
-                  PLarge={true}
-                  shortDes={shortDes}
-                  setShortDes={setShortDes}
-                />
-                <p className="text-sm">Hiển thị trên thẻ sản phẩm</p>
+                <div className="h-1/2 ">
+                  <InputCustomWidth
+                    widthP={"full"}
+                    lable="Miêu tả ngắn gọn"
+                    placeholder="Miêu tả..."
+                    PLarge={true}
+                    shortDes={shortDes}
+                    setShortDes={setShortDes}
+                  />
+                </div>
                 <TextCustomWidth
                   widthP="full"
                   lable="Miêu tả chi tiết"
