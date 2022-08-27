@@ -34,13 +34,13 @@ const LayoutMenu = () => {
         <>
           <Button
             text={"Đăng xuất"}
-            bgColor="bg-red-700"
+            bgColor="#d9d9d9"
             textColor="text-white"
             onClick={() => dispatch(actions.logout())}
           />
           <Button
             text={"Quản lý"}
-            bgColor="bg-sky-700"
+            bgColor="#d9d9d9"
             textColor="text-white"
             onClick={() => navigate("/system/")}
           />
