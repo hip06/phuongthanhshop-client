@@ -9,10 +9,12 @@ export const path = {
   HOME: "/",
   FEED: "*",
   GENERAL: "*",
-  CREATE_PRODUCT: "create",
+  CREATE_PRODUCT: "create-product",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
   USER: "user",
+  BILL: "bill",
+  CREATE_CATEGORY: "create-category",
 };
 export const adminMenu = [
   {
@@ -44,7 +46,12 @@ export const adminMenu = [
   // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
   {
     name: "Thêm sản phẩm",
-    path: "/system/create",
+    path: "/system/create-product",
+    icon: <IoIosCreate size={24} />,
+  },
+  {
+    name: "Thêm gian hàng",
+    path: "/system/create-category",
     icon: <IoIosCreate size={24} />,
   },
 ];

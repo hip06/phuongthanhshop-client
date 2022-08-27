@@ -5,75 +5,57 @@ import { InputCustomWidth } from "../../components/InputCtWidth";
 import { useEffect, useState } from "react";
 import { apiAllUsers } from "../../apis/user";
 const User = () => {
-  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     console.log(1);
     const fetchCategory = async () => {
       const res = await apiAllUsers.get();
-      console.log(res);
+      setUsers(res.user.rows);
     };
     fetchCategory();
   }, []);
-  const tempUser = [
-    {
-      avata: "",
-      name: "Nguyen Van A",
-      phone: "01234567789",
-      email: "longn03@gmail.com",
-    },
-    {
-      avata: "",
-      name: "Nguyen Van A",
-      phone: "01234567789",
-      email: "longn03@gmail.com",
-    },
-    {
-      avata: "",
-      name: "Nguyen Van A",
-      phone: "01234567789",
-      email: "longn03@gmail.com",
-    },
-  ];
 
-  const renderUser = tempUser?.map((user, i) => (
-    <div
-      key={i}
-      className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
-    >
-      <div className="w-[5%] text-center">
-        <p>{i + 1}</p>
-      </div>
+  const renderUser = users?.map((user, i) => {
+    return (
+      <div
+        key={i}
+        className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
+      >
+        <div className="w-[5%] text-center">
+          <span>{i + 1}</span>
+        </div>
 
-      <div className="w-[15%] flex justify-center">
-        <img src={image} className=""></img>
-      </div>
-      <div className="w-[20%] text-center">
-        <p>{user.name}</p>
-      </div>
-      <div className="w-[20%] text-center">
-        <p>{user.phone}</p>
-      </div>
+        <div className="w-[15%] flex justify-center">
+          <img src={image} className="h-full"></img>
+        </div>
+        <div className="w-[10%] text-center">
+          <p>{user.name}</p>
+        </div>
+        <div className="w-[20%] text-center">
+          <p>{user.phone ? user.phone : "Trống"}</p>
+        </div>
 
-      <div className="w-[30%] text-center">
-        <p>{user.email}</p>
+        <div className="w-[20%] text-center">
+          <p>{user.email ? user.email : "Trống"}</p>
+        </div>
+        <div className="w-[30%] flex justify-around">
+          <Button
+            text="Sửa"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            width="40%"
+          ></Button>
+          <Button
+            text="Xóa"
+            bgColor="#cf2b2b"
+            textColor="#fff"
+            width="40%"
+            height="2"
+          ></Button>
+        </div>
       </div>
-      <div className="w-[30%] flex justify-around">
-        <Button
-          text="Sửa"
-          bgColor="#4ed14b"
-          textColor="#fff"
-          width="40%"
-        ></Button>
-        <Button
-          text="Xóa"
-          bgColor="#cf2b2b"
-          textColor="#fff"
-          width="40%"
-          height="2"
-        ></Button>
-      </div>
-    </div>
-  ));
+    );
+  });
 
   return (
     <div>
@@ -89,7 +71,7 @@ const User = () => {
         <div className="flex">
           <div className="w-[5%]  font-bold text-center">ID</div>
           <div className="w-[15%] font-bold text-center">Ảnh đại diện</div>
-          <div className="w-[20%]  font-bold text-center">Tên người dùng</div>
+          <div className="w-[10%]  font-bold text-center">Tên người dùng</div>
           <div className="w-[20%]  font-bold text-center">Số điện thoại</div>
           <div className="w-[20%]  font-bold text-center">Email</div>
         </div>

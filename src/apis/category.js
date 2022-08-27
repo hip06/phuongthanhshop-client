@@ -9,6 +9,10 @@ const ApiCategory = {
     const url = "/api/v1/admin/category/delete";
     return axiosClients.delete(url, { params });
   },
+  post: (data) => {
+    const url = "/api/v1/admin/category/create-new";
+    return axiosClients.post(url, data);
+  },
 };
 
 export default ApiCategory;
