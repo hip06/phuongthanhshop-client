@@ -1,26 +1,37 @@
 import React from "react";
-import { ButtonMedium, ButtonSmall } from "../../components/Button";
+import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import searchIcon from "../../assets/icon/search.svg";
 import sortIcon from "../../assets/icon/sort.svg";
 import { FiSearch } from "react-icons/fi";
 import { BiSortAlt2 } from "react-icons/bi";
 import { useState, useEffect } from "react";
-import ApiGetProduct from '../../apis/product';
+import ApiGetProduct from "../../apis/product";
 import { BsCheckLg } from "react-icons/bs";
+import {
+  InputCustomWidth,
+  SelectCustomWidth,
+} from "../../components/InputCtWidth";
 
 const ManageProduct = () => {
   const [addAll, setAddAll] = useState(false);
   const [products, setProducts] = useState([]);
+  const [selectValue, setSelectValue] = useState("");
+  const [options, setOptions] = useState([]);
+  const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
+  useEffect(() => {
+    setOptions([...exampleArray]);
+
+    setSelectValue("option 1");
+  }, []);
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await ApiGetProduct.getAll();
-      const data = (Object.values(res.data['0']));
+      const res = await ApiGetProduct.getAll({ page: 1 });
+      const data = Object.values(res.data["0"]);
       setProducts(data[0]);
-      console.log(products);
-    }
+    };
     fetchProducts();
-  }, [])
+  }, []);
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
     checkboxs.map((checkbox) => {
@@ -32,14 +43,18 @@ const ManageProduct = () => {
       checkbox.checked = false;
     });
   }
-  products.map((product) => {return <div>
-    <p>{product.id}</p>
-  </div>})
+  products.map((product) => {
+    return (
+      <div>
+        <p>{product.id}</p>
+      </div>
+    );
+  });
   const renderProductList = products.map((product, i) => {
     return (
       <div
         key={i}
-        className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px] font-bold text-xl "
+        className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px]  text-xl "
       >
         <div className="w-[10%] flex justify-center">
           <input
@@ -60,8 +75,19 @@ const ManageProduct = () => {
           <p>{product.costPerUnit}</p>
         </div>
         <div className="flex w-[20%] justify-around ">
-          <ButtonMedium content="Sửa" color="#4ED14B"></ButtonMedium>
-          <ButtonMedium content="Xóa" color="#CF2B2B"></ButtonMedium>
+          <Button
+            text="Sửa"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            width="2/5"
+          ></Button>
+          <Button
+            text="Xóa"
+            bgColor="#cf2b2b"
+            textColor="#fff"
+            width="2/5"
+            height="2"
+          ></Button>
         </div>
       </div>
     );
@@ -70,8 +96,8 @@ const ManageProduct = () => {
     <>
       <h1 className="text-3xl">Quản lí sản phẩm</h1>
 
-      <div className="flex w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-        <div className="w-[25%] pl-[30px] flex items-center justify-around">
+      <div className="flex items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
+        <div className="w-[30%] pl-[30px] flex items-center justify-around text-xl ">
           <input
             type="checkbox"
             className="h-[17.5px] w-[17.5px]"
@@ -79,25 +105,29 @@ const ManageProduct = () => {
               setAddAll(!addAll);
             }}
           ></input>
-          <div className="font-bold text-xl">
+          <div className="font-bold ">
             <p> Đã chọn: 0</p>
           </div>
-          <ButtonSmall content="Action" color="#E92828"></ButtonSmall>
+          <Button
+            text="Xóa"
+            bgColor="#cf2b2b"
+            textColor="#fff"
+            width="2/5"
+            height="2"
+          ></Button>
         </div>
         <div className="flex justify-around w-[50%] h-[40px]">
           <div className="flex items-center w-[50%] ">
-            <input className="mr-3 h-[100%] w-[80%]"></input>
-            <FiSearch className="cursor-pointer text-2xl" />
-          </div>
-          <div className="flex items-center w-[50%] ">
-            <select name="cars" id="cars" className=" mr-3 w-[80%] h-[100%]">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>
+            <InputCustomWidth />
 
-            <BiSortAlt2 className="text-3xl" />
+            <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" />
+          </div>
+          <div className="flex items-center w-[30%] ">
+            <SelectCustomWidth
+              options={options}
+              selectValue={selectValue}
+              setSelectValue={setSelectValue}
+            />
           </div>
         </div>
       </div>

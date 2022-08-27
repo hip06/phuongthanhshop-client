@@ -1,4 +1,4 @@
-import { ButtonMedium } from "../../components/Button";
+import { Button } from "../../components/Button";
 import ApiCategory from "../../apis/category";
 import { useEffect, useState } from "react";
 
@@ -11,12 +11,11 @@ const ManageCategory = () => {
     };
     fetchCategory();
   }, []);
-
   const renderCateList = category.map((cate, i) => {
     console.log(123);
     return (
       <div
-        key={i}
+        key={cate.id}
         className=" flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
       >
         <div className="w-[28%] p-10">
@@ -30,8 +29,21 @@ const ManageCategory = () => {
         <div className="w-[28%]">
           <p className=" text-xl font-bold ">20/12/2022</p>
         </div>
-        <ButtonMedium content="Sửa" color="#4ED14B" ></ButtonMedium>
-        <ButtonMedium content="Xóa" color="#CF2B2B" onAction={{type:'DELETE',id:cate.id}}></ButtonMedium>
+        <div className="w-[30%] flex justify-around">
+          <Button
+            text="Sửa"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            width="2/5"
+          ></Button>
+          <Button
+            text="Xóa"
+            bgColor="#cf2b2b"
+            textColor="#fff"
+            width="2/5"
+            height="2"
+          ></Button>
+        </div>
       </div>
     );
   });

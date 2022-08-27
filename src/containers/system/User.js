@@ -1,7 +1,7 @@
-import { ButtonSmall } from "../../components/Button";
+import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
-
+import { InputCustomWidth } from "../../components/InputCtWidth";
 const User = () => {
   const tempUser = [
     {
@@ -25,7 +25,10 @@ const User = () => {
   ];
 
   const renderUser = tempUser.map((user, i) => (
-    <div className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2">
+    <div
+      key={i}
+      className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
+    >
       <div className="w-[5%] text-center">
         <p>{i + 1}</p>
       </div>
@@ -43,9 +46,20 @@ const User = () => {
       <div className="w-[30%] text-center">
         <p>{user.email}</p>
       </div>
-      <div className="w-[20%] flex justify-center">
-        <ButtonSmall content="Sửa" color="#4ED14B"></ButtonSmall>
-        <ButtonSmall content="Xóa" color="#CF2B2B"></ButtonSmall>
+      <div className="w-[30%] flex justify-around">
+        <Button
+          text="Sửa"
+          bgColor="#4ed14b"
+          textColor="#fff"
+          width="2/5"
+        ></Button>
+        <Button
+          text="Xóa"
+          bgColor="#cf2b2b"
+          textColor="#fff"
+          width="2/5"
+          height="2"
+        ></Button>
       </div>
     </div>
   ));
@@ -54,9 +68,10 @@ const User = () => {
     <div>
       <h1 className="text-3xl">Quản lí người dùng</h1>
 
-      <div className="bg-[#d9d9d9] h-[64px] flex items-center justify-center rounded-xl">
-        <input className="w-[80%] h-[60%] mr-[10px]"></input>
-        <FiSearch size={30}></FiSearch>
+      <div className="bg-[#d9d9d9] h-[64px] flex items-center justify-end rounded-xl py-3 px-5">
+        <InputCustomWidth widthP={"full"} />
+
+        <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" />
       </div>
 
       <div className="bg-[#d9d9d9] p-[10px] mt-[20px] rounded-xl">
