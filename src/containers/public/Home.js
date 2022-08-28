@@ -10,7 +10,7 @@ const Home = () => {
       <Header />
       <Outlet />
       <Routes>
-        <Route path="/fashion" element={<LayoutHome></LayoutHome>}></Route>
+        <Route path="/:slug" element={<LayoutHome></LayoutHome>}></Route>
       </Routes>
     </div>
   );

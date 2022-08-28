@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import logofashion from "../../assets/logofashion.png";
+import logoappliance from "../../assets/logoappliance.png";
+import logogrocery from "../../assets/logogrocery.png";
 import { HiOutlineMenu } from "react-icons/hi"
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
 
+import {useParams} from "react-router-dom"
+
+
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
+  const params=useParams();
   return (
-    <div className="flex items-center justify-around relative">
+    <div className="flex items-center justify-around relative h-[70px]">
       <div className=" " onClick={() => { setModalShow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
@@ -23,7 +29,9 @@ const Header = () => {
       </div>
 
       <div>
-        <img className="translate-y-[10px]" src={logofashion}></img>
+        {params["*"]==='fashion'&&<img className="" src={logofashion}></img>}
+        {params["*"]==='appliance'&&<img className="" src={logoappliance}></img>}
+        {params["*"]==='grocery'&&<img className="" src={logogrocery}></img>}
       </div>
 
       <div>
