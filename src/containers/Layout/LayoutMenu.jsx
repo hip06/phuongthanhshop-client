@@ -87,23 +87,26 @@ const LayoutMenu = () => {
         <div className="self-start w-full h-screen  ">
           <NavLink
             to="/home/fashion"
-            style={{ color: params["*"] === "fashion" ? "#3f9df3" : "" }}
-            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+            style={{ color: params["*"] === "fashion" ? "#3f9df3" : "" ,
+          fontSize: params["*"] === "fashion" ?"25px":'20px'}}
+            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
           >
             {" "}
             Fashion
           </NavLink>
           <NavLink
             to="/home/appliance"
-            style={{ color: params["*"] === "appliance" ? "#EF7300" : "" }}
-            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+            style={{ color: params["*"] === "appliance" ? "#EF7300" : "" ,
+          fontSize: params["*"] === "appliance" ?"25px":'20px'}}
+            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
           >
             Appliance
           </NavLink>
           <NavLink
             to="/home/grocery"
-            style={{ color: params["*"] === "grocery" ? "#10C600" : "" }}
-            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+            style={{ color: params["*"] === "grocery" ? "#10C600" : "" ,
+          fontSize: params["*"] === "grocery" ?"25px":'20px'}}
+            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
           >
             Grocery
           </NavLink>
