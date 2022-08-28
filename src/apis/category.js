@@ -7,7 +7,7 @@ const ApiCategory = {
   },
   delete: (params) => {
     const url = "/api/v1/admin/category/delete";
-    return axiosClients.delete(url, { params });
+    return axiosClients.delete(url, {params});
   },
   post: (data) => {
     const url = "/api/v1/admin/category/create-new";

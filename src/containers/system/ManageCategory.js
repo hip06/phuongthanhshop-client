@@ -41,7 +41,11 @@ const ManageCategory = () => {
             bgColor="#cf2b2b"
             textColor="#fff"
             width="40%"
-            height="2"
+            height="2" 
+            onClick={ 
+              async()=>{
+              const res= await ApiCategory.delete({id:cate.id});  
+            }}
           ></Button>
         </div>
       </div>

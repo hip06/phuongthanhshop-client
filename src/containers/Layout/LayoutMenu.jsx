@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
+import { apiGetCurrent } from "../../apis/user";
 
 import logo from "../../assets/logo.png";
 
 const LayoutMenu = () => {
+  // useEffect(()=>{
+  //   let token =
+  //   window.localStorage.getItem("persist:auth") &&
+  //   JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken.slice(1,-1);
+  //   const fetchUser= async () =>{
+  //     const user=await apiGetCurrent.get(token);
+  //     console.log(user);
+  //   }
+  //   fetchUser();
+  // },[])
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
@@ -21,16 +33,16 @@ const LayoutMenu = () => {
             text={"Đăng nhập"}
             bgColor="#d9d9d9"
             textColor="text-white"
-            width='100%'
-            height='32px'
+            width="100%"
+            height="32px"
             onClick={() => navigate("/login", { state: { flag: false } })}
           />
           <Button
             text={"Đăng ký"}
             bgColor="#d9d9d9"
             textColor="text-white"
-            width='100%'
-            height='32px'
+            width="100%"
+            height="32px"
             onClick={() => navigate("/login", { state: { flag: true } })}
           />
         </>
@@ -40,8 +52,8 @@ const LayoutMenu = () => {
           <Button
             text={"Đăng xuất"}
             bgColor="#d9d9d9"
-            width='100%'
-            height='32px'
+            width="100%"
+            height="32px"
             textColor="text-white"
             onClick={() => dispatch(actions.logout())}
           />
@@ -49,8 +61,8 @@ const LayoutMenu = () => {
             text={"Quản lý"}
             bgColor="#d9d9d9"
             textColor="text-white"
-            width='100%'
-            height='32px'
+            width="100%"
+            height="32px"
             onClick={() => navigate("/system/")}
           />
         </>
@@ -63,9 +75,17 @@ const LayoutMenu = () => {
       <div>
         <img src={logo}></img>
       </div>
-      <div className='w-full'>
-        <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
+      <div className="w-full">
+        <div className="flex justify-around">
+          <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
+          <p>Giá trị đơn hàng:0</p>
+        </div>
         {button}
+      </div>
+      <div className=''>
+        <p> Fashion</p>
+        <p>Appliance</p>
+        <p>Grocery</p>
       </div>
     </div>
   );
