@@ -41,10 +41,14 @@ const axiosClients = axios.create({
 axiosClients.interceptors.request.use(async (config) => {
   let token =
     window.localStorage.getItem("persist:auth") &&
-    JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken;
-  if (token)
+    JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken?.slice(
+      1,
+      -1
+    );
+
+  if (token !== "ul")
     config.headers = {
-      authorization: token,
+      authorization: `${token}`,
     };
   return config;
 });

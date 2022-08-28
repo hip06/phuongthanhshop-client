@@ -1,10 +1,18 @@
 import axiosClients from "../axiosClients";
 
-const ApiGetCategory = {
+const ApiCategory = {
   getAll: () => {
-    const url = "/api/v1/admin/category/all";
+    const url = "/api/v1/category/all?page=all";
     return axiosClients.get(url);
+  },
+  delete: (params) => {
+    const url = "/api/v1/admin/category/delete";
+    return axiosClients.delete(url, { params });
+  },
+  post: (data) => {
+    const url = "/api/v1/admin/category/create-new";
+    return axiosClients.post(url, data);
   },
 };
 
-export default ApiGetCategory;
+export default ApiCategory;

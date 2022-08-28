@@ -3,15 +3,18 @@ import icons from "./icons";
 const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 
 export const path = {
-  HOME: "/*",
   LOGIN: "/login",
   SYSTEM: "/system/*",
+  DETAILS: "/details",
+  HOME: "/",
   FEED: "*",
   GENERAL: "*",
-  CREATE_PRODUCT: "create",
+  CREATE_PRODUCT: "create-product",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
-  USER:'user'
+  USER: "user",
+  BILL: "bill",
+  CREATE_CATEGORY: "create-category",
 };
 export const adminMenu = [
   {
@@ -39,11 +42,16 @@ export const adminMenu = [
     path: "/system/manage-category",
     icon: <RiProductHuntLine size={24} />,
   },
-  { name: "Thống kê", path: "/system/", icon: <RiProductHuntLine size={24} /> },
+  { name: "Thống kê", path: "", icon: <RiProductHuntLine size={24} /> },
   // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
   {
     name: "Thêm sản phẩm",
-    path: "/system/create",
+    path: "/system/create-product",
+    icon: <IoIosCreate size={24} />,
+  },
+  {
+    name: "Thêm gian hàng",
+    path: "/system/create-category",
     icon: <IoIosCreate size={24} />,
   },
 ];

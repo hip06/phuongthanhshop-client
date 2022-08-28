@@ -6,3 +6,9 @@ export const apiGetCurrent = {
     return axiosClients.post(url, data);
   },
 };
+export const apiAllUsers = {
+  get: () => {
+    const url = "/api/v1/admin/user/all?page=1";
+    return axiosClients.get(url);
+  },
+};
