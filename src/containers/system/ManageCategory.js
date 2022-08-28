@@ -34,13 +34,13 @@ const ManageCategory = () => {
             text="Sửa"
             bgColor="#4ed14b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
           ></Button>
           <Button
             text="Xóa"
             bgColor="#cf2b2b"
             textColor="#fff"
-            width="2/5"
+            width="40%"
             height="2"
           ></Button>
         </div>

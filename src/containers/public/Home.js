@@ -5,6 +5,7 @@ import LayoutHomeFashion from "../Layout/LayoutHomeFashion";
 import LayoutHomeGrocery from "../Layout/LayoutHomeGrocery";
 import LayoutHomeAppliance from "../Layout/LayoutHomeAppliance";
 
+
 const Home = () => {
   return (
     <div>
