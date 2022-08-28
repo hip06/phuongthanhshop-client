@@ -142,7 +142,7 @@ const TextCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
         <div className={`w-${widthP} my-3`}>
             <label htmlFor="field" className='font-bold text-l' >{lable}</label>
             <textarea
-                className='mr-3 w-[100%] h-[60px] focus:ring-indigo-500 
+                className='mr-3 w-[100%] h-[120px] focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md'
                 value={value}
@@ -166,7 +166,7 @@ const InputFileCustomWidth = React.memo(({ lable, widthP }) => {
             <label htmlFor="field" className='font-bold text-l' >{lable}</label>
             <input
                 type='file'
-                className='mr-3 w-[100%] h-[60px] focus:ring-indigo-500 
+                className='mr-3 w-[100%] h-[30px] focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md'
                 value={value}

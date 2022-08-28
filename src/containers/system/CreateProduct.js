@@ -87,12 +87,28 @@ const CreateProduct = () => {
                                 />
                             </div>
                             <div className=" w-[50%]">
-                                <InputFileCustomWidth 
-                                    lable='Main image'
+                                <InputFileCustomWidth
+                                    lable='Ảnh chính'
+                                    widthP='full'
+                                />
+                                <InputFileCustomWidth
+                                    lable='Ảnh Phụ 1'
+                                    widthP='full'
+                                />
+                                <InputFileCustomWidth
+                                    lable='Ảnh Phụ 2'
+                                    widthP='full'
+                                />
+                                <InputFileCustomWidth
+                                    lable='Ảnh Phụ 3'
                                     widthP='full'
                                 />
                             </div>
                         </div>
+                    </div>
+                    <h1 className="text-3xl">Xem trước tại đây</h1>
+                    <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
+
                     </div>
                 </>}
 
