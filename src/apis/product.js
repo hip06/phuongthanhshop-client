@@ -1,9 +1,9 @@
 import axiosClients from "../axiosClients";
 
 const ApiGetProduct = {
-  getAll: () => {
+  getAll: (data) => {
     const url = "/api/v1/admin/product/get-all";
-    return axiosClients.get(url);
+    return axiosClients.get(url,data);  
   },
 };
 

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,Navigate } from "react-router-dom";
 import { Home, Login, Feed, Detail } from "./containers/public";
 import {
   System,
@@ -28,10 +28,12 @@ function App() {
     <div className="w-screen h-screen">
       <Routes>
         {/*Public routes */}
-        <Route path={path.HOME} element={<Home />}>
-          <Route path={path.FEED} element={<Feed />} />
-          <Route path={path.DETAILS} element={<Detail />} />
-        </Route>
+        <Route path='/' element={<Navigate to="/home/fashion"></Navigate>}/>
+          <Route path={path.HOME} element={<Home />}>
+            <Route path={path.FEED} element={<Feed />} />
+            <Route path={path.DETAILS} element={<Detail />} />
+          </Route> 
+        
 
         {/*Login route */}
         <Route path={path.LOGIN} element={<Login />} />
