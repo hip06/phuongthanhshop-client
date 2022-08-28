@@ -51,8 +51,7 @@ const ManageCategory = () => {
               width="40%"
               height="2"
               onClick={async () => {
-                const res = await ApiCategory.delete({ code: cate.code });
-                console.log(res);
+                 await ApiCategory.delete({ code: cate.code });
               }}
             ></Button>
           </div>

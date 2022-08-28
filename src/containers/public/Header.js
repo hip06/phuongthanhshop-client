@@ -12,8 +12,8 @@ const Header = () => {
       <div className=" " onClick={() => { setModalShow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
-      {modalShow && <div className="z-10 top-0 left-0 w-full fixed h-full" onClick={(e) => { setModalShow(false) }}>
-        <div className="w-[80%] absolute z-100">
+      {modalShow && <div className="z-10 top-0 left-0 w-full fixed h-full" onClick={(e) => {setModalShow(false) }}>
+        <div className="w-[80%] absolute z-100" onClick={(e) => {e.stopPropagation();}}>
           <LayoutMenu></LayoutMenu>
         </div>
       </div>}
