@@ -13,6 +13,10 @@ const ApiCategory = {
     const url = "/api/v1/admin/category/create-new";
     return axiosClients.post(url, data);
   },
+  put: (data) => {
+    const url = "/api/v1/admin/category/update";
+    return axiosClients.put(url, data);
+  },
 };
 
 export default ApiCategory;
