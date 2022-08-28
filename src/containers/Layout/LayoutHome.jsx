@@ -1,48 +1,35 @@
-import fashionbanner from "../../assets/fashionbanner.png";
-import appliancebanner from "../../assets/appliancebanner.png";
-import grocerybanner from "../../assets/grocerybanner.png";
-import menfashion from "../../assets/menfashion.png";
-import womenfashion from "../../assets/womenfashion.png";
-import freeship from "../../assets/freeship.png";
+import image from "../../ultils/image"
 import { ProductCardMobile } from "../../components/ProductCard";
-import image from "../../assets/temp.png";
 import { useParams, Link } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const LayoutHome = () => {
   const params = useParams();
   let color;
+  let banner;
   if (params["*"] === "fashion") {
     color = "#3f9df3";
+    banner=image.fashionbanner;
   } else if (params["*"] === "appliance") {
     color = "#EF7300";
-  } else color = "#10C600";
+    banner=image.appliancebanner
+  } else {
+    color = "#10C600";
+    banner=image.grocerybanner
+  }
   return (
     <>
-      {params["*"] === "fashion" ? (
-        <img className="" src={fashionbanner}></img>
-      ) : (
-        ""
-      )}
-      {params["*"] === "appliance" ? (
-        <img className="" src={appliancebanner}></img>
-      ) : (
-        ""
-      )}
-      {params["*"] === "grocery" ? (
-        <img className="" src={grocerybanner}></img>
-      ) : (
-        ""
-      )}
+      <img src={banner} ></img>
 
-      <img src={freeship} className="ml-auto w-full mt-[5px] sm:w-[60%]" />
+      <img src={image.freeship} className="ml-auto w-full mt-[5px] sm:w-[60%]" />
 
       {params["*"]==='fashion'?<div className="w-full flex justify-around mb-[20px] mt-[10px]">
         <Link to="/men-fashion">
-          <img src={menfashion}></img>
+          <img src={image.menfashion}></img>
         </Link>
 
         <Link to="/women-fashion">
-          <img src={womenfashion}></img>
+          <img src={image.womenfashion}></img>
         </Link>
       </div>:""}
 
@@ -57,7 +44,7 @@ const LayoutHome = () => {
         <div className="overflow-x-auto flex ">
           <div className="[&:not(:last-child)]:mr-5">
             <ProductCardMobile
-              image={image}
+              image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={color}
@@ -65,7 +52,7 @@ const LayoutHome = () => {
           </div>
           <div className="[&:not(:last-child)]:mr-5">
             <ProductCardMobile
-              image={image}
+              image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={color}
@@ -73,7 +60,7 @@ const LayoutHome = () => {
           </div>
           <div className="[&:not(:last-child)]:mr-5">
             <ProductCardMobile
-              image={image}
+              image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={color}
@@ -81,7 +68,7 @@ const LayoutHome = () => {
           </div>
           <div className="[&:not(:last-child)]:mr-5">
             <ProductCardMobile
-              image={image}
+              image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={color}
@@ -89,15 +76,67 @@ const LayoutHome = () => {
           </div>
           <div className="[&:not(:last-child)]:mr-5">
             <ProductCardMobile
-              image={image}
+              image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={color}
             ></ProductCardMobile>
           </div>
         </div>
+
+        {params["*"]==='appliance'||params["*"]==='grocery'? <div>
+        <div className="mt-[20px] mb-[5px]">
+          <span style={{ color: color }} className="font-bold text-[15px]">
+            #Mới nhất
+          </span>
+        </div>
+
+        <div className="overflow-x-auto flex ">
+          <div className="[&:not(:last-child)]:mr-5">
+            <ProductCardMobile
+              image={image.imagetemp}
+              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
+              costPerUnit="600.000d"
+              color={color}
+            ></ProductCardMobile>
+          </div>
+          <div className="[&:not(:last-child)]:mr-5">
+            <ProductCardMobile
+              image={image.imagetemp}
+              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
+              costPerUnit="600.000d"
+              color={color}
+            ></ProductCardMobile>
+          </div>
+          <div className="[&:not(:last-child)]:mr-5">
+            <ProductCardMobile
+              image={image.imagetemp}
+              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
+              costPerUnit="600.000d"
+              color={color}
+            ></ProductCardMobile>
+          </div>
+          <div className="[&:not(:last-child)]:mr-5">
+            <ProductCardMobile
+              image={image.imagetemp}
+              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
+              costPerUnit="600.000d"
+              color={color}
+            ></ProductCardMobile>
+          </div>
+          <div className="[&:not(:last-child)]:mr-5">
+            <ProductCardMobile
+              image={image.imagetemp}
+              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
+              costPerUnit="600.000d"
+              color={color}
+            ></ProductCardMobile>
+          </div>
+        </div>
+
+        </div>:''}
       </div>
-      <div>hi</div>
+      <Footer params={params["*"]}></Footer>
     </>
   );
 };

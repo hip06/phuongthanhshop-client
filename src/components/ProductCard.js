@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export const ProductCardMobile = (props) => {
     return (
-        <div className="w-[168px] h-[270px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative ">
+        <div className="w-[168px] h-[270px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
             <div className={`mb-[20px]`}>
                 <img className="w-full h-[187px]" src={props.image}></img>
             </div>

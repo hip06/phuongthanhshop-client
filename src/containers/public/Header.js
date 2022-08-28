@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import logofashion from "../../assets/logofashion.png";
-import logoappliance from "../../assets/logoappliance.png";
-import logogrocery from "../../assets/logogrocery.png";
+import image from "../../ultils/image"
 import { HiOutlineMenu } from "react-icons/hi"
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -29,9 +27,9 @@ const Header = () => {
       </div>
 
       <div>
-        {params["*"]==='fashion'&&<img className="" src={logofashion}></img>}
-        {params["*"]==='appliance'&&<img className="" src={logoappliance}></img>}
-        {params["*"]==='grocery'&&<img className="" src={logogrocery}></img>}
+        {params["*"]==='fashion'&&<img className="" src={image.logofashion}></img>}
+        {params["*"]==='appliance'&&<img className="" src={image.logoappliance}></img>}
+        {params["*"]==='grocery'&&<img className="" src={image.logogrocery}></img>}
       </div>
 
       <div>
