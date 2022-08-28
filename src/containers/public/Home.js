@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { Outlet,useLocation,Route,Routes } from "react-router-dom";
+import React from "react";
+import { Outlet,Route,Routes } from "react-router-dom";
 import Header from "./Header";
-import LayoutHomeFashion from "../Layout/LayoutHomeFashion";
-import LayoutHomeGrocery from "../Layout/LayoutHomeGrocery";
-import LayoutHomeAppliance from "../Layout/LayoutHomeAppliance";
+import LayoutHome from "../Layout/LayoutHome";
 
 
 const Home = () => {
@@ -12,9 +10,7 @@ const Home = () => {
       <Header />
       <Outlet />
       <Routes>
-        <Route path="/fashion" element={<LayoutHomeFashion></LayoutHomeFashion>}></Route>
-        <Route path="/grocery" element={<LayoutHomeGrocery></LayoutHomeGrocery>} />
-        <Route path='appliance' element={<LayoutHomeAppliance></LayoutHomeAppliance>}/>
+        <Route path="/fashion" element={<LayoutHome></LayoutHome>}></Route>
       </Routes>
     </div>
   );

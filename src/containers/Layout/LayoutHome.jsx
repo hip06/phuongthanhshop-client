@@ -2,7 +2,7 @@ import banner from "../../assets/fashionbanner.png";
 import freeship from "../../assets/freeship.png";
 import { ProductCardMobile } from "../../components/ProductCard";
 import image from "../../assets/temp.png";
-const LayoutHomeFashion = () => {
+const LayoutHome = () => {
   return (
     <>
       <img className="" src={banner}></img>
@@ -20,4 +20,4 @@ const LayoutHomeFashion = () => {
     </>
   );
 };
-export default LayoutHomeFashion;
+export default LayoutHome;

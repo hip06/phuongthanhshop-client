@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { apiGetCurrent } from "../../apis/user";
@@ -10,6 +10,7 @@ import { apiGetCurrent } from "../../apis/user";
 import logo from "../../assets/logo.png";
 
 const LayoutMenu = () => {
+  const params = useParams(apiGetCurrent);
   // useEffect(()=>{
   //   let token =
   //   window.localStorage.getItem("persist:auth") &&
@@ -71,23 +72,44 @@ const LayoutMenu = () => {
   );
 
   return (
-    <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px]">
-      <div>
-        <img src={logo}></img>
-      </div>
-      <div className="w-full">
-        <div className="flex justify-around">
-          <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
-          <p>Giá trị đơn hàng:0</p>
+      
+      <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px] fixed">
+        <div>
+          <img src={logo}></img>
         </div>
-        {button}
+        <div className="w-full">
+          <div className="flex justify-around">
+            <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
+            <p>Giá trị đơn hàng:0</p>
+          </div>
+          {button}
+        </div>
+        <div className="self-start w-full h-screen  ">
+          <NavLink
+            to="/home/fashion"
+            style={{ color: params["*"] === "fashion" ? "#3f9df3" : "" }}
+            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+          >
+            {" "}
+            Fashion
+          </NavLink>
+          <NavLink
+            to="/home/appliance"
+            style={{ color: params["*"] === "appliance" ? "#EF7300" : "" }}
+            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+          >
+            Appliance
+          </NavLink>
+          <NavLink
+            to="/home/grocery"
+            style={{ color: params["*"] === "grocery" ? "#10C600" : "" }}
+            className=" block border-b border-[rgba(0,0,0,60%)] text-[20px] [&:not(:first-child)]:mt-[20px]"
+          >
+            Grocery
+          </NavLink>
+        </div>
       </div>
-      <div className=''>
-        <p> Fashion</p>
-        <p>Appliance</p>
-        <p>Grocery</p>
-      </div>
-    </div>
+    
   );
 };
 
