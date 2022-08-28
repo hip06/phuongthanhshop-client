@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet,useLocation,Route,Routes } from "react-router-dom";
 import Header from "./Header";
+import LayoutHomeFashion from "../Layout/LayoutHomeFashion";
+import LayoutHomeGrocery from "../Layout/LayoutHomeGrocery";
+import LayoutHomeAppliance from "../Layout/LayoutHomeAppliance";
+
 
 const Home = () => {
   return (
     <div>
       <Header />
       <Outlet />
-      <a href="/fashion">Fashion</a>
-      <br/>
-      <a href="/grocery">Grocery</a>
-      <br/>
-      <a href="/appliance">Appliance</a>
-      <h1>i m here</h1>
+      <Routes>
+        <Route path="/fashion" element={<LayoutHomeFashion></LayoutHomeFashion>}></Route>
+        <Route path="/grocery" element={<LayoutHomeGrocery></LayoutHomeGrocery>} />
+        <Route path='appliance' element={<LayoutHomeAppliance></LayoutHomeAppliance>}/>
+      </Routes>
     </div>
   );
 };
