@@ -5,19 +5,19 @@ import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
 
-import {useParams} from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
-  const params=useParams();
+  const params = useParams();
   return (
     <div className="flex items-center justify-around relative h-[70px]">
       <div className=" " onClick={() => { setModalShow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
-      {modalShow && <div className="z-10 top-0 left-0 w-full fixed h-full" onClick={(e) => {setModalShow(false) }}>
-        <div className="w-[80%] absolute z-100" onClick={(e) => {e.stopPropagation();}}>
+      {modalShow && <div className="z-10 top-0 left-0 w-full fixed h-full" onClick={(e) => { setModalShow(false) }}>
+        <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
           <LayoutMenu></LayoutMenu>
         </div>
       </div>}
@@ -27,17 +27,22 @@ const Header = () => {
       </div>
 
       <div>
-        {params["*"]==='fashion'&&<img className="" src={image.logofashion}></img>}
-        {params["*"]==='appliance'&&<img className="" src={image.logoappliance}></img>}
-        {params["*"]==='grocery'&&<img className="" src={image.logogrocery}></img>}
+        {params["*"] === 'fashion' && <img className="" src={image.logofashion}></img>}
+        {params["*"] === 'appliance' && <img className="" src={image.logoappliance}></img>}
+        {params["*"] === 'grocery' && <img className="" src={image.logogrocery}></img>}
       </div>
 
       <div>
-        <BiUser size={26} ></BiUser>
+        <Link to='/user'>
+          <BiUser size={26} ></BiUser>
+        </Link>
       </div>
 
-      <div>
-        <AiOutlineShoppingCart size={26} ></AiOutlineShoppingCart>
+      <div className='relative'>
+        <Link to='/cart'>
+          <AiOutlineShoppingCart size={26} ></AiOutlineShoppingCart>
+        </Link>
+        <div className='absolute top-[-10px] right-0'>6</div>
       </div>
     </div>
   );
