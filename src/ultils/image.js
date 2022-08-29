@@ -11,9 +11,12 @@ import logogrocery from "../assets/logogrocery.png";
 import logoappliancewhite from "../assets/logoappliancewhite.png";
 import logogrocerywhite from "../assets/logogrocerywhite.png";
 import logofashionwhite from "../assets/logofashionwhite.png";
+import navifashion from "../assets/navifashion.png";
+import navigro from "../assets/navigro.png";
+import naviapp from "../assets/naviapp.png";
 
 
-const image={
+const image = {
     fashionbanner,
     appliancebanner,
     grocerybanner,
@@ -27,6 +30,9 @@ const image={
     logofashionwhite,
     logoappliancewhite,
     logogrocerywhite,
+    navifashion,
+    naviapp,
+    navigro,
 }
 
 export default image;
