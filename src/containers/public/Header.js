@@ -1,50 +1,53 @@
-import React from "react";
-import { Button } from "../../components";
-import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../store/actions";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import image from "../../ultils/image"
+import { HiOutlineMenu } from "react-icons/hi"
+import { BiSearchAlt, BiUser } from "react-icons/bi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import LayoutMenu from "../Layout/LayoutMenu";
+import { getSite } from "../../ultils/constant"
+import { useParams, Link } from "react-router-dom"
+
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
+  const [modalShow, setModalShow] = useState(false);
+  const params = useParams();
+  const site = getSite(params);
   return (
-    <div className="w-full flex items-center gap-5 py-5 justify-center">
-      {isLoggedIn && <small>{`xin chào ${userCurrent?.name}`}</small>}
-      {!isLoggedIn && (
-        <>
-          <Button
-            text={"Đăng nhập"}
-            bgColor="bg-blue-700"
-            textColor="text-white"
-            onClick={() => navigate("/login", { state: { flag: false } })}
-          />
-          <Button
-            text={"Đăng ký"}
-            bgColor="bg-blue-700"
-            textColor="text-white"
-            onClick={() => navigate("/login", { state: { flag: true } })}
-          />
-        </>
-      )}
-      {isLoggedIn && (
-        <>
-          <Button
-            text={"Đăng xuất"}
-            bgColor="bg-red-700"
-            textColor="text-white"
-            onClick={() => dispatch(actions.logout())}
-          />
-          <Button
-            text={"Quản lý"}
-            bgColor="bg-sky-700"
-            textColor="text-white"
-            onClick={() => navigate("/system/")}
-          />
-        </>
-      )}
+    <div className="flex items-center justify-around relative h-[70px]">
+      <div className=" " onClick={() => { setModalShow(true) }}>
+        <HiOutlineMenu size={26} ></HiOutlineMenu>
+      </div>
+      {modalShow && <div className="z-10 top-0 left-0 w-full fixed h-full" onClick={(e) => { setModalShow(false) }}>
+        <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
+          <LayoutMenu></LayoutMenu>
+        </div>
+      </div>}
+
+      <div>
+        <BiSearchAlt size={26} ></BiSearchAlt>
+      </div>
+
+      <div>
+        {params["*"] === 'fashion' && <img className="" src={image.logofashion}></img>}
+        {params["*"] === 'appliance' && <img className="" src={image.logoappliance}></img>}
+        {params["*"] === 'grocery' && <img className="" src={image.logogrocery}></img>}
+      </div>
+
+      <div>
+        <Link to='/user'>
+          <BiUser size={26} ></BiUser>
+        </Link>
+      </div>
+
+      <div className='relative'>
+        <Link to='/cart'>
+          <AiOutlineShoppingCart size={26} ></AiOutlineShoppingCart>
+        </Link>
+        <div className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`} style={{ backgroundColor: site.color }} ><p>6</p></div>
+      </div>
     </div>
   );
+
 };
 
 export default Header;

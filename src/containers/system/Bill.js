@@ -13,7 +13,7 @@ import {
   SelectCustomWidth,
 } from "../../components/InputCtWidth";
 
-const ManageProduct = () => {
+const Bill = () => {
   const [addAll, setAddAll] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectValue, setSelectValue] = useState("");
@@ -57,12 +57,7 @@ const ManageProduct = () => {
         key={i}
         className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px]  text-xl "
       >
-        <div className="w-[10%] flex justify-center">
-          <input
-            type="checkbox"
-            className="h-[17.5px] w-[17.5px] checkbox"
-          ></input>
-        </div>
+        <div className="w-[10%] flex justify-center">{i + 1}</div>
         <div className=" w-[10%] flex justify-center">
           <img src={image} />
         </div>
@@ -75,55 +70,23 @@ const ManageProduct = () => {
         <div className="w-[15%] flex justify-center">
           <p>{product.costPerUnit}</p>
         </div>
-        <div className="flex w-[20%] justify-around ">
-          <Button
-            text="Sửa"
-            bgColor="#4ed14b"
-            textColor="#fff"
-            width="40%"
-          ></Button>
-          <Button
-            text="Xóa"
-            bgColor="#cf2b2b"
-            textColor="#fff"
-            width="40%"
-            height="2"
-          ></Button>
-        </div>
+        <div className="flex w-[20%] justify-around "></div>
       </div>
     );
   });
   return (
     <>
-      <h1 className="text-3xl">Quản lí sản phẩm</h1>
+      <h1 className="text-3xl">Hóa Đơn</h1>
 
       <div className="flex items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-        <div className="w-[30%] pl-[30px] flex items-center justify-around text-xl ">
-          <input
-            type="checkbox"
-            className="h-[17.5px] w-[17.5px]"
-            onClick={() => {
-              setAddAll(!addAll);
-            }}
-          ></input>
-          <div className="font-bold ">
-            <p> Đã chọn: 0</p>
-          </div>
-          <Button
-            text="Xóa"
-            bgColor="#cf2b2b"
-            textColor="#fff"
-            width="40%"
-            height="2"
-          ></Button>
-        </div>
-        <div className="flex justify-between w-[50%] h-[40px]">
+        <div className="flex justify-between w-[80%] h-[40px]">
           <div className="flex items-center w-[50%] ">
-            <InputCustomWidth />
-
+            <InputCustomWidth widthP="full" />
+          </div>
+          <div className="w-[10%] h-full flex items-center">
             <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" />
           </div>
-          <div className="flex items-center w-[40%] ">
+          <div className="w-[40%] ">
             <SelectCustomWidth
               widthP="full"
               options={options}
@@ -136,18 +99,23 @@ const ManageProduct = () => {
 
       <div className="bg-[#d9d9d9] p-5 rounded-[10px] mt-5">
         <div className="flex pb-5">
-          <div className="w-[5%] flex justify-center font-bold text-2xl"></div>
+          <div className="w-[5%] flex justify-center font-bold text-2xl">
+            Id
+          </div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
-            Hình ảnh sản phẩm
+            Tên người nhận
+          </div>
+          <div className="w-[20%] flex justify-center font-bold text-xl">
+            Địa chỉ
           </div>
           <div className="w-[15%] flex justify-center font-bold text-xl">
-            Tên sản phẩm
+            Sđt
           </div>
-          <div className="w-[30%] flex justify-center font-bold text-xl">
-            Loại hàng
+          <div className="w-[20%] flex justify-center font-bold text-xl">
+            Tổng hóa đơn
           </div>
-          <div className="w-[5%] flex justify-center font-bold text-xl">
-            Giá
+          <div className="w-[20%] flex justify-center font-bold text-xl">
+            Ngày/Tháng/Năm
           </div>
         </div>
         {renderProductList}
@@ -156,4 +124,4 @@ const ManageProduct = () => {
   );
 };
 
-export default ManageProduct;
+export default Bill;
