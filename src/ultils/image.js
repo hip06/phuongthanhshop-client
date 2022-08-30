@@ -18,7 +18,6 @@ import navifashion2 from "../assets/navifashion2.png";
 import naviapp3 from "../assets/naviapp3.png";
 import navifashion3 from "../assets/navifashion3.png"
 
-
 const image = {
     fashionbanner,
     appliancebanner,

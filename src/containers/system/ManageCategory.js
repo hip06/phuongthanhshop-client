@@ -12,7 +12,6 @@ const ManageCategory = () => {
     console.log(1);
     const fetchCategory = async () => {
       const tempCate = await ApiCategory.getAll();
-      console.log(tempCate);
       setCategory(tempCate.response.rows);
     };
     fetchCategory();

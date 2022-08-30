@@ -3,14 +3,12 @@ import {getSite} from "../../ultils/constant"
 import { ProductCardMobile } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
-import {useEffect} from "react"
 
 const LayoutHome = () => {
   const params = useParams();
   const site=getSite(params);
-  
   return (
-    <>
+    <div >
       <img src={site.banner}></img>
 
       <img
@@ -146,17 +144,18 @@ const LayoutHome = () => {
           <img src={site.naviLeftImage}></img>
           <p className="absolute top-[40%] left-[10%] text-white font-black text-[16px] " style={{"-webkit-text-stroke-width":"1px","-webkit-text-stroke-color":'rgba(0,0,0,0.65)'}}>{site.naviLeftText}</p>
         </Link>
+
         <Link
           to={`/home/${site.linkRight}`}
           className="absolute top-0 right-0 z-10"
           style={{ clipPath: "polygon(100% 100%,100% 0%, 59% 0%, 1% 293%)" }}
         >
           <img src={site.naviRightImage}></img>
-          <p className="absolute z-1000 top-[40%] right-[15%] text-white font-black text-[16px] " style={{"-webkit-text-stroke-width":"1px","-webkit-text-stroke-color":'rgba(0,0,0,0.65)'}}>{site.naviRightText}</p>
+          <p className="absolute z-10 top-[40%] right-[15%] text-white font-black text-[16px] " style={{"-webkit-text-stroke-width":"1px","-webkit-text-stroke-color":'rgba(0,0,0,0.65)'}}>{site.naviRightText}</p>
         </Link>
       </div>
       <Footer params={params["*"]}></Footer>
-    </>
+    </div>
   );
 };
 export default LayoutHome;

@@ -74,10 +74,10 @@ export const getSite=(params)=>{
     site.banner = image.fashionbanner;
     site.naviLeftText = "Đồ gia dụng";
     site.linkLeft="appliance";
-    site.naviLeftImage=image.naviapp1;
+    site.naviLeftImage=image.navigro1;
     site.naviRightText = "Tạp hóa";
     site.linkRight='grocery'
-    site.naviRightImage=image.navigro1;
+    site.naviRightImage=image.naviapp1;
   } else if (params["*"] === "appliance") {
     site.color = "#EF7300";
     site.banner = image.appliancebanner;

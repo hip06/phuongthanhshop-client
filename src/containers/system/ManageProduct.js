@@ -66,8 +66,10 @@ const ManageProduct = () => {
         <div className=" w-[10%] flex justify-center">
           <img src={image} />
         </div>
-        <div className="w-[25%] flex justify-center">
-          <p>{product.name}</p>
+        <div className="w-[25%] flex justify-center ">
+          <div className='w-full'>
+            <p className='whitespace-nowrap overflow-hidden text-ellipsis' >{product.name}</p>
+          </div>
         </div>
         <div className="w-[20%] flex justify-center">
           <p>{product.category.value}</p>

@@ -2,6 +2,9 @@ import Button from "../../components/Button";
 import { useState } from "react";
 import ApiCategory from "../../apis/category";
 const onSubmit = async (data) => {
+  let token =
+    window.localStorage.getItem("persist:auth") &&
+    JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken.slice(1,-1);
   const res = await ApiCategory.post({ newCategory: data });
   console.log(res);
 };
