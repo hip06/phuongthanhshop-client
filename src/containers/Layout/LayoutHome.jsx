@@ -143,7 +143,7 @@ const LayoutHome = () => {
       </div>
       <div className="relative mb-[4px]">
         <Link to={`/home/${site.linkLeft}`}>
-          <img src={image.navigro1}></img>
+          <img src={site.naviLeftImage}></img>
           <p className="absolute top-[40%] left-[10%] text-white font-black text-[16px] " style={{"-webkit-text-stroke-width":"1px","-webkit-text-stroke-color":'rgba(0,0,0,0.65)'}}>{site.naviLeftText}</p>
         </Link>
         <Link
@@ -151,7 +151,7 @@ const LayoutHome = () => {
           className="absolute top-0 right-0 z-10"
           style={{ clipPath: "polygon(100% 100%,100% 0%, 59% 0%, 1% 293%)" }}
         >
-          <img src={image.naviapp1}></img>
+          <img src={site.naviRightImage}></img>
           <p className="absolute z-1000 top-[40%] right-[15%] text-white font-black text-[16px] " style={{"-webkit-text-stroke-width":"1px","-webkit-text-stroke-color":'rgba(0,0,0,0.65)'}}>{site.naviRightText}</p>
         </Link>
       </div>

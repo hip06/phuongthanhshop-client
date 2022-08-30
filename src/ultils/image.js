@@ -13,8 +13,10 @@ import logogrocerywhite from "../assets/logogrocerywhite.png";
 import logofashionwhite from "../assets/logofashionwhite.png";
 import naviapp1 from "../assets/naviapp1.png";
 import navigro1 from "../assets/navigro1.png";
-import navifashion from "../assets/navifashion.png";
-import navigro from "../assets/navigro.png";
+import navigro2 from "../assets/navigro2.png";
+import navifashion2 from "../assets/navifashion2.png";
+import naviapp3 from "../assets/naviapp3.png";
+import navifashion3 from "../assets/navifashion3.png"
 
 
 const image = {
@@ -31,10 +33,13 @@ const image = {
     logofashionwhite,
     logoappliancewhite,
     logogrocerywhite,
-    navifashion,
     navigro1,
     naviapp1,
-    navigro,
+    navigro2,
+    navifashion2, 
+    naviapp3,
+    navifashion3,
+
 }
 
 export default image;

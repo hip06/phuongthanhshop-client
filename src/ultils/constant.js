@@ -62,32 +62,40 @@ export const getSite=(params)=>{
     banner: "",
     naviLeft: "",
     naviLeftText: "",
+    naviLeftImage:'',
     linkLeft:'',
     naviRight: "",
     naviRightText: "",
+    naviRightImage:'',
     linkRight:'',
   };
   if (params["*"] === "fashion") {
     site.color = "#3f9df3";
     site.banner = image.fashionbanner;
     site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft="appliance"
+    site.linkLeft="appliance";
+    site.naviLeftImage=image.naviapp1;
     site.naviRightText = "Tạp hóa";
     site.linkRight='grocery'
+    site.naviRightImage=image.navigro1;
   } else if (params["*"] === "appliance") {
     site.color = "#EF7300";
     site.banner = image.appliancebanner;
     site.naviLeftText = "Tạp hóa";
-    site.linkLeft='grocery'
+    site.linkLeft='grocery';
+    site.naviLeftImage=image.navigro2;
     site.naviRightText = "Thời trang";
     site.linkRight='fashion'
+    site.naviRightImage=image.navifashion2;
   } else {
     site.color = "#10C600";
     site.banner = image.grocerybanner;
     site.naviLeftText = "Đồ gia dụng";
     site.linkLeft='appliance'
+    site.naviLeftImage=image.naviapp3;
     site.naviRightText = "Thời trang";
     site.linkRight='fashion';
+    site.naviRightImage=image.navifashion3;
   }
 
   return site;
