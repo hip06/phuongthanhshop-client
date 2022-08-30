@@ -19,6 +19,10 @@ const Header = () => {
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params])
+
+  const handleCloseModal=()=>{
+    setModalShow(false);
+  }
   return (
     <div className="flex items-center justify-around relative h-[70px]" ref={headerRef}>
       <div className=" " onClick={() => { setModalShow(true) }}>
