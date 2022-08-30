@@ -30,7 +30,9 @@ const Header = () => {
       </div>
       {modalShow && <div className="z-50 top-0 left-0 w-full fixed h-full" setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
         <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
-          <LayoutMenu></LayoutMenu>
+          <LayoutMenu
+            setModalShow={setModalShow}
+          />
         </div>
       </div>}
 
