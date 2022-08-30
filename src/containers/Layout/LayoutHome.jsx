@@ -1,42 +1,14 @@
 import image from "../../ultils/image";
+import {getSite} from "../../ultils/constant"
 import { ProductCardMobile } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
+import {useEffect} from "react"
 
 const LayoutHome = () => {
   const params = useParams();
-  const site = {
-    color: "",
-    banner: "",
-    naviLeft: "",
-    naviLeftText: "",
-    linkLeft:'',
-    naviRight: "",
-    naviRightText: "",
-    linkRight:'',
-  };
-  if (params["*"] === "fashion") {
-    site.color = "#3f9df3";
-    site.banner = image.fashionbanner;
-    site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft="appliance"
-    site.naviRightText = "Tạp hóa";
-    site.linkRight='grocery'
-  } else if (params["*"] === "appliance") {
-    site.color = "#EF7300";
-    site.banner = image.appliancebanner;
-    site.naviLeftText = "Tạp hóa";
-    site.linkLeft='grocery'
-    site.naviRightText = "Thời trang";
-    site.linkRight='fashion'
-  } else {
-    site.color = "#10C600";
-    site.banner = image.grocerybanner;
-    site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft='appliance'
-    site.naviRightText = "Thời trang";
-    site.linkRight='fashion';
-  }
+  const site=getSite(params);
+  
   return (
     <>
       <img src={site.banner}></img>

@@ -4,13 +4,14 @@ import { HiOutlineMenu } from "react-icons/hi"
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
-
+import { getSite } from "../../ultils/constant"
 import { useParams, Link } from "react-router-dom"
 
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
   const params = useParams();
+  const site = getSite(params);
   return (
     <div className="flex items-center justify-around relative h-[70px]">
       <div className=" " onClick={() => { setModalShow(true) }}>
@@ -42,7 +43,7 @@ const Header = () => {
         <Link to='/cart'>
           <AiOutlineShoppingCart size={26} ></AiOutlineShoppingCart>
         </Link>
-        <div className='absolute top-[-10px] right-0'>6</div>
+        <div className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`} style={{ backgroundColor: site.color }} ><p>6</p></div>
       </div>
     </div>
   );

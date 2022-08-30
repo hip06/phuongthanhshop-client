@@ -1,4 +1,5 @@
 import icons from "./icons";
+import image from "./image"
 
 const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 
@@ -54,3 +55,40 @@ export const adminMenu = [
     icon: <IoIosCreate size={24} />,
   },
 ];
+
+export const getSite=(params)=>{
+  const site = {
+    color: "",
+    banner: "",
+    naviLeft: "",
+    naviLeftText: "",
+    linkLeft:'',
+    naviRight: "",
+    naviRightText: "",
+    linkRight:'',
+  };
+  if (params["*"] === "fashion") {
+    site.color = "#3f9df3";
+    site.banner = image.fashionbanner;
+    site.naviLeftText = "Đồ gia dụng";
+    site.linkLeft="appliance"
+    site.naviRightText = "Tạp hóa";
+    site.linkRight='grocery'
+  } else if (params["*"] === "appliance") {
+    site.color = "#EF7300";
+    site.banner = image.appliancebanner;
+    site.naviLeftText = "Tạp hóa";
+    site.linkLeft='grocery'
+    site.naviRightText = "Thời trang";
+    site.linkRight='fashion'
+  } else {
+    site.color = "#10C600";
+    site.banner = image.grocerybanner;
+    site.naviLeftText = "Đồ gia dụng";
+    site.linkLeft='appliance'
+    site.naviRightText = "Thời trang";
+    site.linkRight='fashion';
+  }
+
+  return site;
+}
