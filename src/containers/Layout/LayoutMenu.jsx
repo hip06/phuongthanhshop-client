@@ -9,7 +9,7 @@ import { apiGetCurrent } from "../../apis/user";
 
 import logo from "../../assets/logo.png";
 
-const LayoutMenu = () => {
+const LayoutMenu = ({setModalShow}) => {
   const params = useParams(apiGetCurrent);
   // useEffect(()=>{
   //   let token =
@@ -90,6 +90,7 @@ const LayoutMenu = () => {
             style={{ color: params["*"] === "fashion" ? "#3f9df3" : "" ,
           fontSize: params["*"] === "fashion" ?"25px":'20px'}}
             className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+            onClick={() => setModalShow(false)}
           >
             {" "}
             Fashion
@@ -99,6 +100,7 @@ const LayoutMenu = () => {
             style={{ color: params["*"] === "appliance" ? "#EF7300" : "" ,
           fontSize: params["*"] === "appliance" ?"25px":'20px'}}
             className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+            onClick={() => setModalShow(false)}
           >
             Appliance
           </NavLink>
@@ -107,6 +109,7 @@ const LayoutMenu = () => {
             style={{ color: params["*"] === "grocery" ? "#10C600" : "" ,
           fontSize: params["*"] === "grocery" ?"25px":'20px'}}
             className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+            onClick={() => setModalShow(false)}
           >
             Grocery
           </NavLink>
