@@ -41,9 +41,9 @@ const Header = () => {
       </div>
 
       <div>
-        {params["*"] === 'fashion' && <img className="" src={image.logofashion}></img>}
-        {params["*"] === 'appliance' && <img className="" src={image.logoappliance}></img>}
-        {params["*"] === 'grocery' && <img className="" src={image.logogrocery}></img>}
+        {params["*"] === 'fashion' && <img className="h-[46px]" src={image.logofashion}></img>}
+        {params["*"] === 'appliance' && <img className="h-[46px]" src={image.logoappliance}></img>}
+        {params["*"] === 'grocery' && <img className="h-[46px]" src={image.logogrocery}></img>}
       </div>
 
       <div>
