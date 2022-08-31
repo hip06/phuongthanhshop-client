@@ -74,8 +74,8 @@ const LayoutMenu = ({setModalShow}) => {
   return (
       
       <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px] fixed">
-        <div>
-          <img src={logo}></img>
+        <div className="flex justify-center">
+          <img src={logo} className='w-[80%]' ></img>
         </div>
         <div className="w-full">
           <div className="flex justify-around">
