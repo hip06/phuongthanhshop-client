@@ -7,11 +7,15 @@ const ApiCategory = {
   },
   delete: (params) => {
     const url = "/api/v1/admin/category/delete";
-    return axiosClients.delete(url, { params });
+    return axiosClients.delete(url, {params});
   },
   post: (data) => {
     const url = "/api/v1/admin/category/create-new";
     return axiosClients.post(url, data);
+  },
+  put: (data) => {
+    const url = "/api/v1/admin/category/update";
+    return axiosClients.put(url, data);
   },
 };
 
