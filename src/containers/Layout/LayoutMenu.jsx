@@ -11,16 +11,16 @@ import logo from "../../assets/logo.png";
 
 const LayoutMenu = ({setModalShow}) => {
   const params = useParams(apiGetCurrent);
-  // useEffect(()=>{
-  //   let token =
-  //   window.localStorage.getItem("persist:auth") &&
-  //   JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken.slice(1,-1);
-  //   const fetchUser= async () =>{
-  //     const user=await apiGetCurrent.get(token);
-  //     console.log(user);
-  //   }
-  //   fetchUser();
-  // },[])
+  useEffect(()=>{
+    let token =
+    window.localStorage.getItem("persist:auth") &&
+    JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken.slice(1,-1);
+    const fetchUser= async () =>{
+      const user=await apiGetCurrent.get();
+      console.log(user);
+    }
+    fetchUser();
+  },[])
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
