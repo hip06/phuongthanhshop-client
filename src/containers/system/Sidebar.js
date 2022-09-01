@@ -8,7 +8,7 @@ const notActiveStyle = "py-4 pl-4 flex items-center gap-2 hover:bg-[#46546C]";
 
 const Sidebar = () => {
   return (
-    <div className="w-256 bg-[#3C4B64] h-full text-gray-300 flex flex-col justify-between">
+    <div className="w-256 bg-[#3C4B64] h-full text-gray-300 flex flex-col justify-between ">
       <div className="flex flex-col">
         <div className="h-[64px] flex justify-center items-center bg-[#303C54] text-white font-semibold">
           PHUONGTHANHSHOP

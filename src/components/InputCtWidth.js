@@ -8,8 +8,7 @@ import Button from "./Button";
     @Anhtd
 */
 const InputCustomWidth = React.memo(
-  ({ lable, widthP, placeholder, PLarge }) => {
-    const [value, setValue] = useState("");
+  ({ lable, widthP, placeholder, PLarge, value, setValue }) => {
     const onAction = useCallback((newvalue) => setValue(newvalue), []);
     return (
       <div className={`w-${widthP}  h-full`}>
@@ -187,9 +186,10 @@ const TextCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
     PLarge : large or small padding
     @Anhtd
 */
-const InputFileCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
-  const [value, setValue] = useState("");
-  const onAction = useCallback((newvalue) => setValue(newvalue), []);
+const InputFileCustomWidth = React.memo(({ lable, widthP, setValueImg, valueImg }) => {
+  const onAction = useCallback((e) => {
+    setValueImg(e.target.files[0])
+  }, [])
   return (
     <div className={`w-${widthP} my-3`}>
       <label htmlFor="field" className="font-bold text-l">
@@ -200,9 +200,7 @@ const InputFileCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
         className="mr-3 w-[100%] h-full focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md"
-        value={value}
-        placeholder={placeholder}
-        onChange={(e) => onAction(e.target.value)}
+        onChange={onAction}
       />
     </div>
   );

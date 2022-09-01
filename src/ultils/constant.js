@@ -9,7 +9,7 @@ export const path = {
   HOME: "/home",
   FEED: "*",
   GENERAL: "*",
-  CREATE_PRODUCT: "create-product",
+  EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
   USER: "user",
@@ -46,7 +46,7 @@ export const adminMenu = [
   // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
   {
     name: "Thêm sản phẩm",
-    path: "/system/create-product",
+    path: "/system/edit-product",
     icon: <IoIosCreate size={24} />,
   },
   {
@@ -56,46 +56,46 @@ export const adminMenu = [
   },
 ];
 
-export const getSite=(params)=>{
+export const getSite = (params) => {
   const site = {
     color: "",
     banner: "",
     naviLeft: "",
     naviLeftText: "",
-    naviLeftImage:'',
-    linkLeft:'',
+    naviLeftImage: '',
+    linkLeft: '',
     naviRight: "",
     naviRightText: "",
-    naviRightImage:'',
-    linkRight:'',
+    naviRightImage: '',
+    linkRight: '',
   };
   if (params["*"] === "fashion") {
     site.color = "#3f9df3";
     site.banner = image.fashionbanner;
     site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft="appliance";
-    site.naviLeftImage=image.navigro1;
+    site.linkLeft = "appliance";
+    site.naviLeftImage = image.navigro1;
     site.naviRightText = "Tạp hóa";
-    site.linkRight='grocery'
-    site.naviRightImage=image.naviapp1;
+    site.linkRight = 'grocery'
+    site.naviRightImage = image.naviapp1;
   } else if (params["*"] === "appliance") {
     site.color = "#EF7300";
     site.banner = image.appliancebanner;
     site.naviLeftText = "Tạp hóa";
-    site.linkLeft='grocery';
-    site.naviLeftImage=image.navigro2;
+    site.linkLeft = 'grocery';
+    site.naviLeftImage = image.navigro2;
     site.naviRightText = "Thời trang";
-    site.linkRight='fashion'
-    site.naviRightImage=image.navifashion2;
+    site.linkRight = 'fashion'
+    site.naviRightImage = image.navifashion2;
   } else {
     site.color = "#10C600";
     site.banner = image.grocerybanner;
     site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft='appliance'
-    site.naviLeftImage=image.naviapp3;
+    site.linkLeft = 'appliance'
+    site.naviLeftImage = image.naviapp3;
     site.naviRightText = "Thời trang";
-    site.linkRight='fashion';
-    site.naviRightImage=image.navifashion3;
+    site.linkRight = 'fashion';
+    site.naviRightImage = image.navifashion3;
   }
 
   return site;
