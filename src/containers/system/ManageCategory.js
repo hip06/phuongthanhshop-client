@@ -8,20 +8,23 @@ const ManageCategory = () => {
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [isShow, setIsShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    console.log(1);
     const fetchCategory = async () => {
       const tempCate = await ApiCategory.getAll();
       console.log(tempCate);
       setCategory(tempCate.response.rows);
     };
     fetchCategory();
-  }, []);
+  }, [isLoading]);
+
   const renderCateList = category.map((cate, i) => {
     console.log(123);
+
     return (
       <div key={cate.id} className="">
-        <div className=" flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2">
+        <div className=" flex rounded w-full  bg-white items-center max-h-[90px] [&:not(:first-child)]:mt-2">
           <div className="w-[28%] p-10">
             <p className=" text-xl font-bold ">{cate.value}</p>
           </div>
@@ -51,7 +54,8 @@ const ManageCategory = () => {
               width="40%"
               height="2"
               onClick={async () => {
-                 await ApiCategory.delete({ code: cate.code });
+                await ApiCategory.delete({ id: cate.id });
+                setIsLoading(!isLoading);
               }}
             ></Button>
           </div>
@@ -92,12 +96,13 @@ const ManageCategory = () => {
       </div>
     );
   });
+
   return (
     <>
       <h1 className="text-2xl mb-2">ManageCategory</h1>
-      <div className="bg-gray-300 rounded p-5">
+      <div className="bg-gray-300 rounded p-5  ">
         <h2>{`Tổng số gian hàng hiện có : ${category.length}`}</h2>
-        {renderCateList}
+        <div className="overflow-auto bg-white h-[540px]">{renderCateList}</div>
       </div>
     </>
   );
