@@ -10,7 +10,7 @@ import { apiGetCurrent } from "../../apis/user";
 import logo from "../../assets/logo.png";
 
 const LayoutMenu = ({setModalShow}) => {
-  const params = useParams(apiGetCurrent);
+  const params = useParams();
   useEffect(()=>{
     let token =
     window.localStorage.getItem("persist:auth") &&

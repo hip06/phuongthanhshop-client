@@ -7,7 +7,6 @@ import { apiAllUsers } from "../../apis/user";
 const User = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    console.log(1);
     const fetchCategory = async () => {
       const res = await apiAllUsers.get();
       setUsers(res.user.rows);
