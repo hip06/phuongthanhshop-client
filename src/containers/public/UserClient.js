@@ -4,8 +4,9 @@ import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import HistoryItem from "../../components/HistoryItem";
 import image from "../../assets/temp.png"
-
+import {useSelector} from "react-redux";
 const UserClient = () => {
+    const user=useSelector(state=>state.auth).userCurrent;
     return (<div className="relative h-full">
         <header className="flex items-center w-full h-[60px] ">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -21,9 +22,9 @@ const UserClient = () => {
                 <FaRegUserCircle size='100'></FaRegUserCircle>
             </div>
             <div className=' font-bold text-[12px] '>
-                <p className='[&:not(:last-child)]:mb-[10px]'>{`Tên người dùng: Nguyễn Đức Anh`}</p>
-                <p className='[&:not(:last-child)]:mb-[10px]'>{`Email: Longn03@gmail.com`}</p>
-                <p className='[&:not(:last-child)]:mb-[10px]'>{`Số điện thoại: 0388685973`}</p>
+                <p className='[&:not(:last-child)]:mb-[10px]'>{`Tên người dùng:${user.name}`}</p>
+                <p className='[&:not(:last-child)]:mb-[10px]'>{`Email: ${user.email}`}</p>
+                <p className='[&:not(:last-child)]:mb-[10px]'>{`Số điện thoại: ${user.phone?user.phone:''}`}</p>
             </div>
         </section>
 

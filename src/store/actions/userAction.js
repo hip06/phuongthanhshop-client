@@ -3,11 +3,11 @@ import { apiGetCurrent } from "../../apis/user";
 
 export const getCurrent = () => async (dispatch) => {
   try {
-    const response = await apiGetCurrent();
-    if (response?.data.status === 0)
+    const response = await apiGetCurrent.get();
+    if (response?.status === 0)
       dispatch({
         type: actionTypes.GET_CURRENT,
-        data: response.data.user,
+        data: response.user,
       });
   } catch (error) {}
 };
