@@ -2,13 +2,18 @@ import { Button } from "../../components/Button";
 import ApiCategory from "../../apis/category";
 import { useEffect, useState } from "react";
 import { calculateNewValue } from "@testing-library/user-event/dist/utils";
-
+import { InputCustomWidth } from "../../components/InputCtWidth";
 const ManageCategory = () => {
   const [category, setCategory] = useState([]);
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [value, setValue] = useState("");
+
+  const onSubmit = async (data) => {
+    console.log(value);
+  };
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -20,8 +25,6 @@ const ManageCategory = () => {
   }, [isLoading]);
 
   const renderCateList = category.map((cate, i) => {
-    console.log(123);
-
     return (
       <div key={cate.id} className="">
         <div className=" flex rounded w-full  bg-white items-center max-h-[90px] [&:not(:first-child)]:mt-2">
@@ -100,9 +103,42 @@ const ManageCategory = () => {
   return (
     <>
       <h1 className="text-2xl mb-2">ManageCategory</h1>
-      <div className="bg-gray-300 rounded p-5  ">
-        <h2>{`Tổng số gian hàng hiện có : ${category.length}`}</h2>
-        <div className="overflow-auto bg-white h-[540px]">{renderCateList}</div>
+      <div className="bg-gray-300 rounded p-5 h-[525px]">
+        <div className="h-1/5 ">
+          <h2>Thêm gian hàng</h2>
+          <div className="h-1/2 flex">
+            <InputCustomWidth
+              widthP="4/5"
+              label="Thee danh muc san pham"
+              value={value}
+              setValue={setValue}
+            ></InputCustomWidth>
+
+            <Button
+              text="Them"
+              bgColor="#4ed14b"
+              textColor="#fff"
+              width="20%"
+              onClick={() => {
+                onSubmit(value);
+              }}
+            ></Button>
+
+            {/* <button
+              type="button"
+              onClick={() => {
+                onSubmit(value);
+              }}
+              className="h-[50px] w-[50px]"
+            >
+              Submit
+            </button> */}
+          </div>
+
+          <h2>{`Tổng số gian hàng hiện có : ${category.length}`}</h2>
+        </div>
+
+        <div className="overflow-auto bg-white h-4/5">{renderCateList}</div>
       </div>
     </>
   );

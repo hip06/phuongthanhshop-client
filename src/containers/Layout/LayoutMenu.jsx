@@ -4,23 +4,19 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
 import { apiGetCurrent } from "../../apis/user";
 
 import logo from "../../assets/logo.png";
 
 const LayoutMenu = () => {
-  const params = useParams(apiGetCurrent);
-  // useEffect(()=>{
-  //   let token =
-  //   window.localStorage.getItem("persist:auth") &&
-  //   JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken.slice(1,-1);
-  //   const fetchUser= async () =>{
-  //     const user=await apiGetCurrent.get(token);
-  //     console.log(user);
-  //   }
-  //   fetchUser();
-  // },[])
+  const params = useParams();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await apiGetCurrent.get();
+      console.log(user);
+    };
+    fetchUser();
+  }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,47 +68,51 @@ const LayoutMenu = () => {
   );
 
   return (
-      
-      <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px] fixed">
-        <div>
-          <img src={logo}></img>
-        </div>
-        <div className="w-full">
-          <div className="flex justify-around">
-            <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
-            <p>Giá trị đơn hàng:0</p>
-          </div>
-          {button}
-        </div>
-        <div className="self-start w-full h-screen  ">
-          <NavLink
-            to="/home/fashion"
-            style={{ color: params["*"] === "fashion" ? "#3f9df3" : "" ,
-          fontSize: params["*"] === "fashion" ?"25px":'20px'}}
-            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          >
-            {" "}
-            Fashion
-          </NavLink>
-          <NavLink
-            to="/home/appliance"
-            style={{ color: params["*"] === "appliance" ? "#EF7300" : "" ,
-          fontSize: params["*"] === "appliance" ?"25px":'20px'}}
-            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          >
-            Appliance
-          </NavLink>
-          <NavLink
-            to="/home/grocery"
-            style={{ color: params["*"] === "grocery" ? "#10C600" : "" ,
-          fontSize: params["*"] === "grocery" ?"25px":'20px'}}
-            className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          >
-            Grocery
-          </NavLink>
-        </div>
+    <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px] fixed">
+      <div>
+        <img src={logo}></img>
       </div>
-    
+      <div className="w-full">
+        <div className="flex justify-around">
+          <AiOutlineShoppingCart size={24}></AiOutlineShoppingCart>
+          <p>Giá trị đơn hàng:0</p>
+        </div>
+        {button}
+      </div>
+      <div className="self-start w-full h-screen  ">
+        <NavLink
+          to="/home/fashion"
+          style={{
+            color: params["*"] === "fashion" ? "#3f9df3" : "",
+            fontSize: params["*"] === "fashion" ? "25px" : "20px",
+          }}
+          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+        >
+          {" "}
+          Fashion
+        </NavLink>
+        <NavLink
+          to="/home/appliance"
+          style={{
+            color: params["*"] === "appliance" ? "#EF7300" : "",
+            fontSize: params["*"] === "appliance" ? "25px" : "20px",
+          }}
+          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+        >
+          Appliance
+        </NavLink>
+        <NavLink
+          to="/home/grocery"
+          style={{
+            color: params["*"] === "grocery" ? "#10C600" : "",
+            fontSize: params["*"] === "grocery" ? "25px" : "20px",
+          }}
+          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+        >
+          Grocery
+        </NavLink>
+      </div>
+    </div>
   );
 };
 
