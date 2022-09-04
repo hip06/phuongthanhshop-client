@@ -8,7 +8,6 @@ const User = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    console.log(1);
     const fetchCategory = async () => {
       const res = await apiAllUsers.get();
       setUsers(res.user.rows);

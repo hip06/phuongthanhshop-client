@@ -18,7 +18,6 @@ const ManageCategory = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       const tempCate = await ApiCategory.getAll();
-      console.log(tempCate);
       setCategory(tempCate.response.rows);
     };
     fetchCategory();
