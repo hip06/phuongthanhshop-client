@@ -8,7 +8,7 @@ export const ProductCardCtHeight = ({ image, name, color, costPerUnit, descripti
         return (price)
     }
     return (
-        <div className="w-[168px] h-[270px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
+        <div className="w-[174px] h-[312px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
             <div className={`mb-[20px]`}>
                 <img className="w-full h-[187px]" src={image} />
             </div>

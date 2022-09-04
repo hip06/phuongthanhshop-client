@@ -19,16 +19,18 @@ const Header = () => {
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params])
+
+  const handleCloseModal = () => {
+    setModalShow(false);
+  }
   return (
     <div className="flex items-center justify-around relative h-[70px]" ref={headerRef}>
       <div className=" " onClick={() => { setModalShow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
-      {modalShow && <div className="z-50 top-0 left-0 w-full fixed h-full" setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
+      {<div className={`z-50 top-0 left-0 w-full fixed h-full ${modalShow ? "" : 'hidden'} animate-modalShow`} setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
         <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
-          <LayoutMenu
-            setModalShow={setModalShow}
-          />
+          <LayoutMenu setModalShow={setModalShow} />
         </div>
       </div>}
 
@@ -37,9 +39,9 @@ const Header = () => {
       </div>
 
       <div>
-        {params["*"] === 'fashion' && <img className="" src={image.logofashion}></img>}
-        {params["*"] === 'appliance' && <img className="" src={image.logoappliance}></img>}
-        {params["*"] === 'grocery' && <img className="" src={image.logogrocery}></img>}
+        {params["*"] === 'fashion' && <img className="h-[46px]" src={image.logofashion}></img>}
+        {params["*"] === 'appliance' && <img className="h-[46px]" src={image.logoappliance}></img>}
+        {params["*"] === 'grocery' && <img className="h-[46px]" src={image.logogrocery}></img>}
       </div>
 
       <div>
