@@ -24,7 +24,7 @@ const User = () => {
           <span>{i + 1}</span>
         </div>
 
-        <div className="w-[15%] flex justify-center">
+        <div className="w-[15%] flex justify-center h-[30px]">
           <img src={image} className="h-full"></img>
         </div>
         <div className="w-[10%] text-center">

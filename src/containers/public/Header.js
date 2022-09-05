@@ -9,7 +9,7 @@ import { useParams, Link } from "react-router-dom"
 
 
 
-const Header = () => {
+const Header = ({isSearching,setIsSearching}) => {
 
 
   const [modalShow, setModalShow] = useState(false);
@@ -20,7 +20,7 @@ const Header = () => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params])
 
-  const handleCloseModal=()=>{
+  const handleCloseModal = () => {
     setModalShow(false);
   }
   return (
@@ -28,7 +28,7 @@ const Header = () => {
       <div className=" " onClick={() => { setModalShow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
-      {<div className={`z-50 top-0 left-0 w-full fixed h-full ${modalShow?"":'hidden'} animate-modalShow`} setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
+      {<div className={`z-50 top-0 left-0 w-full fixed h-full ${modalShow ? "" : 'hidden'} animate-modalShow`} setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
         <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
           <LayoutMenu
             setModalShow={setModalShow}
@@ -36,7 +36,7 @@ const Header = () => {
         </div>
       </div>}
 
-      <div>
+      <div onClick={()=>{setIsSearching(!isSearching)}}>
         <BiSearchAlt size={26} ></BiSearchAlt>
       </div>
 

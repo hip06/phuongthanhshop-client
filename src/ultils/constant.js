@@ -11,6 +11,7 @@ export const path = {
   PAYMENT:'/payment',
   FEED: "/feed",
   CART:'/cart',
+  DETAIL:'/detail',
   GENERAL: "*",
   EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",

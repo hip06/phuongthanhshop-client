@@ -1,4 +1,6 @@
 const Detail=()=>{
-    return <p>Hi- im detail===========</p>
+    return <section>
+        
+    </section>
 }
 export default Detail;

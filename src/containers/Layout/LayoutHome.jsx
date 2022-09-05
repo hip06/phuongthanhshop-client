@@ -1,6 +1,6 @@
 import image from "../../ultils/image";
 import { getSite } from "../../ultils/constant";
-import { ProductCardMobile } from "../../components/ProductCard";
+import { ProductCardCtHeight } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import {BiFilterAlt,BiSortAlt2} from "react-icons/bi";
@@ -41,44 +41,45 @@ const LayoutHome = () => {
 
         <div className="overflow-x-auto flex ">
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
+              costPerUnit={600000}
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
+              description='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12'
+              costPerUnit={600000}
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
+              costPerUnit={600000}
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
+              costPerUnit={600000}
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
+              costPerUnit={600000}
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
         </div>
 
@@ -95,44 +96,44 @@ const LayoutHome = () => {
 
             <div className="overflow-x-auto flex ">
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
+                  costPerUnit={600000}
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
+                  costPerUnit={600000}
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
+                  costPerUnit={600000}
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
+                  costPerUnit={600000}
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
+                  costPerUnit={600000}
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
             </div>
           </div>
