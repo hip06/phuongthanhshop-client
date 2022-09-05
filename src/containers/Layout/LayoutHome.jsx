@@ -1,14 +1,15 @@
 import image from "../../ultils/image";
-import { getSite } from "../../ultils/constant"
-import { ProductCardCtHeight } from "../../components/ProductCard";
+import { getSite } from "../../ultils/constant";
+import { ProductCardMobile } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
+import {BiFilterAlt,BiSortAlt2} from "react-icons/bi";
 
 const LayoutHome = () => {
   const params = useParams();
-  const site = getSite(params)
+  const site = getSite(params);
   return (
-    <div >
+    <div>
       <img src={site.banner}></img>
 
       <img
@@ -40,62 +41,45 @@ const LayoutHome = () => {
 
         <div className="overflow-x-auto flex ">
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
+            <ProductCardMobile
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={76500000}
+              costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardCtHeight>
+            ></ProductCardMobile>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
+            <ProductCardMobile
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={70000}
+              costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardCtHeight>
+            ></ProductCardMobile>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
+            <ProductCardMobile
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={700000}
+              costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardCtHeight>
+            ></ProductCardMobile>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
+            <ProductCardMobile
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={700000}
+              costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardCtHeight>
+            ></ProductCardMobile>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
+            <ProductCardMobile
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={700000}
+              costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardCtHeight>
+            ></ProductCardMobile>
           </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={700000}
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit={700000}
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
-
         </div>
 
         {params["*"] === "appliance" || params["*"] === "grocery" ? (
@@ -111,44 +95,44 @@ const LayoutHome = () => {
 
             <div className="overflow-x-auto flex ">
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
+                <ProductCardMobile
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardCtHeight>
+                ></ProductCardMobile>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
+                <ProductCardMobile
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardCtHeight>
+                ></ProductCardMobile>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
+                <ProductCardMobile
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardCtHeight>
+                ></ProductCardMobile>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
+                <ProductCardMobile
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardCtHeight>
+                ></ProductCardMobile>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
+                <ProductCardMobile
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardCtHeight>
+                ></ProductCardMobile>
               </div>
             </div>
           </div>
@@ -156,10 +140,32 @@ const LayoutHome = () => {
           ""
         )}
       </div>
+      <section>
+        {params["*"] === "grocery" ||
+          (params["*"] === "appliance" && <div className="flex justify-between w-full bg-[#d9d9d9] m-[5px] p-[5px] px-[10px] rounded-[10px] items-center font-semibold text-[20px] h-[60px]">
+            <div className="flex items-center justify-between">
+              <p>Lọc</p>
+              <BiFilterAlt size={22}></BiFilterAlt>
+            </div>
+            <div className="flex items-center justify-between">
+              <p>Phân loại</p>
+              <BiSortAlt2 size={22}></BiSortAlt2>
+            </div>
+          </div>)}
+      </section>
+
       <div className="relative mb-[4px]">
         <Link to={`/home/${site.linkLeft}`}>
           <img src={site.naviLeftImage}></img>
-          <p className="absolute top-[40%] left-[10%] text-white font-black text-[16px] " style={{ "-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": 'rgba(0,0,0,0.65)' }}>{site.naviLeftText}</p>
+          <p
+            className="absolute top-[40%] left-[10%] text-white font-black text-[16px] "
+            style={{
+              "-webkit-text-stroke-width": "1px",
+              "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
+            }}
+          >
+            {site.naviLeftText}
+          </p>
         </Link>
 
         <Link
@@ -168,7 +174,15 @@ const LayoutHome = () => {
           style={{ clipPath: "polygon(100% 100%,100% 0%, 59% 0%, 1% 293%)" }}
         >
           <img src={site.naviRightImage}></img>
-          <p className="absolute z-10 top-[40%] right-[15%] text-white font-black text-[16px] " style={{ "-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": 'rgba(0,0,0,0.65)' }}>{site.naviRightText}</p>
+          <p
+            className="absolute z-10 top-[40%] right-[15%] text-white font-black text-[16px] "
+            style={{
+              "-webkit-text-stroke-width": "1px",
+              "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
+            }}
+          >
+            {site.naviRightText}
+          </p>
         </Link>
       </div>
       <Footer params={params["*"]}></Footer>

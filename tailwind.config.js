@@ -17,6 +17,20 @@ module.exports = {
       width: {
         '256': '256px',
         'r256': 'calc(100% - 256px)'
+      },
+      animation: {
+        'modalShow': 'modalShow .3s linear ',
+        'modalClose': 'modalShow .3s linear ',
+      },
+      keyframes: {
+        modalShow: {
+          '0%': { transform: 'translateX(-100px)', },
+          '100%':{ transform: 'translateX(0%)'}
+        },
+        modalClose: {
+          '0%': { transform: 'translateX(0)', },
+          '100%':{ transform: 'translateX(-100px)',display: 'none'}
+        }
       }
     },
   },
