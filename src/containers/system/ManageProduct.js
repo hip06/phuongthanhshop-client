@@ -63,12 +63,14 @@ const ManageProduct = () => {
             className="h-[17.5px] w-[17.5px] checkbox"
           ></input>
         </div>
-        <div className=" w-[10%] flex justify-center">
-          <img src={image} />
+        <div className=" w-[10%] flex justify-center h-4/5">
+          <img src={image} alt="" className="h-full"></img>
         </div>
         <div className="w-[25%] flex justify-center ">
-          <div className='w-full'>
-            <p className='whitespace-nowrap overflow-hidden text-ellipsis' >{product.name}</p>
+          <div className="w-full">
+            <p className="whitespace-nowrap overflow-hidden text-ellipsis">
+              {product.name}
+            </p>
           </div>
         </div>
         <div className="w-[20%] flex justify-center">
