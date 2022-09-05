@@ -1,9 +1,9 @@
 import image from "../../ultils/image";
 import { getSite } from "../../ultils/constant";
-import { ProductCardMobile } from "../../components/ProductCard";
+import { ProductCardCtHeight } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
-import {BiFilterAlt,BiSortAlt2} from "react-icons/bi";
+import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
 
 const LayoutHome = () => {
   const params = useParams();
@@ -41,44 +41,45 @@ const LayoutHome = () => {
 
         <div className="overflow-x-auto flex ">
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardMobile>
+              description="Áo khoác thời trang nam siêu đẹp vip pro ak4777775"
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardMobile
+            <ProductCardCtHeight
               image={image.imagetemp}
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
-            ></ProductCardMobile>
+            ></ProductCardCtHeight>
           </div>
         </div>
 
@@ -95,44 +96,44 @@ const LayoutHome = () => {
 
             <div className="overflow-x-auto flex ">
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
               <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardMobile
+                <ProductCardCtHeight
                   image={image.imagetemp}
                   name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
                   costPerUnit="600.000d"
                   color={site.color}
-                ></ProductCardMobile>
+                ></ProductCardCtHeight>
               </div>
             </div>
           </div>
@@ -142,16 +143,18 @@ const LayoutHome = () => {
       </div>
       <section>
         {params["*"] === "grocery" ||
-          (params["*"] === "appliance" && <div className="flex justify-between w-full bg-[#d9d9d9] m-[5px] p-[5px] px-[10px] rounded-[10px] items-center font-semibold text-[20px] h-[60px]">
-            <div className="flex items-center justify-between">
-              <p>Lọc</p>
-              <BiFilterAlt size={22}></BiFilterAlt>
+          (params["*"] === "appliance" && (
+            <div className="flex justify-between w-full bg-[#d9d9d9] m-[5px] p-[5px] px-[10px] rounded-[10px] items-center font-semibold text-[20px] h-[60px]">
+              <div className="flex items-center justify-between">
+                <p>Lọc</p>
+                <BiFilterAlt size={22}></BiFilterAlt>
+              </div>
+              <div className="flex items-center justify-between">
+                <p>Phân loại</p>
+                <BiSortAlt2 size={22}></BiSortAlt2>
+              </div>
             </div>
-            <div className="flex items-center justify-between">
-              <p>Phân loại</p>
-              <BiSortAlt2 size={22}></BiSortAlt2>
-            </div>
-          </div>)}
+          ))}
       </section>
 
       <div className="relative mb-[4px]">
