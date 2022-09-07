@@ -18,10 +18,10 @@ const EditProduct = () => {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [shortDes, setShortDes] = useState("");
-  const [imageMain, setImageMain] = useState("")
-  const [image1, setImage1] = useState("")
-  const [image2, setImage2] = useState("")
-  const [image3, setImage3] = useState("")
+  const [imageMain, setImageMain] = useState("");
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
 
   const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
   useEffect(() => {
@@ -29,11 +29,11 @@ const EditProduct = () => {
     setOptions([...exampleArray]);
     setLoading(false);
     setSelectValue("option 1");
-  }, [])
-  if (imageMain !== '') imageMain.preview = URL.createObjectURL(imageMain)
-  if (image1 !== '') image1.preview = URL.createObjectURL(image1)
-  if (image2 !== '') image2.preview = URL.createObjectURL(image2)
-  if (image3 !== '') image3.preview = URL.createObjectURL(image3)
+  }, []);
+  if (imageMain !== "") imageMain.preview = URL.createObjectURL(imageMain);
+  if (image1 !== "") image1.preview = URL.createObjectURL(image1);
+  if (image2 !== "") image2.preview = URL.createObjectURL(image2);
+  if (image3 !== "") image3.preview = URL.createObjectURL(image3);
   return (
     <>
       {loading ? (
@@ -101,25 +101,25 @@ const EditProduct = () => {
               <div className=" w-[50%]">
                 <InputFileCustomWidth
                   lable="Ảnh chính"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={imageMain}
                   setValueImg={setImageMain}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 1"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image1}
                   setValueImg={setImage1}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 2"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image2}
                   setValueImg={setImage2}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 3"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image3}
                   setValueImg={setImage3}
                 />
@@ -135,7 +135,7 @@ const EditProduct = () => {
                   name={productName}
                   description={shortDes}
                   costPerUnit={price}
-                  color={'#4ed14b'}
+                  color={"#4ed14b"}
                 />
               </div>
               <div>
@@ -143,7 +143,7 @@ const EditProduct = () => {
                 <div className="w-[500px] ">
                   <div className="w-[375px] ml-[25%]">
                     <GroupImageCtWidth
-                      widthP='full'
+                      widthP="full"
                       mainImage={imageMain.preview}
                       image1={image1.preview}
                       image2={image2.preview}
@@ -156,10 +156,7 @@ const EditProduct = () => {
             <div className="mt-[12px]">
               <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
 
-              <GroupImageCtWidth
-                widthP='400px'
-                mainImage={imageMain.preview}
-              />
+              <GroupImageCtWidth widthP="400px" mainImage={imageMain.preview} />
             </div>
           </div>
         </>

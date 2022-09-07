@@ -17,7 +17,7 @@ export const path = {
   MANAGE_CATEGORY: "manage-category",
   USER: "user",
   BILL: "bill",
-  CREATE_CATEGORY: "create-category",
+  UPDATE_PROFILE: "update-profile",
 };
 export const adminMenu = [
   {
@@ -58,7 +58,7 @@ export const adminMenu = [
   },
   {
     name: "Thêm gian hàng",
-    path: "/system/create-category",
+    path: "/system/update-profile",
     icon: <IoIosCreate size={24} />,
   },
 ];

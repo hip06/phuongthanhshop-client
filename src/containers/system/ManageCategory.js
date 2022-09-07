@@ -84,11 +84,12 @@ const ManageCategory = () => {
                 width="40%"
                 height="2"
                 onClick={async () => {
-                  const res = await ApiCategory.put({
+                  await ApiCategory.put({
                     id: cate.id,
                     newCategory: name,
                   });
-                  console.log(res);
+                  setIsLoading(!isLoading);
+                  setIsShow(!isShow);
                 }}
               ></Button>
             </div>
@@ -107,12 +108,14 @@ const ManageCategory = () => {
         <div className="h-1/5 ">
           <h2>Thêm gian hàng</h2>
           <div className="h-1/2 flex">
-            <InputCustomWidth
-              widthP="4/5"
-              label="Thee danh muc san pham"
-              value={value}
-              setValue={setValue}
-            ></InputCustomWidth>
+            <div className="w-4/5">
+              <InputCustomWidth
+                widthP="full"
+                label="Thee danh muc san pham"
+                value={value}
+                setValue={setValue}
+              ></InputCustomWidth>
+            </div>
 
             <Button
               text="Them"

@@ -18,3 +18,9 @@ export const apiDeleteUser = {
     return axiosClients.delete(url, { params });
   },
 };
+export const apiUpdateUser = {
+  put: (data) => {
+    const url = "/api/v1/user/update";
+    return axiosClients.put(url, data);
+  },
+};

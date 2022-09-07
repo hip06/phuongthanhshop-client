@@ -1,5 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Feed, Detail, UserClient,Payment,Cart } from "./containers/public";
+import {
+  Home,
+  Login,
+  Feed,
+  Detail,
+  UserClient,
+  Payment,
+  Cart,
+} from "./containers/public";
 import {
   System,
   General,
@@ -8,7 +16,7 @@ import {
   ManageCategory,
   User,
   Bill,
-  AddCategory,
+  UpdateProfile,
 } from "./containers/system";
 import { path } from "./ultils/constant";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,13 +36,12 @@ function App() {
     <div className="w-screen h-screen">
       <Routes>
         {/*Public routes */}
-        <Route path='/' element={<Navigate to="/home/fashion"></Navigate>} />
+        <Route path="/" element={<Navigate to="/home/fashion"></Navigate>} />
         <Route path={path.HOME} element={<Home />}></Route>
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
-        <Route path={path.CART} element={<Cart />}/>
+        <Route path={path.CART} element={<Cart />} />
         <Route path={path.USERCLIENT} element={<UserClient />} />
-
 
         {/*Login route */}
         <Route path={path.LOGIN} element={<Login />} />
@@ -43,11 +50,11 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.GENERAL} element={<General />} />
           <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
-          <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
+          <Route path={path.EDIT_PRODUCT} element={<CreateProduct />} />
           <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           <Route path={path.USER} element={<User />} />
           <Route path={path.BILL} element={<Bill />} />
-          <Route path={path.CREATE_CATEGORY} element={<AddCategory />} />
+          <Route path={path.UPDATE_PROFILE} element={<UpdateProfile />} />
         </Route>
       </Routes>
     </div>
