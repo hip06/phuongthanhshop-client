@@ -46,6 +46,7 @@ const LayoutHome = () => {
               name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
               costPerUnit="600.000d"
               color={site.color}
+              description="Áo khoác thời trang nam siêu đẹp vip pro ak4777775"
             ></ProductCardCtHeight>
           </div>
           <div className="[&:not(:last-child)]:mr-5">
