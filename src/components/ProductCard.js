@@ -28,13 +28,13 @@ export const ProductCardCtHeight = ({
       >
         {convertPrice(costPerUnit)}
       </p>
-      <p className="text-align left text-ellipsis decoration-double font-large text-[15px] px-[5px] h-[40px] text-ellipsis overflow-hidden">
+      <p className="text-align text-wrap left decoration-double font-large text-[15px] px-[5px] h-[40px] text-ellipsis overflow-hidden">
         {name}
       </p>
-      <p className=" decoration-double font-large text-[10px] px-[5px]">
+      <span className="w-full decoration-double font-large text-[10px] py-[5px] px-[5px]">
         {description}
-      </p>
-      <div className="absolute bottom-[0px] flex items-end justify-around w-full py-2">
+      </span>
+      <div className="absolute bottom-[0px] flex items-end justify-around w-full py-3">
         <AiOutlineShoppingCart size={20} color={color}></AiOutlineShoppingCart>
         <Link
           to="/product/"

@@ -1,6 +1,9 @@
 import { toBase64 } from "../../ultils/common";
 import { useState } from "react";
-import { apiUpdateUser } from "../../apis/user";
+import { apiUpdateUser, apiGetCurrent } from "../../apis/user";
+import { useDispatch } from "react-redux";
+import * as actions from "../../store/actions";
+
 function UpdateProfile() {
   const [infor, setInfo] = useState({
     avatar: "",
@@ -8,13 +11,9 @@ function UpdateProfile() {
     email: "",
     phone: "",
   });
-
+  const dispatch = useDispatch();
   const handleUpdate = async () => {
-    console.log(1);
-    const response = await apiUpdateUser.put({ avatar: infor.avatar });
-    if (response) {
-      setInfo((prev) => ({ ...prev, avatar: "" }));
-    }
+    dispatch(actions.updateProfile(infor.avatar));
   };
   const handleImage = async (e) => {
     e.stopPropagation();

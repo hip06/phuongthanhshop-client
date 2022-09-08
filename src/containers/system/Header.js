@@ -8,17 +8,8 @@ import { bufferToBase64 } from "../../ultils/common";
 const { FiMenu } = icons;
 
 const Header = ({ setIsShowSidebar }) => {
-  const [currentData, setCurrentData] = useState({});
-  useEffect(() => {
-    const fetchCurrent = async () => {
-      const dataUser = await apiGetCurrent.get();
-      dataUser?.status === 0 && setCurrentData(dataUser.user);
-    };
-    fetchCurrent();
-  }, []);
-
-  const { userCurrent } = useSelector((state) => state.auth);
-
+  const userCurrent = useSelector((state) => state.auth.userCurrent);
+  console.log(userCurrent);
   return (
     <div className="w-full h-[64px] bg-white text-gray-500 flex items-center justify-between shadow-md px-3">
       <div
@@ -31,8 +22,8 @@ const Header = ({ setIsShowSidebar }) => {
         <small>Xin chào, {userCurrent?.name}</small>
         <img
           src={
-            bufferToBase64(currentData.avatar) ||
-            currentData.avatarUrl ||
+            bufferToBase64(userCurrent?.avatar) ||
+            userCurrent?.avatarUrl ||
             avatar
           }
           alt="avatar"

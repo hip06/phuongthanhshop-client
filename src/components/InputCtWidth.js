@@ -202,6 +202,7 @@ const InputFileCustomWidth = React.memo(
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md"
           onChange={onAction}
+          // value={valueImg}
         />
       </div>
     );

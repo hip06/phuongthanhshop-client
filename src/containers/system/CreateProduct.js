@@ -9,6 +9,8 @@ import {
 } from "../../components/InputCtWidth";
 import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 import Loading from "../../components/Loading";
+import Button from "../../components/Button";
+import ApiGetProduct from "../../apis/product";
 
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
@@ -30,10 +32,10 @@ const EditProduct = () => {
     setLoading(false);
     setSelectValue("option 1");
   }, []);
-  if (imageMain !== "") imageMain.preview = URL.createObjectURL(imageMain);
-  if (image1 !== "") image1.preview = URL.createObjectURL(image1);
-  if (image2 !== "") image2.preview = URL.createObjectURL(image2);
-  if (image3 !== "") image3.preview = URL.createObjectURL(image3);
+  // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
+  // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
+  // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
+  // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
   return (
     <>
       {loading ? (
@@ -99,11 +101,12 @@ const EditProduct = () => {
                 />
               </div>
               <div className=" w-[50%]">
-                <InputFileCustomWidth
-                  lable="Ảnh chính"
-                  widthP="[100%]"
-                  valueImg={imageMain}
-                  setValueImg={setImageMain}
+                <input
+                  type="file"
+                  name="imageMain"
+                  onChange={(e) => {
+                    console.log(e.target);
+                  }}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 1"
@@ -124,6 +127,20 @@ const EditProduct = () => {
                   setValueImg={setImage3}
                 />
               </div>
+              <Button
+                text="Submit"
+                onClick={() => {
+                  ApiGetProduct.create({
+                    name: productName,
+                    costPerUnit: price,
+                    mainDescription: shortDes,
+                    mainImage: imageMain,
+                    image1,
+                    image2,
+                    image3,
+                  });
+                }}
+              ></Button>
             </div>
           </div>
           <h1 className="text-3xl">Xem trước tại đây</h1>
@@ -131,7 +148,7 @@ const EditProduct = () => {
             <div className="flex">
               <div className="mr-[30px]">
                 <ProductCardCtHeight
-                  image={imageMain.preview}
+                  image={imageMain?.preview}
                   name={productName}
                   description={shortDes}
                   costPerUnit={price}
@@ -144,7 +161,7 @@ const EditProduct = () => {
                   <div className="w-[375px] ml-[25%]">
                     <GroupImageCtWidth
                       widthP="full"
-                      mainImage={imageMain.preview}
+                      mainImage={imageMain?.preview}
                       image1={image1.preview}
                       image2={image2.preview}
                       image3={image3.preview}
@@ -156,7 +173,10 @@ const EditProduct = () => {
             <div className="mt-[12px]">
               <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
 
-              <GroupImageCtWidth widthP="400px" mainImage={imageMain.preview} />
+              <GroupImageCtWidth
+                widthP="400px"
+                mainImage={imageMain?.preview}
+              />
             </div>
           </div>
         </>

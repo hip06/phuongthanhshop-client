@@ -37,6 +37,7 @@ const authReducer = (state = initState, action) => {
         userCurrent: {},
       };
     case actionTypes.GET_CURRENT:
+      console.log(action);
       return {
         ...state,
         userCurrent: action.data,
