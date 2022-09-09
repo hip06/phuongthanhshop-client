@@ -25,11 +25,11 @@ module.exports = {
       keyframes: {
         modalShow: {
           '0%': { transform: 'translateX(-100px)', },
-          '100%':{ transform: 'translateX(0%)'}
+          '100%': { transform: 'translateX(0%)' }
         },
         modalClose: {
           '0%': { transform: 'translateX(0)', },
-          '100%':{ transform: 'translateX(-100px)',display: 'none'}
+          '100%': { transform: 'translateX(-100px)', }
         }
       }
     },

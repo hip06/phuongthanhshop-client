@@ -3,19 +3,21 @@ import { getSite } from "../../ultils/constant";
 import { ProductCardCtHeight } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
-import {BiFilterAlt,BiSortAlt2} from "react-icons/bi";
+import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
 
 const LayoutHome = () => {
   const params = useParams();
   const site = getSite(params);
   return (
     <div>
-      <img src={site.banner}></img>
+      <div className="">
 
-      <img
-        src={image.freeship}
-        className="ml-auto w-full mt-[5px] sm:w-[60%]"
-      />
+        <div>
+          <img className="absolute right-0" src={site.banner} />
+        </div>
+        <img src={image.freeship}
+          className="ml-auto w-full mt-[5px] sm:w-[60%]" />
+      </div>
 
       {params["*"] === "fashion" ? (
         <div className="w-full flex justify-around mb-[20px] mt-[10px]">

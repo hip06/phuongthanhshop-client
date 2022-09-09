@@ -8,6 +8,7 @@ import { useState } from "react";
 const Home = () => {
 
   const [isSearching, setIsSearching] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   return (
     <div>
