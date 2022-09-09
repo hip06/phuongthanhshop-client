@@ -1,4 +1,5 @@
 import authReducer from "./authReducer";
+import cartReducer from "./cartReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
@@ -15,8 +16,15 @@ const authConfig = {
     whitelist: ['isLoggedIn', 'accessToken']
 }
 
+const cartConfig = {
+    ...commonConfig,
+    key: 'cart',
+    whitelist: ['productIds','count']
+}
+
 const rootReducer = combineReducers({
-    auth: persistReducer(authConfig, authReducer)
+    auth: persistReducer(authConfig, authReducer),
+    cart: persistReducer(cartConfig, cartReducer),
 })
 
 export default rootReducer

@@ -33,7 +33,7 @@ function App() {
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
         <Route path={path.CART} element={<Cart />}/>
-        <Route path={path.DETAIL} element={<Detail></Detail>} ></Route>
+        <Route path={path.DETAIL} element={<Detail/>} ></Route>
         <Route path={path.USERCLIENT} element={<UserClient />} />
 
 

@@ -13,10 +13,12 @@ const Home = () => {
   return (
     <div>
       <Header setIsSearching={setIsSearching} isSearching={isSearching} />
-      {isSearching && <div className="relative bg-[#d9d9d9] p-[10px]">
-        <input className='bg-white w-full rounded-[5px]'>
-        </input>
-        <p className='absolute top-0 right-0'>Tìm</p>
+      {isSearching && <div className=" relative bg-[#d9d9d9] p-[10px]">
+        <div className="relative bg-white rounded-[5px]">
+          <input className='bg-white w-[83%] h-[30px] outline-none pl-[10px] '></input>
+          <p className='absolute top-[50%] translate-y-[-50%] right-[5%]'>Tìm</p>
+        </div>
+
       </div>}
       <Outlet />
       <Routes>
