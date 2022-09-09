@@ -6,11 +6,12 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
 import { getSite } from "../../ultils/constant"
 import { useParams, Link } from "react-router-dom"
+import {useSelector} from "react-redux";
 
 
 
 const Header = ({isSearching,setIsSearching}) => {
-
+  const cart=useSelector(state=>state.cart);
 
   const [modalShow, setModalShow] = useState(false);
   const params = useParams();
@@ -56,7 +57,7 @@ const Header = ({isSearching,setIsSearching}) => {
         <Link to='/cart'>
           <AiOutlineShoppingCart size={26} ></AiOutlineShoppingCart>
         </Link>
-        <div className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`} style={{ backgroundColor: site.color }} ><p>6</p></div>
+        <div className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`} style={{ backgroundColor: site.color }} ><p>{cart.count}</p></div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ const actionTypes = {
 
   // user
   // product
+  ADD_TO_CART:'ADD_TO_CART',
   // category
   GET_CATEGORY: "GET_CATEGORY",
 };

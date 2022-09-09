@@ -9,5 +9,11 @@ export const getCurrent = () => async (dispatch) => {
         type: actionTypes.GET_CURRENT,
         data: response.user,
       });
-  } catch (error) {}
+  } catch (error) { }
 };
+
+export const cartAction = () => {
+  return {
+    type:actionTypes.ADD_TO_CART,
+  }
+}

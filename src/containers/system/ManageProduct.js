@@ -26,8 +26,7 @@ const ManageProduct = () => {
   }, []);
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await ApiGetProduct.getAll();
-      console.log(res);
+      const res = await ApiGetProduct.getAll(); 
       const data = Object.values(res.data["0"]);
       setProducts(data[0]);
     };
@@ -72,7 +71,7 @@ const ManageProduct = () => {
           </div>
         </div>
         <div className="w-[20%] flex justify-center">
-          <p>{product.category.value}</p>
+          {/* <p>{product.category.value}</p> */}
         </div>
         <div className="w-[15%] flex justify-center">
           <p>{product.costPerUnit}</p>
