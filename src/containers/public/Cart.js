@@ -36,7 +36,7 @@ const Cart = () => {
                 <p>Tổng thanh toán</p>
                 <p>{`${totalPayment} đ`}</p>
             </div>
-            <button className='text-center w-[25%] bg-[#0083C2]'>Mua hàng</button>
+            <Link to='/payment' className='w-[25%] bg-[#0083C2] flex items-center justify-center'>Mua hàng</Link>
         </div>
     </div>)
 }

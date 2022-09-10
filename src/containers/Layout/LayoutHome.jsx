@@ -8,6 +8,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useState, useEffect } from "react";
 import ApiGetProduct from "../../apis/product";
 import ApiCategory from "../../apis/category";
+import Banner from "../../components/Banner";
 
 const LayoutHome = () => {
   const params = useParams();
@@ -44,6 +45,7 @@ const LayoutHome = () => {
 
   return (
     <div>
+      
       <img src={site.banner}></img>
 
       <img

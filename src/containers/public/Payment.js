@@ -1,11 +1,13 @@
 import { AiOutlineHome } from "react-icons/ai";
-import CartItem from "../../components/CartItem";
+import {PaymentItem} from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import image from "../../assets/temp.png"
+import {useSelector} from 'react-redux';
 
 
 const Payment = () => {
+    const cartItem= useSelector(state => state.cart);
     return (<div className='relative'>
         <header className="flex items-center w-full h-[60px] ">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -20,12 +22,10 @@ const Payment = () => {
             <h1 className='text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px]'>THANH TOÁN</h1>
             <div className='border-[1px] border-[#777] p-[10px] rounded-[10px] m-[10px] mt-[15px]'>
                 <div className='h-[200px] overflow-y-auto border-b-[1px] border-[#777]'>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
-                    <CartItem image={image} name='Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12' cost={600000} quantity={1}></CartItem>
+                    {cartItem.products.map((product, i) =>{
+                        return <PaymentItem image={product.image} name={product.name} cost={product.costPerUnit} quantity={1} ></PaymentItem>
+
+                    })}
                 </div>
                 <div className='text-end mt-[10px] font-bold'>
                     <p>{`Tổng đơn hàng: 100000đ`}</p>
