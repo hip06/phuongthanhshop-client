@@ -6,48 +6,71 @@ import Footer from "../../components/Footer";
 import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useState, useEffect } from "react";
-import ApiGetProduct from "../../apis/product";
-import ApiCategory from "../../apis/category";
+import { useSelector } from "react-redux";
+import { InputSearch } from "../../components/InputCtWidth";
+import { vi_uf8 } from "../../ultils/constant";
+import icons from "../../ultils/icons";
 
 const LayoutHome = ({ setLoading }) => {
+  const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
   const params = useParams();
   const site = getSite(params)
+  const { categories } = useSelector(state => state.app)
+  const [slideImage, setSlideImage] = useState('')
+  const [valueSearch, setValueSearch] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+
   useEffect(() => {
-    // const fetchCategory = async () => {
-    //   const tempCate = await ApiCategory.getAll();
-    //   setCategory(tempCate.response.rows);
-    //   console.log(category);
-    // };
-    // fetchCategory();
-
-    const fetchProduct = async () => {
-      // const res = await ApiGetProduct.getAll({ page: 1, CODE:"Lucky Female Customer" });
-      // console.log(res);
-      const res = await ApiGetProduct.getAll();
-      console.log(res);
-      // category.map((category) => {
-      //   const fetchProductChild = async () => {
-      //     console.log(category);
-      //     const res= await ApiGetProduct.getAll({page:1,CODE:category.code})
-      //     console.log(res);
-      //   }
-      //   fetchProductChild();
-      // })
-      const data = Object.values(res.data["0"]);
-      // setProducts(data[0]);
-    };
-
-    fetchProduct();
-  }, []);
+    categories?.rows?.map((category) => {
+      let valueLowerCase = category.value.toLowerCase()
+      if (params["*"] === valueLowerCase) {
+        setSlideImage(category.image)
+      }
+    })
+  }, [params["*"]])
 
   return (
-    <div>
-      <img src={site.banner}></img>
+    <div className="w-screen lg:w-11/12 mx-auto">
+      <div className="hidden lg:flex w-full mb-[12px] mt-[24px]">
+        <div className="w-5/12">
+          <div className="w-5/6 items-center bg-[#d9d9d9] flex mx-auto rounded-[12px] p-3 place-content-center p-5">
+            <p className="font-[600] text-center text-[20px]">{vi_uf8.all_categories}</p>
+            <p className="ml-[12px]">{<IoMdArrowRoundDown size={24} />}</p>
+          </div>
+        </div>
+        <div className="w-5/12 items-center bg-[#F6EAEA] rounded-[12px] relative "
+          onClick={() => {
+            setValueSearch('')
+            setIsSearching(false)
+          }}>
+          <InputSearch value={valueSearch}
+            setValue={setValueSearch}
+            placeholder={'Thêm thông tin để tìm kiếm...'}
+            isSearching={isSearching}
+            setIsSearching={setIsSearching}
+          />
+          <p className="absolute top-[14px] right-[24px]">{isSearching ? <AiOutlineClose size={26} /> : <BiSearchAlt size={30} />}</p>
+        </div>
+        <div className="w-2/12 relative">
+          <div className="absolute right-0 w-[80%]">
+            <div className="w-full">
+              <div className="block w-full text-right">+84 {vi_uf8.phone}</div>
+              <div className="block w-full text-right relative"> {vi_uf8.support_time}
+                <p className="absolute top-[-12px] right-[128px]"><MdOutlinePhonelink size={20} /></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className=" w-full flex">
+        <div className="hidden lg:block w-5/12">
 
-      <img
-        src={image.freeship}
-        className="ml-auto w-full mt-[5px] sm:w-[60%]"
-      />
+        </div>
+        <div className="w-full lg:w-7/12">
+          <img className="w-full max-h-[350px] center" src={slideImage} alt="slide" />
+
+        </div>
+      </div>
 
       {params["*"] === "fashion" ? (
         <div className="w-full flex justify-around mb-[20px] mt-[10px]">
@@ -148,7 +171,7 @@ const LayoutHome = ({ setLoading }) => {
           ))}
       </section>
 
-      <div className="relative mb-[4px]">
+      <div className="relative mb-[4px] lg:hidden">
         <Link to={`/home/${site.linkLeft}`}>
           <img src={site.naviLeftImage}></img>
           <p

@@ -1,4 +1,6 @@
 
+
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -33,7 +35,10 @@ module.exports = {
         }
       },
       fontFamily: {
-        'nunito': ['nunito', 'sans-serif']
+        'nunito': ['nunito', 'sans-serif'],
+        'ruda': ['Ruda', 'sans-serif'],
+        'tactitle': ['Syne Tactile', 'cursive'],
+        'qwitcher': ['Qwitcher Grypen', 'cursive']
       },
     },
   },

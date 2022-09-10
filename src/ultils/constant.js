@@ -21,7 +21,10 @@ export const path = {
   CREATE_CATEGORY: "create-category",
 };
 export const vi_uf8 = {
-  shopname: 'PhuongThanh'
+  shopname: 'PhuongThanh',
+  all_categories: 'Tất cả chủ để',
+  phone: '813.672.409',
+  support_time: 'Hỗ trợ 24/7'
 };
 export const adminMenu = [
   {
