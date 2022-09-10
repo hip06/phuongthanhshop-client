@@ -10,6 +10,7 @@ const actionTypes = {
   // user
   // product
   ADD_TO_CART:'ADD_TO_CART',
+  DETELE_ALL: "DELETE_ALL",
   // category
   GET_CATEGORY: "GET_CATEGORY",
 };

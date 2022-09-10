@@ -5,6 +5,10 @@ const ApiGetProduct = {
     const url = "/api/v1/admin/product/get-all";
     return axiosClients.get(url,{data});  
   },
+  getById: (data) => {
+    const url=`/api/v1/admin/product/${data}`;
+    return axiosClients.get(url);
+  }
 };
 
 export default ApiGetProduct;

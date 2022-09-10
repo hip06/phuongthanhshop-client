@@ -12,8 +12,15 @@ export const getCurrent = () => async (dispatch) => {
   } catch (error) { }
 };
 
-export const cartAction = () => {
+export const addToCartAction = (id) => {
   return {
     type:actionTypes.ADD_TO_CART,
+    data:id,
+  }
+}
+
+export const removeAllCartAction = () => {
+  return {
+    type:actionTypes.DETELE_ALL,
   }
 }

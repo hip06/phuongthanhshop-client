@@ -19,7 +19,7 @@ const authConfig = {
 const cartConfig = {
     ...commonConfig,
     key: 'cart',
-    whitelist: ['productIds','count']
+    whitelist: ['products','count']
 }
 
 const rootReducer = combineReducers({
