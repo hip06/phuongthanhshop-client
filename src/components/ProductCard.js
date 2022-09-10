@@ -1,9 +1,20 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import {cartAction} from "../store/actions/userAction"
+import { addToCartAction } from "../store/actions/userAction"
+import {useNavigate} from "react-router-dom";
+
+const isInArray=(ob,list)=>{
+    for(let i=0; i<list.length; i++)
+    {
+        if(list[i].id==ob.id) return true;
+    }
+    return false;
+}
 
 export const ProductCardCtHeight = ({ id, image, name, color, costPerUnit, description }) => {
+    const navigate=useNavigate();
+    const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
     const convertPrice = (price) => {
@@ -21,7 +32,19 @@ export const ProductCardCtHeight = ({ id, image, name, color, costPerUnit, descr
                 <p className='font-large text-[11px] px-[5px] '>{name}</p>
             </div>
             <div className='flex items-end justify-around w-full mt-[5px] h-[10%]'>
-                <div onClick={()=>{dispatch(cartAction(id));}}>
+                <div onClick={() => {
+                    if (isLoggedIn) { 
+                        // if(cart.productIds.indexOf(id)===-1) {
+                        //     dispatch(addToCartAction(id)); 
+                        // }
+                        if (isInArray({id,image,name,costPerUnit},cart.products)===false) {
+                            dispatch(addToCartAction({id,image,name,costPerUnit}))
+                        }
+                    }
+                    else {
+                        navigate('/login');
+                    }
+                }}>
                     <AiOutlineShoppingCart size={20} color={color}></AiOutlineShoppingCart>
                 </div>
                 <Link to="/detail/" style={{ color: color }} className="text-[11px] font-bold">Xem chi tiết</Link>
