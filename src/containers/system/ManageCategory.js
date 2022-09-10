@@ -10,7 +10,6 @@ const ManageCategory = () => {
   const [isShow, setIsShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState("");
-  console.log(2);
   const onSubmit = async (data) => {
     await ApiCategory.post({ newCategory: data });
     setIsLoading(!isLoading);

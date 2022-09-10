@@ -65,7 +65,7 @@ const Bill = () => {
           <p>{product.name}</p>
         </div>
         <div className="w-[20%] flex justify-center">
-          <p>{product.category.value}</p>
+          <p>{product?.category?.value}</p>
         </div>
         <div className="w-[15%] flex justify-center">
           <p>{product.costPerUnit}</p>

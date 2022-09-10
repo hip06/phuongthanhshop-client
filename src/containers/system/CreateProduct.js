@@ -11,6 +11,7 @@ import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 import Loading from "../../components/Loading";
 import Button from "../../components/Button";
 import ApiGetProduct from "../../apis/product";
+import FormData from "form-data";
 
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
@@ -20,10 +21,22 @@ const EditProduct = () => {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [shortDes, setShortDes] = useState("");
-  const [imageMain, setImageMain] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
+  const [imageMain, setImageMain] = useState({});
+  const [image1, setImage1] = useState({});
+  const [image2, setImage2] = useState({});
+  const [image3, setImage3] = useState({});
+
+  const handleSubmit = async () => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("mainImage", imageMain);
+    bodyFormData.append("image1", image1);
+    bodyFormData.append("image2", image2);
+    bodyFormData.append("image3", image3);
+    bodyFormData.append("name", productName);
+    bodyFormData.append("costPerUnit", price);
+    bodyFormData.append("description", shortDes);
+    ApiGetProduct.create(bodyFormData);
+  };
 
   const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
   useEffect(() => {
@@ -36,6 +49,7 @@ const EditProduct = () => {
   // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
   // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
   // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
+  useEffect(() => {}, [imageMain]);
   return (
     <>
       {loading ? (
@@ -105,10 +119,33 @@ const EditProduct = () => {
                   type="file"
                   name="imageMain"
                   onChange={(e) => {
-                    console.log(e.target);
+                    const file = e.target.files[0];
+
+                    setImageMain(file);
                   }}
                 />
-                <InputFileCustomWidth
+                <input
+                  type="file"
+                  name="image1"
+                  onChange={(e) => {
+                    setImage1(e.target.files[0]);
+                  }}
+                />
+                <input
+                  type="file"
+                  name="image2"
+                  onChange={(e) => {
+                    setImage2(e.target.files[0]);
+                  }}
+                />
+                <input
+                  type="file"
+                  name="image3"
+                  onChange={(e) => {
+                    setImage3(e.target.files[0]);
+                  }}
+                />
+                {/* <InputFileCustomWidth
                   lable="Ảnh 1"
                   widthP="[100%]"
                   valueImg={image1}
@@ -125,22 +162,9 @@ const EditProduct = () => {
                   widthP="[100%]"
                   valueImg={image3}
                   setValueImg={setImage3}
-                />
+                />*/}
               </div>
-              <Button
-                text="Submit"
-                onClick={() => {
-                  ApiGetProduct.create({
-                    name: productName,
-                    costPerUnit: price,
-                    mainDescription: shortDes,
-                    mainImage: imageMain,
-                    image1,
-                    image2,
-                    image3,
-                  });
-                }}
-              ></Button>
+              <Button text="Submit" onClick={handleSubmit}></Button>
             </div>
           </div>
           <h1 className="text-3xl">Xem trước tại đây</h1>

@@ -6,8 +6,14 @@ const ApiGetProduct = {
     return axiosClients.get(url, data);
   },
   create: (data) => {
-    const url = "/api/v1/admin/product/create";
-    return axiosClients.post(url, data);
+    return axiosClients({
+      method: "POST",
+      url: "/api/v1/admin/product/create",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data,
+    });
   },
 };
 
