@@ -6,12 +6,12 @@ const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 export const path = {
   LOGIN: "/login",
   SYSTEM: "/system/*",
-  USERCLIENT:'/user',
+  USERCLIENT: '/user',
   HOME: "/home/*",
-  PAYMENT:'/payment',
+  PAYMENT: '/payment',
   FEED: "/feed",
-  CART:'/cart',
-  DETAIL:'/detail',
+  CART: '/cart',
+  DETAIL: '/detail',
   GENERAL: "*",
   EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",
@@ -19,6 +19,9 @@ export const path = {
   USER: "user",
   BILL: "bill",
   CREATE_CATEGORY: "create-category",
+};
+export const vi_uf8 = {
+  shopname: 'PhuongThanh'
 };
 export const adminMenu = [
   {

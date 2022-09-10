@@ -9,11 +9,9 @@ import { useState, useEffect } from "react";
 import ApiGetProduct from "../../apis/product";
 import ApiCategory from "../../apis/category";
 
-const LayoutHome = () => {
+const LayoutHome = ({ setLoading }) => {
   const params = useParams();
-  const site = getSite(params);
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState([]);
+  const site = getSite(params)
   useEffect(() => {
     // const fetchCategory = async () => {
     //   const tempCate = await ApiCategory.getAll();
@@ -36,7 +34,7 @@ const LayoutHome = () => {
       //   fetchProductChild();
       // })
       const data = Object.values(res.data["0"]);
-      setProducts(data[0]);
+      // setProducts(data[0]);
     };
 
     fetchProduct();
@@ -74,7 +72,7 @@ const LayoutHome = () => {
         </div>
 
         <div className="overflow-x-auto flex ">
-          {products.map((product, i) => (
+          {/* {products?.map((product, i) => (
             <div className="[&:not(:last-child)]:mr-5">
               <ProductCardCtHeight
                 id={product.id}
@@ -84,7 +82,7 @@ const LayoutHome = () => {
                 color={site.color}
               ></ProductCardCtHeight>
             </div>
-          ))}
+          ))} */}
         </div>
 
         {params["*"] === "appliance" || params["*"] === "grocery" ? (
@@ -99,7 +97,7 @@ const LayoutHome = () => {
             </div>
 
             <div className="overflow-x-auto flex ">
-              {products.map((product, i) => (
+              {/* {products.map((product, i) => (
                 <div className="[&:not(:last-child)]:mr-5">
                   <ProductCardCtHeight
                     id={product.id}
@@ -109,7 +107,7 @@ const LayoutHome = () => {
                     color={site.color}
                   ></ProductCardCtHeight>
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         ) : (
@@ -133,7 +131,7 @@ const LayoutHome = () => {
 
               <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4 }}>
                 <Masonry className="justify-center">
-                  {products.map((product, i) => (
+                  {/* {products.map((product, i) => (
                     <div className="flex justify-center mt-[20px]">
                       <ProductCardCtHeight
                         id={product.id}
@@ -143,7 +141,7 @@ const LayoutHome = () => {
                         color={site.color}
                       ></ProductCardCtHeight>
                     </div>
-                  ))}
+                  ))} */}
                 </Masonry>
               </ResponsiveMasonry>
             </div>

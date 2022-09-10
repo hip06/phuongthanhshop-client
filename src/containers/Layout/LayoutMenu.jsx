@@ -60,8 +60,7 @@ const LayoutMenu = ({ setModalShow }) => {
     </div>
   );
   const handleCloseMenu = () => {
-    setTimeout(() => setModalShow(false), 500
-    )
+    setTimeout(() => setModalShow(false), 500)
   }
   return (
 
