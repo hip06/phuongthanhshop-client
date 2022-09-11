@@ -27,7 +27,6 @@ const Bill = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await ApiGetProduct.getAll();
-      console.log(res);
       const data = Object.values(res.data["0"]);
       setProducts(data[0]);
     };

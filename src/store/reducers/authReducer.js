@@ -10,7 +10,7 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
-      console.log(action);
+
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,
@@ -37,7 +37,6 @@ const authReducer = (state = initState, action) => {
         userCurrent: {},
       };
     case actionTypes.GET_CURRENT:
-      console.log(action);
       return {
         ...state,
         userCurrent: action.data,

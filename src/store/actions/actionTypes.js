@@ -9,6 +9,7 @@ const actionTypes = {
 
   // user
   // product
+  GET_PRODUCT: "GET_PRODUCT",
   // category
   GET_CATEGORY: "GET_CATEGORY",
 };

@@ -9,7 +9,6 @@ const { FiMenu } = icons;
 
 const Header = ({ setIsShowSidebar }) => {
   const userCurrent = useSelector((state) => state.auth.userCurrent);
-  console.log(userCurrent);
   return (
     <div className="w-full h-[64px] bg-white text-gray-500 flex items-center justify-between shadow-md px-3">
       <div

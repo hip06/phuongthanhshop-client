@@ -30,6 +30,7 @@ function App() {
   // Khi reload page get userdata again
   useEffect(() => {
     isLoggedIn && dispatch(actions.getCurrent());
+    console.log(11);
   }, [isLoggedIn]);
 
   return (

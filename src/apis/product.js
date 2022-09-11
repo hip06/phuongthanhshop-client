@@ -1,20 +1,18 @@
 import axiosClients from "../axiosClients";
 
-const ApiGetProduct = {
-  getAll: (data) => {
+const ApiProduct = {
+  getAll: (params) => {
     const url = "/api/v1/admin/product/get-all";
-    return axiosClients.get(url, data);
+    return axiosClients.get(url, { params });
   },
   create: (data) => {
-    return axiosClients({
-      method: "POST",
-      url: "/api/v1/admin/product/create",
+    const url = "/api/v1/admin/product/create";
+    return axiosClients.post(url, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      data,
     });
   },
 };
 
-export default ApiGetProduct;
+export default ApiProduct;

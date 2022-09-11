@@ -35,6 +35,7 @@ const EditProduct = () => {
     bodyFormData.append("name", productName);
     bodyFormData.append("costPerUnit", price);
     bodyFormData.append("description", shortDes);
+    bodyFormData.append("categoryCode", "123");
     ApiGetProduct.create(bodyFormData);
   };
 
