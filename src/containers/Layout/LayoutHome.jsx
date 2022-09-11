@@ -39,7 +39,7 @@ const LayoutHome = ({ setLoading }) => {
 
   return (
     <>
-      <div className="w-screen lg:w-11/12 mx-auto">
+      <div className="w-full lg:w-11/12 mx-auto">
         <div className="hidden lg:flex w-full mb-[12px] mt-[24px]">
           <div className="w-5/12">
             <div className="w-5/6 items-center bg-[#d9d9d9] flex mx-auto rounded-[12px] place-content-center p-5">
@@ -144,7 +144,7 @@ const LayoutHome = ({ setLoading }) => {
           </Link>
         </div>
       </div>
-      <Footer params={params["*"]}></Footer>
+      <Footer color={mainColor} category={params['*']} />
     </>
   );
 };

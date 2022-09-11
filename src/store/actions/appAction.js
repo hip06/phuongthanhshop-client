@@ -1,6 +1,7 @@
 import actionTypes from "./actionTypes";
 import ApiCategory from "../../apis/category";
 
+
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await ApiCategory.getAll();

@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch()
-  const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -19,15 +18,9 @@ const Home = () => {
 
 
   return (
-    <div>
+    <div className="w-full">
       {loading && <LoadingPageDesktop />}
-      <Header setIsSearching={setIsSearching} isSearching={isSearching} />
-      {isSearching && <div className=" relative bg-[#d9d9d9] p-[10px]">
-        <div className="relative bg-white rounded-[5px]">
-          <input className='bg-white w-[83%] h-[30px] outline-none pl-[10px] '></input>
-          <p className='absolute top-[50%] translate-y-[-50%] right-[5%]'>Tìm</p>
-        </div>
-      </div>}
+      <Header />
       <Outlet />
       <Routes>
         <Route path="/:slug" element={<LayoutHome setLoading={setLoading} />}></Route>
