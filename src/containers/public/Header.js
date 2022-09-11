@@ -17,7 +17,6 @@ const Header = ({ isSearching, setIsSearching }) => {
   const params = useParams();
   const site = getSite(params);
   const headerRef = useRef();
-  console.log(categories, params['*'])
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params])

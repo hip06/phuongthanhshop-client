@@ -220,6 +220,7 @@ const InputSearch = React.memo(
             value={value}
             placeholder={placeholder}
             onChange={(e) => onAction(e.target.value)}
+            onClick={e => e.stopPropagation()}
           />
         </div>
         {isSearching && <div className="absolute bg-[#000] z-30 top-[60px] right-[60px] rounded-[24px] opacity-[0.7]  w-[560px] text-white">
