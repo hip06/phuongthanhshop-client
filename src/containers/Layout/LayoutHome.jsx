@@ -1,6 +1,5 @@
 import image from "../../ultils/image";
 import { getSite } from "../../ultils/constant";
-import { ProductCardCtHeight } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
@@ -60,7 +59,7 @@ const LayoutHome = ({ setLoading }) => {
               isSearching={isSearching}
               setIsSearching={setIsSearching}
             />
-            <p className="absolute top-[18px] right-[24px]">{isSearching ? <AiOutlineClose size={26} /> : <BiSearchAlt size={30} />}</p>
+            <p className="absolute top-[18px] right-[28px]">{isSearching ? <AiOutlineClose size={26} /> : <BiSearchAlt size={30} />}</p>
           </div>
           <div className="w-2/12 relative">
             <div className="absolute right-0 w-[80%]">
