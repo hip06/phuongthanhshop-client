@@ -6,6 +6,8 @@ import { FiMenu } from 'react-icons/fi'
 import { BiSearchAlt } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { MdOutlinePhonelink } from 'react-icons/md'
+import { GrFacebook } from 'react-icons/gr'
+import { SiZalo } from 'react-icons/si'
 
 const icons = {
     BsSpeedometer2,
@@ -16,7 +18,9 @@ const icons = {
     IoMdArrowRoundDown,
     BiSearchAlt,
     AiOutlineClose,
-    MdOutlinePhonelink
+    MdOutlinePhonelink,
+    GrFacebook,
+    SiZalo
 }
 
 export default icons

@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Feed, Detail, UserClient,Payment,Cart } from "./containers/public";
+import { Home, Login, Feed, Detail, UserClient, Payment, Cart } from "./containers/public";
 import {
   System,
   General,
@@ -25,15 +25,15 @@ function App() {
   }, [isLoggedIn]);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full">
       <Routes>
         {/*Public routes */}
         <Route path='/' element={<Navigate to="/home/fashion"></Navigate>} />
         <Route path={path.HOME} element={<Home />}></Route>
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
-        <Route path={path.CART} element={<Cart />}/>
-        <Route path={path.DETAIL} element={<Detail/>} ></Route>
+        <Route path={path.CART} element={<Cart />} />
+        <Route path={path.DETAIL} element={<Detail />} ></Route>
         <Route path={path.USERCLIENT} element={<UserClient />} />
 
 

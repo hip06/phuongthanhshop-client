@@ -24,7 +24,11 @@ export const vi_uf8 = {
   shopname: 'PhuongThanh',
   all_categories: 'Tất cả chủ để',
   phone: '813.672.409',
-  support_time: 'Hỗ trợ 24/7'
+  support_time: 'Hỗ trợ 24/7',
+  adress: '102-HUB3-CT8 tập thể Thành Công',
+  phone1: '0813672409',
+  phone2: '01253322599',
+  email: 'phuongthanhshophn@gmail.com',
 };
 export const adminMenu = [
   {
