@@ -20,7 +20,7 @@ const Banner = ({color}) => {
                     <p>Mua hàng <span className='font-bold'>trực tuyến</span></p>
                 </div>
                 <div className='flex flex-col items-center border-[2px] border-[#d9d9d9] h-[84px] pt-[5px] m-[10px] rounded-[10px] w-[161px] text-[12px] '>
-                    <MdContactPhone size={30}></MdContactPhone>
+                    <MdContactPhone size={30}></MdContactPhone> 
                     <p>Hỗ trợ <span className='font-bold'>tư vấn</span></p>
                 </div>
                 <div className='flex flex-col items-center border-[2px] border-[#d9d9d9] h-[84px] pt-[5px] m-[10px] rounded-[10px] w-[161px] text-[12px] '>

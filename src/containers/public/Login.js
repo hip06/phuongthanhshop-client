@@ -40,8 +40,6 @@ const Login = () => {
     setIsLoading(false);
     msg && swal.fire("Oops!", msg, "error");
   }, [msg]);
-
-  console.log(isLoggedIn);
   const handleSubmit = async () => {
     const isEmail = isPhone
       ? { phone: payload.phone }
