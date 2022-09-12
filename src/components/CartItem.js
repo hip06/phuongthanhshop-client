@@ -1,26 +1,28 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useMemo } from 'react';
-const CartItem = ({ image, name, cost, quantity, totalPayment, setTotalPayment }) => {
+const CartItem = ({ image, name, cost, quantity, totalPayment, setTotalPayment, isChecked }) => {
     const [quantityNew, setQuantityNew] = useState(+quantity);
     let newCost = quantityNew * cost;
-    const minus = useMemo(() => {return setTotalPayment(totalPayment - cost)}, [quantityNew]);
-    const plus = useMemo(() => { return setTotalPayment(totalPayment + cost) }, [quantityNew]);
+    useEffect(() => {
+        isChecked ? setTotalPayment((prev) => { return prev + newCost }) : setTotalPayment((prev) => { return prev - newCost });
+    }, [isChecked])
     const adjustQuantity = (<div className="flex text-[#8c8c8c] border-[1px] border-[#8c8c8c] rounded-[6px] p-[4px] text-[12px] items-center justify-between">
         <div onClick={() => {
-
             setQuantityNew((prev) => {
                 return prev -= 1
             })
+
+            if (isChecked) setTotalPayment((prev) => { return prev - cost })
         }}>
             <AiOutlineMinus></AiOutlineMinus>
         </div>
         <p>{quantityNew}</p>
         <div onClick={() => {
-
             setQuantityNew((prev) => {
                 return prev += 1
             })
+            if (isChecked) setTotalPayment((prev) => { return prev + cost })
         }}>
             <AiOutlinePlus></AiOutlinePlus>
         </div>
@@ -43,7 +45,7 @@ const CartItem = ({ image, name, cost, quantity, totalPayment, setTotalPayment }
     );
 }
 
-export const PaymentItem = ({ image, name, cost, quantity}) => {
+export const PaymentItem = ({ image, name, cost, quantity }) => {
     const [quantityNew, setQuantityNew] = useState(+quantity);
     let newCost = quantityNew * cost;
     const adjustQuantity = (<div className="flex text-[#8c8c8c] border-[1px] border-[#8c8c8c] rounded-[6px] p-[4px] text-[12px] items-center justify-between">

@@ -2,18 +2,28 @@ import { AiOutlineHome } from "react-icons/ai";
 import CartItem from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
-import {useDispatch} from 'react-redux';
-import {addToPaymentAction,deleteFromPaymentAction} from "../../store/actions/userAction"
+import { useDispatch } from 'react-redux';
+import { addToPaymentAction, deleteFromPaymentAction } from "../../store/actions/userAction"
 import { useSelector } from 'react-redux';
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 
 const Cart = () => {
     const cartItem = useSelector(state => state.cart);
-    console.log(cartItem);
     const dispatch = useDispatch();
-    const checkbox=useRef();
     const [totalPayment, setTotalPayment] = useState(0);
+    useEffect(() => {
+        totalPayment < 0 ? setTotalPayment(0) : setTotalPayment(totalPayment)
+    }, [totalPayment])
+    const [checkedItems, setCheckedItems] = useState(new Array(cartItem.products.length).fill(false));
+    const checkboxHandler = (position) => {
+        setCheckedItems((boxs) => {
+            return boxs.map((box, i) => {
+                if (i === position) return box = !box;
+                else return box
+            })
+        })
+    }
     return (<div>
         <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f]">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -26,10 +36,13 @@ const Cart = () => {
 
         <section className='p-[10px] w-full h-[500px] overflow-y-auto'>
             {cartItem.products.map((product, i) => {
-                return <div className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
-                    <input type='checkbox' className='w-10%' ref={checkbox} onChange={()=>{ !checkbox.current.checked?dispatch(deleteFromPaymentAction(JSON.stringify(product))):dispatch(addToPaymentAction(JSON.stringify(product)))}}></input>
+                return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
+                    <input type='checkbox' className='w-10%' onChange={() => {
+                        checkboxHandler(i);
+                        checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(product))) : dispatch(addToPaymentAction(JSON.stringify(product)))
+                    }}></input>
                     <div className='w-[90%]'>
-                        <CartItem image={product.image} name={product.name} cost={product.costPerUnit} quantity={1} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
+                        <CartItem image={product.image} name={product.name} cost={product.costPerUnit} quantity={1} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
                     </div>
                 </div>
             })}

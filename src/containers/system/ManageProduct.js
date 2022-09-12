@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
