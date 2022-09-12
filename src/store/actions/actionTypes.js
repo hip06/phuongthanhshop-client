@@ -9,8 +9,7 @@ const actionTypes = {
 
   // user
   // product
-  ADD_TO_CART: 'ADD_TO_CART',
-
+  GET_PRODUCT: "GET_PRODUCT",
   // category
   GET_CATEGORY: "GET_CATEGORY",
 };

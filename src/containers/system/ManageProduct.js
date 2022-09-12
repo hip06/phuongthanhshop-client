@@ -1,48 +1,46 @@
-import React from "react";
 import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
-import searchIcon from "../../assets/icon/search.svg";
-import sortIcon from "../../assets/icon/sort.svg";
 import { FiSearch } from "react-icons/fi";
-import { BiSortAlt2 } from "react-icons/bi";
 import { useState, useEffect } from "react";
-import ApiGetProduct from "../../apis/product";
-import { BsCheckLg } from "react-icons/bs";
 import {
   InputCustomWidth,
   SelectCustomWidth,
 } from "../../components/InputCtWidth";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../store/actions";
 
 const ManageProduct = () => {
   const [addAll, setAddAll] = useState(false);
-  const [products, setProducts] = useState([]);
   const [selectValue, setSelectValue] = useState("");
   const [options, setOptions] = useState([]);
-  const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
-  useEffect(() => {
-    setOptions([...exampleArray]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.app.products);
+  const categories = useSelector((state) => state.app.categories);
+  const state = useSelector((state) => state);
 
-    setSelectValue("option 1");
-  }, []);
+  console.log(selectValue, "|", options);
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await ApiGetProduct.getAll(); 
-      const data = Object.values(res.data["0"]);
-      setProducts(data[0]);
-    };
-    fetchProducts();
+    dispatch(actions.getCategory());
+    categories.map((cate) => {
+      console.log(cate.value);
+      setOptions((prev) => {
+        const a = [...prev, cate.value];
+        return a;
+      });
+    });
   }, []);
-  if (addAll) {
-    const checkboxs = [...document.querySelectorAll(".checkbox")];
-    checkboxs.map((checkbox) => {
-      checkbox.checked = "checked";
-    });
-  } else {
-    const checkboxs = [...document.querySelectorAll(".checkbox")];
-    checkboxs.map((checkbox) => {
-      checkbox.checked = false;
-    });
-  }
+  // if (addAll) {
+  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
+  //   checkboxs.map((checkbox) => {
+  //     checkbox.checked = "checked";
+  //   });
+  // } else {
+  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
+  //   checkboxs.map((checkbox) => {
+  //     checkbox.checked = false;
+  //   });
+  // }
   products.map((product) => {
     return (
       <div>
@@ -50,7 +48,7 @@ const ManageProduct = () => {
       </div>
     );
   });
-  const renderProductList = products.map((product, i) => {
+  const renderProductList = products[0]?.map((product, i) => {
     return (
       <div
         key={i}
@@ -62,19 +60,22 @@ const ManageProduct = () => {
             className="h-[17.5px] w-[17.5px] checkbox"
           ></input>
         </div>
-        <div className=" w-[10%] flex justify-center">
-          <img src={image} />
+        <div className=" w-[10%] flex justify-center h-4/5">
+          <img src={image} alt="" className="h-full"></img>
         </div>
         <div className="w-[25%] flex justify-center ">
-          <div className='w-full'>
-            <p className='whitespace-nowrap overflow-hidden text-ellipsis' >{product.name}</p>
+          <div className="w-full">
+            <p className="whitespace-nowrap overflow-hidden text-ellipsis">
+              {product.name}
+              {console.log(2)}
+            </p>
           </div>
         </div>
         <div className="w-[20%] flex justify-center">
-          {/* <p>{product.category.value}</p> */}
+          <p>{product?.category?.value}</p>
         </div>
         <div className="w-[15%] flex justify-center">
-          <p>{product.costPerUnit}</p>
+          <p>{product?.costPerUnit}</p>
         </div>
         <div className="flex w-[20%] justify-around ">
           <Button
@@ -151,6 +152,7 @@ const ManageProduct = () => {
             Giá
           </div>
         </div>
+        {console.log(1)}
         {renderProductList}
       </div>
     </>

@@ -1,5 +1,5 @@
 import actionTypes from "./actionTypes";
-import { apiGetCurrent } from "../../apis/user";
+import { apiGetCurrent, apiUpdateUser } from "../../apis/user";
 
 export const getCurrent = () => async (dispatch) => {
   try {
@@ -9,18 +9,14 @@ export const getCurrent = () => async (dispatch) => {
         type: actionTypes.GET_CURRENT,
         data: response.user,
       });
-  } catch (error) { }
+  } catch (error) {}
 };
-
-export const addToCartAction = (id) => {
-  return {
-    type:actionTypes.ADD_TO_CART,
-    data:id,
-  }
-}
-
-export const removeAllCartAction = () => {
-  return {
-    type:actionTypes.DETELE_ALL,
-  }
-}
+export const updateProfile = (data) => async (dispatch) => {
+  await apiUpdateUser.put({ avatar: data });
+  const response = await apiGetCurrent.get();
+  if (response?.status === 0)
+    dispatch({
+      type: actionTypes.GET_CURRENT,
+      data: response.user,
+    });
+};

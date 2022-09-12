@@ -1,26 +1,41 @@
 import { Button } from "../../components/Button";
 import ApiCategory from "../../apis/category";
 import { useEffect, useState } from "react";
-import { calculateNewValue } from "@testing-library/user-event/dist/utils";
-
+import { InputCustomWidth } from "../../components/InputCtWidth";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../store/actions";
+import FormData from "form-data";
 const ManageCategory = () => {
-  const [category, setCategory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [isShow, setIsShow] = useState(false);
+
+  const [newCategory, setNewCategory] = useState("");
+  const [color, setColor] = useState("");
+  const [image, setImage] = useState({});
+
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.app.categories);
+
+  const onSubmit = async () => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("newCategory", newCategory);
+    bodyFormData.append("color", color);
+    bodyFormData.append("image", image);
+    await ApiCategory.create(bodyFormData);
+    setIsLoading(!isLoading);
+  };
+
   useEffect(() => {
-    console.log(1);
-    const fetchCategory = async () => {
-      const tempCate = await ApiCategory.getAll();
-      setCategory(tempCate.response.rows);
-    };
-    fetchCategory();
-  }, []);
-  const renderCateList = category.map((cate, i) => {
-    console.log(123);
+    dispatch(actions.getCategory());
+  }, [isLoading]);
+
+  const renderCateList = categories.map((cate, i) => {
     return (
       <div key={cate.id} className="">
-        <div className=" flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2">
+        <div className=" flex rounded w-full  bg-white items-center max-h-[90px] [&:not(:first-child)]:mt-2">
           <div className="w-[28%] p-10">
             <p className=" text-xl font-bold ">{cate.value}</p>
           </div>
@@ -50,7 +65,8 @@ const ManageCategory = () => {
               width="40%"
               height="2"
               onClick={async () => {
-                 await ApiCategory.delete({ code: cate.code });
+                await ApiCategory.delete({ id: cate.id });
+                setIsLoading(!isLoading);
               }}
             ></Button>
           </div>
@@ -60,7 +76,7 @@ const ManageCategory = () => {
             <div className="flex">
               <input
                 type="text"
-                aluev={cate.id === id ? name : ""}
+                value={cate.id === id ? name : ""}
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
@@ -76,11 +92,12 @@ const ManageCategory = () => {
                 width="40%"
                 height="2"
                 onClick={async () => {
-                  const res = await ApiCategory.put({
+                  await ApiCategory.put({
                     id: cate.id,
                     newCategory: name,
                   });
-                  console.log(res);
+                  setIsLoading(!isLoading);
+                  setIsShow(!isShow);
                 }}
               ></Button>
             </div>
@@ -91,12 +108,63 @@ const ManageCategory = () => {
       </div>
     );
   });
+
   return (
     <>
       <h1 className="text-2xl mb-2">ManageCategory</h1>
-      <div className="bg-gray-300 rounded p-5">
-        <h2>{`Tổng số gian hàng hiện có : ${category.length}`}</h2>
-        {renderCateList}
+      <div className="bg-gray-300 rounded p-5 h-[525px]">
+        <div className="">
+          <h2>Thêm gian hàng</h2>
+          <div className="">
+            <div className="w-4/5">
+              <InputCustomWidth
+                widthP="full"
+                value={newCategory}
+                setValue={setNewCategory}
+                placeholder="New Category"
+              ></InputCustomWidth>
+            </div>
+            <div className="w-4/5">
+              <InputCustomWidth
+                widthP="full"
+                value={color}
+                setValue={setColor}
+                placeholder="Color"
+              ></InputCustomWidth>
+            </div>
+
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+              }}
+            />
+
+            <Button
+              text="Them"
+              bgColor="#4ed14b"
+              textColor="#fff"
+              width="20%"
+              onClick={() => {
+                onSubmit();
+              }}
+            ></Button>
+
+            {/* <button
+              type="button"
+              onClick={() => {
+                onSubmit(value);
+              }}
+              className="h-[50px] w-[50px]"
+            >
+              Submit
+            </button> */}
+          </div>
+
+          <h2>{`Tổng số gian hàng hiện có : ${categories.length}`}</h2>
+        </div>
+
+        <div className="overflow-auto bg-white h-4/5">{renderCateList}</div>
       </div>
     </>
   );

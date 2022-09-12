@@ -32,9 +32,7 @@ import axios from "axios";
 import queryString from "query-string";
 const axiosClients = axios.create({
   baseURL: process.env.REACT_APP_CLIENT,
-  headers: {
-    "content-type": "application/json",
-  },
+
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
@@ -42,8 +40,7 @@ axiosClients.interceptors.request.use(async (config) => {
   let token =
     window.localStorage.getItem("persist:auth") &&
     JSON.parse(window.localStorage.getItem("persist:auth"))?.accessToken;
-  if (token)
-    token = token.slice(1, token.length - 1);
+  if (token) token = token.slice(1, token.length - 1);
   config.headers = {
     authorization: token,
   };
