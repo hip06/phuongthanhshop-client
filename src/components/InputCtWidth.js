@@ -186,25 +186,28 @@ const TextCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
     PLarge : large or small padding
     @Anhtd
 */
-const InputFileCustomWidth = React.memo(({ lable, widthP, setValueImg, valueImg }) => {
-  const onAction = useCallback((e) => {
-    setValueImg(e.target.files[0])
-  }, [])
-  return (
-    <div className={`w-${widthP} my-3`}>
-      <label htmlFor="field" className="font-bold text-l">
-        {lable}
-      </label>
-      <input
-        type="file"
-        className="mr-3 w-[100%] h-full focus:ring-indigo-500 
+const InputFileCustomWidth = React.memo(
+  ({ lable, widthP, setValueImg, valueImg }) => {
+    const onAction = useCallback((e) => {
+      setValueImg(e.target.files[0]);
+    }, []);
+    return (
+      <div className={`w-${widthP} my-3`}>
+        <label htmlFor="field" className="font-bold text-l">
+          {lable}
+        </label>
+        <input
+          type="file"
+          className="mr-3 w-[100%] h-full focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md"
-        onChange={onAction}
-      />
-    </div>
-  );
-});
+          onChange={onAction}
+          // value={valueImg}
+        />
+      </div>
+    );
+  }
+);
 
 export {
   InputCustomWidth,

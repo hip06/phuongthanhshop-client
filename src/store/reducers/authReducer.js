@@ -10,7 +10,7 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
-      console.log(action);
+
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,

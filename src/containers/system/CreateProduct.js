@@ -9,6 +9,9 @@ import {
 } from "../../components/InputCtWidth";
 import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 import Loading from "../../components/Loading";
+import Button from "../../components/Button";
+import ApiGetProduct from "../../apis/product";
+import FormData from "form-data";
 
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
@@ -18,10 +21,23 @@ const EditProduct = () => {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [shortDes, setShortDes] = useState("");
-  const [imageMain, setImageMain] = useState("")
-  const [image1, setImage1] = useState("")
-  const [image2, setImage2] = useState("")
-  const [image3, setImage3] = useState("")
+  const [imageMain, setImageMain] = useState({});
+  const [image1, setImage1] = useState({});
+  const [image2, setImage2] = useState({});
+  const [image3, setImage3] = useState({});
+
+  const handleSubmit = async () => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("mainImage", imageMain);
+    bodyFormData.append("image1", image1);
+    bodyFormData.append("image2", image2);
+    bodyFormData.append("image3", image3);
+    bodyFormData.append("name", productName);
+    bodyFormData.append("costPerUnit", price);
+    bodyFormData.append("description", shortDes);
+    bodyFormData.append("categoryCode", "123");
+    ApiGetProduct.create(bodyFormData);
+  };
 
   const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
   useEffect(() => {
@@ -29,11 +45,12 @@ const EditProduct = () => {
     setOptions([...exampleArray]);
     setLoading(false);
     setSelectValue("option 1");
-  }, [])
-  if (imageMain !== '') imageMain.preview = URL.createObjectURL(imageMain)
-  if (image1 !== '') image1.preview = URL.createObjectURL(image1)
-  if (image2 !== '') image2.preview = URL.createObjectURL(image2)
-  if (image3 !== '') image3.preview = URL.createObjectURL(image3)
+  }, []);
+  // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
+  // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
+  // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
+  // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
+  useEffect(() => {}, [imageMain]);
   return (
     <>
       {loading ? (
@@ -99,31 +116,56 @@ const EditProduct = () => {
                 />
               </div>
               <div className=" w-[50%]">
-                <InputFileCustomWidth
-                  lable="Ảnh chính"
-                  widthP='[100%]'
-                  valueImg={imageMain}
-                  setValueImg={setImageMain}
+                <input
+                  type="file"
+                  name="imageMain"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
+                    setImageMain(file);
+                  }}
                 />
-                <InputFileCustomWidth
+                <input
+                  type="file"
+                  name="image1"
+                  onChange={(e) => {
+                    setImage1(e.target.files[0]);
+                  }}
+                />
+                <input
+                  type="file"
+                  name="image2"
+                  onChange={(e) => {
+                    setImage2(e.target.files[0]);
+                  }}
+                />
+                <input
+                  type="file"
+                  name="image3"
+                  onChange={(e) => {
+                    setImage3(e.target.files[0]);
+                  }}
+                />
+                {/* <InputFileCustomWidth
                   lable="Ảnh 1"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image1}
                   setValueImg={setImage1}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 2"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image2}
                   setValueImg={setImage2}
                 />
                 <InputFileCustomWidth
                   lable="Ảnh 3"
-                  widthP='[100%]'
+                  widthP="[100%]"
                   valueImg={image3}
                   setValueImg={setImage3}
-                />
+                />*/}
               </div>
+              <Button text="Submit" onClick={handleSubmit}></Button>
             </div>
           </div>
           <h1 className="text-3xl">Xem trước tại đây</h1>
@@ -131,11 +173,11 @@ const EditProduct = () => {
             <div className="flex">
               <div className="mr-[30px]">
                 <ProductCardCtHeight
-                  image={imageMain.preview}
+                  image={imageMain?.preview}
                   name={productName}
                   description={shortDes}
                   costPerUnit={price}
-                  color={'#4ed14b'}
+                  color={"#4ed14b"}
                 />
               </div>
               <div>
@@ -143,8 +185,8 @@ const EditProduct = () => {
                 <div className="w-[500px] ">
                   <div className="w-[375px] ml-[25%]">
                     <GroupImageCtWidth
-                      widthP='full'
-                      mainImage={imageMain.preview}
+                      widthP="full"
+                      mainImage={imageMain?.preview}
                       image1={image1.preview}
                       image2={image2.preview}
                       image3={image3.preview}
@@ -157,8 +199,8 @@ const EditProduct = () => {
               <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
 
               <GroupImageCtWidth
-                widthP='400px'
-                mainImage={imageMain.preview}
+                widthP="400px"
+                mainImage={imageMain?.preview}
               />
             </div>
           </div>
