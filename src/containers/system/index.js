@@ -6,4 +6,3 @@ export { default as ManageProduct } from "./ManageProduct";
 export { default as ManageCategory } from "./ManageCategory";
 export { default as User } from "./User";
 export { default as Bill } from "./Bill";
-export { default as UpdateProfile } from "./UpdateProfile";
