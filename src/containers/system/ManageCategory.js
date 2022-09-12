@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import FormData from "form-data";
 const ManageCategory = () => {
+<<<<<<< Updated upstream
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
@@ -33,6 +34,7 @@ const ManageCategory = () => {
   }, [isLoading]);
 
   const renderCateList = categories.map((cate, i) => {
+
     return (
       <div key={cate.id} className="">
         <div className=" flex rounded w-full  bg-white items-center max-h-[90px] [&:not(:first-child)]:mt-2">
