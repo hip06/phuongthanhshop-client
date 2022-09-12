@@ -2,14 +2,18 @@ import { AiOutlineHome } from "react-icons/ai";
 import CartItem from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
-import image from "../../assets/temp.png"
+import {useDispatch} from 'react-redux';
+import {addToPaymentAction,deleteFromPaymentAction} from "../../store/actions/userAction"
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from "react";
-import ApiGetProduct from "../../apis/product";
+import { useState, useEffect,useRef } from "react";
+
 
 const Cart = () => {
     const cartItem = useSelector(state => state.cart);
-    const [totalPayment,setTotalPayment]=useState(0);
+    console.log(cartItem);
+    const dispatch = useDispatch();
+    const checkbox=useRef();
+    const [totalPayment, setTotalPayment] = useState(0);
     return (<div>
         <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f]">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -23,7 +27,7 @@ const Cart = () => {
         <section className='p-[10px] w-full h-[500px] overflow-y-auto'>
             {cartItem.products.map((product, i) => {
                 return <div className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
-                    <input type='checkbox' className='w-10%'></input>
+                    <input type='checkbox' className='w-10%' ref={checkbox} onChange={()=>{ !checkbox.current.checked?dispatch(deleteFromPaymentAction(JSON.stringify(product))):dispatch(addToPaymentAction(JSON.stringify(product)))}}></input>
                     <div className='w-[90%]'>
                         <CartItem image={product.image} name={product.name} cost={product.costPerUnit} quantity={1} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
                     </div>

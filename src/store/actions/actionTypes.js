@@ -11,6 +11,8 @@ const actionTypes = {
   // product
   ADD_TO_CART:'ADD_TO_CART',
   DETELE_ALL: "DELETE_ALL",
+  ADD_TO_PAYMENT:'ADD_TO_PAYMENT',
+  DELETE_FROM_PAYMENT:'DELETE_FROM_PAYMENT',
   // category
   GET_CATEGORY: "GET_CATEGORY",
 };

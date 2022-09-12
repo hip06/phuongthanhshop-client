@@ -1,13 +1,27 @@
 import { AiOutlineHome } from "react-icons/ai";
-import {PaymentItem} from "../../components/CartItem";
+import { PaymentItem } from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import image from "../../assets/temp.png"
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react'
+import ApiPayment from "../../apis/payment";
 
 
 const Payment = () => {
-    const cartItem= useSelector(state => state.cart);
+    const cartItem = useSelector(state => state.cart);
+    // useEffect(() => {
+    //     const fetchProducts = async () => {
+    //         const res = await ApiPayment.createBill({
+    //             email: 'longn03@gmail.com',
+    //             address: 'hanoi',
+    //             current_products: '4b539927-ba04-4991-a219-bdebed7fc495:1,3fb0ecab-648b-4b55-8ddc-e959547940cd:2'
+    //         })
+    //         console.log(res);
+    //     }
+
+    //     fetchProducts();
+    // }, [])
     return (<div className='relative'>
         <header className="flex items-center w-full h-[60px] ">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -22,7 +36,8 @@ const Payment = () => {
             <h1 className='text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px]'>THANH TOÁN</h1>
             <div className='border-[1px] border-[#777] p-[10px] rounded-[10px] m-[10px] mt-[15px]'>
                 <div className='h-[200px] overflow-y-auto border-b-[1px] border-[#777]'>
-                    {cartItem.products.map((product, i) =>{
+                    {cartItem.productsPayment.map((product, i) => {
+                        product=JSON.parse(product);
                         return <PaymentItem image={product.image} name={product.name} cost={product.costPerUnit} quantity={1} ></PaymentItem>
 
                     })}

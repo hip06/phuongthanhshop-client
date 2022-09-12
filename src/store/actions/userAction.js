@@ -12,15 +12,28 @@ export const getCurrent = () => async (dispatch) => {
   } catch (error) { }
 };
 
-export const addToCartAction = (id) => {
+export const addToCartAction = (product) => {
   return {
     type:actionTypes.ADD_TO_CART,
-    data:id,
+    data:product,
   }
 }
 
 export const removeAllCartAction = () => {
   return {
     type:actionTypes.DETELE_ALL,
+  }
+}
+
+export const addToPaymentAction=(product)=>{
+  return {
+    type:actionTypes.ADD_TO_PAYMENT,
+    data:product,
+  }
+}
+export const deleteFromPaymentAction=(product)=>{
+  return {
+    type:actionTypes.DELETE_FROM_PAYMENT,
+    data:product,
   }
 }
