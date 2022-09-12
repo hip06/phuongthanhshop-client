@@ -2,7 +2,7 @@ import axiosClients from "../axiosClients";
 
 const ApiProduct = {
   getAll: (params) => {
-    const url = "/api/v1/admin/product/get-all";
+    const url = "/api/v1/product/all";
     return axiosClients.get(url, { params });
   },
   create: (data) => {
