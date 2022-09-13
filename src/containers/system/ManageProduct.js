@@ -10,37 +10,42 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 
 const ManageProduct = () => {
+  const dispatch = useDispatch();
   const [addAll, setAddAll] = useState(false);
   const [selectValue, setSelectValue] = useState("");
   const [options, setOptions] = useState([]);
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.app.products);
-  const categories = useSelector((state) => state.app.categories);
-  const state = useSelector((state) => state);
-
-  console.log(selectValue, "|", options);
+  const { categories, products, code } = useSelector((state) => state.app);
+  const cate = (value) => {
+    categories.map((cate, index) => {
+      if (cate.value === value) {
+        dispatch(actions.getProduct(cate.code));
+      }
+    });
+  };
 
   useEffect(() => {
-    dispatch(actions.getCategory());
+    cate(selectValue);
+  }, [selectValue]);
+
+  useEffect(() => {
     categories.map((cate) => {
-      console.log(cate.value);
       setOptions((prev) => {
         const a = [...prev, cate.value];
         return a;
       });
     });
-  }, []);
-  // if (addAll) {
-  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
-  //   checkboxs.map((checkbox) => {
-  //     checkbox.checked = "checked";
-  //   });
-  // } else {
-  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
-  //   checkboxs.map((checkbox) => {
-  //     checkbox.checked = false;
-  //   });
-  // }
+  }, [categories]);
+  if (addAll) {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    checkboxs.map((checkbox) => {
+      checkbox.checked = "checked";
+    });
+  } else {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    checkboxs.map((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
   products.map((product) => {
     return (
       <div>
@@ -67,7 +72,6 @@ const ManageProduct = () => {
           <div className="w-full">
             <p className="whitespace-nowrap overflow-hidden text-ellipsis">
               {product.name}
-              {console.log(2)}
             </p>
           </div>
         </div>
@@ -136,8 +140,8 @@ const ManageProduct = () => {
         </div>
       </div>
 
-      <div className="bg-[#d9d9d9] p-5 rounded-[10px] mt-5">
-        <div className="flex pb-5">
+      <div className="bg-[#d9d9d9] p-5 rounded-[10px] mt-5 h-[525px] ">
+        <div className="flex pb-5 h-1/8">
           <div className="w-[5%] flex justify-center font-bold text-2xl"></div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
             Hình ảnh sản phẩm
@@ -152,8 +156,7 @@ const ManageProduct = () => {
             Giá
           </div>
         </div>
-        {console.log(1)}
-        {renderProductList}
+        <div className="h-4/5 overflow-auto">{renderProductList}</div>
       </div>
     </>
   );

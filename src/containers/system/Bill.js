@@ -6,7 +6,7 @@ import sortIcon from "../../assets/icon/sort.svg";
 import { FiSearch } from "react-icons/fi";
 import { BiSortAlt2 } from "react-icons/bi";
 import { useState, useEffect } from "react";
-import ApiGetProduct from "../../apis/product";
+import ApiBill from "../../apis/bill";
 import { BsCheckLg } from "react-icons/bs";
 import {
   InputCustomWidth,
@@ -26,9 +26,10 @@ const Bill = () => {
   }, []);
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await ApiGetProduct.getAll();
-      const data = Object.values(res.data["0"]);
-      setProducts(data[0]);
+      const res = await ApiBill.getAll();
+      const bills = Object.values(res.data);
+      console.log(bills);
+      setProducts(bills);
     };
     fetchProducts();
   }, []);

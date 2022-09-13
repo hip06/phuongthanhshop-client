@@ -4,6 +4,7 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   products: [],
   categories: [],
+  code: [],
 };
 
 const appReducer = (state = initState, action) => {
@@ -12,12 +13,19 @@ const appReducer = (state = initState, action) => {
       const cate = Object.values(action.data[0]);
       return {
         ...state,
-        products: state.products.concat(cate),
+        products: cate,
       };
 
     case actionTypes.GET_CATEGORY:
+      const code = Object.values(action.data);
+      const categoryCode = [];
+      code.map((cate) => {
+        categoryCode.push(cate.code);
+      });
+
       return {
         ...state,
+        code: categoryCode,
         categories: action.data,
       };
     default:
