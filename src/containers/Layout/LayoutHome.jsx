@@ -77,7 +77,7 @@ const LayoutHome = () => {
 
         <div className="overflow-x-auto flex ">
           {products.map((product, i) => (
-            <div className="[&:not(:last-child)]:mr-5">
+            <div key={i} className="[&:not(:last-child)]:mr-5">
               <ProductCardCtHeight
                 id={product.id}
                 image={product.mainImage}
@@ -102,7 +102,7 @@ const LayoutHome = () => {
 
             <div className="overflow-x-auto flex ">
               {products.map((product, i) => (
-                <div className="[&:not(:last-child)]:mr-5">
+                <div key={i} className="[&:not(:last-child)]:mr-5">
                   <ProductCardCtHeight
                     id={product.id}
                     image={product.mainImage}
@@ -136,7 +136,7 @@ const LayoutHome = () => {
               <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4 }}>
                 <Masonry className="justify-center">
                   {products.map((product, i) => (
-                    <div className="flex justify-center mt-[20px]">
+                    <div key={i} className="flex justify-center mt-[20px]">
                       <ProductCardCtHeight
                         id={product.id}
                         image={product.mainImage}

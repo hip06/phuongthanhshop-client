@@ -14,7 +14,7 @@ const cartReducer = (state = initState, action) => {
             return { ...state, count: 0, products: [] }
         case actionTypes.ADD_TO_PAYMENT:
             return { ...state, productsPayment:[...state.productsPayment,action.data]}
-        case actionTypes.DELETE_FROM_PAYMENT:
+        case actionTypes.DELETE_FROM_PAYMENT: 
             let newProductsPayment=state.productsPayment.filter((product)=>{return product!==action.data});
             return {...state,productsPayment:newProductsPayment}
         default:
