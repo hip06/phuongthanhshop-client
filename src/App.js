@@ -11,7 +11,7 @@ import {
 import {
   System,
   General,
-  CreateProduct,
+  EditProduct,
   ManageProduct,
   ManageCategory,
   User,
@@ -51,7 +51,7 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.GENERAL} element={<General />} />
           <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
-          <Route path={path.EDIT_PRODUCT} element={<CreateProduct />} />
+          <Route path={path.EDIT_PRODUCT} element={<EditProduct />} />
           <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           <Route path={path.USER} element={<User />} />
           <Route path={path.BILL} element={<Bill />} />
