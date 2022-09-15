@@ -3,7 +3,7 @@ import CartItem from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux';
-import { addToPaymentAction, deleteFromPaymentAction } from "../../store/actions/userAction"
+import { addToPaymentAction, deleteFromPaymentAction, updatePaymentAction } from "../../store/actions/userAction"
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 
@@ -27,22 +27,26 @@ const Cart = () => {
 
     }, [totalPayment])
     const [checkedItems, setCheckedItems] = useState(new Array(cartItem.products.length).fill(false));
-    const addQuantityHandle = (position) => {
+    const addQuantityHandle = (position, id) => {
         setQuantity((quantities) => {
             return quantities.map((quantity, i) => {
-                if (i === position) quantity += 1;
+                if (i === position) {
+                    quantity += 1;
+                    dispatch(updatePaymentAction({ id, quantity }))
+                }
                 else quantity = quantity;
 
                 return quantity;
             })
         })
     }
-    const minusQuantityHandle = (position) => {
+    const minusQuantityHandle = (position, id) => {
         setQuantity((quantities) => {
             return quantities.map((quantity, i) => {
                 if (i === position) {
                     if (quantity > 0)
-                        quantity -= 1;
+                    quantity -= 1;
+                    dispatch(updatePaymentAction({ id, quantity }))
                 }
                 else quantity = quantity;
                 return quantity;
@@ -50,6 +54,7 @@ const Cart = () => {
         })
 
     }
+
     return (<div>
         <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f]">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
@@ -63,19 +68,19 @@ const Cart = () => {
         <section className='p-[10px] w-full h-[500px] overflow-y-auto'>
             {cartItem.products.map((product, i) => {
                 product.quantity = quantities[i];
-                let productNew=product
-                console.log(productNew);
+
                 return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
                     <input type='checkbox' className='w-10%' onChange={() => {
                         checkboxHandler(i);
-                        checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(productNew))) : dispatch(addToPaymentAction(JSON.stringify(productNew)))
-            
+                        checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(product))) : dispatch(addToPaymentAction(JSON.stringify(product)))
                     }}></input>
                     <div className='w-[90%]'>
-                        <CartItem i={i} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
+                        <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
                     </div>
                 </div>
             })}
+
+
         </section>
 
         <div className='w-full  bg-[#2898FF] h-[70px] fixed bottom-0 text-white flex w-full '>

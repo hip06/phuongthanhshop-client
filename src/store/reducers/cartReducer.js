@@ -13,10 +13,27 @@ const cartReducer = (state = initState, action) => {
         case actionTypes.DETELE_ALL:
             return { ...state, count: 0, products: [] }
         case actionTypes.ADD_TO_PAYMENT:
-            return { ...state, productsPayment:[...state.productsPayment,action.data]}
-        case actionTypes.DELETE_FROM_PAYMENT: 
-            let newProductsPayment=state.productsPayment.filter((product)=>{return product!==action.data});
-            return {...state,productsPayment:newProductsPayment}
+
+            return { ...state, productsPayment: [...state.productsPayment, action.data] }
+        case actionTypes.DELETE_FROM_PAYMENT:
+
+            let newProductsPayment = state.productsPayment.filter((product) => { return product !== action.data });
+            return { ...state, productsPayment: newProductsPayment }
+        case actionTypes.UPDATE_PAYMENT:
+            console.log(state.productsPayment);
+            let updateQuantityProductsPayment= state.productsPayment.map((product) =>{ 
+                product= JSON.parse(product);
+                
+                if(product.id===action.data.id)
+                {
+                    product.quantity=action.data.quantity;
+                    return JSON.stringify(product);
+                }
+                else return JSON.stringify(product);
+            })
+            return {...state, productsPayment:updateQuantityProductsPayment}
+            case actionTypes.DELETE_ALL_PAYMENTS:
+                return {...state, productsPayment:[]};
         default:
             return state;
     }

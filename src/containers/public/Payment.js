@@ -4,9 +4,12 @@ import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
+import {deleteAllPaymentsAction} from "../../store/actions/userAction"
+import {useDispatch} from "react-redux"
 
 
 const Payment = () => {
+    const dispatch = useDispatch();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
     const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
@@ -31,7 +34,7 @@ const Payment = () => {
     return (<div className='relative'>
         <header className="flex items-center w-full h-[60px] ">
             <Link className='w-[15%] flex justify-center' to='/home/fashion' onClick={() => {
-                cartItem.productsPayment = []
+                dispatch(deleteAllPaymentsAction());
             }}>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
