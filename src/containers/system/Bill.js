@@ -27,7 +27,7 @@ const Bill = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await ApiBill.getAll();
-      const bills = Object.values(res.data);
+      const bills = res.bill;
       console.log(bills);
       setProducts(bills);
     };
@@ -35,26 +35,20 @@ const Bill = () => {
   }, []);
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
-    checkboxs.map((checkbox) => {
+    checkboxs?.map((checkbox) => {
       checkbox.checked = "checked";
     });
   } else {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
-    checkboxs.map((checkbox) => {
+    checkboxs?.map((checkbox) => {
       checkbox.checked = false;
     });
   }
-  products.map((product) => {
-    return (
-      <div>
-        <p>{product.id}</p>
-      </div>
-    );
-  });
-  const renderProductList = products.map((product, i) => {
+
+  const renderProductList = products?.map((product, i) => {
     return (
       <div
-        key={i}
+        key={product.id}
         className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px]  text-xl "
       >
         <div className="w-[10%] flex justify-center">{i + 1}</div>
@@ -103,7 +97,7 @@ const Bill = () => {
             Id
           </div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
-            Tên người nhận
+            Email
           </div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
             Địa chỉ
@@ -115,7 +109,7 @@ const Bill = () => {
             Tổng hóa đơn
           </div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
-            Ngày/Tháng/Năm
+            Trang thai
           </div>
         </div>
         {renderProductList}

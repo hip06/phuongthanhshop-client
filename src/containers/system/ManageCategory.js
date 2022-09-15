@@ -71,34 +71,32 @@ const ManageCategory = () => {
             ></Button>
           </div>
         </div>
-        {isShow & (id === cate.id) ? (
-          <div className="">
-            <div className="flex">
-              <input
-                type="text"
-                value={cate.id === id ? name : ""}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                onFocus={() => {
-                  setId(cate.id);
-                  setName("");
-                }}
-              />
+        {isShow ? (
+          <div className="fixed h-full w-full top-0 right-0 flex justify-center items-center z-10 bg-gray-500/[.06] drop-shadow-lg">
+            <div className=" w-[500px] h-[500px] bg-white rounded p-10 flex flex-col  items-center">
+              <div className="h-[10%] w-full my-5">
+                <InputCustomWidth
+                  label="Ten gian hang"
+                  widthP="full"
+                  placeholder="Ten gian hang..."
+                ></InputCustomWidth>
+              </div>
+              <div className="h-[10%] w-full my-5">
+                <InputCustomWidth
+                  label="Color"
+                  widthP="full"
+                  placeholder="Color..."
+                ></InputCustomWidth>
+              </div>
+              <div className="h-[10%] w-full my-5">
+                <input type="file" />
+              </div>
               <Button
-                text="XAC NHAN"
-                bgColor="#cf2b2b"
+                text="Sửa"
+                bgColor="#4ed14b"
                 textColor="#fff"
                 width="40%"
                 height="2"
-                onClick={async () => {
-                  await ApiCategory.put({
-                    id: cate.id,
-                    newCategory: name,
-                  });
-                  setIsLoading(!isLoading);
-                  setIsShow(!isShow);
-                }}
               ></Button>
             </div>
           </div>
