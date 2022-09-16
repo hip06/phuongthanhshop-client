@@ -1,3 +1,4 @@
+
 import image from "../../ultils/image";
 import { getSite } from "../../ultils/constant";
 import { useParams, Link } from "react-router-dom";
@@ -22,14 +23,14 @@ const LayoutHome = ({ setLoading }) => {
   const [mainColor, setMainColor] = useState('')
 
   useEffect(() => {
-    categories?.rows?.map((category) => {
+    categories?.map((category) => {
       let valueLowerCase = category.value.toLowerCase()
-      if (params["*"] === valueLowerCase) {
+      if (params.slug === valueLowerCase) {
         setSlideImage(category.image)
         setMainColor(category.color)
       }
     })
-  }, [params["*"]])
+  }, [params.slug])
   useEffect(() => {
     categories?.rows?.map((category) => {
       let valueLowerCase = category.value.toLowerCase()
@@ -76,7 +77,7 @@ const LayoutHome = ({ setLoading }) => {
           <div className="hidden lg:block w-5/12">
             <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
               {
-                categories.rows?.map((category) => {
+                categories?.map((category) => {
                   let valueLowerCase = category.value.toLowerCase()
                   let weight = 'font-[400]'
                   if (params["*"] === valueLowerCase) {
@@ -149,3 +150,4 @@ const LayoutHome = ({ setLoading }) => {
   );
 };
 export default LayoutHome;
+

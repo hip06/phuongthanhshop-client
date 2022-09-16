@@ -21,7 +21,7 @@ const FillerProducts = () => {
 
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4 }}>
           <Masonry className="justify-center">
-            {products[0].map((product, i) => {
+            {products[0]?.map((product, i) => {
               console.log(product.name);
               return (
                 <div className="flex justify-center mt-[20px]">
