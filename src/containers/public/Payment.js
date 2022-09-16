@@ -4,21 +4,45 @@ import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
-import {deleteAllPaymentsAction} from "../../store/actions/userAction"
-import {useDispatch} from "react-redux"
-
+import { deleteAllPaymentsAction } from "../../store/actions/userAction"
+import { useDispatch } from "react-redux"
 
 const Payment = () => {
     const dispatch = useDispatch();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
+    const [cities, setCities] = useState([]);
+    const [towns, setTowns] = useState([]);
+    const [wards, setWards] = useState([]);
+
+    console.log();
     const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
         product = JSON.parse(product);
         return sum += product.costPerUnit * product.quantity
     }, 0)
+
+    const fetchAddressData = (url, setState, params) => {
+        const fetchData = async () => {
+            const res = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
+                },
+            })
+            const data = await res.json();
+            setState(data.data);
+        }
+        fetchData();
+    }
+    const fetchTownsHandler = (cityId) => {
+        fetchAddressData(' https://online-gateway.ghn.vn/shiip/public-api/master-data/district', setTowns);
+    }
+
     useEffect(() => {
+        fetchAddressData('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', setCities);
         setTotalPayment(getTotalPayment);
     }, [])
+    console.log(cities);
     // useEffect(() => {
     //     const fetchProducts = async () => {
     //         const res = await ApiPayment.createBill({
@@ -66,6 +90,16 @@ const Payment = () => {
             </div>
             <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
             <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
+            <select >
+                {cities.map((city, i) => <option key={i}>
+                    <div onClick={() => { console.log(1); }}>
+                        {city.ProvinceName}
+                    </div>
+                </option>)}
+            </select>
+            <select>
+                {towns.map((town, i) => <option ></option>)}
+            </select>
             <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
         </section>
 
