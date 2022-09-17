@@ -26,7 +26,7 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAll(params);
+    const response = await ApiProduct.getProductsFollowPage(params);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,

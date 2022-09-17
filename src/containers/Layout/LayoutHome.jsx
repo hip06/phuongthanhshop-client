@@ -110,7 +110,7 @@ const LayoutHome = ({ setLoading }) => {
           <BoxTopSeller color={mainColor} />
         </div>
         <div className="w-full">
-          <FillerProducts />
+          <FillerProducts color={mainColor} />
         </div>
 
         <div className="relative mb-[4px] lg:hidden">

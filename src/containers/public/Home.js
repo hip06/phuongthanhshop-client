@@ -1,20 +1,21 @@
 import React from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Header";
 import LayoutHome from "../Layout/LayoutHome";
 import { useState, useEffect } from "react";
 import { LoadingPageDesktop } from "../../components/LoadingPage";
 import * as actions from "../../store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const params = useParams()
 
   useEffect(() => {
     dispatch(actions.getCategory());
-    dispatch(actions.getProduct());
-  }, []);
+    dispatch(actions.getProduct('category=CAT1&page=3'));
+  }, [params['*']]);
 
   return (
     <div className="w-full">

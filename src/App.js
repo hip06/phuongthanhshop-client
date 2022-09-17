@@ -34,7 +34,7 @@ function App() {
   }, [isLoggedIn]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full 2xl:w-[75%] 2xl:mx-auto">
       <Routes>
         {/*Public routes */}
         <Route path="/" element={<Navigate to="/home/fashion"></Navigate>} />

@@ -13,6 +13,10 @@ const ApiProduct = {
       },
     });
   },
+  getProductsFollowPage: (params) => {
+    const url = '/api/v1/product/all'
+    return axiosClients.get(url, { params });
+  }
 };
 
 export default ApiProduct;

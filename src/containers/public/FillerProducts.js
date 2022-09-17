@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ProductCardCtHeight } from "../../components/ProductCard";
 
-const FillerProducts = () => {
+const FillerProducts = ({ color }) => {
   const { products } = useSelector((state) => state.app);
   return (
     <section className="my-[24px]">
@@ -19,10 +19,9 @@ const FillerProducts = () => {
           </div>
         </div>
 
-        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4 }}>
-          <Masonry className="justify-center">
+        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 668: 3, 956: 4, 1286: 5, 2016: 6 }}>
+          <Masonry className="justify-center bg-[#d9d9d9] mt-[12px] rounded-[12px] pb-[24px]">
             {products[0]?.map((product, i) => {
-              console.log(product.name);
               return (
                 <div className="flex justify-center mt-[20px]">
                   <ProductCardCtHeight
@@ -30,6 +29,7 @@ const FillerProducts = () => {
                     image={product.mainImage}
                     name={product.name}
                     costPerUnit={product.costPerUnit}
+                    color={color}
                   ></ProductCardCtHeight>
                 </div>
               );

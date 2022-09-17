@@ -2,7 +2,7 @@ import { BallTriangle } from 'react-loader-spinner'
 
 export const LoadingPageDesktop = () => {
     return (
-        <div className='hidden lg:flex w-screen h-screen justify-center items-center bg-overlay-30 fixed z-60'>
+        <div className='hidden lg:absolute top-0 bot-0 right-0 left-0 justify-center items-center bg-overlay-30 fixed z-100'>
             <BallTriangle
                 height={200}
                 width={200}
