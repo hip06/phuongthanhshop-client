@@ -5,13 +5,15 @@ import { InputCustomWidth } from "../../components/InputCtWidth";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import FormData from "form-data";
+import { ModalEditCate, PopupDeleteCate } from "../../components/Modal";
+
 const ManageCategory = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [id, setId] = useState("");
-  const [isShow, setIsShow] = useState(false);
-
+  const [isShowEdit, setIsShowEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState({});
@@ -54,7 +56,7 @@ const ManageCategory = () => {
               textColor="#fff"
               width="40%"
               onClick={() => {
-                setIsShow(!isShow);
+                setIsShowEdit(!isShowEdit);
                 setId(cate.id);
               }}
             ></Button>
@@ -64,45 +66,13 @@ const ManageCategory = () => {
               textColor="#fff"
               width="40%"
               height="2"
-              onClick={async () => {
-                await ApiCategory.delete({ id: cate.id });
-                setIsLoading(!isLoading);
+              onClick={() => {
+                setIsDelete(!isDelete);
+                setId(cate.id);
               }}
             ></Button>
           </div>
         </div>
-        {isShow ? (
-          <div className="fixed h-full w-full top-0 right-0 flex justify-center items-center z-10 bg-gray-500/[.06] drop-shadow-lg">
-            <div className=" w-[500px] h-[500px] bg-white rounded p-10 flex flex-col  items-center">
-              <div className="h-[10%] w-full my-5">
-                <InputCustomWidth
-                  label="Ten gian hang"
-                  widthP="full"
-                  placeholder="Ten gian hang..."
-                ></InputCustomWidth>
-              </div>
-              <div className="h-[10%] w-full my-5">
-                <InputCustomWidth
-                  label="Color"
-                  widthP="full"
-                  placeholder="Color..."
-                ></InputCustomWidth>
-              </div>
-              <div className="h-[10%] w-full my-5">
-                <input type="file" />
-              </div>
-              <Button
-                text="Sửa"
-                bgColor="#4ed14b"
-                textColor="#fff"
-                width="40%"
-                height="2"
-              ></Button>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
     );
   });
@@ -164,6 +134,20 @@ const ManageCategory = () => {
 
         <div className="overflow-auto bg-white h-4/5">{renderCateList}</div>
       </div>
+      {isShowEdit ? (
+        <ModalEditCate setIsShowEdit={setIsShowEdit} id={id} />
+      ) : (
+        ""
+      )}
+      {isDelete ? (
+        <PopupDeleteCate
+          setIsDelete={setIsDelete}
+          id={id}
+          isDelete={isDelete}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };

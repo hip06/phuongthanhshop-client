@@ -8,13 +8,19 @@ import {
 } from "../../components/InputCtWidth";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
-
+import { PopupDeleteCate, PopupDeleteProduct } from "../../components/Modal";
 const ManageProduct = () => {
   const dispatch = useDispatch();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState("");
+  const [isShowEdit, setIsShowEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
   const [selectValue, setSelectValue] = useState("");
   const [options, setOptions] = useState([]);
   const { categories, products, code } = useSelector((state) => state.app);
+
   const cate = (value) => {
     categories.map((cate, index) => {
       if (cate.value === value) {
@@ -22,7 +28,7 @@ const ManageProduct = () => {
       }
     });
   };
-
+  // reload products theo category
   useEffect(() => {
     cate(selectValue);
   }, [selectValue]);
@@ -35,6 +41,7 @@ const ManageProduct = () => {
       });
     });
   }, [categories]);
+
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
     checkboxs.map((checkbox) => {
@@ -46,17 +53,11 @@ const ManageProduct = () => {
       checkbox.checked = false;
     });
   }
-  products.map((product) => {
-    return (
-      <div>
-        <p>{product.id}</p>
-      </div>
-    );
-  });
+
   const renderProductList = products[0]?.map((product, i) => {
     return (
       <div
-        key={i}
+        key={product.id}
         className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px]  text-xl "
       >
         <div className="w-[10%] flex justify-center">
@@ -94,6 +95,10 @@ const ManageProduct = () => {
             textColor="#fff"
             width="40%"
             height="2"
+            onClick={() => {
+              setIsDelete(!isDelete);
+              setId(product.id);
+            }}
           ></Button>
         </div>
       </div>
@@ -158,6 +163,19 @@ const ManageProduct = () => {
         </div>
         <div className="h-4/5 overflow-auto">{renderProductList}</div>
       </div>
+      {isDelete ? (
+        <PopupDeleteProduct
+          setIsDelete={setIsDelete}
+          id={id}
+          isDelete={isDelete}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+          selectValue={selectValue}
+          cate={cate}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
