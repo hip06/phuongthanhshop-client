@@ -12,7 +12,6 @@ const FillerProducts = ({ color, page, setPage }) => {
   const [filterContent, setFilterContent] = useState('')
   const [productsShow, setProductsShow] = useState(null)
   const typingTimeOut = useRef(null)
-
   useEffect(() => {
     // handle api for sort here
     // Đợi mỗi @Sơn
@@ -58,7 +57,7 @@ const FillerProducts = ({ color, page, setPage }) => {
         <div className="justify-center bg-[#d9d9d9] rounded-[12px] mt-[12px]">
           <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 668: 3, 956: 4, 1286: 5, 2016: 6 }}>
             <Masonry className="justify-center bg-[#d9d9d9] rounded-[12px] pb-[24px]">
-              {products[0]?.map((product, i) => {
+              {products?.map((product, i) => {
                 return (
                   <div className="flex justify-center mt-[20px]">
                     <ProductCardCtHeight

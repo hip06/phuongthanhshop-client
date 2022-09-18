@@ -20,6 +20,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
   const [isSearching, setIsSearching] = useState(false)
   const [mainColor, setMainColor] = useState('')
 
+
   useEffect(() => {
     categories?.map((category) => {
       let valueLowerCase = category.value.toLowerCase()
