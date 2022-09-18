@@ -17,7 +17,7 @@ const ApiProduct = {
     const url = `/api/v1/admin/product/update/${id}`;
     return axiosClients.post(url, data);
   },
-  getProductsFollowPage: ({ params }) => {
+  getProductsByUser: ({ params }) => {
     const url = "/api/v1/product/all";
     return axiosClients.get(url, { params });
   },
