@@ -21,9 +21,9 @@ const ManageCategory = () => {
 
   const dispatch = useDispatch();
   const categories = useSelector((state) => {
-    console.log(state);
-    return state.app.categories});
-  
+    return state.app.categories
+  });
+
   const onSubmit = async () => {
     const bodyFormData = new FormData();
     bodyFormData.append("newCategory", newCategory);
