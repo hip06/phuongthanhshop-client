@@ -10,7 +10,7 @@ import {
 import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 import Loading from "../../components/Loading";
 import Button from "../../components/Button";
-import ApiGetProduct from "../../apis/product";
+import ApiProduct from "../../apis/product";
 import FormData from "form-data";
 import { useSelector } from "react-redux";
 
@@ -48,7 +48,7 @@ const EditProduct = () => {
     bodyFormData.append("costPerUnit", price);
     bodyFormData.append("description", shortDes);
     bodyFormData.append("categoryCode", cateCode(selectValue));
-    ApiGetProduct.create(bodyFormData);
+    ApiProduct.create(bodyFormData);
   };
 
   useEffect(() => {
@@ -87,12 +87,11 @@ const EditProduct = () => {
             />
           </div>
 
-          <div className="flex h-1/5 justify-between">
-            <div className="flex w-[60%] ">
+          <div className="flex h-[10%] my-5  justify-between items-center">
+            <div className="flex h-full ">
               <SelectCustomWidth
-                widthP="[30%]"
-                lable="Loại hàng"
-                options={options}
+                widthP="full"
+                options={categories}
                 selectValue={selectValue}
                 setSelectValue={setSelectValue}
               />
