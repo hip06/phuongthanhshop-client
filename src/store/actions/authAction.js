@@ -4,11 +4,11 @@ import { apiRegister, apiLogin } from "../../apis/auth";
 export const register = (payload) => async (dispatch) => {
   try {
     const response = await apiRegister.post(payload);
-    console.log(response);
+    console.log(response.status === 0);
     if (response?.status === 0)
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
-        token: response.data.token,
+        token: response.token,
         userCurrent: response.data.dataCurrent,
       });
     else
@@ -42,7 +42,7 @@ export const login = (payload) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.LOGIN_FAIL,
-      message: "Có lỗi trong quá trình đăng ký, Hãy thử lại sau.",
+      message: "Có lỗi trong quá trình đăng nhap, Hãy thử lại sau.",
     });
   }
 };
