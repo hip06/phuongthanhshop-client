@@ -19,7 +19,11 @@ const ApiCategory = {
   },
   put: (data) => {
     const url = "/api/v1/admin/category/update";
-    return axiosClients.put(url, data);
+    return axiosClients.put(url, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 };
 

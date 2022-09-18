@@ -7,11 +7,15 @@ const ApiProduct = {
   },
   create: (data) => {
     const url = "/api/v1/admin/product/create";
-    return axiosClients.post(url, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return axiosClients.post(url, data);
+  },
+  delete: (id) => {
+    const url = `/api/v1/admin/product/delete/${id}`;
+    return axiosClients.delete(url);
+  },
+  update: (data, id) => {
+    const url = `/api/v1/admin/product/update/${id}`;
+    return axiosClients.post(url, data);
   },
   getProductsFollowPage: (params) => {
     const url = '/api/v1/product/all'

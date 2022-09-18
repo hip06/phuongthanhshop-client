@@ -5,13 +5,15 @@ import { InputCustomWidth } from "../../components/InputCtWidth";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import FormData from "form-data";
+import { ModalEditCate, PopupDeleteCate } from "../../components/Modal";
+
 const ManageCategory = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [id, setId] = useState("");
-  const [isShow, setIsShow] = useState(false);
-
+  const [isShowEdit, setIsShowEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState({});
@@ -54,7 +56,7 @@ const ManageCategory = () => {
               textColor="#fff"
               width="40%"
               onClick={() => {
-                setIsShow(!isShow);
+                setIsShowEdit(!isShowEdit);
                 setId(cate.id);
               }}
             ></Button>
@@ -64,47 +66,13 @@ const ManageCategory = () => {
               textColor="#fff"
               width="40%"
               height="2"
-              onClick={async () => {
-                await ApiCategory.delete({ id: cate.id });
-                setIsLoading(!isLoading);
+              onClick={() => {
+                setIsDelete(!isDelete);
+                setId(cate.id);
               }}
             ></Button>
           </div>
         </div>
-        {isShow & (id === cate.id) ? (
-          <div className="">
-            <div className="flex">
-              <input
-                type="text"
-                value={cate.id === id ? name : ""}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                onFocus={() => {
-                  setId(cate.id);
-                  setName("");
-                }}
-              />
-              <Button
-                text="XAC NHAN"
-                bgColor="#cf2b2b"
-                textColor="#fff"
-                width="40%"
-                height="2"
-                onClick={async () => {
-                  await ApiCategory.put({
-                    id: cate.id,
-                    newCategory: name,
-                  });
-                  setIsLoading(!isLoading);
-                  setIsShow(!isShow);
-                }}
-              ></Button>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
     );
   });
@@ -166,6 +134,20 @@ const ManageCategory = () => {
 
         <div className="overflow-auto bg-white h-4/5">{renderCateList}</div>
       </div>
+      {isShowEdit ? (
+        <ModalEditCate setIsShowEdit={setIsShowEdit} id={id} />
+      ) : (
+        ""
+      )}
+      {isDelete ? (
+        <PopupDeleteCate
+          setIsDelete={setIsDelete}
+          id={id}
+          isDelete={isDelete}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
