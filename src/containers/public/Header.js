@@ -1,18 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import image from "../../ultils/image";
 import { HiOutlineMenu } from "react-icons/hi";
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
 import { getSite } from "../../ultils/constant";
 import { useParams, Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
+import * as actions from '../../store/actions'
 
 const Header = ({ isSearching, setIsSearching }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
+  const dispatch = useDispatch()
   const params = useParams();
   const site = getSite(params);
   const headerRef = useRef();
@@ -59,7 +60,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             setIsSearching(!isSearching);
           }}
         >
-          <BiSearchAlt size={26}></BiSearchAlt>
+          <BiSearchAlt size={26} />
         </div>
 
         <div>
@@ -80,13 +81,13 @@ const Header = ({ isSearching, setIsSearching }) => {
 
         <div>
           <Link to="/user">
-            <BiUser size={26}></BiUser>
+            <BiUser size={26} />
           </Link>
         </div>
 
         <div className="relative">
           <Link to="/cart">
-            <AiOutlineShoppingCart size={26}></AiOutlineShoppingCart>
+            <AiOutlineShoppingCart size={26} />
           </Link>
           <div
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
@@ -117,6 +118,7 @@ const Header = ({ isSearching, setIsSearching }) => {
           return (
             <div>
               <NavLink
+                onClick={() => dispatch(actions.getCodeCategory(category.code))}
                 key={"navlink-" + index}
                 to={`/home/${valueLowerCase}`}
                 style={{

@@ -29,9 +29,8 @@ function App() {
 
   // Khi reload page get userdata again
   useEffect(() => {
-    isLoggedIn && dispatch(actions.getCurrent());
-    console.log(11);
-  }, [isLoggedIn]);
+    dispatch(actions.getCategory());
+  }, []);
 
   return (
     <div className="w-full h-full 2xl:w-[75%] 2xl:mx-auto">

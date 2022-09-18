@@ -12,6 +12,7 @@ const actionTypes = {
   GET_PRODUCT: "GET_PRODUCT",
   // category
   GET_CATEGORY: "GET_CATEGORY",
+  GET_CODE_CATEGORIES: "GET_CODE_CATEGORIES",
 };
 
 export default actionTypes;

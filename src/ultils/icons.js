@@ -11,6 +11,7 @@ import { SiZalo } from 'react-icons/si'
 import { ImLocation2 } from 'react-icons/im'
 import { TiLocationOutline } from 'react-icons/ti'
 
+
 const icons = {
     BsSpeedometer2,
     RiProductHuntLine,
@@ -28,7 +29,7 @@ const icons = {
     AiOutlineFacebook,
     AiOutlineInstagram,
     TiLocationOutline,
-    AiOutlineArrowRight
+    AiOutlineArrowRight,
 }
 
 export default icons

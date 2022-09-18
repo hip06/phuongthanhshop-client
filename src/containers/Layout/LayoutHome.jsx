@@ -1,6 +1,5 @@
 
 import image from "../../ultils/image";
-import { getSite } from "../../ultils/constant";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
@@ -12,10 +11,9 @@ import Banner from "../../components/Banner";
 import BoxTopSeller from "../../components/BoxTopSeller";
 import { FillerProducts } from "../public";
 
-const LayoutHome = ({ setLoading }) => {
+const LayoutHome = ({ setLoading, page, setPage }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
   const params = useParams();
-  const site = getSite(params)
   const { categories } = useSelector(state => state.app)
   const [slideImage, setSlideImage] = useState('')
   const [valueSearch, setValueSearch] = useState('')
@@ -31,12 +29,13 @@ const LayoutHome = ({ setLoading }) => {
       }
     })
   }, [params.slug])
-  useEffect(() => {
-    categories?.rows?.map((category) => {
-      let valueLowerCase = category.value.toLowerCase()
-      document.getElementById(`cate-list-${valueLowerCase}`).style.color = category.color
-    })
-  }, [slideImage])
+
+  // useEffect(() => {
+  //   categories?.map((category) => {
+  //     let valueLowerCase = category.value.toLowerCase()
+  //     document.getElementById(`cate-list-${valueLowerCase}`).style.color = category.color
+  //   })
+  // }, [slideImage])
 
   return (
     <>
@@ -83,7 +82,7 @@ const LayoutHome = ({ setLoading }) => {
                   if (params["*"] === valueLowerCase) {
                     weight = 'font-[800]'
                   }
-                  return (<div id={'cate-list-' + valueLowerCase} className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight}`}>{category.value}</div>)
+                  return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.value}</div>)
                 })
               }
             </div>
@@ -110,10 +109,10 @@ const LayoutHome = ({ setLoading }) => {
           <BoxTopSeller color={mainColor} />
         </div>
         <div className="w-full">
-          <FillerProducts color={mainColor} />
+          <FillerProducts color={mainColor} page={page} setPage={setPage} />
         </div>
 
-        <div className="relative mb-[4px] lg:hidden">
+        {/* <div className="relative mb-[4px] lg:hidden">
           <Link to={`/home/${site.linkLeft}`}>
             <img src={site.naviLeftImage}></img>
             <p
@@ -143,7 +142,8 @@ const LayoutHome = ({ setLoading }) => {
               {site.naviRightText}
             </p>
           </Link>
-        </div>
+        </div> */}
+
       </div>
       <Footer color={mainColor} category={params['*']} />
     </>

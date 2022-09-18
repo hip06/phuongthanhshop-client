@@ -4,21 +4,29 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   products: [],
   categories: [],
+  code: 'CAT1',
 };
 
 const appReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCT:
       const cate = Object.values(action.data[0]);
+      const pageLength = action.data[1]
       return {
         ...state,
-        products: state.products.concat(cate),
+        products: cate,
+        pageLength,
       };
 
     case actionTypes.GET_CATEGORY:
       return {
         ...state,
         categories: action.data,
+      };
+    case actionTypes.GET_CODE_CATEGORIES:
+      return {
+        ...state,
+        code: action.data
       };
     default:
       return state;

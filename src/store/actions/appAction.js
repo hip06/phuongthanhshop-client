@@ -1,6 +1,7 @@
 import actionTypes from "./actionTypes";
 import ApiCategory from "../../apis/category";
 import ApiProduct from "../../apis/product";
+
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await ApiCategory.getAll();
@@ -43,5 +44,12 @@ export const getProduct = (params) => async (dispatch) => {
       type: actionTypes.GET_PRODUCT,
       data: null,
     });
+  }
+};
+
+export const getCodeCategory = (code) => {
+  return {
+    type: actionTypes.GET_CODE_CATEGORIES,
+    data: code,
   }
 };
