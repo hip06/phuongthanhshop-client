@@ -44,8 +44,9 @@ export const updatePaymentAction = (product) => {
   }
 }
 
-export const deleteAllPaymentsAction = ()=>{
+export const deleteAllPaymentsAction = () => {
   return {
     type: actionTypes.DELETE_ALL_PAYMENTS,
   }
 }
+
