@@ -35,13 +35,13 @@ export const getProduct = (params) => async (dispatch) => {
     } else {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: null,
+        data: [],
       });
     }
   } catch (error) {
     dispatch({
       type: actionTypes.GET_PRODUCT,
-      data: null,
+      data: [],
     });
   }
 };

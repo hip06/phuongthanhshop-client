@@ -8,10 +8,10 @@ import {
 } from "../../components/InputCtWidth";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
-import { PopupDeleteCate, PopupDeleteProduct } from "../../components/Modal";
+import { PopupDeleteProduct, EditProduct } from "../../components/Modal";
 const ManageProduct = () => {
   const dispatch = useDispatch();
-
+  const { categories, products } = useSelector((state) => state.app);
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState("");
   const [isShowEdit, setIsShowEdit] = useState(false);
@@ -19,9 +19,8 @@ const ManageProduct = () => {
   const [addAll, setAddAll] = useState(false);
   const [selectValue, setSelectValue] = useState("");
   const [options, setOptions] = useState([]);
-  const { categories, products, code } = useSelector((state) => state.app);
 
-  const cate = (value) => {
+  const cateProdcut = (value) => {
     categories.map((cate, index) => {
       if (cate.value === value) {
         dispatch(actions.getProduct(cate.code));
@@ -30,8 +29,8 @@ const ManageProduct = () => {
   };
   // reload products theo category
   useEffect(() => {
-    cate(selectValue);
-  }, [selectValue]);
+    cateProdcut(selectValue);
+  }, [selectValue, isLoading]);
 
   useEffect(() => {
     categories.map((cate) => {
@@ -40,6 +39,7 @@ const ManageProduct = () => {
         return a;
       });
     });
+    setSelectValue(categories[0]?.value);
   }, [categories]);
 
   if (addAll) {
@@ -54,6 +54,7 @@ const ManageProduct = () => {
     });
   }
 
+  // Compontent products
   const renderProductList = products[0]?.map((product, i) => {
     return (
       <div
@@ -88,6 +89,10 @@ const ManageProduct = () => {
             bgColor="#4ed14b"
             textColor="#fff"
             width="40%"
+            onClick={() => {
+              setIsShowEdit(true);
+              setId(product.id);
+            }}
           ></Button>
           <Button
             text="Xóa"
@@ -166,12 +171,24 @@ const ManageProduct = () => {
       {isDelete ? (
         <PopupDeleteProduct
           setIsDelete={setIsDelete}
-          id={id}
           isDelete={isDelete}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
+          id={id}
           selectValue={selectValue}
-          cate={cate}
+          cate={cateProdcut}
+        />
+      ) : (
+        ""
+      )}
+      {isShowEdit ? (
+        <EditProduct
+          isShowEdit={isShowEdit}
+          setIsShowEdit={setIsShowEdit}
+          id={id}
+          categories={categories}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />
       ) : (
         ""
