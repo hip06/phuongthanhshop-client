@@ -20,8 +20,10 @@ const ManageCategory = () => {
   const [image, setImage] = useState({});
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.app.categories);
-
+  const categories = useSelector((state) => {
+    console.log(state);
+    return state.app.categories});
+  
   const onSubmit = async () => {
     const bodyFormData = new FormData();
     bodyFormData.append("newCategory", newCategory);
