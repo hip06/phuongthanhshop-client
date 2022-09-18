@@ -6,12 +6,12 @@ const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 export const path = {
   LOGIN: "/login",
   SYSTEM: "/system/*",
-  USERCLIENT:'/user',
+  USERCLIENT: '/user',
   HOME: "/home/*",
-  PAYMENT:'/payment',
+  PAYMENT: '/payment',
   FEED: "/feed",
-  CART:'/cart',
-  DETAIL:'/detail',
+  CART: '/cart',
+  DETAIL: '/detail',
   GENERAL: "*",
   EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",
@@ -19,6 +19,19 @@ export const path = {
   USER: "user",
   BILL: "bill",
   CREATE_CATEGORY: "create-category",
+};
+export const vi_uf8 = {
+  shopname: 'PhuongThanh',
+  all_categories: 'Tất cả chủ để',
+  phone: '813.672.409',
+  support_time: 'Hỗ trợ 24/7',
+  adress: '102-HUB3-CT8 tập thể Thành Công',
+  phone1: '0813672409',
+  phone2: '01253322599',
+  email: 'phuongthanhshophn@gmail.com',
+  facebook: "Phuong Thanh's Shop",
+  zalo: '01253322599',
+  instagram: 'pthanh@shop102'
 };
 export const adminMenu = [
   {

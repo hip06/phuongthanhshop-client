@@ -17,6 +17,8 @@ import navigro2 from "../assets/navigro2.png";
 import navifashion2 from "../assets/navifashion2.png";
 import naviapp3 from "../assets/naviapp3.png";
 import navifashion3 from "../assets/navifashion3.png"
+import fashionMan from '../assets/fashion-man.avif'
+import fashionGirl from '../assets/fashion-girl.avif'
 
 const image = {
     fashionbanner,
@@ -35,10 +37,11 @@ const image = {
     navigro1,
     naviapp1,
     navigro2,
-    navifashion2, 
+    navifashion2,
     naviapp3,
     navifashion3,
-
+    fashionMan,
+    fashionGirl,
 }
 
 export default image;

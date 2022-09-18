@@ -1,6 +1,7 @@
 import actionTypes from "./actionTypes";
 import ApiCategory from "../../apis/category";
 import ApiProduct from "../../apis/product";
+
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await ApiCategory.getAll();
@@ -26,7 +27,8 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAll({ category: params });
+    const response = await ApiProduct.getProductsFollowPage(params);
+    console.log(response)
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
@@ -35,13 +37,20 @@ export const getProduct = (params) => async (dispatch) => {
     } else {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: [],
+        data: null,
       });
     }
   } catch (error) {
     dispatch({
       type: actionTypes.GET_PRODUCT,
-      data: [],
+      data: null,
     });
+  }
+};
+
+export const getCodeCategory = (code) => {
+  return {
+    type: actionTypes.GET_CODE_CATEGORIES,
+    data: code,
   }
 };
