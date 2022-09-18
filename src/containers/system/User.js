@@ -3,17 +3,16 @@ import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
 import { InputCustomWidth } from "../../components/InputCtWidth";
 import { useEffect, useState } from "react";
-import { apiAllUsers, apiDeleteUser } from "../../apis/user";
+import { apiAllUsers } from "../../apis/user";
 const User = () => {
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchCategory = async () => {
       const res = await apiAllUsers.get();
       setUsers(res.user.rows);
     };
     fetchCategory();
-  }, [isLoading]);
+  }, []);
 
   const renderUser = users?.map((user, i) => {
     return (
@@ -25,7 +24,7 @@ const User = () => {
           <span>{i + 1}</span>
         </div>
 
-        <div className="w-[15%] h-4/5 flex justify-center">
+        <div className="w-[15%] flex justify-center h-[30px]">
           <img src={image} className="h-full"></img>
         </div>
         <div className="w-[10%] text-center">
@@ -51,10 +50,6 @@ const User = () => {
             textColor="#fff"
             width="40%"
             height="2"
-            onClick={async () => {
-              await apiDeleteUser.delete({ id: user.id });
-              setIsLoading(!isLoading);
-            }}
           ></Button>
         </div>
       </div>
