@@ -210,10 +210,41 @@ const InputFileCustomWidth = React.memo(
   }
 );
 
+// Input search
+const InputSearch = React.memo(
+  ({ placeholder, value, setValue, isSearching, setIsSearching }) => {
+    const onAction = useCallback((newvalue) => setValue(newvalue), []);
+    if (value !== '') setIsSearching(true)
+    else setIsSearching(false)
+    return (
+      <>
+        <div className={`h-full w-[84%]`}>
+          <input
+            className='h-full w-full bg-[#d9d9d9] pl-[18px] focus:outline-none rounded-l-[12px]'
+            value={value}
+            placeholder={placeholder}
+            onChange={(e) => onAction(e.target.value)}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+        {isSearching && <div className="absolute bg-[#000] z-30 top-[60px] right-[60px] rounded-[24px] opacity-[0.7]  w-[560px] text-white">
+          <div className="w-[80%] mx-auto my-[16px] border-b-[2px]">This this a test case of searching...</div>
+          <div className="w-[80%] mx-auto my-[12px] border-b-[2px]">This this a test case of searching...</div>
+          <div className="w-[80%] mx-auto my-[12px] border-b-[2px]">This this a test case of searching...</div>
+          <div className="w-[80%] mx-auto my-[12px] border-b-[2px]">This this a test case of searching...</div>
+          <div className="w-[80%] mx-auto my-[12px] border-b-[2px]">This this a test case of searching...</div>
+          <div className="w-[80%] mx-auto my-[12px] border-b-[2px]">This this a test case of searching...</div>
+        </div>}
+      </>
+    );
+  }
+);
+
 export {
   InputCustomWidth,
   SelectCustomWidth,
   HashTagCustomWidth,
   TextCustomWidth,
   InputFileCustomWidth,
+  InputSearch,
 };
