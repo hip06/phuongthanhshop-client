@@ -4,7 +4,7 @@ import ApiProduct from "../../apis/product";
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await ApiCategory.getAll();
-
+    console.log(response);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_CATEGORY,

@@ -2,7 +2,7 @@ import axiosClients from "../axiosClients";
 
 const ApiCategory = {
   getAll: () => {
-    const url = "/api/v1/category/all?page=all";
+    const url = "api/v1/category/all?page=all";
     return axiosClients.get(url);
   },
   delete: (params) => {
