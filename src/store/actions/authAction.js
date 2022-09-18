@@ -5,17 +5,19 @@ export const register = (payload) => async (dispatch) => {
   try {
     const response = await apiRegister.post(payload);
     console.log(response);
-    if (response?.status === 0)
+    if (response?.status === 0) {
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
-        token: response.data.token,
-        userCurrent: response.data.dataCurrent,
+        token: response.token,
+        userCurrent: response.dataCurrent,
       });
-    else
+    }
+    else {
       dispatch({
         type: actionTypes.REGISTER_FAIL,
-        message: response.data.message,
+        message: response.message,
       });
+    }
   } catch (error) {
     dispatch({
       type: actionTypes.REGISTER_FAIL,

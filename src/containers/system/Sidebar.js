@@ -10,9 +10,9 @@ const Sidebar = () => {
   return (
     <div className="w-256 bg-[#3C4B64] h-full text-gray-300 flex flex-col justify-between ">
       <div className="flex flex-col">
-        <div className="h-[64px] flex justify-center items-center bg-[#303C54] text-white font-semibold">
+        <Link to='/' className="h-[64px] flex justify-center items-center bg-[#303C54] text-white font-semibold">
           PHUONGTHANHSHOP
-        </div>
+        </Link>
         <div className="flex flex-col">
           {adminMenu.map((i) => {
             return (

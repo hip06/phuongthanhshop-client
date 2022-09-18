@@ -4,12 +4,48 @@ import { ProductCardCtHeight } from "../../components/ProductCard";
 import { useParams, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { useState, useEffect } from "react";
+import ApiGetProduct from "../../apis/product";
+import ApiCategory from "../../apis/category";
+import Banner from "../../components/Banner";
 
 const LayoutHome = () => {
   const params = useParams();
   const site = getSite(params);
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    // const fetchCategory = async () => {
+    //   const tempCate = await ApiCategory.getAll();
+    //   setCategory(tempCate.response.rows);
+    //   console.log(category);
+    // };
+    // fetchCategory();
+
+    const fetchProduct = async () => {
+      // const res = await ApiGetProduct.getAll({ page: 1, CODE:"Lucky Female Customer" });
+      // console.log(res);
+      const res = await ApiGetProduct.getAll();
+      console.log(res);
+      // category.map((category) => {
+      //   const fetchProductChild = async () => {
+      //     console.log(category);
+      //     const res= await ApiGetProduct.getAll({page:1,CODE:category.code})
+      //     console.log(res);
+      //   }
+      //   fetchProductChild();
+      // })
+      const data = Object.values(res.data["0"]);
+      setProducts(data[0]);
+    };
+
+    fetchProduct();
+  }, []);
+
   return (
     <div>
+      
       <img src={site.banner}></img>
 
       <img
@@ -40,47 +76,17 @@ const LayoutHome = () => {
         </div>
 
         <div className="overflow-x-auto flex ">
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
-              color={site.color}
-              description="Áo khoác thời trang nam siêu đẹp vip pro ak4777775"
-            ></ProductCardCtHeight>
-          </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
-          <div className="[&:not(:last-child)]:mr-5">
-            <ProductCardCtHeight
-              image={image.imagetemp}
-              name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-              costPerUnit="600.000d"
-              color={site.color}
-            ></ProductCardCtHeight>
-          </div>
+          {products.map((product, i) => (
+            <div key={i} className="[&:not(:last-child)]:mr-5">
+              <ProductCardCtHeight
+                id={product.id}
+                image={product.mainImage}
+                name={product.name}
+                costPerUnit={product.costPerUnit}
+                color={site.color}
+              ></ProductCardCtHeight>
+            </div>
+          ))}
         </div>
 
         {params["*"] === "appliance" || params["*"] === "grocery" ? (
@@ -95,46 +101,17 @@ const LayoutHome = () => {
             </div>
 
             <div className="overflow-x-auto flex ">
-              <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
-                  image={image.imagetemp}
-                  name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
-                  color={site.color}
-                ></ProductCardCtHeight>
-              </div>
-              <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
-                  image={image.imagetemp}
-                  name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
-                  color={site.color}
-                ></ProductCardCtHeight>
-              </div>
-              <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
-                  image={image.imagetemp}
-                  name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
-                  color={site.color}
-                ></ProductCardCtHeight>
-              </div>
-              <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
-                  image={image.imagetemp}
-                  name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
-                  color={site.color}
-                ></ProductCardCtHeight>
-              </div>
-              <div className="[&:not(:last-child)]:mr-5">
-                <ProductCardCtHeight
-                  image={image.imagetemp}
-                  name="Set Tập Gym Yoga Nam Áo Icado AT16, Quần Short Icado AT12"
-                  costPerUnit="600.000d"
-                  color={site.color}
-                ></ProductCardCtHeight>
-              </div>
+              {products.map((product, i) => (
+                <div key={i} className="[&:not(:last-child)]:mr-5">
+                  <ProductCardCtHeight
+                    id={product.id}
+                    image={product.mainImage}
+                    name={product.name}
+                    costPerUnit={product.costPerUnit}
+                    color={site.color}
+                  ></ProductCardCtHeight>
+                </div>
+              ))}
             </div>
           </div>
         ) : (
@@ -144,15 +121,33 @@ const LayoutHome = () => {
       <section>
         {params["*"] === "grocery" ||
           (params["*"] === "appliance" && (
-            <div className="flex justify-between w-full bg-[#d9d9d9] m-[5px] p-[5px] px-[10px] rounded-[10px] items-center font-semibold text-[20px] h-[60px]">
-              <div className="flex items-center justify-between">
-                <p>Lọc</p>
-                <BiFilterAlt size={22}></BiFilterAlt>
+            <div className="flex flex-col justify-center w-full">
+              <div className="flex justify-between w-full bg-[#d9d9d9] m-[5px] p-[5px] px-[10px] rounded-[10px] items-center font-semibold text-[20px] h-[60px]">
+                <div className="flex items-center justify-between">
+                  <p className="mr-[5px]">Lọc</p>
+                  <BiFilterAlt size={22}></BiFilterAlt>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="mr-[5px]">Phân loại</p>
+                  <BiSortAlt2 size={22}></BiSortAlt2>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <p>Phân loại</p>
-                <BiSortAlt2 size={22}></BiSortAlt2>
-              </div>
+
+              <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4 }}>
+                <Masonry className="justify-center">
+                  {products.map((product, i) => (
+                    <div key={i} className="flex justify-center mt-[20px]">
+                      <ProductCardCtHeight
+                        id={product.id}
+                        image={product.mainImage}
+                        name={product.name}
+                        costPerUnit={product.costPerUnit}
+                        color={site.color}
+                      ></ProductCardCtHeight>
+                    </div>
+                  ))}
+                </Masonry>
+              </ResponsiveMasonry>
             </div>
           ))}
       </section>
