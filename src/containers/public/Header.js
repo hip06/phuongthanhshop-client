@@ -13,7 +13,7 @@ import {useSelector} from "react-redux";
 const Header = ({isSearching,setIsSearching}) => {
   const cart=useSelector(state=>state.cart);
 
-  const [modalShow, setModalShow] = useState(false);
+  const [modalshow, setmodalshow] = useState(false);
   const params = useParams();
   const site = getSite(params);
   const headerRef = useRef();
@@ -22,17 +22,17 @@ const Header = ({isSearching,setIsSearching}) => {
   }, [params])
 
   const handleCloseModal = () => {
-    setModalShow(false);
+    setmodalshow(false);
   }
   return (
     <div className="flex items-center justify-around relative h-[70px]" ref={headerRef}>
-      <div className=" " onClick={() => { setModalShow(true) }}>
+      <div className=" " onClick={() => { setmodalshow(true) }}>
         <HiOutlineMenu size={26} ></HiOutlineMenu>
       </div>
-      {<div className={`z-50 top-0 left-0 w-full fixed h-full ${modalShow ? "" : 'hidden'} animate-modalShow`} setModalShow={setModalShow} onClick={(e) => { setModalShow(false) }}>
+      {<div className={`z-50 top-0 left-0 w-full fixed h-full ${modalshow ? "" : 'hidden'} animate-modalShow`} setModalShow={setmodalshow} onClick={(e) => { setmodalshow(false) }}>
         <div className="w-[80%] absolute z-100" onClick={(e) => { e.stopPropagation(); }}>
           <LayoutMenu
-            setModalShow={setModalShow}
+            setmodalshow={setmodalshow}
           />
         </div>
       </div>}

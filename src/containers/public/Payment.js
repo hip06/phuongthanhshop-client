@@ -3,46 +3,121 @@ import { PaymentItem } from "../../components/CartItem";
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { deleteAllPaymentsAction } from "../../store/actions/userAction"
 import { useDispatch } from "react-redux"
+import { SelectCustomWidth } from "../../components/InputCtWidth"
 
 const Payment = () => {
     const dispatch = useDispatch();
+    const selectRef = useRef();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
-    const [cities, setCities] = useState([]);
+    const [cities, setCities] = useState(['Lào Cai']);
+    const [citiesObject, setCitiesObject] = useState([]);
     const [towns, setTowns] = useState([]);
+    const [townsObject, setTownsObject] = useState([]);
     const [wards, setWards] = useState([]);
-
-    console.log();
+    const [wardsObject, setWardsObject] = useState([]);
+    const [currentCity, setCurrentCity] = useState('Lào cai');
+    const [currentTowns, setCurrentTowns] = useState('Lào cai');
+    const [currentWard, setCurrentWard] = useState('Lào cai');
     const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
         product = JSON.parse(product);
         return sum += product.costPerUnit * product.quantity
     }, 0)
 
-    const fetchAddressData = (url, setState, params) => {
+
+
+
+    useEffect(() => {
+        citiesObject.map((city) => {
+            if (city['ProvinceName'] === currentCity) {
+
+                fetchTownsHandler(city['ProvinceID']);
+            }
+        })
+    }, [currentCity])
+
+    useEffect(() => {
+        townsObject.map((town) => {
+            if (town['DistrictName'] === currentTowns) {
+
+                fetchWardsHandler(town['DistrictID']);
+            }
+        })
+    }, [currentTowns])
+    console.log(townsObject);
+
+    const fetchTownsHandler = (cityId) => {
+
         const fetchData = async () => {
-            const res = await fetch(url, {
+            const res = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=${cityId}`, {
                 method: 'GET',
                 headers: {
                     'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
                 },
             })
             const data = await res.json();
-            setState(data.data);
+
+            const townsData = [];
+
+            data.data.map((town) => {
+                townsData.push(town['DistrictName']);
+            })
+            setTowns(townsData);
+            setTownsObject(data.data);
+
         }
         fetchData();
     }
-    const fetchTownsHandler = (cityId) => {
-        fetchAddressData(' https://online-gateway.ghn.vn/shiip/public-api/master-data/district', setTowns);
+    const fetchWardsHandler = (districtId) => {
+
+        const fetchData = async () => {
+            const res = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${districtId}`, {
+                method: 'GET',
+                headers: {
+                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
+                },
+            })
+            const data = await res.json();
+
+            const wardsData = [];
+            console.log(data.data);
+            data.data.map((ward) => {
+                wardsData.push(ward['WardName']);
+            })
+            setWards(wardsData);
+            setWardsObject(wardsData);
+
+        }
+        fetchData();
     }
 
     useEffect(() => {
-        fetchAddressData('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', setCities);
+
+        const fetchData = async () => {
+            const res = await fetch('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', {
+                method: 'GET',
+                headers: {
+                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
+                },
+            })
+            const data = await res.json();
+
+            const citiesData = [];
+
+            data.data.map((city) => {
+                citiesData.push(city['ProvinceName']);
+            })
+            setCities(citiesData);
+            setCitiesObject(data.data);
+
+        }
+        fetchData();
+
         setTotalPayment(getTotalPayment);
     }, [])
-    console.log(cities);
     // useEffect(() => {
     //     const fetchProducts = async () => {
     //         const res = await ApiPayment.createBill({
@@ -83,26 +158,25 @@ const Payment = () => {
             </div>
         </section>
 
-        <section className=" border-[1px] border-[#777] rounded-[10px] h-[150px] p-[10px] m-[10px] mt-[20px]">
+        <section className=" border-[1px] border-[#777] rounded-[10px] h-[350px] p-[10px] m-[10px] mt-[20px] mb-[50px]">
 
             <div className="relative w-full mb-[13px]">
                 <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px]">Thông tin người nhận</p>
             </div>
             <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
             <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
-            <select >
-                {cities.map((city, i) => <option key={i}>
-                    <div onClick={() => { console.log(1); }}>
-                        {city.ProvinceName}
-                    </div>
-                </option>)}
-            </select>
-            <select>
-                {towns.map((town, i) => <option ></option>)}
-            </select>
+            <div className='h-[50px]'>
+                <SelectCustomWidth options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidth>
+            </div>
+            <div className='h-[50px] w-full]'>
+                <SelectCustomWidth options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidth>
+            </div>
+            <div className='h-[50px] w-full]'>
+                <SelectCustomWidth options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidth>
+            </div>
             <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
         </section>
-
+        <div className='h-[10px]'></div>
         <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] fixed bottom-0 text-white' onClick={() => {
             cartItem.productsPayment = []
         }}>

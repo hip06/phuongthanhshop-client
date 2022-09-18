@@ -55,6 +55,7 @@ const SelectCustomWidth = React.memo(
             onChange={(e) => onAction(e.target.value)}
             defaultValue={selectValue}
           >
+
             {options.length !== 0 ? (
               options.map((option, index) => {
                 return (
