@@ -49,3 +49,13 @@ export const deleteAllPaymentsAction = ()=>{
     type: actionTypes.DELETE_ALL_PAYMENTS,
   }
 }
+
+export const updateProfile = (data) => async (dispatch) => {
+  await apiUpdateUser.put({ avatar: data });
+  const response = await apiGetCurrent.get();
+  if (response?.status === 0)
+    dispatch({
+      type: actionTypes.GET_CURRENT,
+      data: response.user,
+    });
+};
