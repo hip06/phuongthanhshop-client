@@ -16,6 +16,7 @@ import {
   ManageCategory,
   User,
   Bill,
+  UpdateProfile,
 } from "./containers/system";
 import { path } from "./ultils/constant";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,6 +58,7 @@ function App() {
           <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           <Route path={path.USER} element={<User />} />
           <Route path={path.BILL} element={<Bill />} />
+          <Route path={path.UPDATE_PROFILE} element={<UpdateProfile />} />
         </Route>
       </Routes>
     </div>

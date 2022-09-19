@@ -12,12 +12,13 @@ const authReducer = (state = initState, action) => {
     case actionTypes.LOGIN_SUCCESS:
 
     case actionTypes.REGISTER_SUCCESS:
+      console.log(action);
       return {
         ...state,
         isLoggedIn: true,
         accessToken: action.token,
         msg: "",
-        userCurrent: action.userCurrent,
+        userCurrent: action?.userCurrent,
       };
     case actionTypes.LOGIN_FAIL:
     case actionTypes.REGISTER_FAIL:
