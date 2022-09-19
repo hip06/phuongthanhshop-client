@@ -8,6 +8,7 @@ import FormData from "form-data";
 import { ModalEditCate, PopupDeleteCate } from "../../components/Modal";
 
 const ManageCategory = () => {
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
@@ -19,7 +20,9 @@ const ManageCategory = () => {
   const [image, setImage] = useState({});
 
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.app.categories);
+  const categories = useSelector((state) => {
+    return state.app.categories
+  });
 
   const onSubmit = async () => {
     const bodyFormData = new FormData();
@@ -35,6 +38,7 @@ const ManageCategory = () => {
   }, [isLoading]);
 
   const renderCateList = categories.map((cate, i) => {
+
     return (
       <div key={cate.id} className="">
         <div className=" flex rounded w-full  bg-white items-center max-h-[90px] [&:not(:first-child)]:mt-2">

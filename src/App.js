@@ -11,12 +11,11 @@ import {
 import {
   System,
   General,
-  CreateProduct,
+  EditProduct,
   ManageProduct,
   ManageCategory,
   User,
   Bill,
-  UpdateProfile,
 } from "./containers/system";
 import { path } from "./ultils/constant";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +30,9 @@ function App() {
   useEffect(() => {
     isLoggedIn && dispatch(actions.getCurrent());
   }, [isLoggedIn]);
+  useEffect(() => {
+    dispatch(actions.getCategory());
+  }, []);
 
   return (
     <div className="w-screen h-screen">
@@ -41,6 +43,7 @@ function App() {
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
         <Route path={path.CART} element={<Cart />} />
+        <Route path={path.DETAIL} element={<Detail />}></Route>
         <Route path={path.USERCLIENT} element={<UserClient />} />
 
         {/*Login route */}
@@ -50,11 +53,10 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.GENERAL} element={<General />} />
           <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
-          <Route path={path.EDIT_PRODUCT} element={<CreateProduct />} />
+          <Route path={path.EDIT_PRODUCT} element={<EditProduct />} />
           <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           <Route path={path.USER} element={<User />} />
           <Route path={path.BILL} element={<Bill />} />
-          <Route path={path.UPDATE_PROFILE} element={<UpdateProfile />} />
         </Route>
       </Routes>
     </div>

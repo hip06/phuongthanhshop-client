@@ -1,23 +1,37 @@
 import icons from "./icons";
-import image from "./image";
+import image from "./image"
 
 const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 
 export const path = {
   LOGIN: "/login",
   SYSTEM: "/system/*",
-  USERCLIENT: "/user",
+  USERCLIENT: '/user',
   HOME: "/home/*",
-  PAYMENT: "/payment",
+  PAYMENT: '/payment',
   FEED: "/feed",
-  CART: "/cart",
+  CART: '/cart',
+  DETAIL: '/detail',
   GENERAL: "*",
   EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",
   MANAGE_CATEGORY: "manage-category",
   USER: "user",
   BILL: "bill",
-  UPDATE_PROFILE: "update-profile",
+  CREATE_CATEGORY: "create-category",
+};
+export const vi_uf8 = {
+  shopname: 'PhuongThanh',
+  all_categories: 'Tất cả chủ để',
+  phone: '813.672.409',
+  support_time: 'Hỗ trợ 24/7',
+  adress: '102-HUB3-CT8 tập thể Thành Công',
+  phone1: '0813672409',
+  phone2: '01253322599',
+  email: 'phuongthanhshophn@gmail.com',
+  facebook: "Phuong Thanh's Shop",
+  zalo: '01253322599',
+  instagram: 'pthanh@shop102'
 };
 export const adminMenu = [
   {
@@ -45,11 +59,7 @@ export const adminMenu = [
     path: "/system/manage-category",
     icon: <RiProductHuntLine size={24} />,
   },
-  {
-    name: "Thống kê",
-    path: "/system/analytics",
-    icon: <RiProductHuntLine size={24} />,
-  },
+  { name: "Thống kê", path: "", icon: <RiProductHuntLine size={24} /> },
   // { name: 'Quản lý thành viên', path: '/system/manage-user', icon: <FaUserEdit size={24} /> },
   {
     name: "Thêm sản phẩm",
@@ -58,7 +68,7 @@ export const adminMenu = [
   },
   {
     name: "Thêm gian hàng",
-    path: "/system/update-profile",
+    path: "/system/create-category",
     icon: <IoIosCreate size={24} />,
   },
 ];
@@ -69,12 +79,12 @@ export const getSite = (params) => {
     banner: "",
     naviLeft: "",
     naviLeftText: "",
-    naviLeftImage: "",
-    linkLeft: "",
+    naviLeftImage: '',
+    linkLeft: '',
     naviRight: "",
     naviRightText: "",
-    naviRightImage: "",
-    linkRight: "",
+    naviRightImage: '',
+    linkRight: '',
   };
   if (params["*"] === "fashion") {
     site.color = "#3f9df3";
@@ -83,27 +93,27 @@ export const getSite = (params) => {
     site.linkLeft = "appliance";
     site.naviLeftImage = image.navigro1;
     site.naviRightText = "Tạp hóa";
-    site.linkRight = "grocery";
+    site.linkRight = 'grocery'
     site.naviRightImage = image.naviapp1;
   } else if (params["*"] === "appliance") {
     site.color = "#EF7300";
     site.banner = image.appliancebanner;
     site.naviLeftText = "Tạp hóa";
-    site.linkLeft = "grocery";
+    site.linkLeft = 'grocery';
     site.naviLeftImage = image.navigro2;
     site.naviRightText = "Thời trang";
-    site.linkRight = "fashion";
+    site.linkRight = 'fashion'
     site.naviRightImage = image.navifashion2;
   } else {
     site.color = "#10C600";
     site.banner = image.grocerybanner;
     site.naviLeftText = "Đồ gia dụng";
-    site.linkLeft = "appliance";
+    site.linkLeft = 'appliance'
     site.naviLeftImage = image.naviapp3;
     site.naviRightText = "Thời trang";
-    site.linkRight = "fashion";
+    site.linkRight = 'fashion';
     site.naviRightImage = image.navifashion3;
   }
 
   return site;
-};
+}
