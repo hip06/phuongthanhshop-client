@@ -141,6 +141,7 @@ const ManageProduct = () => {
           </div>
           <div className="flex items-center w-[40%] ">
             <SelectCustomWidth
+              label="Loại hàng"
               widthP="full"
               options={options}
               selectValue={selectValue}

@@ -121,7 +121,6 @@ export const PopupDeleteProduct = ({
   cate,
   selectValue,
 }) => {
-  const dispatch = useDispatch();
   return (
     <div
       className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
@@ -164,7 +163,6 @@ export const EditProduct = ({
   categories,
 }) => {
   const [productName, setProductName] = useState("");
-  const [options, setOptions] = useState([]);
   const [selectValue, setSelectValue] = useState("");
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
@@ -173,17 +171,6 @@ export const EditProduct = ({
   const [image1, setImage1] = useState({});
   const [image2, setImage2] = useState({});
   const [image3, setImage3] = useState({});
-
-  function cateCode(value) {
-    let code = null;
-    categories.map((cate, index) => {
-      if (cate.value === value) {
-        return (code = cate.code);
-      }
-    });
-
-    return code;
-  }
 
   const handleSubmit = async () => {
     const bodyFormData = new FormData();
@@ -202,16 +189,6 @@ export const EditProduct = ({
     }
   };
 
-  const exampleArray = ["Option 1", "option 2", "Option 3", "Option 4"];
-  useEffect(() => {
-    categories.map((cate) => {
-      setOptions((prev) => {
-        const a = [...prev, cate.value];
-        return a;
-      });
-    });
-    setSelectValue(categories[0]?.value);
-  }, [categories]);
   // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
   // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
   // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
@@ -250,7 +227,7 @@ export const EditProduct = ({
                 <SelectCustomWidth
                   widthP="[30%]"
                   lable="Loại hàng"
-                  options={options}
+                  options={categories}
                   selectValue={selectValue}
                   setSelectValue={setSelectValue}
                 />

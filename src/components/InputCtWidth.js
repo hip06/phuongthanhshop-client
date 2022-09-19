@@ -55,11 +55,11 @@ const SelectCustomWidth = React.memo(
             onChange={(e) => onAction(e.target.value)}
             defaultValue={selectValue}
           >
-            {options.length !== 0 ? (
-              options.map((option, index) => {
+            {options?.length !== 0 ? (
+              options?.map((option, index) => {
                 return (
-                  <option key={index} value={option}>
-                    {option}
+                  <option key={option.code} value={option.code}>
+                    {option.value}
                   </option>
                 );
               })
@@ -129,8 +129,8 @@ const HashTagCustomWidth = React.memo(
           ></Button>
         </div>
         <div className="flex flex-wrap">
-          {tags.length !== 0 ? (
-            tags.map((tag, index) => {
+          {tags?.length !== 0 ? (
+            tags?.map((tag, index) => {
               return (
                 <div
                   className="text-sm
