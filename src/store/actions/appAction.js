@@ -1,11 +1,11 @@
 import actionTypes from "./actionTypes";
 import ApiCategory from "../../apis/category";
 import ApiProduct from "../../apis/product";
+import { login } from "./authAction";
 
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await ApiCategory.getAll();
-    console.log(response);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_CATEGORY,
@@ -27,8 +27,8 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getProductsFollowPage(params);
-    console.log(response)
+    const response = await ApiProduct.getAllByAdmin(params);
+
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
@@ -52,5 +52,5 @@ export const getCodeCategory = (code) => {
   return {
     type: actionTypes.GET_CODE_CATEGORIES,
     data: code,
-  }
+  };
 };

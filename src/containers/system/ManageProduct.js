@@ -1,4 +1,3 @@
-
 import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
@@ -19,29 +18,16 @@ const ManageProduct = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
   const [selectValue, setSelectValue] = useState("");
-  const [options, setOptions] = useState([]);
 
-  const cateProdcut = (value) => {
-    categories.map((cate, index) => {
-      if (cate.value === value) {
-        dispatch(actions.getProduct(cate.code));
-      }
-    });
-  };
   // reload products theo category
   useEffect(() => {
-    cateProdcut(selectValue);
-  }, [selectValue, isLoading]);
+    categories.length > 0 && setSelectValue(categories[0].code);
+  }, [categories]);
 
   useEffect(() => {
-    categories.map((cate) => {
-      setOptions((prev) => {
-        const a = [...prev, cate.value];
-        return a;
-      });
-    });
-    setSelectValue(categories[0]?.value);
-  }, [categories]);
+    selectValue &&
+      dispatch(actions.getProduct({ category: selectValue, page: 1 }));
+  }, [selectValue, isLoading]);
 
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
@@ -56,6 +42,7 @@ const ManageProduct = () => {
   }
 
   // Compontent products
+
   const renderProductList = products[0]?.map((product, i) => {
     return (
       <div
@@ -142,8 +129,9 @@ const ManageProduct = () => {
           </div>
           <div className="flex items-center w-[40%] ">
             <SelectCustomWidth
+              label="Loại hàng"
               widthP="full"
-              options={options}
+              options={categories}
               selectValue={selectValue}
               setSelectValue={setSelectValue}
             />
@@ -177,7 +165,7 @@ const ManageProduct = () => {
           isLoading={isLoading}
           id={id}
           selectValue={selectValue}
-          cate={cateProdcut}
+          // cate={cateProdcut}
         />
       ) : (
         ""

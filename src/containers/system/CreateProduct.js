@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { ProductCardCtHeight } from "../../components/ProductCard";
 import {
   InputCustomWidth,
   SelectCustomWidth,
   HashTagCustomWidth,
   TextCustomWidth,
-  InputFileCustomWidth,
 } from "../../components/InputCtWidth";
-import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
-import Loading from "../../components/Loading";
 import Button from "../../components/Button";
-import ApiGetProduct from "../../apis/product";
 import FormData from "form-data";
 import { useSelector } from "react-redux";
-
+import ApiProduct from "../../apis/product";
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
-  const [options, setOptions] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectValue, setSelectValue] = useState("");
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
@@ -28,16 +21,6 @@ const EditProduct = () => {
   const [image3, setImage3] = useState({});
   const { categories } = useSelector((state) => state.app);
 
-  function cateCode(value) {
-    let code = null;
-    categories.map((cate, index) => {
-      if (cate.value === value) {
-        return (code = cate.code);
-      }
-    });
-
-    return code;
-  }
   const handleSubmit = async () => {
     const bodyFormData = new FormData();
     bodyFormData.append("mainImage", imageMain);
@@ -47,18 +30,11 @@ const EditProduct = () => {
     bodyFormData.append("name", productName);
     bodyFormData.append("costPerUnit", price);
     bodyFormData.append("description", shortDes);
-    bodyFormData.append("categoryCode", cateCode(selectValue));
-    ApiGetProduct.create(bodyFormData);
+    bodyFormData.append("categoryCode", selectValue);
+    ApiProduct.create(bodyFormData);
   };
-
   useEffect(() => {
-    categories.map((cate) => {
-      setOptions((prev) => {
-        const a = [...prev, cate.value];
-        return a;
-      });
-    });
-    setSelectValue(categories[0]?.value);
+    categories.length > 0 && setSelectValue(categories[0].code);
   }, [categories]);
   // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
   // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
@@ -67,9 +43,8 @@ const EditProduct = () => {
   useEffect(() => {}, [imageMain]);
   return (
     <>
-      <h1 className="text-3xl">Nhập thông tin tại đây</h1>
       <div
-        className=" w-[600px]  rounded  flex flex-col  items-center z-10"
+        className=" w-[800px]  rounded  flex flex-col  items-center z-10"
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -88,11 +63,11 @@ const EditProduct = () => {
           </div>
 
           <div className="flex h-1/5 justify-between">
-            <div className="flex w-[60%] ">
+            <div className="flex w-[70%] ">
               <SelectCustomWidth
                 widthP="[30%]"
                 lable="Loại hàng"
-                options={options}
+                options={categories}
                 selectValue={selectValue}
                 setSelectValue={setSelectValue}
               />
@@ -107,7 +82,7 @@ const EditProduct = () => {
             </div>
 
             <HashTagCustomWidth
-              widthP="[40%]"
+              widthP="[30%]"
               lable="Hash_Tag"
               placeholder="Tag..."
               tags={tags}
@@ -164,96 +139,63 @@ const EditProduct = () => {
                 }}
               />
               {/* <InputFileCustomWidth
-                  lable="Ảnh 1"
-                  widthP="[100%]"
-                  valueImg={image1}
-                  setValueImg={setImage1}
-                />
-                <InputFileCustomWidth
-                  lable="Ảnh 2"
-                  widthP="[100%]"
-                  valueImg={image2}
-                  setValueImg={setImage2}
-                />
-                <InputFileCustomWidth
-                  lable="Ảnh 3"
-                  widthP="[100%]"
-                  valueImg={image3}
-                  setValueImg={setImage3}
-                />*/}
+                lable="Ảnh 1"
+                widthP="[100%]"
+                valueImg={image1}
+                setValueImg={setImage1}
+              />
+              <InputFileCustomWidth
+                lable="Ảnh 2"
+                widthP="[100%]"
+                valueImg={image2}
+                setValueImg={setImage2}
+              />
+              <InputFileCustomWidth
+                lable="Ảnh 3"
+                widthP="[100%]"
+                valueImg={image3}
+                setValueImg={setImage3}
+              />*/}
             </div>
             <Button text="Submit" onClick={handleSubmit}></Button>
           </div>
         </div>
         {/* <h1 className="text-3xl">Xem trước tại đây</h1>
-        <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-          <div className="flex">
-              <div className="mr-[30px]">
-                <ProductCardCtHeight
-                  image={imageMain?.preview}
-                  name={productName}
-                  description={shortDes}
-                  costPerUnit={price}
-                  color={"#4ed14b"}
-                />
-              </div>
-              <div>
-                <p>Xem trước chi tiết sản phẩm trên mobile tại đây</p>
-                <div className="w-[500px] ">
-                  <div className="w-[375px] ml-[25%]">
-                    <GroupImageCtWidth
-                      widthP="full"
-                      mainImage={imageMain?.preview}
-                      image1={image1.preview}
-                      image2={image2.preview}
-                      image3={image3.preview}
-                    />
-                  </div>
+      <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
+        <div className="flex">
+            <div className="mr-[30px]">
+              <ProductCardCtHeight
+                image={imageMain?.preview}
+                name={productName}
+                description={shortDes}
+                costPerUnit={price}
+                color={"#4ed14b"}
+              />
+            </div>
+            <div>
+              <p>Xem trước chi tiết sản phẩm trên mobile tại đây</p>
+              <div className="w-[500px] ">
+                <div className="w-[375px] ml-[25%]">
+                  <GroupImageCtWidth
+                    widthP="full"
+                    mainImage={imageMain?.preview}
+                    image1={image1.preview}
+                    image2={image2.preview}
+                    image3={image3.preview}
+                  />
                 </div>
               </div>
             </div>
-            <div className="mt-[12px]">
-              <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
+          </div>
+          <div className="mt-[12px]">
+            <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
 
-              <GroupImageCtWidth
-                widthP="400px"
-                mainImage={imageMain?.preview}
-              />
-            </div>
-        </div> */}
-      </div>
-      <h1 className="text-3xl">Xem trước tại đây</h1>
-      <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-        <div className="flex">
-          <div className="mr-[30px]">
-            <ProductCardCtHeight
-              image={imageMain?.preview}
-              name={productName}
-              description={shortDes}
-              costPerUnit={price}
-              color={"#4ed14b"}
+            <GroupImageCtWidth
+              widthP="400px"
+              mainImage={imageMain?.preview}
             />
           </div>
-          <div>
-            <p>Xem trước chi tiết sản phẩm trên mobile tại đây</p>
-            <div className="w-[500px] ">
-              <div className="w-[375px] ml-[25%]">
-                <GroupImageCtWidth
-                  widthP="full"
-                  mainImage={imageMain?.preview}
-                  image1={image1.preview}
-                  image2={image2.preview}
-                  image3={image3.preview}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-[12px]">
-          <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
-
-          <GroupImageCtWidth widthP="400px" mainImage={imageMain?.preview} />
-        </div>
+      </div> */}
       </div>
     </>
   );
