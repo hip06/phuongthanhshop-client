@@ -11,14 +11,19 @@ import ApiProduct from "../apis/product";
 import * as actions from "../../src/store/actions";
 import { useDispatch } from "react-redux";
 
-export const ModalEditCate = ({ setIsShowEdit, id }) => {
-  const [newCategory, setNewCategory] = useState("");
-  const [newColor, setNewColor] = useState("");
+export const ModalEditCate = ({ setIsShowEdit, selectCate }) => {
+  const [newCategory, setNewCategory] = useState(`${selectCate.valueVi}`);
+  const [newColor, setNewColor] = useState(`${selectCate.color}`);
   const [image, setImage] = useState({});
 
   const dispatch = useDispatch();
   const Submit = async () => {
-    await ApiCategory.put({ newCategory, newColor, image, id });
+    const bodyFormData = new FormData();
+    bodyFormData.append("valueVi", newCategory);
+    bodyFormData.append("id", selectCate.id);
+    bodyFormData.append("color", newColor);
+    bodyFormData.append("image", image);
+    await ApiCategory.update(bodyFormData);
     dispatch(actions.getCategory());
   };
 
@@ -60,7 +65,6 @@ export const ModalEditCate = ({ setIsShowEdit, id }) => {
             type="file"
             onChange={(e) => {
               const file = e.target.files[0];
-
               setImage(file);
             }}
           />
@@ -77,8 +81,86 @@ export const ModalEditCate = ({ setIsShowEdit, id }) => {
     </div>
   );
 };
+export const ModalCreateCate = ({ setIsShowCreate }) => {
+  const [newCategory, setNewCategory] = useState("");
+  const [color, setColor] = useState("");
+  const [image, setImage] = useState({});
+  const dispatch = useDispatch();
+  const onSubmit = async () => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("valueVi", newCategory);
+    bodyFormData.append("color", color);
+    bodyFormData.append("image", image);
+    await ApiCategory.create(bodyFormData);
+    dispatch(actions.getCategory());
+  };
+  return (
+    <div
+      className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsShowCreate(false);
+      }}
+    >
+      <div
+        className=" w-[500px] h-[500px] bg-white rounded p-10 flex flex-col  items-center z-10"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <b>THÊM GIAN HÀNG</b>
+        <div className="h-full flex flex-col justify-evenly">
+          <div className=" h-[15%] border rounded ">
+            <InputCustomWidth
+              widthP="full"
+              value={newCategory}
+              setValue={setNewCategory}
+              placeholder="New Category"
+            ></InputCustomWidth>
+          </div>
+          <div className=" h-[15%] border rounded">
+            <InputCustomWidth
+              widthP="full"
+              value={color}
+              setValue={setColor}
+              placeholder="Color"
+            ></InputCustomWidth>
+          </div>
+          <h1>Ảnh cho gian hàng mới</h1>
+          <input
+            type="file"
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
+          />
 
-export const PopupDeleteCate = ({ setIsDelete, isDelete, id }) => {
+          <Button
+            text="Them"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            width="20%"
+            onClick={() => {
+              onSubmit();
+              setIsShowCreate(false);
+            }}
+          ></Button>
+
+          {/* <button
+              type="button"
+              onClick={() => {
+                onSubmit(value);
+              }}
+              className="h-[50px] w-[50px]"
+            >
+              Submit
+            </button> */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const PopupDeleteCate = ({ setIsDelete, id }) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -103,7 +185,7 @@ export const PopupDeleteCate = ({ setIsDelete, isDelete, id }) => {
           height="2"
           onClick={async () => {
             await ApiCategory.delete({ id });
-            setIsDelete(!isDelete);
+            setIsDelete(false);
             dispatch(actions.getCategory());
           }}
         ></Button>
