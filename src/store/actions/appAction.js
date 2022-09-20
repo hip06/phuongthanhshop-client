@@ -45,3 +45,20 @@ export const getProduct = (params) => async (dispatch) => {
     });
   }
 };
+<<<<<<< Updated upstream
+=======
+
+export const getCodeCategory = (code) => {
+  return {
+    type: actionTypes.GET_CODE_CATEGORIES,
+    data: code,
+  };
+};
+
+export const savePreviousSite=(site)=>{
+  return {
+    type: actionTypes.SAVE_PREVIOUS_SITE,
+    data:site,
+  }
+}
+>>>>>>> Stashed changes

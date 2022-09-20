@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react'
 import { deleteAllPaymentsAction } from "../../store/actions/userAction"
 import { useDispatch } from "react-redux"
-import { SelectCustomWidth } from "../../components/InputCtWidth"
+import { SelectCustomWidthPayment } from "../../components/InputCtWidth"
 
 const Payment = () => {
     const dispatch = useDispatch();
@@ -19,16 +19,15 @@ const Payment = () => {
     const [townsObject, setTownsObject] = useState([]);
     const [wards, setWards] = useState([]);
     const [wardsObject, setWardsObject] = useState([]);
-    const [currentCity, setCurrentCity] = useState('Lào cai');
-    const [currentTowns, setCurrentTowns] = useState('Lào cai');
-    const [currentWard, setCurrentWard] = useState('Lào cai');
+    const [currentCity, setCurrentCity] = useState('Vui lòng chọn thành phố');
+    const [currentTowns, setCurrentTowns] = useState('Vui lòng chọn quận/huyện');
+    const [currentWard, setCurrentWard] = useState('Vui lòng chọn phường xã');
     const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
         product = JSON.parse(product);
         return sum += product.costPerUnit * product.quantity
     }, 0)
 
-
-
+    console.log(currentCity);
 
     useEffect(() => {
         citiesObject.map((city) => {
@@ -46,8 +45,7 @@ const Payment = () => {
                 fetchWardsHandler(town['DistrictID']);
             }
         })
-    }, [currentTowns])
-    console.log(townsObject);
+    }, [currentTowns, currentCity])
 
     const fetchTownsHandler = (cityId) => {
 
@@ -131,53 +129,60 @@ const Payment = () => {
     //     fetchProducts();
     // }, [])
     return (<div className='relative'>
-        <header className="flex items-center w-full h-[60px] ">
+        <header className="flex items-center w-full h-[60px] lg:hidden">
             <Link className='w-[15%] flex justify-center' to='/home/fashion' onClick={() => {
                 dispatch(deleteAllPaymentsAction());
             }}>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
             <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/home/fashion'>
-                <img src={Logo} alt='hi' className='w-[70%]'></img>
+                <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>
 
         <section className=''>
-            <h1 className='text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px]'>THANH TOÁN</h1>
+            <h1 className='text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px] lg:hidden'>THANH TOÁN</h1>
             <div className='border-[1px] border-[#777] p-[10px] rounded-[10px] m-[10px] mt-[15px]'>
-                <div className='h-[200px] overflow-y-auto border-b-[1px] border-[#777]'>
+                <div className='h-[200px] overflow-y-auto border-b-[1px] border-[#777] lg:h-[400px]'>
                     {cartItem.productsPayment.map((product, i) => {
                         product = JSON.parse(product);
                         return <PaymentItem key={i} i={i} image={product.image} name={product.name} cost={product.costPerUnit * product.quantity} quantity={product.quantity} ></PaymentItem>
                     })}
                 </div>
-                <div className='text-end mt-[10px] font-bold'>
+                <div className='text-end mt-[10px] font-bold lg:text-[18px]'>
                     <p>{`Tổng đơn hàng: ${totalPayment} đ`}</p>
                     <p>{`+ Phí vận chuyển: 100000đ`}</p>
                 </div>
             </div>
         </section>
 
-        <section className=" border-[1px] border-[#777] rounded-[10px] h-[350px] p-[10px] m-[10px] mt-[20px] mb-[50px]">
+        <section className=" border-[1px] border-[#777] rounded-[10px] h-[340px] p-[10px] m-[10px] mt-[20px] mb-[50px] lg:mt-[30px] lg:mb-[20px]">
 
             <div className="relative w-full mb-[13px]">
-                <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px]">Thông tin người nhận</p>
+                <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px] lg:text-[20px]">Thông tin người nhận</p>
             </div>
-            <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
-            <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
-            <div className='h-[50px]'>
-                <SelectCustomWidth options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidth>
+            <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
+            <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
+
+            <div className='h-[50px] w-full'>
+                <SelectCustomWidthPayment options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidthPayment>
             </div>
-            <div className='h-[50px] w-full]'>
-                <SelectCustomWidth options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidth>
+            <div className='h-[50px] w-full'>
+                <SelectCustomWidthPayment options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidthPayment>
             </div>
-            <div className='h-[50px] w-full]'>
-                <SelectCustomWidth options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidth>
+            <div className='h-[50px] w-full'>
+                <SelectCustomWidthPayment options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidthPayment>
             </div>
-            <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[30px] rounded-[10px] pl-[10px]'></input>
+
+            <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
         </section>
-        <div className='h-[10px]'></div>
-        <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] fixed bottom-0 text-white' onClick={() => {
+        <div className='h-[20px]'></div>
+        <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] fixed bottom-0 text-white lg:hidden' onClick={() => {
+            cartItem.productsPayment = []
+        }}>
+            Đặt hàng
+        </button>
+        <button className='w-[95%] flex justify-center  text-center text-[28px] bg-[#0083c2] py-[10px] text-white hidden lg:block rounded-[10px]' onClick={() => {
             cartItem.productsPayment = []
         }}>
             Đặt hàng

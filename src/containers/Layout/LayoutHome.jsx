@@ -12,9 +12,18 @@ import Banner from "../../components/Banner";
 
 const LayoutHome = () => {
   const params = useParams();
+<<<<<<< Updated upstream
   const site = getSite(params);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
+=======
+  const { categories } = useSelector(state => {;return state.app})
+  const [slideImage, setSlideImage] = useState('')
+  const [valueSearch, setValueSearch] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+  const [mainColor, setMainColor] = useState('')
+
+>>>>>>> Stashed changes
   useEffect(() => {
     // const fetchCategory = async () => {
     //   const tempCate = await ApiCategory.getAll();

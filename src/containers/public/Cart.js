@@ -1,17 +1,19 @@
 import { AiOutlineHome } from "react-icons/ai";
 import CartItem from "../../components/CartItem";
-import Logo from "../../assets/logo.png"
+
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { addToPaymentAction, deleteFromPaymentAction, updatePaymentAction } from "../../store/actions/userAction"
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
-
+import Header from "./Header";
+import Footer from '../../components/Footer'
+import Payment from "./Payment";
 
 const Cart = () => {
-    const cartItem = useSelector(state => state.cart);
+
+    const cartItem = useSelector(state => { return state.cart });
     const dispatch = useDispatch();
-    console.log(cartItem.productsPayment);
     const [totalPayment, setTotalPayment] = useState(0);
     const [quantities, setQuantity] = useState(new Array(cartItem.products.length).fill(1));
     const checkboxHandler = (position) => {
@@ -45,7 +47,7 @@ const Cart = () => {
             return quantities.map((quantity, i) => {
                 if (i === position) {
                     if (quantity > 0)
-                    quantity -= 1;
+                        quantity -= 1;
                     dispatch(updatePaymentAction({ id, quantity }))
                 }
                 else quantity = quantity;
@@ -56,40 +58,56 @@ const Cart = () => {
     }
 
     return (<div>
-        <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f]">
+        <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f] md:hidden">
             <Link className='w-[15%] flex justify-center' to='/home/fashion'>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
-            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/home/fashion'>
-                <img src={Logo} alt='hi' className='w-[70%]'></img>
+            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[5%]' to='/home/fashion'>
+                <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>
+        <header className='hidden md:block'>
+            <Header></Header>
+        </header>
 
-        <section className='p-[10px] w-full h-[500px] overflow-y-auto'>
-            {cartItem.products.map((product, i) => {
-                product.quantity = quantities[i];
-
-                return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
-                    <input type='checkbox' className='w-10%' onChange={() => {
-                        checkboxHandler(i);
-                        checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(product))) : dispatch(addToPaymentAction(JSON.stringify(product)))
-                    }}></input>
-                    <div className='w-[90%]'>
-                        <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
+        <section className='p-[10px] w-full h-[500px] overflow-y-auto lg:flex lg:overflow-hidden lg:h-auto lg:justify-between lg:px-[20px] pt-[20px]'>
+            <div className='w-full lg:w-[55%]'>
+                <p className='hidden lg:block lg:text-black lg:text-center lg:font-bold lg:text-[26px] lg:border-[#9f9f9f] lg:border-b-[2px] lg:mb-[10px] '>Giỏ hàng</p>
+                <div key={1} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
+                    <div className='w-[100%]'>
+                        <CartItem i={1} id='12' image='' name='hehe' cost='2000' quantity='3' addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked='' totalPayment='' setTotalPayment={()=>{}}></CartItem>
                     </div>
                 </div>
-            })}
+                {/* {cartItem.products.map((product, i) => {
+                    product.quantity = quantities[i];
 
+                    return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
+                        <input type='checkbox' className='w-10%' onChange={() => {
+                            checkboxHandler(i);
+                            checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(product))) : dispatch(addToPaymentAction(JSON.stringify(product)))
+                        }}></input>
+                        <div className='w-[90%]'>
+                            <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
+                        </div>
+                    </div>
+                })} */}
+            </div>
 
+            <div className="hidden lg:block lg:w-[35%]">
+                <Payment></Payment>
+            </div>
         </section>
 
-        <div className='w-full  bg-[#2898FF] h-[70px] fixed bottom-0 text-white flex w-full '>
+        <div className='w-full  bg-[#2898FF] h-[70px] fixed bottom-0 text-white flex w-full  lg:hidden'>
             <div className='w-[75%] text-end self-center mr-[10px]'>
                 <p>Tổng thanh toán</p>
                 <p>{`${totalPayment} đ`}</p>
             </div>
             <Link to='/payment' className='w-[25%] bg-[#0083C2] flex items-center justify-center'>Mua hàng</Link>
         </div>
+        <footer className='hidden md:block'>
+            <Footer></Footer>
+        </footer>
     </div>)
 }
 
