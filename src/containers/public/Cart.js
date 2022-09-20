@@ -73,12 +73,8 @@ const Cart = () => {
         <section className='p-[10px] w-full h-[500px] overflow-y-auto lg:flex lg:overflow-hidden lg:h-auto lg:justify-between lg:px-[20px] pt-[20px]'>
             <div className='w-full lg:w-[55%]'>
                 <p className='hidden lg:block lg:text-black lg:text-center lg:font-bold lg:text-[26px] lg:border-[#9f9f9f] lg:border-b-[2px] lg:mb-[10px] '>Giỏ hàng</p>
-                <div key={1} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
-                    <div className='w-[100%]'>
-                        <CartItem i={1} id='12' image='' name='hehe' cost='2000' quantity='3' addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked='' totalPayment='' setTotalPayment={()=>{}}></CartItem>
-                    </div>
-                </div>
-                {/* {cartItem.products.map((product, i) => {
+
+                {cartItem.products.map((product, i) => {
                     product.quantity = quantities[i];
 
                     return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
@@ -90,12 +86,13 @@ const Cart = () => {
                             <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
                         </div>
                     </div>
-                })} */}
+                })}
             </div>
 
-            <div className="hidden lg:block lg:w-[35%]">
+            <div className="hidden lg:block lg:w-[35%] h-[1030px]">
                 <Payment></Payment>
             </div>
+
         </section>
 
         <div className='w-full  bg-[#2898FF] h-[70px] fixed bottom-0 text-white flex w-full  lg:hidden'>

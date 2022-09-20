@@ -182,11 +182,13 @@ const Payment = () => {
         }}>
             Đặt hàng
         </button>
-        <button className='w-[95%] flex justify-center  text-center text-[28px] bg-[#0083c2] py-[10px] text-white hidden lg:block rounded-[10px]' onClick={() => {
-            cartItem.productsPayment = []
-        }}>
-            Đặt hàng
-        </button>
+        <div className='w-full flex justify-center'>
+            <button className='w-[95%] flex justify-center  text-center text-[28px] bg-[#0083c2] py-[10px] text-white hidden lg:block rounded-[10px]' onClick={() => {
+                cartItem.productsPayment = []
+            }}>
+                Đặt hàng
+            </button>
+        </div>
     </div>);
 }
 
