@@ -27,7 +27,7 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAllProducts(params);
+    const response = await ApiProduct.getAll(params);
     
     if (response?.status === 0) {
       dispatch({
