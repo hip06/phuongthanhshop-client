@@ -13,8 +13,7 @@ const System = () => {
   //   }
 
   useEffect(() => {
-    dispatch(actions.getProduct());
-    console.log(3);
+    dispatch(actions.getCategory());
   }, [isLoggedIn]);
   return (
     <div className="flex h-screen w-screen bg-white">

@@ -1,4 +1,6 @@
 
+
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -25,15 +27,23 @@ module.exports = {
       keyframes: {
         modalShow: {
           '0%': { transform: 'translateX(-100px)', },
-          '100%':{ transform: 'translateX(0%)'}
+          '100%': { transform: 'translateX(0%)' }
         },
         modalClose: {
           '0%': { transform: 'translateX(0)', },
-          '100%':{ transform: 'translateX(-100px)',display: 'none'}
+          '100%': { transform: 'translateX(-100px)', }
         }
-      }
+      },
+      fontFamily: {
+        'nunito': ['nunito', 'sans-serif'],
+        'ruda': ['Ruda', 'sans-serif'],
+        'tactitle': ['Syne Tactile', 'cursive'],
+        'qwitcher': ['Qwitcher Grypen', 'cursive']
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
   mode: 'jit'
 }

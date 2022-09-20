@@ -1,4 +1,3 @@
-
 import { Button } from "../../components/Button";
 import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
@@ -9,50 +8,45 @@ import {
 } from "../../components/InputCtWidth";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
-
+import { PopupDeleteProduct, EditProduct } from "../../components/Modal";
 const ManageProduct = () => {
+  const dispatch = useDispatch();
+  const { categories, products } = useSelector((state) => state.app);
+  const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState("");
+  const [isShowEdit, setIsShowEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
   const [selectValue, setSelectValue] = useState("");
-  const [options, setOptions] = useState([]);
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.app.products);
-  const categories = useSelector((state) => state.app.categories);
-  const state = useSelector((state) => state);
 
-  console.log(selectValue, "|", options);
+  // reload products theo category
+  useEffect(() => {
+    categories.length > 0 && setSelectValue(categories[0].code);
+  }, [categories]);
 
   useEffect(() => {
-    dispatch(actions.getCategory());
-    categories.map((cate) => {
-      console.log(cate.value);
-      setOptions((prev) => {
-        const a = [...prev, cate.value];
-        return a;
-      });
+    selectValue &&
+      dispatch(actions.getProduct({ category: selectValue, page: 1 }));
+  }, [selectValue, isLoading]);
+
+  if (addAll) {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    checkboxs.map((checkbox) => {
+      checkbox.checked = "checked";
     });
-  }, []);
-  // if (addAll) {
-  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
-  //   checkboxs.map((checkbox) => {
-  //     checkbox.checked = "checked";
-  //   });
-  // } else {
-  //   const checkboxs = [...document.querySelectorAll(".checkbox")];
-  //   checkboxs.map((checkbox) => {
-  //     checkbox.checked = false;
-  //   });
-  // }
-  products.map((product) => {
-    return (
-      <div>
-        <p>{product.id}</p>
-      </div>
-    );
-  });
+  } else {
+    const checkboxs = [...document.querySelectorAll(".checkbox")];
+    checkboxs.map((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
+
+  // Compontent products
+
   const renderProductList = products[0]?.map((product, i) => {
     return (
       <div
-        key={i}
+        key={product.id}
         className="flex items-center bg-white [&:not(:last-child)]:mb-[10px] w-full rounded-lg h-[102px]  text-xl "
       >
         <div className="w-[10%] flex justify-center">
@@ -68,7 +62,6 @@ const ManageProduct = () => {
           <div className="w-full">
             <p className="whitespace-nowrap overflow-hidden text-ellipsis">
               {product.name}
-              {console.log(2)}
             </p>
           </div>
         </div>
@@ -84,6 +77,10 @@ const ManageProduct = () => {
             bgColor="#4ed14b"
             textColor="#fff"
             width="40%"
+            onClick={() => {
+              setIsShowEdit(true);
+              setId(product.id);
+            }}
           ></Button>
           <Button
             text="Xóa"
@@ -91,6 +88,10 @@ const ManageProduct = () => {
             textColor="#fff"
             width="40%"
             height="2"
+            onClick={() => {
+              setIsDelete(!isDelete);
+              setId(product.id);
+            }}
           ></Button>
         </div>
       </div>
@@ -128,8 +129,9 @@ const ManageProduct = () => {
           </div>
           <div className="flex items-center w-[40%] ">
             <SelectCustomWidth
+              label="Loại hàng"
               widthP="full"
-              options={options}
+              options={categories}
               selectValue={selectValue}
               setSelectValue={setSelectValue}
             />
@@ -137,8 +139,8 @@ const ManageProduct = () => {
         </div>
       </div>
 
-      <div className="bg-[#d9d9d9] p-5 rounded-[10px] mt-5">
-        <div className="flex pb-5">
+      <div className="bg-[#d9d9d9] p-5 rounded-[10px] mt-5 h-[525px] ">
+        <div className="flex pb-5 h-1/8">
           <div className="w-[5%] flex justify-center font-bold text-2xl"></div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
             Hình ảnh sản phẩm
@@ -153,9 +155,33 @@ const ManageProduct = () => {
             Giá
           </div>
         </div>
-        {console.log(1)}
-        {renderProductList}
+        <div className="h-4/5 overflow-auto">{renderProductList}</div>
       </div>
+      {isDelete ? (
+        <PopupDeleteProduct
+          setIsDelete={setIsDelete}
+          isDelete={isDelete}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+          id={id}
+          selectValue={selectValue}
+          // cate={cateProdcut}
+        />
+      ) : (
+        ""
+      )}
+      {isShowEdit ? (
+        <EditProduct
+          isShowEdit={isShowEdit}
+          setIsShowEdit={setIsShowEdit}
+          id={id}
+          categories={categories}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };

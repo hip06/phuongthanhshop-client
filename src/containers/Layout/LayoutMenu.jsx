@@ -14,7 +14,6 @@ const LayoutMenu = ({ setModalShow }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
-  const cart = useSelector((state) => state.cart);
   const button = (
     <div className="w-full flex items-center gap-5 py-5 justify-center flex-col">
       {isLoggedIn && <p>{`Xin chào ${userCurrent?.name}`}</p>}
@@ -46,10 +45,7 @@ const LayoutMenu = ({ setModalShow }) => {
             width="100%"
             height="32px"
             textColor="text-white"
-            onClick={() => {
-              dispatch(actions.logout());
-              dispatch(actions.removeAllCartAction());
-            }}
+            onClick={() => dispatch(actions.logout())}
           />
           <Button
             text={"Quản lý"}
@@ -63,11 +59,14 @@ const LayoutMenu = ({ setModalShow }) => {
       )}
     </div>
   );
-
+  const handleCloseMenu = () => {
+    setTimeout(() => setModalShow(false), 500)
+  }
   return (
+
     <div className="w-[300px] h-full bg-white flex flex-col items-center justify-center p-[20px] fixed">
       <div className="flex justify-center">
-        <img src={logo} className="w-[80%]"></img>
+        <img src={logo} className='w-[80%]' ></img>
       </div>
       <div className="w-full">
         <div className="flex justify-around">
@@ -81,10 +80,10 @@ const LayoutMenu = ({ setModalShow }) => {
           to="/home/fashion"
           style={{
             color: params["*"] === "fashion" ? "#3f9df3" : "",
-            fontSize: params["*"] === "fashion" ? "25px" : "20px",
+            fontSize: params["*"] === "fashion" ? "25px" : '20px'
           }}
-          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          onClick={() => setModalShow(false)}
+          className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+          onClick={() => handleCloseMenu()}
         >
           {" "}
           Fashion
@@ -93,10 +92,10 @@ const LayoutMenu = ({ setModalShow }) => {
           to="/home/appliance"
           style={{
             color: params["*"] === "appliance" ? "#EF7300" : "",
-            fontSize: params["*"] === "appliance" ? "25px" : "20px",
+            fontSize: params["*"] === "appliance" ? "25px" : '20px'
           }}
-          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          onClick={() => setModalShow(false)}
+          className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+          onClick={() => handleCloseMenu()}
         >
           Appliance
         </NavLink>
@@ -104,15 +103,16 @@ const LayoutMenu = ({ setModalShow }) => {
           to="/home/grocery"
           style={{
             color: params["*"] === "grocery" ? "#10C600" : "",
-            fontSize: params["*"] === "grocery" ? "25px" : "20px",
+            fontSize: params["*"] === "grocery" ? "25px" : '20px'
           }}
-          className=" block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
-          onClick={() => setModalShow(false)}
+          className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+          onClick={() => handleCloseMenu()}
         >
           Grocery
         </NavLink>
       </div>
     </div>
+
   );
 };
 

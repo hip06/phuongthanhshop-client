@@ -1,27 +1,42 @@
 import React from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Header";
 import LayoutHome from "../Layout/LayoutHome";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { LoadingPageDesktop } from "../../components/LoadingPage";
+import * as actions from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1)
+  const { code } = useSelector((state) => state.app);
+  const params = useParams()
+  useEffect(() => {
+    setPage(1)
+    dispatch(actions.getProduct({ category: code, page: 1 }));
+  }, [params]);
 
-  const [isSearching, setIsSearching] = useState(false);
+  useEffect(() => {
+    dispatch(actions.getProduct({ category: code, page: page }));
+  }, [page]);
+
 
   return (
-    <div>
-      <Header setIsSearching={setIsSearching} isSearching={isSearching} />
-      {isSearching && <div className=" relative bg-[#d9d9d9] p-[10px]">
-        <div className="relative bg-white rounded-[5px]">
-          <input className='bg-white w-[83%] h-[30px] outline-none pl-[10px] '></input>
-          <p className='absolute top-[50%] translate-y-[-50%] right-[5%]'>Tìm</p>
-        </div>
-
-      </div>}
+    <div className="w-full">
+      {loading && <LoadingPageDesktop />}
+      <Header />
       <Outlet />
       <Routes>
-        <Route path="/:slug" element={<LayoutHome></LayoutHome>}></Route>
+        <Route
+          path="/:slug"
+          element={<LayoutHome
+            setLoading={setLoading}
+            page={page}
+            setPage={setPage} />}
+        ></Route>
       </Routes>
     </div>
   );
