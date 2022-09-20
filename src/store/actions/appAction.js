@@ -5,11 +5,11 @@ import { login } from "./authAction";
 
 export const getCategory = () => async (dispatch) => {
   try {
-    const response = await ApiCategory.getAll();
+    const response = await ApiCategory.getAllByUser();
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_CATEGORY,
-        data: response.response.rows,
+        data: response.response,
       });
     } else {
       dispatch({
@@ -27,12 +27,12 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAllByAdmin(params);
-
+    const response = await ApiProduct.getAllProducts(params);
+    // console.log(response);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: response.data,
+        data: response.productData.rows,
       });
     } else {
       dispatch({
@@ -40,7 +40,9 @@ export const getProduct = (params) => async (dispatch) => {
         data: null,
       });
     }
+    throw new Error();
   } catch (error) {
+    // console.log(error);
     dispatch({
       type: actionTypes.GET_PRODUCT,
       data: null,

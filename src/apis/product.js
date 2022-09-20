@@ -1,8 +1,8 @@
 import axiosClients from "../axiosClients";
 
 const ApiProduct = {
-  getAllByAdmin: (params) => {
-    const url = "/api/v1/admin/product/get-all";
+  getAllProducts: (params) => {
+    const url = "/api/v1/product/";
     return axiosClients.get(url, { params });
   },
   create: (data) => {
@@ -16,10 +16,6 @@ const ApiProduct = {
   update: (data, id) => {
     const url = `/api/v1/admin/product/update/${id}`;
     return axiosClients.post(url, data);
-  },
-  getProductsByUser: ({ params }) => {
-    const url = "/api/v1/product/all";
-    return axiosClients.get(url, { params });
   },
   getProductById: (id) => {
     const url = `/api/v1/admin/product/${id}`;

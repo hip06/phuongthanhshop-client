@@ -75,19 +75,19 @@ const Header = ({ isSearching, setIsSearching }) => {
         </div>
 
         <div>
-          {/* {categories?.map((category) => {
-            let valueLowerCase = category.value.toLowerCase();
+          {categories?.map((category) => {
+            let valueLowerCase = category.valueVi.toLowerCase();
             if (params["*"] === valueLowerCase) {
               let color = category.color;
               return (
                 <NameCategory
                   index={category.id}
-                  category={category.value}
+                  category={category.valueVi}
                   color={color}
                 />
               );
             }
-          })} */}
+          })}
         </div>
 
         <div>
@@ -111,13 +111,13 @@ const Header = ({ isSearching, setIsSearching }) => {
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
           {categories?.map((category, index) => {
-            let valueLowerCase = category.value.toLowerCase();
+            let valueLowerCase = category.valueVi.toLowerCase();
             if (params["*"] === valueLowerCase) {
               let color = category.color;
               return (
                 <NameCategory
                   index={index}
-                  category={category.value}
+                  category={category.valueVi}
                   color={color}
                 />
               );
@@ -125,7 +125,7 @@ const Header = ({ isSearching, setIsSearching }) => {
           })}
         </div>
         {categories?.map((category) => {
-          let valueLowerCase = category.value.toLowerCase();
+          let valueLowerCase = category.valueVi.toLowerCase();
           return (
             <div>
               <NavLink
@@ -138,7 +138,7 @@ const Header = ({ isSearching, setIsSearching }) => {
                 }}
                 className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
               >
-                {category.value}
+                {category.valueVi}
               </NavLink>
             </div>
           );

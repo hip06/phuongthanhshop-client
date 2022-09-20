@@ -16,11 +16,11 @@ const Home = () => {
   const params = useParams()
   useEffect(() => {
     setPage(1)
-    dispatch(actions.getProduct({ category: code, page: 1 }));
+    dispatch(actions.getProduct());
   }, [params]);
 
   useEffect(() => {
-    dispatch(actions.getProduct({ category: code, page: page }));
+    dispatch(actions.getProduct());
   }, [page]);
 
 

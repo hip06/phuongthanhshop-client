@@ -24,7 +24,7 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    dispatch(actions.getCategory());
+    dispatch(actions.getCategory()); 
   }, [])
 
   return (

@@ -5,6 +5,10 @@ const ApiCategory = {
     const url = "api/v1/category/all?page=all";
     return axiosClients.get(url);
   },
+  getAllByUser:()=>{
+    const url='/api/v1/category/';
+    return axiosClients.get(url);
+  },
   delete: (params) => {
     const url = "/api/v1/admin/category/delete";
     return axiosClients.delete(url, { params });
@@ -25,6 +29,7 @@ const ApiCategory = {
       },
     });
   },
+
 };
 
 export default ApiCategory;

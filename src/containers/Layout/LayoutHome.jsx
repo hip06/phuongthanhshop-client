@@ -14,7 +14,7 @@ import { FillerProducts } from "../public";
 const LayoutHome = ({ setLoading, page, setPage }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
   const params = useParams();
-  const { categories } = useSelector(state => state.app)
+  const { categories } = useSelector(state =>  {return state.app})
   const [slideImage, setSlideImage] = useState('')
   const [valueSearch, setValueSearch] = useState('')
   const [isSearching, setIsSearching] = useState(false)
@@ -78,12 +78,12 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
             <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
               {
                 categories?.map((category) => {
-                  let valueLowerCase = category.value.toLowerCase()
+                  let valueLowerCase = category.valueVi.toLowerCase()
                   let weight = 'font-[400]'
                   if (params["*"] === valueLowerCase) {
                     weight = 'font-[800]'
                   }
-                  return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.value}</div>)
+                  return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.valueVi}</div>)
                 })
               }
             </div>
