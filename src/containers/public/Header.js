@@ -13,7 +13,7 @@ const Header = ({ isSearching, setIsSearching }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
-  const [threeCategory, setThreeCategory] = useState([])
+  // const [threeCategory, setThreeCategory] = useState([])
   const dispatch = useDispatch()
   const params = useParams();
   const site = getSite(params);
@@ -44,7 +44,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             setModalShow(true);
           }}
         >
-          <HiOutlineMenu size={26}></HiOutlineMenu>
+          <HiOutlineMenu size={26} />
         </div>
         {
           <div
@@ -124,13 +124,13 @@ const Header = ({ isSearching, setIsSearching }) => {
             }
           })}
         </div>
-        {categories?.map((category, index) => {
+        {categories?.map((category) => {
           let valueLowerCase = category.value.toLowerCase();
           return (
             <div>
               <NavLink
                 onClick={() => dispatch(actions.getCodeCategory(category.code))}
-                key={"navlink-" + index}
+                key={category.id}
                 to={`/home/${valueLowerCase}`}
                 style={{
                   color: category.color,

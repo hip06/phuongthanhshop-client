@@ -1,10 +1,14 @@
-import image from "../../assets/temp.png";
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { TbArrowBackUp } from 'react-icons/tb';
+import Footer from "../../components/Footer";
+import Header from "../public/Header";
 
-const Detail = (props) => {
-    return <section className="relative h-screen relative">
-        <div className=" absolute top-[20px] left-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
+const Detail = () => {
+    return (<section className="w-full">
+        <Header />
+
+        <div className="hidden lg:block">
+            <Footer />
+        </div>
+        {/* <div className=" absolute top-[20px] left-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
             <TbArrowBackUp className=" m-[10px]" size={28}></TbArrowBackUp>
 
         </div>
@@ -13,20 +17,20 @@ const Detail = (props) => {
         </div>
         <div>
             <div className='w-full h-[372px]'>
-                <img src={image} alt='hi' className='w-full'></img>
+                <img src={image} alt='hi' className='w-full' />
             </div>
             <div className='flex justify-around mt-[20px]'>
                 <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full'></img>
+                    <img src={image} alt='hi' className='w-full' />
                 </div>
                 <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full'></img>
+                    <img src={image} alt='hi' className='w-full' />
                 </div>
                 <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full'></img>
+                    <img src={image} alt='hi' className='w-full' />
                 </div>
                 <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full'></img>
+                    <img src={image} alt='hi' className='w-full' />
                 </div>
             </div>
         </div>
@@ -73,8 +77,9 @@ const Detail = (props) => {
                 <p className='ml-[10px]'>Thêm vào giỏ hàng</p>
             </button>
             <button className='bg-[#0083C2] w-[30%]'>Mua hàng</button>
-        </div>
+        </div> */}
 
     </section>
+    );
 }
 export default Detail;
