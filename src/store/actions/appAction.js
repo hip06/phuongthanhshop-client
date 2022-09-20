@@ -28,7 +28,7 @@ export const getCategory = () => async (dispatch) => {
 export const getProduct = (params) => async (dispatch) => {
   try {
     const response = await ApiProduct.getAllProducts(params);
-    // console.log(response);
+    
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
@@ -40,9 +40,9 @@ export const getProduct = (params) => async (dispatch) => {
         data: null,
       });
     }
-    throw new Error();
+   
   } catch (error) {
-    // console.log(error);
+   
     dispatch({
       type: actionTypes.GET_PRODUCT,
       data: null,
