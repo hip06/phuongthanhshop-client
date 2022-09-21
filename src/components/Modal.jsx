@@ -25,6 +25,7 @@ export const ModalEditCate = ({ setIsShowEdit, selectCate }) => {
     bodyFormData.append("image", image);
     await ApiCategory.update(bodyFormData);
     dispatch(actions.getCategory());
+    setIsShowEdit(false);
   };
 
   return (
@@ -160,7 +161,7 @@ export const ModalCreateCate = ({ setIsShowCreate }) => {
   );
 };
 
-export const PopupDeleteCate = ({ setIsDelete, id }) => {
+export const PopupDeleteCate = ({ setIsDelete, selectCate }) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -184,7 +185,7 @@ export const PopupDeleteCate = ({ setIsDelete, id }) => {
           width="40%"
           height="2"
           onClick={async () => {
-            await ApiCategory.delete({ id });
+            await ApiCategory.delete({ id: [selectCate.id] });
             setIsDelete(false);
             dispatch(actions.getCategory());
           }}

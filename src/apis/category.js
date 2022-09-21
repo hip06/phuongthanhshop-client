@@ -12,7 +12,7 @@ const ApiCategory = {
   },
   // getAll for User
   delete: (params) => {
-    const url = "/api/v1/admin/category/delete";
+    const url = "/api/v1/category";
     return axiosClients.delete(url, { params });
   },
   create: (data) => {
