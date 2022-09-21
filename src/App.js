@@ -39,7 +39,7 @@ function App() {
     <div className="w-screen h-screen">
       <Routes>
         {/*Public routes */}
-        <Route path="/" element={<Navigate to="/home/fashion"></Navigate>} />
+        <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />
         <Route path={path.HOME} element={<Home />}></Route>
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />

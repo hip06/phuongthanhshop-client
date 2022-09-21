@@ -5,11 +5,11 @@ import { login } from "./authAction";
 
 export const getCategory = () => async (dispatch) => {
   try {
-    const response = await ApiCategory.getAll();
+    const response = await ApiCategory.getAllByUser();
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_CATEGORY,
-        data: response.response.rows,
+        data: response.response,
       });
     } else {
       dispatch({

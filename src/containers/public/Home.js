@@ -14,14 +14,14 @@ const Home = () => {
   const [page, setPage] = useState(1)
   const { code } = useSelector((state) => state.app);
   const params = useParams()
-  useEffect(() => {
-    setPage(1)
-    dispatch(actions.getProduct({ category: code, page: 1 }));
-  }, [params]);
+  // useEffect(() => {
+  //   setPage(1)
+  //   dispatch(actions.getProduct({ category: code, page: 1 }));
+  // }, [params]);
 
-  useEffect(() => {
-    dispatch(actions.getProduct({ category: code, page: page }));
-  }, [page]);
+  // useEffect(() => {
+  //   dispatch(actions.getProduct({ category: code, page: page }));
+  // }, [page]);
 
 
   return (

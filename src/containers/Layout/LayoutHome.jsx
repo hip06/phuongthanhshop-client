@@ -22,13 +22,13 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
 
 
   useEffect(() => {
-    categories?.map((category) => {
-      let valueLowerCase = category.value.toLowerCase()
-      if (params.slug === valueLowerCase) {
-        setSlideImage(category.image)
-        setMainColor(category.color)
-      }
-    })
+    // categories?.map((category) => {
+    //   let valueLowerCase = category.value.toLowerCase()
+    //   if (params.slug === valueLowerCase) {
+    //     setSlideImage(category.image)
+    //     setMainColor(category.color)
+    //   }
+    // })
   }, [params.slug])
 
   // useEffect(() => {
@@ -76,7 +76,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
         <div className=" w-full flex mb-[24px]">
           <div className="hidden lg:block w-5/12">
             <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
-              {
+              {/* {
                 categories?.map((category) => {
                   let valueLowerCase = category.value.toLowerCase()
                   let weight = 'font-[400]'
@@ -85,7 +85,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
                   }
                   return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.value}</div>)
                 })
-              }
+              } */}
             </div>
           </div>
           <div className="w-full lg:w-7/12">

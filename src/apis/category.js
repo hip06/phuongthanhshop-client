@@ -1,16 +1,16 @@
 import axiosClients from "../axiosClients";
 
 const ApiCategory = {
+  // getAll for Admin
   getAll: (params) => {
     const url = "/api/v1/category/admin";
     return axiosClients.get(url, { params });
   },
-  // getAll for Admin
+  // getAll for User
   getAllByUser: (params) => {
     const url = "/api/v1/category";
     return axiosClients.get(url, { params });
   },
-  // getAll for User
   delete: (params) => {
     const url = "/api/v1/admin/category/delete";
     return axiosClients.delete(url, { params });

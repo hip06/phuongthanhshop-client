@@ -75,19 +75,19 @@ const Header = ({ isSearching, setIsSearching }) => {
         </div>
 
         <div>
-          {/* {categories?.map((category) => {
-            let valueLowerCase = category.value.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+          {categories?.map((category) =>{
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color
+              console.log(category)
               return (
                 <NameCategory
-                  index={category.id}
-                  category={category.value}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
             }
-          })} */}
+          })}
         </div>
 
         <div>
@@ -110,14 +110,13 @@ const Header = ({ isSearching, setIsSearching }) => {
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {categories?.map((category, index) => {
-            let valueLowerCase = category.value.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+          {categories?.map((category) => {
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color;
               return (
                 <NameCategory
-                  index={index}
-                  category={category.value}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
@@ -125,20 +124,19 @@ const Header = ({ isSearching, setIsSearching }) => {
           })}
         </div>
         {categories?.map((category) => {
-          let valueLowerCase = category.value.toLowerCase();
           return (
             <div>
               <NavLink
-                onClick={() => dispatch(actions.getCodeCategory(category.code))}
+                onClick={() => dispatch(actions.getCodeCategory(category?.code))}
                 key={category.id}
-                to={`/home/${valueLowerCase}`}
+                to={`/home/${category?.valueEn}`}
                 style={{
                   color: category.color,
-                  fontSize: params["*"] === valueLowerCase ? "25px" : "20px",
+                  fontSize: params["*"] === category?.valueEn ? "25px" : "20px",
                 }}
                 className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
               >
-                {category.value}
+                {category.valueVi}
               </NavLink>
             </div>
           );
