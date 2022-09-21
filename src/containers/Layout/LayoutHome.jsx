@@ -3,13 +3,14 @@ import image from "../../ultils/image";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { InputSearch } from "../../components/InputCtWidth";
 import { vi_uf8 } from "../../ultils/constant";
 import icons from "../../ultils/icons";
 import Banner from "../../components/Banner";
 import BoxTopSeller from "../../components/BoxTopSeller";
 import { FillerProducts } from "../public";
+import * as actions from '../../store/actions'
 
 const LayoutHome = ({ setLoading, page, setPage }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
@@ -20,6 +21,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
   const [isSearching, setIsSearching] = useState(false)
   const [mainColor, setMainColor] = useState('')
   const navigate =  useNavigate()
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -30,13 +32,6 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
       }
     })
   }, [params.slug])
-
-  // useEffect(() => {
-  //   categories?.map((category) => {
-  //     let valueLowerCase = category.value.toLowerCase()
-  //     document.getElementById(`cate-list-${valueLowerCase}`).style.color = category.color
-  //   })
-  // }, [slideImage])
 
   return (
     <>
@@ -56,7 +51,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
             }}>
             <InputSearch value={valueSearch}
               setValue={setValueSearch}
-              placeholder={'Thêm thông tin để tìm kiếm...'}
+              placeholder={'Tìm kiếm trên toàn bộ trang...'}
               isSearching={isSearching}
               setIsSearching={setIsSearching}
             />
@@ -83,7 +78,9 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
                     weight = 'font-[800]'
                   }
                   return (<div 
-                    onClick={() => navigate(`/home/${category?.valueEn}`)}
+                    onClick={() => {
+                      dispatch(actions.getCodeCategory(category?.code))
+                      navigate(`/home/${category?.valueEn}`)}}
                     className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] cursor-pointer ${weight} `}>{category.valueVi}</div>)
                 })
               }

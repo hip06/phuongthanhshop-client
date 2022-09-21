@@ -4,6 +4,7 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   products: [],
   productsBestSeller: [],
+  productsCurrentUpdate: [],
   categories: [],
   code: "OĐAIGNUD8",
 };
@@ -24,6 +25,11 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         productsBestSeller: action.data
+      };
+    case actionTypes.GET_PRODUCT_CURRENT_UPDATE:
+      return {
+        ...state,
+        productsCurrentUpdate: action.data
       };
     case actionTypes.GET_CODE_CATEGORIES:
       return {

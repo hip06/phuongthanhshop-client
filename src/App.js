@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full h-full">
       <Routes>
         {/*Public routes */}
         <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />

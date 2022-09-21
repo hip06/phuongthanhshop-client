@@ -34,6 +34,10 @@ export const vi_uf8 = {
   zalo: "01253322599",
   instagram: "pthanh@shop102",
 };
+export const constant_page = {
+  limit_products_outstanding: 15,
+  limit_products: 25,
+};
 export const adminMenu = [
   {
     name: "Tổng sản phẩm",

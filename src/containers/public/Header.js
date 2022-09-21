@@ -13,7 +13,6 @@ const Header = ({ isSearching, setIsSearching }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
-  // const [threeCategory, setThreeCategory] = useState([])
   const dispatch = useDispatch()
   const params = useParams();
   const site = getSite(params);
@@ -22,16 +21,6 @@ const Header = ({ isSearching, setIsSearching }) => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params]);
 
-  // useEffect(() => {
-  //   const getThreeCategories = (categories) => {
-  //     let categoryArray = []
-  //     for (let i = 0; i < 3; i++) {
-  //       categoryArray.push(categories[i])
-  //     }
-  //     setThreeCategory([...categoryArray])
-  //   }
-  //   getThreeCategories()
-  // })
   return (
     <>
       <div
@@ -75,7 +64,7 @@ const Header = ({ isSearching, setIsSearching }) => {
         </div>
 
         <div>
-          {categories?.map((category) =>{
+          {categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
               let color = category?.color
               return (

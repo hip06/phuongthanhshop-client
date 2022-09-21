@@ -31,7 +31,7 @@ export const getProduct = (params) => async (dispatch) => {
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: response.data,
+        data: response.productData.rows,
       });
     } else {
       dispatch({
@@ -50,7 +50,6 @@ export const getProduct = (params) => async (dispatch) => {
 export const getProductBestSeller = (params) => async (dispatch) => {
   try {
     const response = await ApiProduct.getAll(params);
-    console.log(response)
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT_BEST_SELLER,
@@ -65,6 +64,28 @@ export const getProductBestSeller = (params) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.GET_PRODUCT_BEST_SELLER,
+      data: null,
+    });
+  }
+};
+
+export const getProductCurrentUpdate = (params) => async (dispatch) => {
+  try {
+    const response = await ApiProduct.getAll(params);
+    if (response?.status === 0) {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
+        data: response.productData.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
       data: null,
     });
   }
