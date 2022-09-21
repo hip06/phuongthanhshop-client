@@ -27,8 +27,7 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAllByAdmin(params);
-
+    const response = await ApiProduct.getAll(params);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
@@ -43,6 +42,29 @@ export const getProduct = (params) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.GET_PRODUCT,
+      data: null,
+    });
+  }
+};
+
+export const getProductBestSeller = (params) => async (dispatch) => {
+  try {
+    const response = await ApiProduct.getAll(params);
+    console.log(response)
+    if (response?.status === 0) {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BEST_SELLER,
+        data: response.productData.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BEST_SELLER,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_BEST_SELLER,
       data: null,
     });
   }

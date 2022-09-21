@@ -14,15 +14,15 @@ const Home = () => {
   const [page, setPage] = useState(1)
   const { code } = useSelector((state) => state.app);
   const params = useParams()
-  // useEffect(() => {
-  //   setPage(1)
-  //   dispatch(actions.getProduct({ category: code, page: 1 }));
-  // }, [params]);
+  // get 15 products best seller
+  useEffect( () => {
+   dispatch(actions.getProductBestSeller({ limitProduct: 15, order: ['soldCounter','DESC'], categoryCode: code}));
+  }, [params["*"]]);
+  //get 15 products current update
 
   // useEffect(() => {
   //   dispatch(actions.getProduct({ category: code, page: page }));
   // }, [page]);
-
 
   return (
     <div className="w-full">

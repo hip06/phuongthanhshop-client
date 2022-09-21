@@ -10,6 +10,7 @@ const actionTypes = {
   // user
   // product
   GET_PRODUCT: "GET_PRODUCT",
+  GET_PRODUCT_BEST_SELLER: "GET_PRODUCT_BEST_SELLER",
   ADD_TO_CART: "ADD_TO_CART",
   DETELE_ALL: "DELETE_ALL",
   ADD_TO_PAYMENT: "ADD_TO_PAYMENT",
@@ -18,6 +19,7 @@ const actionTypes = {
   DELETE_ALL_PAYMENTS: "DELETE_ALL_PAYMENTS",
   // category
   GET_CATEGORY: "GET_CATEGORY",
+  GET_CODE_CATEGORIES: "GET_CODE_CATEGORIES"
 };
 
 export default actionTypes;

@@ -1,6 +1,6 @@
 
 import image from "../../ultils/image";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -19,16 +19,16 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
   const [valueSearch, setValueSearch] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [mainColor, setMainColor] = useState('')
+  const navigate =  useNavigate()
 
 
   useEffect(() => {
-    // categories?.map((category) => {
-    //   let valueLowerCase = category.value.toLowerCase()
-    //   if (params.slug === valueLowerCase) {
-    //     setSlideImage(category.image)
-    //     setMainColor(category.color)
-    //   }
-    // })
+    categories?.map((category) => {
+      if (params.slug === category?.valueEn) {
+        setSlideImage(category.image)
+        setMainColor(category.color)
+      }
+    })
   }, [params.slug])
 
   // useEffect(() => {
@@ -76,16 +76,17 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
         <div className=" w-full flex mb-[24px]">
           <div className="hidden lg:block w-5/12">
             <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
-              {/* {
+              {
                 categories?.map((category) => {
-                  let valueLowerCase = category.value.toLowerCase()
                   let weight = 'font-[400]'
-                  if (params["*"] === valueLowerCase) {
+                  if (params["*"] === category?.valueEn) {
                     weight = 'font-[800]'
                   }
-                  return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.value}</div>)
+                  return (<div 
+                    onClick={() => navigate(`/home/${category?.valueEn}`)}
+                    className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] cursor-pointer ${weight} `}>{category.valueVi}</div>)
                 })
-              } */}
+              }
             </div>
           </div>
           <div className="w-full lg:w-7/12">

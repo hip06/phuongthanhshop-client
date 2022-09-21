@@ -78,7 +78,6 @@ const Header = ({ isSearching, setIsSearching }) => {
           {categories?.map((category) =>{
             if (params["*"] === category?.valueEn) {
               let color = category?.color
-              console.log(category)
               return (
                 <NameCategory
                   id={category.id}
@@ -125,9 +124,8 @@ const Header = ({ isSearching, setIsSearching }) => {
         </div>
         {categories?.map((category) => {
           return (
-            <div>
+            <div onClick={() => dispatch(actions.getCodeCategory(category?.code))}>
               <NavLink
-                onClick={() => dispatch(actions.getCodeCategory(category?.code))}
                 key={category.id}
                 to={`/home/${category?.valueEn}`}
                 style={{
