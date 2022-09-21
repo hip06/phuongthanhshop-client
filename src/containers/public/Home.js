@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { LoadingPageDesktop } from "../../components/LoadingPage";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef } from "react";
+import { constant_page } from "../../ultils/constant";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,15 +14,25 @@ const Home = () => {
   const [page, setPage] = useState(1)
   const { code } = useSelector((state) => state.app);
   const params = useParams()
-  useEffect(() => {
+  // get 15 products best seller
+  useEffect( () => {
+   dispatch(actions.getProductBestSeller(
+     { limitProduct: constant_page.limit_products_outstanding, order: ['soldCounter','DESC'], categoryCode: code}));
+  }, [params["*"]]);
+  //get 15 products current update
+  useEffect( () => {
+    dispatch(actions.getProductCurrentUpdate(
+      { limitProduct: constant_page.limit_products_outstanding, order: ['updatedAt','DESC'], categoryCode: code}));
+   }, [params["*"]]);
+  //get products of category 25products per page =>> follow by category
+  useEffect( () => {
     setPage(1)
-    dispatch(actions.getProduct());
-  }, [params]);
-
-  useEffect(() => {
-    dispatch(actions.getProduct());
-  }, [page]);
-
+    dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: ['updatedAt','DESC'], categoryCode: code}));
+   }, [params["*"]]);
+   //get products of category 25products per page =>> follow by page
+  useEffect( () => {
+    dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: ['updatedAt','DESC'], categoryCode: code, page: page}));
+   }, [page]);
 
   return (
     <div className="w-full">

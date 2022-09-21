@@ -1,44 +1,37 @@
 
 import image from "../../ultils/image";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { InputSearch } from "../../components/InputCtWidth";
 import { vi_uf8 } from "../../ultils/constant";
 import icons from "../../ultils/icons";
 import Banner from "../../components/Banner";
 import BoxTopSeller from "../../components/BoxTopSeller";
 import { FillerProducts } from "../public";
+import * as actions from '../../store/actions'
 
 const LayoutHome = ({ setLoading, page, setPage }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
   const params = useParams();
-  const { categories } = useSelector(state =>  {return state.app})
+  const { categories } = useSelector(state => state.app)
   const [slideImage, setSlideImage] = useState('')
   const [valueSearch, setValueSearch] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [mainColor, setMainColor] = useState('')
+  const navigate =  useNavigate()
+  const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   useEffect(() => {
     categories?.map((category) => {
-      let valueLowerCase = category?.value?.toLowerCase()
-      if (params.slug === valueLowerCase) {
+      if (params.slug === category?.valueEn) {
         setSlideImage(category.image)
         setMainColor(category.color)
       }
     })
   }, [params.slug])
-
-  // useEffect(() => {
-  //   categories?.map((category) => {
-  //     let valueLowerCase = category.value.toLowerCase()
-  //     document.getElementById(`cate-list-${valueLowerCase}`).style.color = category.color
-  //   })
-  // }, [slideImage])
 
   return (
     <>
@@ -58,7 +51,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
             }}>
             <InputSearch value={valueSearch}
               setValue={setValueSearch}
-              placeholder={'Thêm thông tin để tìm kiếm...'}
+              placeholder={'Tìm kiếm trên toàn bộ trang...'}
               isSearching={isSearching}
               setIsSearching={setIsSearching}
             />
@@ -80,12 +73,15 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
             <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
               {
                 categories?.map((category) => {
-                  let valueLowerCase = category.valueVi.toLowerCase()
                   let weight = 'font-[400]'
-                  if (params["*"] === valueLowerCase) {
+                  if (params["*"] === category?.valueEn) {
                     weight = 'font-[800]'
                   }
-                  return (<div className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] ${weight} `}>{category.valueVi}</div>)
+                  return (<div 
+                    onClick={() => {
+                      dispatch(actions.getCodeCategory(category?.code))
+                      navigate(`/home/${category?.valueEn}`)}}
+                    className={`w-[80%] mx-auto border-black border-b-[2px] h-[40px] text-[24px] cursor-pointer ${weight} `}>{category.valueVi}</div>)
                 })
               }
             </div>

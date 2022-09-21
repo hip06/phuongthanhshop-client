@@ -1,4 +1,4 @@
-import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
+import { BiFilterAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ProductCardCtHeight } from "../../components/ProductCard";
@@ -10,7 +10,6 @@ const FillerProducts = ({ color, page, setPage }) => {
   const { products } = useSelector((state) => state.app);
   const [selectedOption, setSelectedOption] = useState('Mới nhất')
   const [filterContent, setFilterContent] = useState('')
-  const [productsShow, setProductsShow] = useState(null)
   const typingTimeOut = useRef(null)
   useEffect(() => {
     // handle api for sort here
@@ -36,7 +35,7 @@ const FillerProducts = ({ color, page, setPage }) => {
             <InputCustomWidth
               lable={'Lọc'}
               widthP={'full'}
-              placeholder={'Thêm thông tin để lọc...'}
+              placeholder={'Tìm kiếm trong kho...'}
               PLarge={false}
               value={filterContent}
               setValue={setFilterContent}

@@ -13,7 +13,6 @@ const Header = ({ isSearching, setIsSearching }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
-  // const [threeCategory, setThreeCategory] = useState([])
   const dispatch = useDispatch()
   const params = useParams();
   const site = getSite(params);
@@ -22,16 +21,6 @@ const Header = ({ isSearching, setIsSearching }) => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
   }, [params]);
 
-  // useEffect(() => {
-  //   const getThreeCategories = (categories) => {
-  //     let categoryArray = []
-  //     for (let i = 0; i < 3; i++) {
-  //       categoryArray.push(categories[i])
-  //     }
-  //     setThreeCategory([...categoryArray])
-  //   }
-  //   getThreeCategories()
-  // })
   return (
     <>
       <div
@@ -76,13 +65,12 @@ const Header = ({ isSearching, setIsSearching }) => {
 
         <div>
           {categories?.map((category) => {
-            let valueLowerCase = category.valueVi.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color
               return (
                 <NameCategory
-                  index={category.id}
-                  category={category.valueVi}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
@@ -104,20 +92,19 @@ const Header = ({ isSearching, setIsSearching }) => {
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
             style={{ backgroundColor: site.color }}
           >
-            <p>{cart.count}</p>
+            <p>6</p>
           </div>
         </div>
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {categories?.map((category, index) => {
-            let valueLowerCase = category.valueVi.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+          {categories?.map((category) => {
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color;
               return (
                 <NameCategory
-                  index={index}
-                  category={category.valueVi}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
@@ -125,16 +112,14 @@ const Header = ({ isSearching, setIsSearching }) => {
           })}
         </div>
         {categories?.map((category) => {
-          let valueLowerCase = category.valueVi.toLowerCase();
           return (
-            <div>
+            <div onClick={() => dispatch(actions.getCodeCategory(category?.code))}>
               <NavLink
-                onClick={() => dispatch(actions.getCodeCategory(category.code))}
                 key={category.id}
-                to={`/home/${valueLowerCase}`}
+                to={`/home/${category?.valueEn}`}
                 style={{
                   color: category.color,
-                  fontSize: params["*"] === valueLowerCase ? "25px" : "20px",
+                  fontSize: params["*"] === category?.valueEn ? "25px" : "20px",
                 }}
                 className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
               >
@@ -158,7 +143,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
               style={{ backgroundColor: site.color }}
             >
-              <p>{cart.count}</p>
+              <p>6</p>
             </div>
           </div>
         </div>
