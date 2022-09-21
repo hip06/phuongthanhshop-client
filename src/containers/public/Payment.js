@@ -13,6 +13,7 @@ const Payment = () => {
     const selectRef = useRef();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
+    console.log(totalPayment);
     const [cities, setCities] = useState(['Lào Cai']);
     const [citiesObject, setCitiesObject] = useState([]);
     const [towns, setTowns] = useState([]);
@@ -26,9 +27,6 @@ const Payment = () => {
         product = JSON.parse(product);
         return sum += product.costPerUnit * product.quantity
     }, 0)
-
-    console.log(currentCity);
-
     useEffect(() => {
         citiesObject.map((city) => {
             if (city['ProvinceName'] === currentCity) {
@@ -114,8 +112,10 @@ const Payment = () => {
         }
         fetchData();
 
-        setTotalPayment(getTotalPayment);
     }, [])
+    useEffect(() => {
+        setTotalPayment(getTotalPayment);
+    }, [cartItem.productsPayment])
     // useEffect(() => {
     //     const fetchProducts = async () => {
     //         const res = await ApiPayment.createBill({

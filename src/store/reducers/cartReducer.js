@@ -23,7 +23,6 @@ const cartReducer = (state = initState, action) => {
             console.log(state.productsPayment);
             let updateQuantityProductsPayment= state.productsPayment.map((product) =>{ 
                 product= JSON.parse(product);
-                
                 if(product.id===action.data.id)
                 {
                     product.quantity=action.data.quantity;

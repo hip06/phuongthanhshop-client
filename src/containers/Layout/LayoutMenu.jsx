@@ -45,7 +45,8 @@ const LayoutMenu = ({ setModalShow }) => {
             width="100%"
             height="32px"
             textColor="text-white"
-            onClick={() => dispatch(actions.logout())}
+            onClick={() => {dispatch(actions.logout());
+            dispatch(actions.removeAllCartAction())}}
           />
           <Button
             text={"Quản lý"}

@@ -20,10 +20,12 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
   const [isSearching, setIsSearching] = useState(false)
   const [mainColor, setMainColor] = useState('')
 
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
 
   useEffect(() => {
     categories?.map((category) => {
-      let valueLowerCase = category.value.toLowerCase()
+      let valueLowerCase = category?.value?.toLowerCase()
       if (params.slug === valueLowerCase) {
         setSlideImage(category.image)
         setMainColor(category.color)

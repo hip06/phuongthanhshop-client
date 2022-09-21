@@ -104,7 +104,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
             style={{ backgroundColor: site.color }}
           >
-            <p>6</p>
+            <p>{cart.count}</p>
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
               style={{ backgroundColor: site.color }}
             >
-              <p>6</p>
+              <p>{cart.count}</p>
             </div>
           </div>
         </div>

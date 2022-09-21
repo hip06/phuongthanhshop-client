@@ -1,7 +1,10 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCartAction } from "../store/actions/userAction";
 
 export const ProductCardCtHeight = ({
+  id,
   image,
   name,
   color,
@@ -9,6 +12,9 @@ export const ProductCardCtHeight = ({
   description,
   height,
 }) => {
+  const cartItem = useSelector(state => state.cart);
+  console.log(cartItem);
+  const dispatch = useDispatch();
   const convertPrice = (price) => {
     price = Number(price);
     price = price.toLocaleString("it-IT", {
@@ -17,6 +23,14 @@ export const ProductCardCtHeight = ({
     });
     return price;
   };
+  const isProductInCart = (id) => {
+    for (let i = 0; i < cartItem.products.length; i++) {
+      if (cartItem.products[i].id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
   return (
     <div className="w-[174px] h-[312px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
       <div className={`mb-[20px]`}>
@@ -32,7 +46,17 @@ export const ProductCardCtHeight = ({
         {name}
       </p>
       <div className="absolute bottom-[0px] flex items-end justify-around w-full py-3">
-        <AiOutlineShoppingCart size={20} color={color}></AiOutlineShoppingCart>
+        <AiOutlineShoppingCart size={20} color={color} onClick={() => {
+          if (!isProductInCart(id)) {
+            dispatch(addToCartAction({
+              id,
+              image,
+              name,
+              color,
+              costPerUnit,
+            }))
+          }
+        }} ></AiOutlineShoppingCart>
         <Link
           to="/product/"
           style={{ color: color }}
