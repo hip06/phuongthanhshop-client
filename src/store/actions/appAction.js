@@ -27,12 +27,12 @@ export const getCategory = () => async (dispatch) => {
 
 export const getProduct = (params) => async (dispatch) => {
   try {
-    const response = await ApiProduct.getAllByAdmin(params);
-
+    const response = await ApiProduct.getAll(params);
+    console.log(response);
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: response.data,
+        data: response.productData.rows,
       });
     } else {
       dispatch({

@@ -11,12 +11,10 @@ const initState = {
 const appReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCT:
-      const cate = Object.values(action.data[0]);
-      const pageLength = action.data[1].pages;
+      // const pageLength = action.data[1].pages;
       return {
         ...state,
-        products: cate,
-        pageLength,
+        products: action.data,
       };
 
     case actionTypes.GET_CATEGORY:

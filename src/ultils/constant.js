@@ -78,6 +78,15 @@ export const adminMenu = [
   },
 ];
 
+export const filters = [
+  { valueVi: "Mới nhất", sort: { code: "DESC", type: "updatedAt" } },
+  { valueVi: "Cũ nhất", sort: { code: "ASC", type: "updatedAt" } },
+  { valueVi: "A-Z", sort: { code: "DESC", type: "name" } },
+  { valueVi: "Z-A", sort: { code: "ASC", type: "name" } },
+  { valueVi: "Giá cao -> thấp", sort: { code: "DESC", type: "costPerUnit" } },
+  { valueVi: "Giá thấp -> cao", sort: { code: "ASC", type: "costPerUnit" } },
+];
+
 export const getSite = (params) => {
   const site = {
     color: "",

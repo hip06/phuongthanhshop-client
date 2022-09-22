@@ -49,14 +49,23 @@ const SelectCustomWidth = React.memo(
             className="mr-3 w-[90%] focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md h-full"
-            onChange={(e) => setSelectValue(e.target.value)}
+            onChange={(e) => {
+              if (options[0].sort) {
+                setSelectValue(JSON.parse(e.target.value));
+              } else {
+                setSelectValue(e.target.value);
+              }
+            }}
             defaultValue={selectValue}
           >
             {options?.length !== 0 ? (
               options?.map((option, index) => {
                 return (
-                  <option key={option.code} value={option.code}>
-                    {option.value}
+                  <option
+                    key={option.code ? option.code : option.valueVi}
+                    value={option.code ? option.code : JSON.stringify(option)}
+                  >
+                    {option.valueVi}
                   </option>
                 );
               })

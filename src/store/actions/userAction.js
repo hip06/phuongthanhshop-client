@@ -1,9 +1,9 @@
 import actionTypes from "./actionTypes";
-import { apiGetCurrent, apiUpdateUser } from "../../apis/user";
+import apiUser from "../../apis/user";
 
 export const getCurrent = () => async (dispatch) => {
   try {
-    const response = await apiGetCurrent.get();
+    const response = await apiUser.getCurrent();
     if (response?.status === 0)
       dispatch({
         type: actionTypes.GET_CURRENT,
@@ -50,8 +50,8 @@ export const deleteAllPaymentsAction = () => {
   };
 };
 export const updateProfile = (data) => async (dispatch) => {
-  await apiUpdateUser.put({ avatar: data });
-  const response = await apiGetCurrent.get();
+  await apiUser.update({ avatar: data });
+  const response = await apiUser.getCurrent();
   if (response?.status === 0)
     dispatch({
       type: actionTypes.GET_CURRENT,

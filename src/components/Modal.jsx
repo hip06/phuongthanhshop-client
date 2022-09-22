@@ -204,6 +204,7 @@ export const PopupDeleteProduct = ({
   cate,
   selectValue,
 }) => {
+  console.log(id);
   return (
     <div
       className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
@@ -226,7 +227,7 @@ export const PopupDeleteProduct = ({
           width="40%"
           height="2"
           onClick={async () => {
-            await ApiProduct.delete(id);
+            await ApiProduct.delete({ id });
             setIsDelete(!isDelete);
             setIsLoading(!isLoading);
 
