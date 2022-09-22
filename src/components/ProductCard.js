@@ -1,7 +1,8 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCartAction } from "../store/actions/userAction";
+import { addToCartAction} from "../store/actions/userAction";
+import {togglePopup} from '../store/actions/popupAction';
 
 export const ProductCardCtHeight = ({
   id,
@@ -13,7 +14,7 @@ export const ProductCardCtHeight = ({
   height,
 }) => {
   const cartItem = useSelector(state => state.cart);
-  console.log(cartItem);
+  const isLoggedIn = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const convertPrice = (price) => {
     price = Number(price);
@@ -47,14 +48,19 @@ export const ProductCardCtHeight = ({
       </p>
       <div className="absolute bottom-[0px] flex items-end justify-around w-full py-3">
         <AiOutlineShoppingCart size={20} color={color} onClick={() => {
-          if (!isProductInCart(id)) {
-            dispatch(addToCartAction({
-              id,
-              image,
-              name,
-              color,
-              costPerUnit,
-            }))
+          if (isLoggedIn.isLoggedIn) {
+            if (!isProductInCart(id)) {
+              dispatch(addToCartAction({
+                id,
+                image,
+                name,
+                color,
+                costPerUnit,
+              }))
+            }
+          }
+          else {
+            dispatch(togglePopup(true))
           }
         }} ></AiOutlineShoppingCart>
         <Link

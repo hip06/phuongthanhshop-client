@@ -70,7 +70,7 @@ const Cart = () => {
             <Header></Header>
         </header>
 
-        <section className='p-[10px] w-full h-[500px] overflow-y-auto lg:flex lg:overflow-hidden lg:h-auto lg:justify-between lg:px-[20px] pt-[20px]'>
+        <section className='z-20 p-[10px] w-full h-[500px] overflow-y-auto lg:flex lg:overflow-hidden lg:h-auto lg:justify-between lg:px-[20px] pt-[20px]'>
             <div className='w-full lg:w-[55%]'>
                 <p className='hidden lg:block lg:text-black lg:text-center lg:font-bold lg:text-[26px] lg:border-[#9f9f9f] lg:border-b-[2px] lg:mb-[10px] '>Giỏ hàng</p>
 
@@ -102,7 +102,7 @@ const Cart = () => {
             </div>
             <Link to='/payment' className='w-[25%] bg-[#0083C2] flex items-center justify-center'>Mua hàng</Link>
         </div>
-        <footer className='hidden md:block'>
+        <footer className='hidden md:block z-10'>
             <Footer></Footer>
         </footer>
     </div>)

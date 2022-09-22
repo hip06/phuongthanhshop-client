@@ -50,6 +50,50 @@ export const getProduct = (params) => async (dispatch) => {
   }
 };
 
+export const getProductBestSeller = (params) => async (dispatch) => {
+  try {
+    const response = await ApiProduct.getAll(params);
+    if (response?.status === 0) {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BEST_SELLER,
+        data: response.productData.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BEST_SELLER,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_BEST_SELLER,
+      data: null,
+    });
+  }
+};
+
+export const getProductCurrentUpdate = (params) => async (dispatch) => {
+  try {
+    const response = await ApiProduct.getAll(params);
+    if (response?.status === 0) {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
+        data: response.productData.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_CURRENT_UPDATE,
+      data: null,
+    });
+  }
+};
+
 export const getCodeCategory = (code) => {
   return {
     type: actionTypes.GET_CODE_CATEGORIES,

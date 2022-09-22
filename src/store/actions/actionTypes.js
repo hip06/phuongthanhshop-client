@@ -8,6 +8,8 @@ const actionTypes = {
   GET_CURRENT: "GET_CURRENT",
 
   // user
+  //app
+  TOGGLE_POPUP: "TOGGLE_POPUP",
   // product
   GET_PRODUCT: "GET_PRODUCT",
   GET_PRODUCT_BEST_SELLER: "GET_PRODUCT_BEST_SELLER",

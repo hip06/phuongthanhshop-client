@@ -1,5 +1,6 @@
 import authReducer from "./authReducer";
 import cartReducer from "./cartReducer";
+import popupReducer from "./popupReducer"
 import appReducer from "./appReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     auth: persistReducer(authConfig, authReducer),
     cart: persistReducer(cartConfig, cartReducer),
     app:appReducer,
+    popup:popupReducer,
 
 })
 
