@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import * as actions from "../store/actions";
 import {togglePopup} from '../store/actions/popupAction';
+import { convertPrice } from "../ultils/common";
 
 export const ProductCardCtHeight = ({
   id,
@@ -15,15 +16,6 @@ export const ProductCardCtHeight = ({
   const isLoggedIn = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const convertPrice = (price) => {
-    price = Number(price);
-    price = price.toLocaleString("it-IT", {
-      style: "currency",
-      currency: "VND",
-    });
-    return price;
-  };
 
   const handleDispatch = () => {
     navigate(`/detail/${id}`)

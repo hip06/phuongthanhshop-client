@@ -69,9 +69,9 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
         </div>
 
         <div>
-          {categories?.map((category) => {
+        {!categoryProvided&&categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
-              let color = category?.color
+              let color = category?.color;
               return (
                 <NameCategory
                   id={category.id}
@@ -81,6 +81,11 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
               );
             }
           })}
+          {categoryProvided&&<NameCategory
+                  id={'unique-id-nameCard$'}
+                  category={categoryProvided?.valueEn}
+                  color={categoryProvided?.color}
+                />}
         </div>
 
         <div>
