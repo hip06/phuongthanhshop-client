@@ -7,6 +7,8 @@ const initState = {
   productsCurrentUpdate: [],
   categories: [],
   code: "OĐAIGNUD8",
+  count: 0,
+  currentProduct: null,
 };
 
 const appReducer = (state = initState, action) => {
@@ -19,7 +21,8 @@ const appReducer = (state = initState, action) => {
     case actionTypes.GET_PRODUCT:
       return {
         ...state,
-        products: action.data
+        products: action.data[0],
+        count: action.data[1]
       };
     case actionTypes.GET_PRODUCT_BEST_SELLER:
       return {
@@ -30,6 +33,11 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         productsCurrentUpdate: action.data
+      };
+    case actionTypes.GET_PRODUCT_BY_ID:
+      return {
+        ...state,
+        currentProduct: action.data
       };
     case actionTypes.GET_CODE_CATEGORIES:
       return {

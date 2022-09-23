@@ -52,6 +52,7 @@ const SelectCustomWidth = React.memo(
                 border-gray-300 rounded-md h-full"
             onChange={(e) => setSelectValue(e.target.value)}
             defaultValue={selectValue}
+            value={selectValue}
           >
             {options?.length !== 0 ? (
               options?.map((option) => {

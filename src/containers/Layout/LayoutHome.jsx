@@ -12,13 +12,9 @@ import { FillerProducts } from "../public";
 import * as actions from "../../store/actions";
 import Popup from "../../components/Popup";
 
-const LayoutHome = ({ setLoading, page, setPage }) => {
-  const {
-    IoMdArrowRoundDown,
-    BiSearchAlt,
-    AiOutlineClose,
-    MdOutlinePhonelink,
-  } = icons;
+const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOption, setSearchOnCategory,searchOnCategory }) => {
+  const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
+
   const params = useParams();
   const { categories } = useSelector((state) => state.app);
   const [slideImage, setSlideImage] = useState("");
@@ -35,8 +31,9 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
         setSlideImage(category.image);
         setMainColor(category.color);
       }
-    });
-  }, [params.slug]);
+
+    })
+  }, [params.slug,categories])
 
   return (
     <div className="">
@@ -144,7 +141,14 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
           <BoxTopSeller color={mainColor} />
         </div>
         <div className="w-full">
-          <FillerProducts color={mainColor} page={page} setPage={setPage} />
+          <FillerProducts 
+          color={mainColor}
+          page={page} 
+          setPage={setPage}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+          setSearchOnCategory={setSearchOnCategory}
+          searchOnCategory={searchOnCategory} />
         </div>
 
         {/* <div className="relative mb-[4px] lg:hidden">

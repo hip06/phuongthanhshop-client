@@ -10,6 +10,7 @@ import { GrFacebook } from 'react-icons/gr'
 import { SiZalo } from 'react-icons/si'
 import { ImLocation2 } from 'react-icons/im'
 import { TiLocationOutline } from 'react-icons/ti'
+import {GrLinkNext} from 'react-icons/gr'
 
 
 const icons = {
@@ -30,6 +31,7 @@ const icons = {
     AiOutlineInstagram,
     TiLocationOutline,
     AiOutlineArrowRight,
+    GrLinkNext
 }
 
 export default icons

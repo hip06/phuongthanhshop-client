@@ -1,7 +1,8 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { addToCartAction} from "../store/actions/userAction";
+
+import { useSelector,useDispatch } from "react-redux";
+import * as actions from "../store/actions";
 import {togglePopup} from '../store/actions/popupAction';
 
 export const ProductCardCtHeight = ({
@@ -10,12 +11,12 @@ export const ProductCardCtHeight = ({
   name,
   color,
   costPerUnit,
-  description,
-  height,
+  id
 }) => {
   const cartItem = useSelector(state => state.cart);
   const isLoggedIn = useSelector(state => state.auth);
   const dispatch = useDispatch();
+
   const convertPrice = (price) => {
     price = Number(price);
     price = price.toLocaleString("it-IT", {
@@ -24,6 +25,10 @@ export const ProductCardCtHeight = ({
     });
     return price;
   };
+
+  const handleDispatch = () => {
+    dispatch(actions.getProductByIdClient({ id: id}));
+  }
   const isProductInCart = (id) => {
     for (let i = 0; i < cartItem.products.length; i++) {
       if (cartItem.products[i].id === id) {
@@ -33,8 +38,10 @@ export const ProductCardCtHeight = ({
     return false;
   }
   return (
-    <div className="w-[174px] h-[312px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
-      <div className={`mb-[20px]`}>
+    <div className="w-[200px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
+      <div 
+      onClick={() => handleDispatch()}
+      className={`mb-[20px]`}>
         <img className="w-full h-[187px]" src={image} />
       </div>
       <p
@@ -63,8 +70,10 @@ export const ProductCardCtHeight = ({
             dispatch(togglePopup(true))
           }
         }} ></AiOutlineShoppingCart>
+
         <Link
-          to="/product/"
+          onClick={() => handleDispatch()}
+          to={`/detail/${id}`}
           style={{ color: color }}
           className="text-[11px] font-bold"
         >
