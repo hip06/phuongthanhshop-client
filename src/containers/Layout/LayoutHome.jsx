@@ -10,7 +10,6 @@ import Banner from "../../components/Banner";
 import BoxTopSeller from "../../components/BoxTopSeller";
 import { FillerProducts } from "../public";
 import * as actions from "../../store/actions";
-import Popup from "../../components/Popup";
 
 const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOption, setSearchOnCategory,searchOnCategory }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;

@@ -11,7 +11,6 @@ export const ProductCardCtHeight = ({
   name,
   color,
   costPerUnit,
-  id
 }) => {
   const cartItem = useSelector(state => state.cart);
   const isLoggedIn = useSelector(state => state.auth);
@@ -57,7 +56,7 @@ export const ProductCardCtHeight = ({
         <AiOutlineShoppingCart size={20} color={color} onClick={() => {
           if (isLoggedIn.isLoggedIn) {
             if (!isProductInCart(id)) {
-              dispatch(addToCartAction({
+              dispatch(actions.addToCartAction({
                 id,
                 image,
                 name,

@@ -10,9 +10,12 @@ import Header from "./Header";
 import Footer from '../../components/Footer'
 import Payment from "./Payment";
 import {deleteAllPaymentsAction} from "../../store/actions/userAction"
-
+    
 const Cart = () => {
-
+    let screenWidth;
+    window.onresize=function(){
+        screenWidth=window.innerWidth;
+    }
     const cartItem = useSelector(state => { return state.cart });
     const dispatch = useDispatch();
     const [totalPayment, setTotalPayment] = useState(0);
@@ -71,7 +74,7 @@ const Cart = () => {
             <Header></Header>
         </header>
 
-        <section className='z-20 p-[10px] w-full h-[500px] overflow-y-auto lg:flex lg:h-auto lg:justify-between lg:px-[20px] pt-[20px]'>
+        <section className={`z-20 p-[10px] w-full h-[500px] lg:flex lg:h-auto lg:justify-between lg:px-[20px] pt-[20px] ${+screenWidth>=1024?'overflow-y-auto':''}`}>
             <div className='w-full lg:w-[55%]'>
                 <p className='hidden lg:block lg:text-black lg:text-center lg:font-bold lg:text-[26px] lg:border-[#9f9f9f] lg:border-b-[2px] lg:mb-[10px] '>Giỏ hàng</p>
 
@@ -105,7 +108,7 @@ const Cart = () => {
         </div>
 
 
-        <footer className='hidden md:block z-10'>
+        <footer className='hidden lg:block z-10'>
             <Footer></Footer>
         </footer>
     </div>)
