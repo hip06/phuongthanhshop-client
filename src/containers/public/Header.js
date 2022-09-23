@@ -3,7 +3,6 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
-import { getSite } from "../../ultils/constant";
 import { useParams, Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
@@ -15,11 +14,16 @@ const Header = ({ isSearching, setIsSearching }) => {
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch()
   const params = useParams();
-  const site = getSite(params);
+  const [mainColor,setMainColor] = useState('');
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [params]);
+    categories.map((category) =>{
+      if(params['*']===category.contentEn){
+        setMainColor(category.color);
+      }
+    })
+  }, [params,categories]);
 
   return (
     <>
@@ -90,7 +94,7 @@ const Header = ({ isSearching, setIsSearching }) => {
           </Link>
           <div
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
-            style={{ backgroundColor: site.color }}
+            style={{ backgroundColor: mainColor }}
           >
             <p>{cart.count}</p>
           </div>
@@ -141,7 +145,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             <div
               className={`absolute top-[-5px] right-[-3px] rounded-[50%] 
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
-              style={{ backgroundColor: site.color }}
+              style={{ backgroundColor: mainColor }}
             >
               <p>{cart.count}</p>
             </div>
