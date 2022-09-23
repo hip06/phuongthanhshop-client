@@ -1,5 +1,5 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as actions from "../store/actions";
 
@@ -11,6 +11,7 @@ export const ProductCardCtHeight = ({
   id
 }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const convertPrice = (price) => {
     price = Number(price);
     price = price.toLocaleString("it-IT", {
@@ -20,6 +21,7 @@ export const ProductCardCtHeight = ({
     return price;
   };
   const handleDispatch = () => {
+    navigate(`/detail/${id}`)
     dispatch(actions.getProductByIdClient({ id: id}));
   }
 
@@ -42,7 +44,7 @@ export const ProductCardCtHeight = ({
       <div className="absolute bottom-[0px] flex items-end justify-around w-full py-3">
         <AiOutlineShoppingCart size={20} color={color}/>
         <Link
-          onClick={() => handleDispatch()}
+          onClick={() => dispatch(actions.getProductByIdClient({ id: id}))}
           to={`/detail/${id}`}
           style={{ color: color }}
           className="text-[11px] font-bold"

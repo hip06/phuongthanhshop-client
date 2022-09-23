@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer";
 import Header from "../public/Header";
 import { useSelector } from "react-redux";
+import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 
 const Detail = () => {
     const { currentProduct } = useSelector((state) => state.app);
@@ -9,8 +10,11 @@ const Detail = () => {
     return (
         <section className="w-full">
             <Header categoryProvided={currentProduct?.categoryData} />
-
-
+            <div className="flex my-[12px]">
+                <div className="">
+                   {currentProduct&&<GroupImageCtWidth data={currentProduct} />}
+                </div>
+            </div>
             <div className="w-full">
                 <Footer
                     color={currentProduct?.categoryData?.color}
