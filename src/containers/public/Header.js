@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
 import * as actions from '../../store/actions'
 
-const Header = ({ isSearching, setIsSearching }) => {
+const limitCategory = [0,1,2]
+const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
@@ -98,7 +99,7 @@ const Header = ({ isSearching, setIsSearching }) => {
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {categories?.map((category) => {
+          {!categoryProvided&&categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
               let color = category?.color;
               return (
@@ -110,8 +111,13 @@ const Header = ({ isSearching, setIsSearching }) => {
               );
             }
           })}
+          {categoryProvided&&<NameCategory
+                  id={'unique-id-nameCard$'}
+                  category={categoryProvided?.valueEn}
+                  color={categoryProvided?.color}
+                />}
         </div>
-        {categories?.map((category) => {
+        {categories?.filter((category, index) => limitCategory.some(item => item === index))?.map((category) => {
           return (
             <div onClick={() => dispatch(actions.getCodeCategory(category?.code))}>
               <NavLink

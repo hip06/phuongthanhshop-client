@@ -1,14 +1,22 @@
 import Footer from "../../components/Footer";
 import Header from "../public/Header";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
-    return (<section className="w-full">
-        <Header />
+    const { currentProduct } = useSelector((state) => state.app);
+    console.log(currentProduct);
 
-        <div className="hidden lg:block">
-            <Footer />
-        </div>
-        {/* <div className=" absolute top-[20px] left-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
+    return (
+        <section className="w-full">
+            <Header categoryProvided={currentProduct?.categoryData} />
+
+
+            <div className="w-full">
+                <Footer
+                    color={currentProduct?.categoryData?.color}
+                    category={currentProduct?.categoryData?.valueEn} />
+            </div>
+            {/* <div className=" absolute top-[20px] left-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
             <TbArrowBackUp className=" m-[10px]" size={28}></TbArrowBackUp>
 
         </div>
@@ -79,7 +87,7 @@ const Detail = () => {
             <button className='bg-[#0083C2] w-[30%]'>Mua hàng</button>
         </div> */}
 
-    </section>
+        </section>
     );
 }
 export default Detail;

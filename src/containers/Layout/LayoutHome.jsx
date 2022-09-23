@@ -12,7 +12,7 @@ import BoxTopSeller from "../../components/BoxTopSeller";
 import { FillerProducts } from "../public";
 import * as actions from '../../store/actions'
 
-const LayoutHome = ({ setLoading, page, setPage }) => {
+const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOption, setSearchOnCategory,searchOnCategory }) => {
   const { IoMdArrowRoundDown, BiSearchAlt, AiOutlineClose, MdOutlinePhonelink } = icons;
   const params = useParams();
   const { categories } = useSelector(state => state.app)
@@ -31,8 +31,7 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
         setMainColor(category.color)
       }
     })
-  }, [params.slug])
-
+  }, [params.slug,categories])
   return (
     <>
       <div className="w-full lg:w-11/12 mx-auto">
@@ -108,7 +107,14 @@ const LayoutHome = ({ setLoading, page, setPage }) => {
           <BoxTopSeller color={mainColor} />
         </div>
         <div className="w-full">
-          <FillerProducts color={mainColor} page={page} setPage={setPage} />
+          <FillerProducts 
+          color={mainColor}
+          page={page} 
+          setPage={setPage}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+          setSearchOnCategory={setSearchOnCategory}
+          searchOnCategory={searchOnCategory} />
         </div>
 
         {/* <div className="relative mb-[4px] lg:hidden">

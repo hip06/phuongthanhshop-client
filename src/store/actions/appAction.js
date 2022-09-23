@@ -31,7 +31,7 @@ export const getProduct = (params) => async (dispatch) => {
     if (response?.status === 0) {
       dispatch({
         type: actionTypes.GET_PRODUCT,
-        data: response.productData.rows,
+        data: [response.productData.rows,response.productData.count]
       });
     } else {
       dispatch({
@@ -91,9 +91,32 @@ export const getProductCurrentUpdate = (params) => async (dispatch) => {
   }
 };
 
+export const getProductByIdClient = (params) => async (dispatch) => {
+  try {
+    const response = await ApiProduct.getProductByIdClient(params);
+    if (response?.status === 0) {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BY_ID,
+        data: response.productData.rows[0],
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PRODUCT_BY_ID,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PRODUCT_BY_ID,
+      data: null,
+    });
+  }
+};
+
 export const getCodeCategory = (code) => {
   return {
     type: actionTypes.GET_CODE_CATEGORIES,
     data: code,
   };
 };
+

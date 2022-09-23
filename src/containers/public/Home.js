@@ -13,26 +13,30 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1)
   const { code } = useSelector((state) => state.app);
+  const [selectedOption, setSelectedOption] = useState('Mới nhất')
+  const [searchOnCategory, setSearchOnCategory] = useState('')
   const params = useParams()
   // get 15 products best seller
   useEffect( () => {
+    setSelectedOption('Mới nhất')
+    setPage(1)
+    setSearchOnCategory('')
    dispatch(actions.getProductBestSeller(
      { limitProduct: constant_page.limit_products_outstanding, order: ['soldCounter','DESC'], categoryCode: code}));
-  }, [params["*"]]);
-  //get 15 products current update
-  useEffect( () => {
-    dispatch(actions.getProductCurrentUpdate(
+     dispatch(actions.getProductCurrentUpdate(
       { limitProduct: constant_page.limit_products_outstanding, order: ['updatedAt','DESC'], categoryCode: code}));
-   }, [params["*"]]);
-  //get products of category 25products per page =>> follow by category
+  }, [params["*"]]);
+  //get products of category 25products per page =>> follow by category && oder
   useEffect( () => {
-    setPage(1)
-    dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: ['updatedAt','DESC'], categoryCode: code}));
-   }, [params["*"]]);
-   //get products of category 25products per page =>> follow by page
-  useEffect( () => {
-    dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: ['updatedAt','DESC'], categoryCode: code, page: page}));
-   }, [page]);
+    let order = []
+    if(selectedOption ==='Mới nhất' ) order = ['updatedAt','DESC']
+    else if(selectedOption ==='Cũ nhất' ) order = ['updatedAt','ASC']
+    else if ( selectedOption === 'A-Z') order = ['name','DESC']
+    else if ( selectedOption === 'Z-A') order = ['name','ASC']
+    else if ( selectedOption === 'Giá lớn nhất') order = ['costPerUnit','DESC']
+    else if ( selectedOption === 'Giá nhỏ nhất') order = ['costPerUnit','ASC']
+    dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: order, categoryCode: code, page: page, name: searchOnCategory}));
+   }, [params["*"],selectedOption,page,searchOnCategory]);
 
   return (
     <div className="w-full">
@@ -45,7 +49,11 @@ const Home = () => {
           element={<LayoutHome
             setLoading={setLoading}
             page={page}
-            setPage={setPage} />}
+            setPage={setPage}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            searchOnCategory={searchOnCategory}
+            setSearchOnCategory={setSearchOnCategory} />}
         ></Route>
       </Routes>
     </div>
