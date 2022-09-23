@@ -56,9 +56,9 @@ const SelectCustomWidth = React.memo(
             {options?.length !== 0 ? (
               options?.map((option) => {
                 return (
-                  <option key={option.id} 
-                  value={option.code?option.code:option}>
-                    {option.code?option.code:option}
+                  <option key={option.id}
+                    value={option.code ? option.code : option}>
+                    {option.code ? option.code : option}
                   </option>
                 );
               })
@@ -86,6 +86,7 @@ const SelectCustomWidthPayment =
     }
     const colorStyles = {
       container: (styles) => { return { ...styles, width: '100%' } },
+      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
     }
     return (
       <div className={`w-${widthP} h-full`}>
