@@ -120,7 +120,7 @@ const Login = () => {
               value={payload.password}
               setValue={setPayload}
               type="password"
-              typeInput="text"
+              typeInput="password"
             />
             {isRegister && (
               <InputField
@@ -130,7 +130,7 @@ const Login = () => {
                 value={payload.password2}
                 setValue={setPayload}
                 type="password2"
-                typeInput="text"
+                typeInput="password"
               />
             )}
           </div>

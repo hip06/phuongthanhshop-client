@@ -1,17 +1,21 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import * as actions from "../store/actions";
+import {togglePopup} from '../store/actions/popupAction';
 
 export const ProductCardCtHeight = ({
+  id,
   image,
   name,
   color,
   costPerUnit,
-  id
 }) => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const cartItem = useSelector(state => state.cart);
+  const isLoggedIn = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const convertPrice = (price) => {
     price = Number(price);
     price = price.toLocaleString("it-IT", {
@@ -20,11 +24,19 @@ export const ProductCardCtHeight = ({
     });
     return price;
   };
+
   const handleDispatch = () => {
     navigate(`/detail/${id}`)
     dispatch(actions.getProductByIdClient({ id: id}));
   }
-
+  const isProductInCart = (id) => {
+    for (let i = 0; i < cartItem.products.length; i++) {
+      if (cartItem.products[i].id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
   return (
     <div className="w-[200px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
       <div 
@@ -42,7 +54,23 @@ export const ProductCardCtHeight = ({
         {name}
       </p>
       <div className="absolute bottom-[0px] flex items-end justify-around w-full py-3">
-        <AiOutlineShoppingCart size={20} color={color}/>
+        <AiOutlineShoppingCart size={20} color={color} onClick={() => {
+          if (isLoggedIn.isLoggedIn) {
+            if (!isProductInCart(id)) {
+              dispatch(actions.addToCartAction({
+                id,
+                image,
+                name,
+                color,
+                costPerUnit,
+              }))
+            }
+          }
+          else {
+            dispatch(togglePopup(true))
+          }
+        }} ></AiOutlineShoppingCart>
+
         <Link
           onClick={() => dispatch(actions.getProductByIdClient({ id: id}))}
           to={`/detail/${id}`}

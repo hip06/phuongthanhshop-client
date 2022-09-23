@@ -2,19 +2,22 @@ import React from "react";
 import { Outlet, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Header";
 import LayoutHome from "../Layout/LayoutHome";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { LoadingPageDesktop } from "../../components/LoadingPage";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { constant_page } from "../../ultils/constant";
+import Popup from '../../components/Popup';
 
 const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1)
   const { code } = useSelector((state) => state.app);
+
   const [selectedOption, setSelectedOption] = useState('Mới nhất')
   const [searchOnCategory, setSearchOnCategory] = useState('')
+  const popup =useSelector(state=>state.popup);
   const params = useParams()
   // get 15 products best seller
   useEffect( () => {
@@ -39,7 +42,8 @@ const Home = () => {
    }, [params["*"],selectedOption,page,searchOnCategory]);
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      {popup.showPopup && <Popup></Popup>}
       {loading && <LoadingPageDesktop />}
       <Header />
       <Outlet />

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { BiSortAlt2 } from "react-icons/bi";
 import Button from "./Button";
+import Select from "react-select";
 
 /* Input field Which can custom width
     WidthP : value of width
@@ -56,9 +57,9 @@ const SelectCustomWidth = React.memo(
             {options?.length !== 0 ? (
               options?.map((option) => {
                 return (
-                  <option key={option.id} 
-                  value={option.code?option.code:option}>
-                    {option.code?option.code:option}
+                  <option key={option.id}
+                    value={option.code ? option.code : option}>
+                    {option.code ? option.code : option}
                   </option>
                 );
               })
@@ -72,6 +73,37 @@ const SelectCustomWidth = React.memo(
     );
   }
 );
+const SelectCustomWidthPayment =
+  ({ options, lable, widthP, selectValue, setSelectValue }) => {
+    let newOptions = [];
+    options.forEach(option => {
+      let tempOption = {};
+      tempOption.value = option;
+      tempOption.label = option;
+      newOptions.push(tempOption);
+    })
+    const handleChange = (selectedOption) => {
+      setSelectValue(selectedOption.value);
+    }
+    const colorStyles = {
+      container: (styles) => { return { ...styles, width: '100%' } },
+      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+    }
+    return (
+      <div className={`w-${widthP} h-full`}>
+        <label htmlFor="field" className="font-bold text-l">
+          {lable}
+        </label>
+        <div
+          className={`flex items-center w-full ${lable ? "h-1/2" : "h-full"}`}
+        >
+          <Select options={newOptions} onChange={handleChange} styles={colorStyles} width='100$'></Select>
+
+        </div>
+      </div>
+    );
+  }
+
 
 /* HashTag field Which can custom width
     WidthP : value of width
@@ -201,7 +233,7 @@ const InputFileCustomWidth = React.memo(
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md"
           onChange={onAction}
-          // value={valueImg}
+        // value={valueImg}
         />
       </div>
     );
@@ -255,6 +287,7 @@ const InputSearch = React.memo(
 export {
   InputCustomWidth,
   SelectCustomWidth,
+  SelectCustomWidthPayment,
   HashTagCustomWidth,
   TextCustomWidth,
   InputFileCustomWidth,
