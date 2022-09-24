@@ -7,12 +7,18 @@ import Button from "./Button";
     PLarge : large or small padding
     @Anhtd
 */
+
+
+
 const InputCustomWidth = React.memo(
-  ({ lable, widthP, placeholder, PLarge, value, setValue }) => {
-    const onAction = useCallback((newvalue) => setValue(newvalue), []);
+  ({ lable, widthP, placeholder, PLarge, value, setValue, type }) => {
     return (
       <div className={`w-${widthP}  h-full`}>
-        <label htmlFor="field" className="font-bold text-l">
+        <label
+          htmlFor="field"
+          className={`font-bold text-l ${lable ? "min-h-[42px]" : ""
+            } flex items-center`}
+        >
           {lable}
         </label>
 
@@ -20,11 +26,20 @@ const InputCustomWidth = React.memo(
           className={`focus:ring-indigo-500 
                 focus:border-indigo-500 block 
                 w-full ${PLarge ? "pl-7 pr-12" : "pl-2 pr-2"} sm:text-sm 
-                border-gray-300 rounded-md ${lable ? "h-1/2" : "h-full"}
+                border-gray-300 rounded-md ${lable ? "min-h-[42px]" : "h-full"}
                  `}
           value={value}
           placeholder={placeholder}
-          onChange={(e) => onAction(e.target.value)}
+          onChange={(e) => {
+            if (!type) {
+              return setValue(e.target.value)
+            } else {
+              setValue((prev) => ({
+                ...prev,
+                [type]: e.target.value,
+              }))
+            }
+          }}
         />
       </div>
     );
@@ -39,16 +54,20 @@ const SelectCustomWidth = React.memo(
   ({ options, lable, widthP, selectValue, setSelectValue }) => {
     return (
       <div className={`w-${widthP} h-full`}>
-        <label htmlFor="field" className="font-bold text-l">
+        <label
+          htmlFor="field"
+          className={`font-bold text-l ${lable ? "min-h-[42px]" : ""
+            }  flex items-center`}
+        >
           {lable}
         </label>
         <div
           className={`flex items-center w-full ${lable ? "h-1/2" : "h-full"}`}
         >
           <select
-            className="mr-3 w-[90%] focus:ring-indigo-500 
+            className="mr-3  focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
-                border-gray-300 rounded-md h-full"
+                border-gray-300 rounded-md min-h-[42px]"
             onChange={(e) => {
               if (options[0].sort) {
                 setSelectValue(JSON.parse(e.target.value));
@@ -85,7 +104,7 @@ const SelectCustomWidth = React.memo(
     @Anhtd
 */
 const HashTagCustomWidth = React.memo(
-  ({ lable, widthP, placeholder, tags, setTags }) => {
+  ({ lable, widthP, placeholder, tags = ['12312', '23423', '123123', '234234123', '12321'], setTags }) => {
     const [value, setValue] = useState("");
     const onAction = useCallback((newValue) => {
       setValue(newValue);
@@ -103,35 +122,32 @@ const HashTagCustomWidth = React.memo(
       setTags([]);
     };
     return (
-      <div className={`w-${widthP} h-[120%]`}>
-        <label htmlFor="field" className="font-bold text-l">
+      <div className={`w-${widthP} h-full`}>
+        <label
+          htmlFor="field"
+          className={`font-bold text-l ${lable ? "min-h-[42px]" : ""
+            }  flex items-center`}
+        >
           {lable}
         </label>
-        <div className="flex h-[42%]">
+        <div className="flex h-[30%]">
           <input
             className="focus:ring-indigo-500 
                 focus:border-indigo-500 block 
                 w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md
-                h-full mr-[12px]"
+                min-h-[42px] mr-[12px]"
             value={value}
             placeholder={placeholder}
             onChange={(e) => onAction(e.target.value)}
             onKeyDown={(e) => handleKeyCode(e)}
           />
           <Button
-            text="Sửa"
+            text="Them"
             bgColor="#4ed14b"
             textColor="#fff"
             width="40%"
             onClick={handleAction}
-          ></Button>
-          <Button
-            text="Xóa"
-            bgColor="#cf2b2b"
-            textColor="#fff"
-            width="40%"
-            onClick={handleClear}
           ></Button>
         </div>
         <div className="flex flex-wrap">
@@ -139,10 +155,7 @@ const HashTagCustomWidth = React.memo(
             tags?.map((tag, index) => {
               return (
                 <div
-                  className="text-sm
-                                    items-center bg-[#fff] rounded
-                                    my-2 mr-2"
-                >
+                  className="text-sm items-center bg-[#fff] rounded my-2 mr-2">
                   {tag}
                 </div>
               );
@@ -171,12 +184,13 @@ const TextCustomWidth = React.memo(({ lable, widthP, placeholder }) => {
   const [value, setValue] = useState("");
   const onAction = useCallback((newvalue) => setValue(newvalue), []);
   return (
-    <div className={`w-${widthP} my-3`}>
-      <label htmlFor="field" className="font-bold text-l">
+    <div className={`w-${widthP}`}>
+      <label htmlFor="field" className={`font-bold text-l ${lable ? "min-h-[42px]" : ""
+        }  flex items-center`}>
         {lable}
       </label>
       <textarea
-        className="mr-3 w-[100%] h-[80px] focus:ring-indigo-500 
+        className="mr-3  h-[80px] focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md "
         value={value}
@@ -204,16 +218,91 @@ const InputFileCustomWidth = React.memo(
         </label>
         <input
           type="file"
-          className="mr-3 w-[100%] h-full focus:ring-indigo-500 
+          className="mr-3  h-full focus:ring-indigo-500 
                 focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
                 border-gray-300 rounded-md"
           onChange={onAction}
-          // value={valueImg}
+        // value={valueImg}
         />
       </div>
     );
   }
 );
+
+
+
+const InputVariant = ({ setVariantChild, setVariant, variant, variantChild, variantValue, setVariantValue }) => {
+  return (
+    <div className={`w-full`}>
+      <div className="h-[50%] flex">
+        <InputCustomWidth
+          widthP="[60%]"
+          lable="Name Option"
+          placeholder="Giá: VND"
+          PLarge={false}
+          value={variantValue.name}
+          setValue={setVariantValue}
+          type='name'
+        />
+        <div className="w-[30%] ml-5">
+          <div className="h-1/2"></div>
+          <Button
+            width="100%"
+            text="Add Variant"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            height="2"
+
+            onClick={() => {
+
+              variant.push(variantValue);
+              setVariantValue({ name: '', value: [] })
+              setVariantChild({ type: '', price: '' })
+            }}
+          ></Button>
+        </div>
+
+      </div>
+      <div className="flex justify-between ">
+        <InputCustomWidth
+          widthP="[30%]"
+          lable="Type"
+          placeholder="Giá: VND"
+          PLarge={false}
+          value={variantChild.type}
+          setValue={setVariantChild}
+          type='type'
+        />
+        <InputCustomWidth
+          widthP="[30%]"
+          lable="Price"
+          placeholder="Giá: VND"
+          PLarge={false}
+          value={variantChild.price}
+          setValue={setVariantChild}
+          type='price'
+        />
+        <div className=" w-[30%]">
+          <div className="h-1/2"></div>
+          <Button
+            width="100%"
+            text="Add"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            height="2"
+
+            onClick={() => {
+              variantValue.value.push(variantChild)
+
+
+            }}
+          ></Button>
+        </div>
+      </div>
+
+    </div>
+  );
+};
 
 // Input search
 const InputSearch = React.memo(
@@ -266,4 +355,5 @@ export {
   TextCustomWidth,
   InputFileCustomWidth,
   InputSearch,
+  InputVariant,
 };

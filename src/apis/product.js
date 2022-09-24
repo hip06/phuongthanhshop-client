@@ -25,8 +25,8 @@ const ApiProduct = {
     const url = "/api/v1/product/delete";
     return axiosClients.delete(url, { params });
   },
-  update: (data, id) => {
-    const url = ``;
+  update: (data) => {
+    const url = "/api/v1/product/update";
     return axiosClients.post(url, data);
   },
   getProductById: (id) => {

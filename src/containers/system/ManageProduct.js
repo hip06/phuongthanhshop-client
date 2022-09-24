@@ -16,6 +16,7 @@ const ManageProduct = () => {
   const { categories, products } = useSelector((state) => state.app);
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState("");
+  const [selectProduct, setSelectProduct] = useState("");
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
@@ -99,7 +100,7 @@ const ManageProduct = () => {
             width="40%"
             onClick={() => {
               setIsShowEdit(true);
-              setId(product.id);
+              setSelectProduct(product);
             }}
           ></Button>
           <Button
@@ -110,7 +111,7 @@ const ManageProduct = () => {
             height="2"
             onClick={() => {
               setIsDelete(!isDelete);
-              setId(product.id);
+              setSelectProduct(product);
             }}
           ></Button>
         </div>
@@ -191,9 +192,9 @@ const ManageProduct = () => {
           isDelete={isDelete}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
-          id={id}
+          product={selectProduct}
           selectValue={selectValue}
-          // cate={cateProdcut}
+        // cate={cateProdcut}
         />
       ) : (
         ""
@@ -202,7 +203,7 @@ const ManageProduct = () => {
         <EditProduct
           isShowEdit={isShowEdit}
           setIsShowEdit={setIsShowEdit}
-          id={id}
+          product={selectProduct}
           categories={categories}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
