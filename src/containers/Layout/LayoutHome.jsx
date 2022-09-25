@@ -1,5 +1,5 @@
 import image from "../../ultils/image";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -150,37 +150,6 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
           searchOnCategory={searchOnCategory} />
         </div>
 
-        {/* <div className="relative mb-[4px] lg:hidden">
-          <Link to={`/home/${site.linkLeft}`}>
-            <img src={site.naviLeftImage}></img>
-            <p
-              className="absolute top-[40%] left-[10%] text-white font-black text-[16px] "
-              style={{
-                "-webkit-text-stroke-width": "1px",
-                "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
-              }}
-            >
-              {site.naviLeftText}
-            </p>
-          </Link>
-
-          <Link
-            to={`/home/${site.linkRight}`}
-            className="absolute top-0 right-0 z-10"
-            style={{ clipPath: "polygon(100% 100%,100% 0%, 59% 0%, 1% 293%)" }}
-          >
-            <img src={site.naviRightImage}></img>
-            <p
-              className="absolute z-10 top-[40%] right-[15%] text-white font-black text-[16px] "
-              style={{
-                "-webkit-text-stroke-width": "1px",
-                "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
-              }}
-            >
-              {site.naviRightText}
-            </p>
-          </Link>
-        </div> */}
       </div>
       <Footer color={mainColor} category={params["*"]} />
     </div>

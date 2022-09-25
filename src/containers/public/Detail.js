@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Detail = () => {
     const { currentProduct } = useSelector((state) => state.app);
-    console.log(currentProduct);
+    
 
     return (
         <section className="w-full">

@@ -34,7 +34,7 @@ const Login = () => {
         password2: "",
         name: "",
       });
-    isLoggedIn && navigate("/home/fashion");
+    isLoggedIn && navigate("/");
   }, [isLoggedIn]);
   useEffect(() => {
     setIsLoading(false);

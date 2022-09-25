@@ -5,14 +5,14 @@ import * as actions from "../../store/actions";
 import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-const LayoutMenu = ({ setModalShow }) => {
+const LayoutMenu = ({ setModalShow,mainColor }) => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
   const app = useSelector((state) => state.app);
   const cart = useSelector((state) => state.cart);
-  const [mainColor,setMainColor] = useState('');
+  // const [mainColor,setMainColor] = useState('');
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     let newCategory = [];
@@ -23,14 +23,14 @@ const LayoutMenu = ({ setModalShow }) => {
         contentEn: category.valueEn,
       });
     });
-    categories.map((category) =>{
-      if(params['*']===category.contentEn){
-        setMainColor(category.color);
+      // categories.map((category) =>{
+      //   if(params['*']===category.contentEn){
+      //     setMainColor(category.color);
 
-      }
-    })
+      //   }
+      // })
     setCategories(newCategory);
-  }, [app]);
+  }, [app,app.categories]);
 
   const button = (
     <div className="w-full flex items-center gap-5 py-5 justify-center flex-col">

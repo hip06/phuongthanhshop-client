@@ -13,7 +13,7 @@ const Payment = () => {
     const selectRef = useRef();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
-    console.log(totalPayment);
+
     const [cities, setCities] = useState(['Lào Cai']);
     const [citiesObject, setCitiesObject] = useState([]);
     const [towns, setTowns] = useState([]);
@@ -79,7 +79,7 @@ const Payment = () => {
             const data = await res.json();
 
             const wardsData = [];
-            console.log(data.data);
+            
             data.data.map((ward) => {
                 wardsData.push(ward['WardName']);
             })

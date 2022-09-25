@@ -70,7 +70,7 @@ const Cart = () => {
                 <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>
-        <header className='hidden md:block' onClick={()=>{console.log(1); dispatch(deleteAllPaymentsAction())}}>
+        <header className='hidden md:block' onClick={()=>{dispatch(deleteAllPaymentsAction())}}>
             <Header></Header>
         </header>
 
