@@ -200,11 +200,11 @@ export const PopupDeleteProduct = ({
   setIsLoading,
   isLoading,
   isDelete,
-  id,
+  product,
   cate,
   selectValue,
+  setAddDelete,
 }) => {
-  console.log(id);
   return (
     <div
       className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
@@ -227,10 +227,10 @@ export const PopupDeleteProduct = ({
           width="40%"
           height="2"
           onClick={async () => {
-            await ApiProduct.delete({ id });
+            await ApiProduct.delete({ id: [...product] });
+            setAddDelete([])
             setIsDelete(!isDelete);
             setIsLoading(!isLoading);
-
             cate(selectValue);
           }}
         ></Button>
@@ -243,30 +243,33 @@ export const EditProduct = ({
   setIsShowEdit,
   setIsLoading,
   isLoading,
-  id,
   categories,
+  product,
 }) => {
-  const [productName, setProductName] = useState("");
+  const [productName, setProductName] = useState(product ? product.name : "");
   const [selectValue, setSelectValue] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(product ? product.costPerUnit : "");
   const [tags, setTags] = useState([]);
-  const [shortDes, setShortDes] = useState("");
-  const [imageMain, setImageMain] = useState({});
-  const [image1, setImage1] = useState({});
-  const [image2, setImage2] = useState({});
-  const [image3, setImage3] = useState({});
+  const [shortDes, setShortDes] = useState();
+  const [image, setImage] = useState({
+    imageMain: {},
+    image1: {},
+    image2: {},
+    image3: {},
+  });
 
   const handleSubmit = async () => {
     const bodyFormData = new FormData();
-    bodyFormData.append("mainImage", imageMain);
-    bodyFormData.append("image1", image1);
-    bodyFormData.append("image2", image2);
-    bodyFormData.append("image3", image3);
+    bodyFormData.append("mainImage", image.imageMain);
+    bodyFormData.append("image1", image.image1);
+    bodyFormData.append("image2", image.image2);
+    bodyFormData.append("image3", image.image3);
     bodyFormData.append("name", productName);
     bodyFormData.append("costPerUnit", price);
+    bodyFormData.append("id", product.id);
     bodyFormData.append("description", shortDes);
-    bodyFormData.append("categoryCode", "123");
-    const res = await ApiProduct.update(bodyFormData, id);
+    bodyFormData.append("categoryCode", product.categoryData.code);
+    const res = await ApiProduct.update(bodyFormData, product.id);
     if (res.status === 0) {
       setIsLoading(!isLoading);
       setIsShowEdit(false);
@@ -277,7 +280,7 @@ export const EditProduct = ({
   // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
   // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
   // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
-  useEffect(() => {}, [imageMain]);
+  // useEffect(() => {}, [imageMain]);
   return (
     <>
       <div
@@ -293,7 +296,7 @@ export const EditProduct = ({
             e.stopPropagation();
           }}
         >
-          <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5 h-[500px]">
+          <div className="w-full items-center bg-[#d9d9d9] rounded justify-between p-5 h-[500px]">
             <h1 className="text-3xl text-center">Nhập thông tin tại đây</h1>
             <div className="h-[20%]">
               <InputCustomWidth
@@ -312,7 +315,7 @@ export const EditProduct = ({
                   widthP="[30%]"
                   lable="Loại hàng"
                   options={categories}
-                  selectValue={selectValue}
+                  selectValue={product.categoryData.valueVi}
                   setSelectValue={setSelectValue}
                 />
                 <InputCustomWidth
@@ -356,30 +359,40 @@ export const EditProduct = ({
                   type="file"
                   name="imageMain"
                   onChange={(e) => {
-                    const file = e.target.files[0];
-
-                    setImageMain(file);
+                    setImage((prev) => ({
+                      ...prev,
+                      mainImage: e.target.files[0],
+                    }));
                   }}
                 />
                 <input
                   type="file"
                   name="image1"
                   onChange={(e) => {
-                    setImage1(e.target.files[0]);
+                    setImage((prev) => ({
+                      ...prev,
+                      image1: e.target.files[0],
+                    }));
                   }}
                 />
                 <input
                   type="file"
                   name="image2"
                   onChange={(e) => {
-                    setImage2(e.target.files[0]);
+                    setImage((prev) => ({
+                      ...prev,
+                      image2: e.target.files[0],
+                    }));
                   }}
                 />
                 <input
                   type="file"
                   name="image3"
                   onChange={(e) => {
-                    setImage3(e.target.files[0]);
+                    setImage((prev) => ({
+                      ...prev,
+                      image3: e.target.files[0],
+                    }));
                   }}
                 />
                 {/* <InputFileCustomWidth
@@ -440,6 +453,34 @@ export const EditProduct = ({
               />
             </div>
         </div> */}
+        </div>
+      </div>
+    </>
+  );
+};
+export const Profile = ({ currentUser }) => {
+  return (
+    <>
+      <div
+        className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <div
+          className=" w-[600px]  rounded  flex flex-col  items-center z-10"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <div className="w-full items-center bg-[#d9d9d9] rounded  justify-between p-5 h-[500px]">
+            <h1 className="text-3xl text-center">Thong tin ca nhan</h1>
+            <img
+              src="../assets/avatar-anon.png"
+              alt=""
+              className=" h-full w-full"
+            />
+          </div>
         </div>
       </div>
     </>

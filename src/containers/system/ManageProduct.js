@@ -14,12 +14,14 @@ import { filters } from "../../ultils/constant";
 const ManageProduct = () => {
   const dispatch = useDispatch();
   const { categories, products } = useSelector((state) => state.app);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState("");
-  const [selectProduct, setSelectProduct] = useState("");
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
+  const [addDelete, setAddDelete] = useState([]);
+
+  const [selectProduct, setSelectProduct] = useState("");
   const [selectValue, setSelectValue] = useState("");
   const [selectFilter, setSelectFilter] = useState(filters[0]);
 
@@ -29,16 +31,18 @@ const ManageProduct = () => {
   }, [categories]);
 
   // console.log(selectFilter);
-  const filter = Object.values(selectFilter.sort);
+
 
   useEffect(() => {
+    const filter = Object.values(selectFilter.sort);
     selectValue &&
       dispatch(
         actions.getProduct({
           categoryCode: selectValue,
-          order: [...filter].reverse(),
+          order: [...filter],
         })
       );
+
   }, [selectValue, isLoading, selectFilter]);
 
   if (addAll) {
@@ -65,6 +69,7 @@ const ManageProduct = () => {
           <input
             type="checkbox"
             className="h-[17.5px] w-[17.5px] checkbox"
+
           ></input>
         </div>
         <div className=" w-[10%] flex justify-center h-4/5">
@@ -111,7 +116,7 @@ const ManageProduct = () => {
             height="2"
             onClick={() => {
               setIsDelete(!isDelete);
-              setSelectProduct(product);
+              setAddDelete((prev) => ([...prev, product.id]));
             }}
           ></Button>
         </div>
@@ -132,7 +137,7 @@ const ManageProduct = () => {
             }}
           ></input>
           <div className="font-bold ">
-            <p> Đã chọn: 0</p>
+            <p> Đã chọn: {addDelete.length}</p>
           </div>
           <Button
             text="Xóa"
@@ -192,8 +197,9 @@ const ManageProduct = () => {
           isDelete={isDelete}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
-          product={selectProduct}
+          product={addDelete}
           selectValue={selectValue}
+          setAddDelete={setAddDelete}
         // cate={cateProdcut}
         />
       ) : (

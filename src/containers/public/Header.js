@@ -111,7 +111,7 @@ const Header = ({ isSearching, setIsSearching }) => {
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
           {categories?.map((category, index) => {
-            let valueLowerCase = category.value.toLowerCase();
+            let valueLowerCase = category?.value.toLowerCase();
             if (params["*"] === valueLowerCase) {
               let color = category.color;
               return (

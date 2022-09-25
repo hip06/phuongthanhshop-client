@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   InputCustomWidth,
   SelectCustomWidth,
@@ -10,7 +10,9 @@ import Button from "../../components/Button";
 import FormData from "form-data";
 import { useSelector } from "react-redux";
 import ApiProduct from "../../apis/product";
-
+import { Editor } from '@tinymce/tinymce-react';
+import { ProductCardCtHeight } from "../../components/ProductCard";
+import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
   const [selectValue, setSelectValue] = useState("");
@@ -18,10 +20,10 @@ const EditProduct = () => {
   const [tags, setTags] = useState([]);
   const [shortDes, setShortDes] = useState("");
   const [image, setImage] = useState({
-    imageMain: {},
-    image1: {},
-    image2: {},
-    image3: {},
+    imageMain: '',
+    image1: '',
+    image2: '',
+    image3: '',
   });
   const [variant, setVariant] = useState([]);
   const [variantValue, setVariantValue] = useState({ name: '', value: [] });
@@ -31,9 +33,6 @@ const EditProduct = () => {
   const { categories } = useSelector((state) => state.app);
 
   const handleSubmit = async () => {
-    console.log(variant);
-    const ca = JSON.stringify(variant);
-    console.log(JSON.parse(ca));
     const bodyFormData = new FormData();
     bodyFormData.append("mainImage", image.imageMain);
     bodyFormData.append("image1", image.image1);
@@ -49,15 +48,28 @@ const EditProduct = () => {
   useEffect(() => {
     categories.length > 0 && setSelectValue(categories[0].code);
   }, [categories]);
-  // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
-  // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
-  // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
-  // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
-  // useEffect(() => {}, [imageMain]);
+  const editorRef = useRef(null);
+  const log = () => {
+
+    if (editorRef.current) {
+      const des = editorRef.current.getContent()
+      console.log(des);
+      setShortDes(des)
+    }
+  };
+  useEffect(() => {
+    if (typeof image.imageMain !== 'string') image.imageMain.preview = URL.createObjectURL(image.imageMain);
+    if (typeof image.image1 !== 'string') image.image1.preview = URL.createObjectURL(image.image1);
+    if (typeof image.image2 !== 'string') image.image2.preview = URL.createObjectURL(image.image2);
+    if (typeof image.image3 !== 'string') image.image3.preview = URL.createObjectURL(image.image3);
+
+  }, [image.imageMain]);
+
+
   return (
     <>
 
-      <div className="w-full items-center bg-[#d9d9d9] rounded justify-between p-5 h-[600px]">
+      <div className="w-full items-center bg-[#d9d9d9] rounded justify-between p-5 h-[700px]">
         <h1 className="text-3xl text-center">Nhập thông tin tại đây</h1>
         <div className="h-[15%]">
           <InputCustomWidth
@@ -99,26 +111,52 @@ const EditProduct = () => {
         </div>
         <div className="flex ">
           <div className=" w-1/2 pr-3">
-            <div className="">
-              <InputCustomWidth
-                widthP={"full"}
-                lable="Miêu tả ngắn gọn"
-                placeholder="Miêu tả..."
-                PLarge={true}
-                value={shortDes}
-                setValue={setShortDes}
+
+            <div className="h-[350px]">
+              <Editor
+                apiKey='your-api-key'
+                onInit={(evt, editor) => { return editorRef.current = editor }}
+                initialValue="<p>This is the initial content of the editor.</p>"
+                onEditorChange={(e) => { console.log(e); }}
+                onKeyDown={(e) => { console.log(e); }}
+                init={{
+                  max_height: 300,
+                  width: 'full',
+                  menubar: false,
+                  plugins: [
+                    'advlist', 'autolink', 'lists', 'charmap',
+                    'anchor', 'searchreplace', 'visualblocks', 'code',
+                    'insertdatetime', 'media'
+                  ],
+                  toolbar: 'undo redo | blocks | ' +
+                    'bold italic forecolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ',
+                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                }}
               />
+              <Button
+                text="ADD CONTENT"
+                bgColor="#4ed14b"
+                textColor="#fff"
+                width="100%"
+                onClick={log}
+              ></Button>
             </div>
-            <TextCustomWidth
-              widthP="full"
-              lable="Miêu tả chi tiết"
-              placeholder="Miêu tả chi tiết tại đây..."
-            />
+
+
+
             {/* input image */}
+
+
+
+          </div>
+          <div className="w-1/2 pl-3">
+            <InputVariant setVariantChild={setVariantChild} setVariant={setVariant} variant={variant} variantChild={variantChild} variantValue={variantValue} setVariantValue={setVariantValue} />
             <div className=" w-[50%] mt-3">
               <input
                 type="file"
                 name="imageMain"
+                accept="image/*"
                 onChange={(e) => {
                   setImage((prev) => ({
                     ...prev,
@@ -145,6 +183,7 @@ const EditProduct = () => {
                     image2: e.target.files[0],
                   }));
                 }}
+
               />
               <input
                 type="file"
@@ -176,49 +215,34 @@ const EditProduct = () => {
                 />*/}
             </div>
           </div>
-          <div className="w-1/2 pl-3">
-            <InputVariant setVariantChild={setVariantChild} setVariant={setVariant} variant={variant} variantChild={variantChild} variantValue={variantValue} setVariantValue={setVariantValue} />
-          </div>
 
-          <Button text="Submit" onClick={handleSubmit}></Button>
+
+
+        </div>
+        <div className="flex">
+          <Button
+            text="ADD PRODUCT"
+            bgColor="#4ed14b"
+            textColor="#fff"
+            width="50%"
+            height='2'
+            onClick={handleSubmit}
+          ></Button>
+          <Button
+            text="SEE PREVIEW"
+            bgColor="#cf2b2b"
+            textColor="#fff"
+            width="50%"
+            height='2'
+            onClick={handleSubmit}
+          ></Button>
         </div>
       </div>
-      {/* <h1 className="text-3xl">Xem trước tại đây</h1>
+      <h1 className="text-3xl">Xem trước tại đây</h1>
       <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-        <div className="flex">
-            <div className="mr-[30px]">
-              <ProductCardCtHeight
-                image={imageMain?.preview}
-                name={productName}
-                description={shortDes}
-                costPerUnit={price}
-                color={"#4ed14b"}
-              />
-            </div>
-            <div>
-              <p>Xem trước chi tiết sản phẩm trên mobile tại đây</p>
-              <div className="w-[500px] ">
-                <div className="w-[375px] ml-[25%]">
-                  <GroupImageCtWidth
-                    widthP="full"
-                    mainImage={imageMain?.preview}
-                    image1={image1.preview}
-                    image2={image2.preview}
-                    image3={image3.preview}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-[12px]">
-            <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
-
-            <GroupImageCtWidth
-              widthP="400px"
-              mainImage={imageMain?.preview}
-            />
-          </div>
-      </div> */}
+        {console.log(image.imageMain?.preview)}
+        <img src={image.imageMain?.preview ? image.imageMain?.preview : ''} width='100%' height='100%' alt="" />
+      </div>
 
     </>
   );

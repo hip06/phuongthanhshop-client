@@ -79,12 +79,12 @@ export const adminMenu = [
 ];
 
 export const filters = [
-  { valueVi: "Mới nhất", sort: { code: "DESC", type: "updatedAt" } },
-  { valueVi: "Cũ nhất", sort: { code: "ASC", type: "updatedAt" } },
-  { valueVi: "A-Z", sort: { code: "DESC", type: "name" } },
-  { valueVi: "Z-A", sort: { code: "ASC", type: "name" } },
-  { valueVi: "Giá cao -> thấp", sort: { code: "DESC", type: "costPerUnit" } },
-  { valueVi: "Giá thấp -> cao", sort: { code: "ASC", type: "costPerUnit" } },
+  { valueVi: "Mới nhất", sort: { type: "updatedAt", code: "DESC" } },
+  { valueVi: "Cũ nhất", sort: { type: "updatedAt", code: "ASC" } },
+  { valueVi: "A-Z", sort: { type: "name", code: "DESC" } },
+  { valueVi: "Z-A", sort: { type: "name", code: "ASC" } },
+  { valueVi: "Giá cao -> thấp", sort: { type: "costPerUnit", code: "DESC" } },
+  { valueVi: "Giá thấp -> cao", sort: { type: "costPerUnit", code: "ASC" } },
 ];
 
 export const getSite = (params) => {
