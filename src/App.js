@@ -36,15 +36,15 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full h-full">
       <Routes>
         {/*Public routes */}
-        <Route path="/" element={<Navigate to="/home/fashion"></Navigate>} />
-        <Route path={path.HOME} element={<Home />}></Route>
+        <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />
+        <Route path={path.HOME} element={<Home />}/>
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
         <Route path={path.CART} element={<Cart />} />
-        <Route path={path.DETAIL} element={<Detail />}></Route>
+        <Route path={path.DETAIL} element={<Detail />}/>
         <Route path={path.USERCLIENT} element={<UserClient />} />
 
         {/*Login route */}

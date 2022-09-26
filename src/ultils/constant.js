@@ -11,7 +11,7 @@ export const path = {
   PAYMENT: "/payment",
   FEED: "/feed",
   CART: "/cart",
-  DETAIL: "/detail",
+  DETAIL: "/detail/:id",
   GENERAL: "*",
   EDIT_PRODUCT: "edit-product",
   MANAGE_PRODUCT: "manage-product",
@@ -33,6 +33,10 @@ export const vi_uf8 = {
   facebook: "Phuong Thanh's Shop",
   zalo: "01253322599",
   instagram: "pthanh@shop102",
+};
+export const constant_page = {
+  limit_products_outstanding: 15,
+  limit_products: 25,
 };
 export const adminMenu = [
   {

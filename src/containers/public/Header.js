@@ -3,35 +3,32 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { BiSearchAlt, BiUser } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import LayoutMenu from "../Layout/LayoutMenu";
-import { getSite } from "../../ultils/constant";
 import { useParams, Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
 import * as actions from '../../store/actions'
 
-const Header = ({ isSearching, setIsSearching }) => {
+const limitCategory = [0, 1, 2]
+const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
-  const [threeCategory, setThreeCategory] = useState([])
   const dispatch = useDispatch()
   const params = useParams();
-  const site = getSite(params);
+  const [mainColor, setMainColor] = useState('');
+
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [params]);
+    categories.map((category) => {
 
-  // useEffect(() => {
-  //   const getThreeCategories = (categories) => {
-  //     let categoryArray = []
-  //     for (let i = 0; i < 3; i++) {
-  //       categoryArray.push(categories[i])
-  //     }
-  //     setThreeCategory([...categoryArray])
-  //   }
-  //   getThreeCategories()
-  // })
+      if (params['*'] === category.valueEn) {
+
+        setMainColor(category.color);
+      }
+    })
+  }, [params, categories]);
+
   return (
     <>
       <div
@@ -44,7 +41,7 @@ const Header = ({ isSearching, setIsSearching }) => {
             setModalShow(true);
           }}
         >
-          <HiOutlineMenu size={26}></HiOutlineMenu>
+          <HiOutlineMenu size={26} />
         </div>
         {
           <div
@@ -61,7 +58,7 @@ const Header = ({ isSearching, setIsSearching }) => {
                 e.stopPropagation();
               }}
             >
-              <LayoutMenu setModalShow={setModalShow} />
+              <LayoutMenu mainColor={mainColor} setModalShow={setModalShow} />
             </div>
           </div>
         }
@@ -75,19 +72,18 @@ const Header = ({ isSearching, setIsSearching }) => {
         </div>
 
         <div>
-          {/* {categories?.map((category) => {
-            let valueLowerCase = category.value.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+          {categories?.map((category) => {
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color
               return (
                 <NameCategory
-                  index={category.id}
-                  category={category.value}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
             }
-          })} */}
+          })}
         </div>
 
         <div>
@@ -102,43 +98,45 @@ const Header = ({ isSearching, setIsSearching }) => {
           </Link>
           <div
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
-            style={{ backgroundColor: site.color }}
+            style={{ backgroundColor: mainColor }}
           >
-            <p>6</p>
+            <p className='text-[white]'>{cart.count}</p>
           </div>
         </div>
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {categories?.map((category, index) => {
-            let valueLowerCase = category?.value.toLowerCase();
-            if (params["*"] === valueLowerCase) {
-              let color = category.color;
+          {!categoryProvided && categories?.map((category) => {
+            if (params["*"] === category?.valueEn) {
+              let color = category?.color;
               return (
                 <NameCategory
-                  index={index}
-                  category={category.value}
+                  id={category.id}
+                  category={category.valueEn}
                   color={color}
                 />
               );
             }
           })}
+          {categoryProvided && <NameCategory
+            id={'unique-id-nameCard$'}
+            category={categoryProvided?.valueEn}
+            color={categoryProvided?.color}
+          />}
         </div>
-        {categories?.map((category, index) => {
-          let valueLowerCase = category.value.toLowerCase();
+        {categories?.filter((category, index) => limitCategory.some(item => item === index))?.map((category) => {
           return (
-            <div>
+            <div onClick={() => dispatch(actions.getCodeCategory(category?.code))}>
               <NavLink
-                onClick={() => dispatch(actions.getCodeCategory(category.code))}
-                key={"navlink-" + index}
-                to={`/home/${valueLowerCase}`}
+                key={category.id}
+                to={`/home/${category?.valueEn}`}
                 style={{
                   color: category.color,
-                  fontSize: params["*"] === valueLowerCase ? "25px" : "20px",
+                  fontSize: params["*"] === category?.valueEn ? "25px" : "20px",
                 }}
                 className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
               >
-                {category.value}
+                {category.valueVi}
               </NavLink>
             </div>
           );
@@ -156,9 +154,9 @@ const Header = ({ isSearching, setIsSearching }) => {
             <div
               className={`absolute top-[-5px] right-[-3px] rounded-[50%] 
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
-              style={{ backgroundColor: site.color }}
+              style={{ backgroundColor: mainColor }}
             >
-              <p>6</p>
+              <p className='text-[white]'>{cart.count}</p>
             </div>
           </div>
         </div>

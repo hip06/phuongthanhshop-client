@@ -28,7 +28,7 @@ const Bill = () => {
     const fetchProducts = async () => {
       const res = await ApiBill.getAll();
       const bills = res.bill;
-      console.log(bills);
+    
       setProducts(bills);
     };
     fetchProducts();

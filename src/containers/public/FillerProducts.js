@@ -1,33 +1,23 @@
-import { BiFilterAlt, BiSortAlt2 } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { BiFilterAlt } from "react-icons/bi";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ProductCardCtHeight } from "../../components/ProductCard";
 import { SelectCustomWidth, InputCustomWidth } from "../../components/InputCtWidth";
-import { useState, useEffect, useRef } from "react";
-import { Pagination } from "../../components/Pagination";
+import {  useEffect, useRef, useState } from "react";
+import Pagination from "./Pagination";
+import { useSelector } from "react-redux";
 
-const FillerProducts = ({ color, page, setPage }) => {
+const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOption, setSearchOnCategory, searchOnCategory }) => {
   const { products } = useSelector((state) => state.app);
-  const [selectedOption, setSelectedOption] = useState('Mới nhất')
-  const [filterContent, setFilterContent] = useState('')
-  const [productsShow, setProductsShow] = useState(null)
   const typingTimeOut = useRef(null)
+  const [filterContent, setFilterContent] = useState('')
   useEffect(() => {
-    // handle api for sort here
-    // Đợi mỗi @Sơn
-  }, [selectedOption])
-
-  useEffect(() => {
-    if (filterContent.trim() === '') return
     if (typingTimeOut.current) {
       clearTimeout(typingTimeOut.current)
     }
     typingTimeOut.current = setTimeout(() => {
-      //handle api for search here
-      // Đợi mỗi @Sơn
+      setSearchOnCategory(filterContent)
     }, 1000);
   }, [filterContent])
-
   return (
     <section className="my-[24px]">
       <div className="flex flex-col w-full">
@@ -36,7 +26,7 @@ const FillerProducts = ({ color, page, setPage }) => {
             <InputCustomWidth
               lable={'Lọc'}
               widthP={'full'}
-              placeholder={'Thêm thông tin để lọc...'}
+              placeholder={'Tìm kiếm trong kho...'}
               PLarge={false}
               value={filterContent}
               setValue={setFilterContent}
@@ -55,6 +45,7 @@ const FillerProducts = ({ color, page, setPage }) => {
         </div>
 
         <div className="justify-center bg-[#d9d9d9] rounded-[12px] mt-[12px]">
+          {products.length ===0 && <div className="w-full text-center mt-[12px] lg:text-lg"> Chúng tôi chưa có sản phẩm hợp với mô tả !</div>}
           <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 668: 3, 956: 4, 1286: 5, 2016: 6 }}>
             <Masonry className="justify-center bg-[#d9d9d9] rounded-[12px] pb-[24px]">
               {products?.map((product, i) => {
@@ -73,7 +64,10 @@ const FillerProducts = ({ color, page, setPage }) => {
             </Masonry>
           </ResponsiveMasonry>
           <div className="my-[24px]">
-            <Pagination color={color} page={page} setPage={setPage} />
+            <Pagination
+              currentPage={page}
+              setCurrentPage={setPage}
+             />
           </div>
         </div>
       </div>

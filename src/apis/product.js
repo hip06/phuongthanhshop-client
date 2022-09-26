@@ -5,7 +5,10 @@ const ApiProduct = {
     const url = "/api/v1/product/";
     return axiosClients.get(url, { params });
   },
-
+  getProductByIdClient: (params) => {
+    const url = `/api/v1/product/`;
+    return axiosClients.get(url, { params });
+  },
   //   params = {
   //     limitProduct: số products muốn lấy về 1 lần, nếu ko truyền sẽ lấy theo mặc định là 5,
   //     page: số trang muốn lấy, nếu ko truyền sẽ mặc định là lấy trang đầu,
@@ -29,9 +32,9 @@ const ApiProduct = {
     const url = "/api/v1/product/update";
     return axiosClients.post(url, data);
   },
-  getProductById: (id) => {
-    const url = `/api/v1/admin/product/${id}`;
-    return axiosClients.get(url);
+  getProductById: (params) => {
+    const url = `/api/v1/admin/product/`;
+    return axiosClients.get(url, { params });
   },
 };
 
