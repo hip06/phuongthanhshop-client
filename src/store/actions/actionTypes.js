@@ -8,6 +8,8 @@ const actionTypes = {
   GET_CURRENT: "GET_CURRENT",
 
   // user
+  SAVE_USERID_TOKEN: "SAVE_USERID_TOKEN",
+  SAVE_TOKEN_VERIFY_EMAIL: "SAVE_TOKEN_VERIFY_EMAIL",
   //app
   TOGGLE_POPUP: "TOGGLE_POPUP",
   // product

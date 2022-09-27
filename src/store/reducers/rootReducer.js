@@ -5,6 +5,7 @@ import appReducer from "./appReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import changePasswordReducer from "./changePasswordReducer";
 import { combineReducers } from "redux";
 
 const commonConfig = {
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     cart: persistReducer(cartConfig, cartReducer),
     app:appReducer,
     popup:popupReducer,
+    changePassword:changePasswordReducer,
 
 })
 

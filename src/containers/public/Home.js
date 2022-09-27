@@ -7,7 +7,7 @@ import { LoadingPageDesktop } from "../../components/LoadingPage";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { constant_page } from "../../ultils/constant";
-import Popup from '../../components/Popup';
+import PopupCart from '../../components/Popup';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div className="w-full relative">
-      {popup.showPopup && <Popup></Popup>}
+      {popup.showPopup && <PopupCart></PopupCart>}
       {loading && <LoadingPageDesktop />}
       <Header />
       <Outlet />

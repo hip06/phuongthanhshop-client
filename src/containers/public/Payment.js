@@ -130,12 +130,12 @@ const Payment = () => {
     // }, [])
     return (<div className='relative'>
         <header className="flex items-center w-full h-[60px] lg:hidden">
-            <Link className='w-[15%] flex justify-center' to='/home/fashion' onClick={() => {
+            <Link className='w-[15%] flex justify-center' to='/' onClick={() => {
                 dispatch(deleteAllPaymentsAction());
             }}>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
-            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/home/fashion'>
+            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/'>
                 <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>

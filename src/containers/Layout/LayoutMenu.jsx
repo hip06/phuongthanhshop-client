@@ -92,7 +92,7 @@ const LayoutMenu = ({ setModalShow,mainColor }) => {
               className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
               style={{ backgroundColor: mainColor }}
             >
-              <p>{cart.count}</p>
+              <p className='text-[white]'>{cart.count}</p>
             </div>
           </div>
           <p>Giá trị đơn hàng:0</p>
