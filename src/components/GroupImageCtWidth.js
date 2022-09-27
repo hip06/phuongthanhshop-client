@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+const active  = 'border-8'
 export const GroupImageCtWidth = ({ data }) => {
     const { mainImage, image1, image2, image3 } = data
     const [imageShowed, setImageShowed] = useState(mainImage)
@@ -16,22 +17,22 @@ export const GroupImageCtWidth = ({ data }) => {
                     <div 
                     onClick={() => setImageShowed(mainImage)}
                     className="mx-[14px] cursor-pointer">
-                        <img className="w-full" src={mainImage} alt="main image" />
+                        <img className={`${mainImage===imageShowed? active: '' } w-full`} src={mainImage} alt="main image" />
                     </div>
                     <div 
                     onClick={() => setImageShowed(image1)}
                     className="mx-[14px] cursor-pointer">
-                        <img className="w-full" src={image1} alt="main image" />
+                        <img className={`${image1===imageShowed? active: '' } w-full`} src={image1} alt="main image" />
                     </div>
                     <div 
                     onClick={() => setImageShowed(image2)}
                     className="mx-[14px] cursor-pointer">
-                        <img className="w-full" src={image2} alt="main image" />
+                        <img className={`${image2===imageShowed? active: '' } w-full`} src={image2} alt="main image" />
                     </div>
                     <div 
                     onClick={() => setImageShowed(image3)}
                     className="mx-[14px] cursor-pointer">
-                        <img className="w-full" src={image3} alt="main image" />
+                        <img className={`${image3===imageShowed? active: '' } w-full`} src={image3} alt="main image" />
                     </div>
                 </div>
             </div>

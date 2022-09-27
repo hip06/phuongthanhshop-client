@@ -27,7 +27,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   }, [params,categories]);
 
   return (
-    <>
+    <div>
       <div
         className="flex lg:hidden items-center justify-around relative h-[70px]"
         ref={headerRef}
@@ -163,7 +163,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Header;

@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full max-w-[1560px] mx-auto">
       <Routes>
         {/*Public routes */}
         <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />

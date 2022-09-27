@@ -39,7 +39,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
       <div className="w-full lg:w-11/12 mx-auto">
         <div className="hidden lg:flex w-full mb-[12px] mt-[24px]">
           <div className="w-5/12">
-            <div className="w-5/6 items-center bg-[#d9d9d9] flex mx-auto rounded-[12px] place-content-center p-5">
+            <div className="w-[90%] items-center bg-[#d9d9d9] flex ml-0 rounded-[12px] place-content-center p-5">
               <p className="font-[600] text-center text-[20px]">
                 {vi_uf8.all_categories}
               </p>
@@ -88,7 +88,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
         </div>
         <div className=" w-full flex mb-[24px]">
           <div className="hidden lg:block w-5/12">
-            <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
+            <div className="w-[90%] bg-[#d9d9d9] ml-0 rounded-[12px] h-full p-5">
               {categories?.map((category) => {
                 let weight = "font-[400]";
                 if (params["*"] === category?.valueEn) {
@@ -123,6 +123,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
               <img
                 className="max-w-full mx-auto rounded"
                 src={image.fashionMan}
+                alt="img"
               />
             </div>
 
@@ -130,6 +131,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
               <img
                 className="max-w-full mx-auto rounded h-full"
                 src={image.fashionGirl}
+                alt="img"
               />
             </div>
           </div>
@@ -150,37 +152,6 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
           searchOnCategory={searchOnCategory} />
         </div>
 
-        {/* <div className="relative mb-[4px] lg:hidden">
-          <Link to={`/home/${site.linkLeft}`}>
-            <img src={site.naviLeftImage}></img>
-            <p
-              className="absolute top-[40%] left-[10%] text-white font-black text-[16px] "
-              style={{
-                "-webkit-text-stroke-width": "1px",
-                "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
-              }}
-            >
-              {site.naviLeftText}
-            </p>
-          </Link>
-
-          <Link
-            to={`/home/${site.linkRight}`}
-            className="absolute top-0 right-0 z-10"
-            style={{ clipPath: "polygon(100% 100%,100% 0%, 59% 0%, 1% 293%)" }}
-          >
-            <img src={site.naviRightImage}></img>
-            <p
-              className="absolute z-10 top-[40%] right-[15%] text-white font-black text-[16px] "
-              style={{
-                "-webkit-text-stroke-width": "1px",
-                "-webkit-text-stroke-color": "rgba(0,0,0,0.65)",
-              }}
-            >
-              {site.naviRightText}
-            </p>
-          </Link>
-        </div> */}
       </div>
       <Footer color={mainColor} category={params["*"]} />
     </div>

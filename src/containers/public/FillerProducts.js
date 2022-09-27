@@ -35,7 +35,7 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
           </div>
           <div className="flex items-center justify-between mr-[12px]">
             <SelectCustomWidth
-              options={['Mới nhất', 'Cũ nhất', 'A-Z', 'Z-A', 'Giá lớn nhất', 'Giá nhỏ nhất']}
+              options={['Mới nhất', 'Cũ nhất', 'A-Z', 'Z-A', 'Giá cao -> thấp', 'Giá thấp -> cao']}
               lable={'Phân loại'}
               widthP={'full'}
               selectValue={selectedOption}
@@ -46,9 +46,9 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
 
         <div className="justify-center bg-[#d9d9d9] rounded-[12px] mt-[12px]">
           {products.length ===0 && <div className="w-full text-center mt-[12px] lg:text-lg"> Chúng tôi chưa có sản phẩm hợp với mô tả !</div>}
-          <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 668: 3, 956: 4, 1286: 5, 2016: 6 }}>
+          <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 650: 3, 956: 4, 1286: 5 }}>
             <Masonry className="justify-center bg-[#d9d9d9] rounded-[12px] pb-[24px]">
-              {products?.map((product, i) => {
+              {products?.map((product) => {
                 return (
                   <div className="flex justify-center mt-[20px]">
                     <ProductCardCtHeight

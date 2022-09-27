@@ -17,9 +17,9 @@ export const ProductCardCtHeight = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDispatch = () => {
+  const handleDispatch = async () => {
+    await dispatch(actions.getProductByIdClient({ id: id}));
     navigate(`/detail/${id}`)
-    dispatch(actions.getProductByIdClient({ id: id}));
   }
   const isProductInCart = (id) => {
     for (let i = 0; i < cartItem.products.length; i++) {
@@ -30,11 +30,11 @@ export const ProductCardCtHeight = ({
     return false;
   }
   return (
-    <div className="w-[200px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
+    <div className="w-[200px] md:w-[230px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
       <div 
       onClick={() => handleDispatch()}
-      className={`mb-[20px]`}>
-        <img className="w-full h-[187px]" src={image} />
+      className={`mb-[20px] w-full`}>
+        <img className="w-full h-[187px] object-cover " src={image} />
       </div>
       <p
         className="absolute text-white rounded-[10px] top-[172px] left-[20px] text-[12px] px-[5px] py-[6px]"
@@ -64,7 +64,7 @@ export const ProductCardCtHeight = ({
         }} ></AiOutlineShoppingCart>
 
         <Link
-          onClick={() => dispatch(actions.getProductByIdClient({ id: id}))}
+          onClick={async() => await dispatch(actions.getProductByIdClient({ id: id}))}
           to={`/detail/${id}`}
           style={{ color: color }}
           className="text-[11px] font-bold"

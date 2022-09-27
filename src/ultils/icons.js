@@ -3,8 +3,13 @@ import { RiProductHuntLine } from 'react-icons/ri'
 import { FaUserEdit, FaInstagramSquare } from 'react-icons/fa'
 import { IoIosCreate, IoMdArrowRoundDown } from 'react-icons/io'
 import { FiMenu } from 'react-icons/fi'
-import { BiSearchAlt } from 'react-icons/bi'
-import { AiOutlineClose, AiOutlineFacebook, AiOutlineInstagram, AiOutlineArrowRight } from 'react-icons/ai'
+import { BiSearchAlt, BiPurchaseTag } from 'react-icons/bi'
+import { AiOutlineClose, 
+    AiOutlineFacebook, 
+    AiOutlineInstagram, 
+    AiOutlineArrowRight, 
+    AiTwotoneStar,
+    AiOutlineShoppingCart } from 'react-icons/ai'
 import { MdOutlinePhonelink } from 'react-icons/md'
 import { GrFacebook } from 'react-icons/gr'
 import { SiZalo } from 'react-icons/si'
@@ -31,7 +36,10 @@ const icons = {
     AiOutlineInstagram,
     TiLocationOutline,
     AiOutlineArrowRight,
-    GrLinkNext
+    GrLinkNext,
+    AiTwotoneStar,
+    AiOutlineShoppingCart,
+    BiPurchaseTag
 }
 
 export default icons
