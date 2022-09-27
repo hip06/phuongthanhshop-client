@@ -6,6 +6,10 @@ const initState = {
   categories: [],
   code: "OĐAIGNUD8",
   pageLength: "",
+  productsBestSeller: [],
+  productsCurrentUpdate: [],
+  count: 0,
+  currentProduct: null,
 };
 
 const appReducer = (state = initState, action) => {
@@ -16,11 +20,25 @@ const appReducer = (state = initState, action) => {
         ...state,
         products: action.data,
       };
-
+    case actionTypes.GET_PRODUCT_BEST_SELLER:
+      return {
+        ...state,
+        productsBestSeller: action.data
+      };
     case actionTypes.GET_CATEGORY:
       return {
         ...state,
         categories: action.data,
+      };
+    case actionTypes.GET_PRODUCT_BY_ID:
+      return {
+        ...state,
+        currentProduct: action.data
+      };
+    case actionTypes.GET_PRODUCT_CURRENT_UPDATE:
+      return {
+        ...state,
+        productsCurrentUpdate: action.data
       };
     case actionTypes.GET_CODE_CATEGORIES:
       return {
