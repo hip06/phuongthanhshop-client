@@ -6,3 +6,4 @@ export { default as UserClient } from "./UserClient"
 export { default as Payment } from "./Payment"
 export { default as Cart } from "./Cart"
 export { default as FillerProducts } from "./FillerProducts"
+export {default as UserChangePassword} from './UserChangePassword';

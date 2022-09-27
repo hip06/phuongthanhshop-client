@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import takeParamsVerifyToken from "./ultils/takeParamsVerifyToken";
 import {
   Home,
   Login,
@@ -7,6 +8,7 @@ import {
   UserClient,
   Payment,
   Cart,
+  UserChangePassword,
 } from "./containers/public";
 import {
   System,
@@ -26,13 +28,18 @@ import { useEffect } from "react";
 function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   // Khi reload page get userdata again
   useEffect(() => {
     isLoggedIn && dispatch(actions.getCurrent());
   }, [isLoggedIn]);
   useEffect(() => {
     dispatch(actions.getCategory());
+    if (window.location.href.includes('verify-token')) {
+      const params = takeParamsVerifyToken(window.location.href);
+      dispatch(actions.saveUseridToken({ userId: params[params.length - 2], tokenChangePassword: params[params.length - 1] }))
+      navigate('/changePassword');
+    }
   }, []);
 
   return (
@@ -40,11 +47,12 @@ function App() {
       <Routes>
         {/*Public routes */}
         <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />
-        <Route path={path.HOME} element={<Home />}/>
+        <Route path="/changePassword" element={<UserChangePassword></UserChangePassword>}></Route>
+        <Route path={path.HOME} element={<Home />} />
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
         <Route path={path.CART} element={<Cart />} />
-        <Route path={path.DETAIL} element={<Detail />}/>
+        <Route path={path.DETAIL} element={<Detail />} />
         <Route path={path.USERCLIENT} element={<UserClient />} />
 
         {/*Login route */}

@@ -63,10 +63,10 @@ const Cart = () => {
 
     return (<div>
         <header className="flex items-center w-full h-[60px] border-b-[1px] border-[#9f9f9f] md:hidden">
-            <Link className='w-[15%] flex justify-center' to='/home/fashion'>
+            <Link className='w-[15%] flex justify-center' to='/'>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
-            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[5%]' to='/home/fashion'>
+            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[5%]' to='/'>
                 <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>
