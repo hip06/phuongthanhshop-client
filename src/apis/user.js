@@ -2,7 +2,7 @@ import axiosClients from "../axiosClients";
 
 const apiUSer = {
   getCurrent: (data) => {
-    const url = "/api/v1/user/get-current";
+    const url = "/api/v1/user/current";
     return axiosClients.get(url, data);
   },
   getAll: () => {

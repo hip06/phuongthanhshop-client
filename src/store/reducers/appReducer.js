@@ -4,7 +4,7 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   products: [],
   categories: [],
-  code: "CAT1",
+  code: "OĐAIGNUD8",
   pageLength: "",
 };
 
