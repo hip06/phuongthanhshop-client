@@ -46,15 +46,15 @@ const Login = () => {
       : { email: payload.email };
     const finalPayload = isRegister
       ? {
-          ...isEmail,
-          password: payload.password,
-          password2: payload.password2,
-          name: payload.name,
-        }
+        ...isEmail,
+        password: payload.password,
+        password2: payload.password2,
+        name: payload.name,
+      }
       : {
-          ...isEmail,
-          password: payload.password,
-        };
+        ...isEmail,
+        password: payload.password,
+      };
     let result = validateLogin(finalPayload, setInvalidFields, payload);
     if (result === 0) {
       setIsLoading(true);

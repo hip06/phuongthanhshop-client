@@ -1,202 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   InputCustomWidth,
   SelectCustomWidth,
   HashTagCustomWidth,
   TextCustomWidth,
+  InputVariant,
 } from "../../components/InputCtWidth";
 import Button from "../../components/Button";
 import FormData from "form-data";
 import { useSelector } from "react-redux";
 import ApiProduct from "../../apis/product";
+
+import { ProductCardCtHeight } from "../../components/ProductCard";
+import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
+import FormCreateProduct from "../../components/FormCreateProduct";
 const EditProduct = () => {
   const [productName, setProductName] = useState("");
   const [selectValue, setSelectValue] = useState("");
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const [shortDes, setShortDes] = useState("");
-  const [imageMain, setImageMain] = useState({});
-  const [image1, setImage1] = useState({});
-  const [image2, setImage2] = useState({});
-  const [image3, setImage3] = useState({});
+  const [image, setImage] = useState({
+    imageMain: '',
+    image1: '',
+    image2: '',
+    image3: '',
+  });
+  const [variants, setVariants] = useState([]);
+  const [variantValue, setVariantValue] = useState({ name: '', value: [] });
+  const [variantChild, setVariantChild] = useState({ type: '', price: '' })
+
+
   const { categories } = useSelector((state) => state.app);
 
   const handleSubmit = async () => {
     const bodyFormData = new FormData();
-    bodyFormData.append("mainImage", imageMain);
-    bodyFormData.append("image1", image1);
-    bodyFormData.append("image2", image2);
-    bodyFormData.append("image3", image3);
+    bodyFormData.append("mainImage", image.imageMain);
+    bodyFormData.append("image1", image.image1);
+    bodyFormData.append("image2", image.image2);
+    bodyFormData.append("image3", image.image3);
     bodyFormData.append("name", productName);
     bodyFormData.append("costPerUnit", price);
     bodyFormData.append("description", shortDes);
     bodyFormData.append("categoryCode", selectValue);
-    ApiProduct.create(bodyFormData);
+    bodyFormData.append("variants", JSON.stringify(variants));
+    // ApiProduct.create(bodyFormData);
   };
   useEffect(() => {
     categories.length > 0 && setSelectValue(categories[0].code);
   }, [categories]);
-  // if (imageMain !== "") imageMain?.preview = URL.createObjectURL(imageMain);
-  // if (image1 !== "") image1.preview = URL.createObjectURL(image1);
-  // if (image2 !== "") image2.preview = URL.createObjectURL(image2);
-  // if (image3 !== "") image3.preview = URL.createObjectURL(image3);
-  useEffect(() => {}, [imageMain]);
+  const editorRef = useRef(null);
+  const log = () => {
+
+    if (editorRef.current) {
+      const des = editorRef.current.getContent()
+
+      setShortDes(des)
+    }
+  };
+  useEffect(() => {
+    if (typeof image.imageMain !== 'string') image.imageMain.preview = URL.createObjectURL(image.imageMain);
+    if (typeof image.image1 !== 'string') image.image1.preview = URL.createObjectURL(image.image1);
+    if (typeof image.image2 !== 'string') image.image2.preview = URL.createObjectURL(image.image2);
+    if (typeof image.image3 !== 'string') image.image3.preview = URL.createObjectURL(image.image3);
+
+  }, [image.imageMain]);
+
+
   return (
     <>
-      <div
-        className=" w-[800px]  rounded  flex flex-col  items-center z-10"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5 h-[500px]">
-          <h1 className="text-3xl text-center">Nhập thông tin tại đây</h1>
-          <div className="h-[20%]">
-            <InputCustomWidth
-              widthP={"full"}
-              lable="Tên sản phẩm "
-              placeholder="Tên sản phẩm..."
-              PLarge={true}
-              value={productName}
-              setValue={setProductName}
-            />
-          </div>
 
-          <div className="flex h-1/5 justify-between">
-            <div className="flex w-[70%] ">
-              <SelectCustomWidth
-                widthP="[30%]"
-                lable="Loại hàng"
-                options={categories}
-                selectValue={selectValue}
-                setSelectValue={setSelectValue}
-              />
-              <InputCustomWidth
-                widthP="[30%]"
-                lable="Giá"
-                placeholder="Giá: VND"
-                PLarge={false}
-                value={price}
-                setValue={setPrice}
-              />
-            </div>
-
-            <HashTagCustomWidth
-              widthP="[30%]"
-              lable="Hash_Tag"
-              placeholder="Tag..."
-              tags={tags}
-              setTags={setTags}
-            />
-          </div>
-          <div className="flex">
-            <div className=" w-[46%] mr-[24px]">
-              <div className="h-1/2 ">
-                <InputCustomWidth
-                  widthP={"full"}
-                  lable="Miêu tả ngắn gọn"
-                  placeholder="Miêu tả..."
-                  PLarge={true}
-                  value={shortDes}
-                  setValue={setShortDes}
-                />
-              </div>
-              <TextCustomWidth
-                widthP="full"
-                lable="Miêu tả chi tiết"
-                placeholder="Miêu tả chi tiết tại đây..."
-              />
-            </div>
-            <div className=" w-[50%]">
-              <input
-                type="file"
-                name="imageMain"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-
-                  setImageMain(file);
-                }}
-              />
-              <input
-                type="file"
-                name="image1"
-                onChange={(e) => {
-                  setImage1(e.target.files[0]);
-                }}
-              />
-              <input
-                type="file"
-                name="image2"
-                onChange={(e) => {
-                  setImage2(e.target.files[0]);
-                }}
-              />
-              <input
-                type="file"
-                name="image3"
-                onChange={(e) => {
-                  setImage3(e.target.files[0]);
-                }}
-              />
-              {/* <InputFileCustomWidth
-                lable="Ảnh 1"
-                widthP="[100%]"
-                valueImg={image1}
-                setValueImg={setImage1}
-              />
-              <InputFileCustomWidth
-                lable="Ảnh 2"
-                widthP="[100%]"
-                valueImg={image2}
-                setValueImg={setImage2}
-              />
-              <InputFileCustomWidth
-                lable="Ảnh 3"
-                widthP="[100%]"
-                valueImg={image3}
-                setValueImg={setImage3}
-              />*/}
-            </div>
-            <Button text="Submit" onClick={handleSubmit}></Button>
-          </div>
-        </div>
-        {/* <h1 className="text-3xl">Xem trước tại đây</h1>
+      <FormCreateProduct productName={productName} setProductName={setProductName} categories={categories} selectValue={selectValue} setSelectValue={setSelectValue} price={price} setPrice={setPrice} tags={tags} setTags={setTags} setVariantChild={setVariantChild} variantChild={variantChild} setVariants={setVariants} variants={variants} image={image} setImage={setImage} variantValue={variantValue} setVariantValue={setVariantValue} handleSubmit={handleSubmit} setShortDes={setShortDes} />
+      <h1 className="text-3xl">Xem trước tại đây</h1>
       <div className="w-full items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
-        <div className="flex">
-            <div className="mr-[30px]">
-              <ProductCardCtHeight
-                image={imageMain?.preview}
-                name={productName}
-                description={shortDes}
-                costPerUnit={price}
-                color={"#4ed14b"}
-              />
-            </div>
-            <div>
-              <p>Xem trước chi tiết sản phẩm trên mobile tại đây</p>
-              <div className="w-[500px] ">
-                <div className="w-[375px] ml-[25%]">
-                  <GroupImageCtWidth
-                    widthP="full"
-                    mainImage={imageMain?.preview}
-                    image1={image1.preview}
-                    image2={image2.preview}
-                    image3={image3.preview}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-[12px]">
-            <p>Xem trước chi tiết sản phẩm trên desktop tại đây</p>
 
-            <GroupImageCtWidth
-              widthP="400px"
-              mainImage={imageMain?.preview}
-            />
-          </div>
-      </div> */}
+        <img src={image.imageMain?.preview ? image.imageMain?.preview : ''} width='100%' height='100%' alt="" />
       </div>
+
     </>
   );
 };

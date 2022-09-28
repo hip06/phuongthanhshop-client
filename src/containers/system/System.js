@@ -16,9 +16,9 @@ const System = () => {
     dispatch(actions.getCategory());
   }, [isLoggedIn]);
   return (
-    <div className="flex h-screen w-screen bg-white">
+    <div className="flex h-screen w-screen bg-white ">
       {isShowSidebar && <Sidebar />}
-      <div className={`${isShowSidebar ? "w-r256" : "w-full"} h-full`}>
+      <div className="flex-auto overflow-auto">
         <Header setIsShowSidebar={setIsShowSidebar} />
         <div className="p-5">
           <Outlet />

@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { apiGetCurrent } from "../../apis/user";
 import { bufferToBase64 } from "../../ultils/common";
+import { Profile } from "../../components/Modal";
 const { FiMenu } = icons;
 
 const Header = ({ setIsShowSidebar }) => {
+  const [isShow, setIsShow] = useState(false);
   const userCurrent = useSelector((state) => state.auth.userCurrent);
   return (
     <div className="w-full h-[64px] bg-white text-gray-500 flex items-center justify-between shadow-md px-3">
@@ -27,8 +29,10 @@ const Header = ({ setIsShowSidebar }) => {
           }
           alt="avatar"
           className="w-10 h-10 object-cover rounded-full"
+          onClick={() => setIsShow(!isShow)}
         />
       </div>
+      {isShow ? <Profile /> : ""}
     </div>
   );
 };

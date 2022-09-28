@@ -3,14 +3,13 @@ import image from "../../assets/temp.png";
 import { FiSearch } from "react-icons/fi";
 import { InputCustomWidth } from "../../components/InputCtWidth";
 import { useEffect, useState } from "react";
-import { apiAllUsers } from "../../apis/user";
-
+import apiUser from "../../apis/user";
 const User = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchCategory = async () => {
-      const res = await apiAllUsers.get();
-      setUsers(res.user.rows);
+      const res = await apiUser.getAll();
+      setUsers(res.response.rows);
     };
     fetchCategory();
   }, []);
@@ -21,7 +20,6 @@ const User = () => {
         key={i}
         className="flex rounded w-full bg-white items-center h-[90px] [&:not(:first-child)]:mt-2"
       >
-        
         <div className="w-[5%] text-center">
           <span>{i + 1}</span>
         </div>
