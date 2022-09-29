@@ -20,7 +20,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-    categories.map((category) => {
+    categories?.map((category) => {
 
       if (params['*'] === category.valueEn) {
 

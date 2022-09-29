@@ -16,7 +16,7 @@ const LayoutMenu = ({ setModalShow,mainColor }) => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     let newCategory = [];
-    app.categories.map((category) => {
+    app?.categories?.map((category) => {
       newCategory.push({
         content: category.valueVi,
         color: category.color,

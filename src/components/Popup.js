@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from "../components/Button"
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
@@ -6,6 +6,7 @@ import { togglePopup } from '../store/actions/popupAction';
 import ApiChangePassword from '../apis/changePassword';
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
+import InputField from "../components/InputField"
 
 const PopupCart = () => {
     const dispatch = useDispatch();
@@ -54,34 +55,39 @@ const PopupCart = () => {
 }
 
 export const PopupChangePassword = ({ setIsChangePassword }) => {
-    const passwordRef = useRef();
+    const [currentPassword, setCurrentPassword] = useState({
+        password: "",
+    });
     const { isLoggedIn, userCurrent } = useSelector((state) => state.auth);
     const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = async (email, password) => {
         try {
             const res = await ApiChangePassword.verifyAccount({ email: email, password: password });
             setIsLoading(false);
-            if(res.status===0)Swal.fire('Thành công',res.message,'success');
-            else Swal.fire('Thất bại',res.message,'error')
+            if (res.status === 0) Swal.fire('Thành công', res.message, 'success');
+            else Swal.fire('Thất bại', res.message, 'error')
         }
         catch (err) {
             setIsLoading(false);
-            Swal.fire('Thất bại',err.message,'error')
+            Swal.fire('Thất bại', err.message, 'error')
 
         }
     }
     return (<div className="absolute top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,.25)] z-[10] flex justify-center items-center " onClick={(e) => { setIsChangePassword(false); }}>
         {isLoading && <Loading></Loading>}
-        <div className="h-[120px] w-[90%] bg-white rounded-[10px] p-[10px]" onClick={(e) => { e.stopPropagation() }}>
-            <p className="text-center text-[16px] font-bold">Nhập mật khẩu hiện tại để đổi mật khẩu</p>
-            <input className='w-full h-[30px] bg-[#d9d9d9] p-[5px]' ref={passwordRef}></input>
+        <div className="h-[140px] w-[90%] bg-white rounded-[10px] p-[10px] flex flex-col justify-around" onClick={(e) => { e.stopPropagation() }}>
+            {/* <p className="text-[16px] font-bold">Mật khẩu hiện tại</p> */}
+            {/* <input className='w-full h-[30px] outline-[#d9d9d9] border-[1px] border-[#d9d9d9] p-[5px]' ref={passwordRef}></input> */}
+            <div className='font-bold text-[16px]'>
+                <InputField label='Mật khẩu hiện tại' value={currentPassword.password} setValue={setCurrentPassword} type='password' typeInput='password' setInvalidFields={() => { }} invalidFields=''></InputField>
+            </div>
             <div className='flex w-full justify-around'>
-                <button onClick={() => { setIsChangePassword(false) }} className='w-[40%] rounded-[10px] h-[40px]'>Hủy bỏ</button>
+                <button onClick={() => { setIsChangePassword(false) }} className='w-[40%] rounded-[10px] h-[40px] bg-[#383838] text-[white]'>Hủy bỏ</button>
                 <button onClick={() => {
                     setIsLoading(true);
-                    handleSubmit(userCurrent.email, passwordRef.current.value);
-                    passwordRef.current.value = "";
-                }} className='w-[40%] bg-[red] rounded-[10px] h-[40px]'>Xác nhận</button>
+                    handleSubmit(userCurrent.email, currentPassword.password);
+                    setCurrentPassword((prev) => { return { ...prev, password: "" } })
+                }} className='w-[40%] bg-[#3F9DF3] rounded-[10px] h-[40px] text-[white]'>Xác nhận</button>
             </div>
         </div>
     </div>)
