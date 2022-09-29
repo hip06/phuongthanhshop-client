@@ -1,26 +1,21 @@
 import axiosClients from "../axiosClients";
 
-export const  apiGetCurrent = {
-  get: (data) => {
+const apiUSer = {
+  getCurrent: (data) => {
     const url = "/api/v1/user/current";
     return axiosClients.get(url, data);
   },
-};
-export const apiAllUsers = {
-  get: () => {
-    const url = "/api/v1/admin/user/all?page=1";
+  getAll: () => {
+    const url = "/api/v1/user/";
     return axiosClients.get(url);
   },
-};
-export const apiDeleteUser = {
   delete: (params) => {
-    const url = "/api/v1/admin/user/delete";
+    const url = "/api/v1/user/";
     return axiosClients.delete(url, { params });
   },
-};
-export const apiUpdateUser = {
-  put: (data) => {
-    const url = "/api/v1/user/update";
+  update: (data) => {
+    const url = "/api/v1/user/";
     return axiosClients.put(url, data);
   },
 };
+export default apiUSer;

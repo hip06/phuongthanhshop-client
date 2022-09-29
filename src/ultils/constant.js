@@ -6,7 +6,7 @@ const { BsSpeedometer2, RiProductHuntLine, FaUserEdit, IoIosCreate } = icons;
 export const path = {
   LOGIN: "/login",
   SYSTEM: "/system/*",
-  USERCLIENT: "/user",
+  USERCLIENT: "/user/*",
   HOME: "/home/*",
   PAYMENT: "/payment",
   FEED: "/feed",
@@ -89,6 +89,8 @@ export const adminMenu = [
     icon: <IoIosCreate size={24} />,
   },
 ];
+
+
 
 export const getSite = (params) => {
   const site = {

@@ -1,5 +1,5 @@
 import image from "../../ultils/image";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";

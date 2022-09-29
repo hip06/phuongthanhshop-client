@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react'
 import { deleteAllPaymentsAction } from "../../store/actions/userAction"
 import { useDispatch } from "react-redux"
-import { SelectCustomWidthPayment } from "../../components/InputCtWidth"
+import { SelectCustomWidth } from "../../components/InputCtWidth"
 
 const Payment = () => {
     const dispatch = useDispatch();
     const selectRef = useRef();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
-    console.log(totalPayment);
+
     const [cities, setCities] = useState(['Lào Cai']);
     const [citiesObject, setCitiesObject] = useState([]);
     const [towns, setTowns] = useState([]);
@@ -79,7 +79,7 @@ const Payment = () => {
             const data = await res.json();
 
             const wardsData = [];
-            console.log(data.data);
+
             data.data.map((ward) => {
                 wardsData.push(ward['WardName']);
             })
@@ -130,12 +130,12 @@ const Payment = () => {
     // }, [])
     return (<div className='relative'>
         <header className="flex items-center w-full h-[60px] lg:hidden">
-            <Link className='w-[15%] flex justify-center' to='/home/fashion' onClick={() => {
+            <Link className='w-[15%] flex justify-center' to='/' onClick={() => {
                 dispatch(deleteAllPaymentsAction());
             }}>
                 <AiOutlineHome size={28} className=""></AiOutlineHome>
             </Link>
-            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/home/fashion'>
+            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/'>
                 <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
             </Link>
         </header>
@@ -165,13 +165,13 @@ const Payment = () => {
             <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
 
             <div className='h-[50px] w-full'>
-                <SelectCustomWidthPayment options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidthPayment>
+                <SelectCustomWidth options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidth>
             </div>
             <div className='h-[50px] w-full'>
-                <SelectCustomWidthPayment options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidthPayment>
+                <SelectCustomWidth options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidth>
             </div>
             <div className='h-[50px] w-full'>
-                <SelectCustomWidthPayment options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidthPayment>
+                <SelectCustomWidth options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidth>
             </div>
 
             <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>

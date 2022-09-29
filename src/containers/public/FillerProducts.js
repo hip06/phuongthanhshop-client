@@ -2,10 +2,10 @@ import { BiFilterAlt } from "react-icons/bi";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ProductCardCtHeight } from "../../components/ProductCard";
 import { SelectCustomWidth, InputCustomWidth } from "../../components/InputCtWidth";
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
-
+import { filters } from "../../ultils/constant";
 const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOption, setSearchOnCategory, searchOnCategory }) => {
   const { products } = useSelector((state) => state.app);
   const typingTimeOut = useRef(null)
@@ -35,7 +35,9 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
           </div>
           <div className="flex items-center justify-between mr-[12px]">
             <SelectCustomWidth
-              options={['Mới nhất', 'Cũ nhất', 'A-Z', 'Z-A', 'Giá cao -> thấp', 'Giá thấp -> cao']}
+
+              options={filters}
+
               lable={'Phân loại'}
               widthP={'full'}
               selectValue={selectedOption}
@@ -45,8 +47,10 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
         </div>
 
         <div className="justify-center bg-[#d9d9d9] rounded-[12px] mt-[12px]">
-          {products.length ===0 && <div className="w-full text-center mt-[12px] lg:text-lg"> Chúng tôi chưa có sản phẩm hợp với mô tả !</div>}
+
+          {products.length === 0 && <div className="w-full text-center mt-[12px] lg:text-lg"> Chúng tôi chưa có sản phẩm hợp với mô tả !</div>}
           <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 650: 3, 956: 4, 1286: 5 }}>
+
             <Masonry className="justify-center bg-[#d9d9d9] rounded-[12px] pb-[24px]">
               {products?.map((product) => {
                 return (
@@ -67,7 +71,7 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
             <Pagination
               currentPage={page}
               setCurrentPage={setPage}
-             />
+            />
           </div>
         </div>
       </div>

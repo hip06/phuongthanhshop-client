@@ -24,12 +24,12 @@ const ApiProduct = {
     const url = "/api/v1/product";
     return axiosClients.post(url, data);
   },
-  delete: (id) => {
-    const url = ``;
-    return axiosClients.delete(url);
+  delete: (params) => {
+    const url = "/api/v1/product/delete";
+    return axiosClients.delete(url, { params });
   },
-  update: (data, id) => {
-    const url = ``;
+  update: (data) => {
+    const url = "/api/v1/product/update";
     return axiosClients.post(url, data);
   },
   getProductById: (params) => {

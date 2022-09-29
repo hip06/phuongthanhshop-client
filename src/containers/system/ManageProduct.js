@@ -9,25 +9,41 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import { PopupDeleteProduct, EditProduct } from "../../components/Modal";
+import { filters } from "../../ultils/constant";
+
 const ManageProduct = () => {
   const dispatch = useDispatch();
   const { categories, products } = useSelector((state) => state.app);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState("");
   const [isShowEdit, setIsShowEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [addAll, setAddAll] = useState(false);
+  const [addDelete, setAddDelete] = useState([]);
+
+  const [selectProduct, setSelectProduct] = useState("");
   const [selectValue, setSelectValue] = useState("");
+  const [selectFilter, setSelectFilter] = useState(filters[0]);
 
   // reload products theo category
   useEffect(() => {
     categories.length > 0 && setSelectValue(categories[0].code);
   }, [categories]);
 
+  // console.log(selectFilter);
+
+
   useEffect(() => {
+    const filter = Object.values(selectFilter.sort);
     selectValue &&
-      dispatch(actions.getProduct({ category: selectValue, page: 1 }));
-  }, [selectValue, isLoading]);
+      dispatch(
+        actions.getProduct({
+          categoryCode: selectValue,
+          order: [...filter],
+        })
+      );
+
+  }, [selectValue, isLoading, selectFilter]);
 
   if (addAll) {
     const checkboxs = [...document.querySelectorAll(".checkbox")];
@@ -43,7 +59,7 @@ const ManageProduct = () => {
 
   // Compontent products
 
-  const renderProductList = products[0]?.map((product, i) => {
+  const renderProductList = products?.map((product, i) => {
     return (
       <div
         key={product.id}
@@ -53,12 +69,17 @@ const ManageProduct = () => {
           <input
             type="checkbox"
             className="h-[17.5px] w-[17.5px] checkbox"
+
           ></input>
         </div>
         <div className=" w-[10%] flex justify-center h-4/5">
-          <img src={image} alt="" className="h-full"></img>
+          <img
+            src={product.mainImage}
+            alt=""
+            className="object-cover w-full"
+          ></img>
         </div>
-        <div className="w-[25%] flex justify-center ">
+        <div className="w-[20%] flex justify-center ">
           <div className="w-full">
             <p className="whitespace-nowrap overflow-hidden text-ellipsis">
               {product.name}
@@ -69,7 +90,12 @@ const ManageProduct = () => {
           <p>{product?.category?.value}</p>
         </div>
         <div className="w-[15%] flex justify-center">
-          <p>{product?.costPerUnit}</p>
+          <p>
+            {new Intl.NumberFormat("it-IT", {
+              style: "currency",
+              currency: "VND",
+            }).format(product?.costPerUnit)}
+          </p>
         </div>
         <div className="flex w-[20%] justify-around ">
           <Button
@@ -79,7 +105,7 @@ const ManageProduct = () => {
             width="40%"
             onClick={() => {
               setIsShowEdit(true);
-              setId(product.id);
+              setSelectProduct(product);
             }}
           ></Button>
           <Button
@@ -90,7 +116,7 @@ const ManageProduct = () => {
             height="2"
             onClick={() => {
               setIsDelete(!isDelete);
-              setId(product.id);
+              setAddDelete((prev) => ([...prev, product.id]));
             }}
           ></Button>
         </div>
@@ -98,7 +124,7 @@ const ManageProduct = () => {
     );
   });
   return (
-    <>
+    <div className="w-full">
       <h1 className="text-3xl">Quản lí sản phẩm</h1>
 
       <div className="flex items-center bg-[#d9d9d9] rounded p-3 justify-between p-5">
@@ -111,7 +137,7 @@ const ManageProduct = () => {
             }}
           ></input>
           <div className="font-bold ">
-            <p> Đã chọn: 0</p>
+            <p> Đã chọn: {addDelete.length}</p>
           </div>
           <Button
             text="Xóa"
@@ -123,9 +149,17 @@ const ManageProduct = () => {
         </div>
         <div className="flex justify-between w-[50%] h-[40px]">
           <div className="flex items-center w-[50%] ">
-            <InputCustomWidth />
+            {/* <InputCustomWidth />
 
-            <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" />
+            <FiSearch className="ml-2 cursor-pointer text-2xl hover:text-gray-500" /> */}
+
+            <SelectCustomWidth
+              label="Loc"
+              widthP="full"
+              options={filters}
+              selectValue={selectFilter}
+              setSelectValue={setSelectFilter}
+            />
           </div>
           <div className="flex items-center w-[40%] ">
             <SelectCustomWidth
@@ -143,7 +177,7 @@ const ManageProduct = () => {
         <div className="flex pb-5 h-1/8">
           <div className="w-[5%] flex justify-center font-bold text-2xl"></div>
           <div className="w-[20%] flex justify-center font-bold text-xl">
-            Hình ảnh sản phẩm
+            Hình ảnh
           </div>
           <div className="w-[15%] flex justify-center font-bold text-xl">
             Tên sản phẩm
@@ -163,9 +197,10 @@ const ManageProduct = () => {
           isDelete={isDelete}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
-          id={id}
+          product={addDelete}
           selectValue={selectValue}
-          // cate={cateProdcut}
+          setAddDelete={setAddDelete}
+        // cate={cateProdcut}
         />
       ) : (
         ""
@@ -174,7 +209,7 @@ const ManageProduct = () => {
         <EditProduct
           isShowEdit={isShowEdit}
           setIsShowEdit={setIsShowEdit}
-          id={id}
+          product={selectProduct}
           categories={categories}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
@@ -182,7 +217,7 @@ const ManageProduct = () => {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 

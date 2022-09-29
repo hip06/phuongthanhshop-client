@@ -8,23 +8,26 @@ import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
 import * as actions from '../../store/actions'
 
-const limitCategory = [0,1,2]
+const limitCategory = [0, 1, 2]
 const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const cart = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.app);
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch()
   const params = useParams();
-  const [mainColor,setMainColor] = useState('');
+  const [mainColor, setMainColor] = useState('');
+
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-    categories.map((category) =>{
-      if(params['*']===category.contentEn){
+    categories.map((category) => {
+
+      if (params['*'] === category.valueEn) {
+
         setMainColor(category.color);
       }
     })
-  }, [params,categories]);
+  }, [params, categories]);
 
   return (
     <div>
@@ -55,7 +58,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
                 e.stopPropagation();
               }}
             >
-              <LayoutMenu setModalShow={setModalShow} />
+              <LayoutMenu mainColor={mainColor} setModalShow={setModalShow} />
             </div>
           </div>
         }
@@ -102,13 +105,13 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
             style={{ backgroundColor: mainColor }}
           >
-            <p>{cart.count}</p>
+            <p className='text-[white]'>{cart.count}</p>
           </div>
         </div>
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {!categoryProvided&&categories?.map((category) => {
+          {!categoryProvided && categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
               let color = category?.color;
               return (
@@ -120,11 +123,11 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
               );
             }
           })}
-          {categoryProvided&&<NameCategory
-                  id={'unique-id-nameCard$'}
-                  category={categoryProvided?.valueEn}
-                  color={categoryProvided?.color}
-                />}
+          {categoryProvided && <NameCategory
+            id={'unique-id-nameCard$'}
+            category={categoryProvided?.valueEn}
+            color={categoryProvided?.color}
+          />}
         </div>
         {categories?.filter((category, index) => limitCategory.some(item => item === index))?.map((category) => {
           return (
@@ -158,7 +161,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
               style={{ backgroundColor: mainColor }}
             >
-              <p>{cart.count}</p>
+              <p className='text-[white]'>{cart.count}</p>
             </div>
           </div>
         </div>
