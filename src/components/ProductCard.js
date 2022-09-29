@@ -1,9 +1,9 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import * as actions from "../store/actions";
 import {togglePopup} from '../store/actions/popupAction';
+import { convertPrice } from "../ultils/common";
 
 export const ProductCardCtHeight = ({
   id,
@@ -15,18 +15,11 @@ export const ProductCardCtHeight = ({
   const cartItem = useSelector(state => state.cart);
   const isLoggedIn = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const convertPrice = (price) => {
-    price = Number(price);
-    price = price.toLocaleString("it-IT", {
-      style: "currency",
-      currency: "VND",
-    });
-    return price;
-  };
-
-  const handleDispatch = () => {
-    dispatch(actions.getProductByIdClient({ id: id}));
+  const handleDispatch = async () => {
+    await dispatch(actions.getProductByIdClient({ id: id}));
+    navigate(`/detail/${id}`)
   }
   const isProductInCart = (id) => {
     for (let i = 0; i < cartItem.products.length; i++) {
@@ -37,11 +30,11 @@ export const ProductCardCtHeight = ({
     return false;
   }
   return (
-    <div className="w-[200px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
+    <div className="w-[200px] md:w-[230px] h-[320px] flex flex-col items-center bg-white rounded-[10px] overflow-hidden relative drop-shadow-md ">
       <div 
       onClick={() => handleDispatch()}
-      className={`mb-[20px]`}>
-        <img className="w-full h-[187px]" src={image} />
+      className={`mb-[20px] w-full`}>
+        <img className="w-full h-[187px] object-cover " src={image} />
       </div>
       <p
         className="absolute text-white rounded-[10px] top-[172px] left-[20px] text-[12px] px-[5px] py-[6px]"
@@ -71,7 +64,7 @@ export const ProductCardCtHeight = ({
         }} ></AiOutlineShoppingCart>
 
         <Link
-          onClick={() => handleDispatch()}
+          onClick={async() => await dispatch(actions.getProductByIdClient({ id: id}))}
           to={`/detail/${id}`}
           style={{ color: color }}
           className="text-[11px] font-bold"

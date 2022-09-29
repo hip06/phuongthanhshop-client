@@ -30,7 +30,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   }, [params, categories]);
 
   return (
-    <>
+    <div>
       <div
         className="flex lg:hidden items-center justify-around relative h-[70px]"
         ref={headerRef}
@@ -72,9 +72,9 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
         </div>
 
         <div>
-          {categories?.map((category) => {
+        {!categoryProvided&&categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
-              let color = category?.color
+              let color = category?.color;
               return (
                 <NameCategory
                   id={category.id}
@@ -84,6 +84,11 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
               );
             }
           })}
+          {categoryProvided&&<NameCategory
+                  id={'unique-id-nameCard$'}
+                  category={categoryProvided?.valueEn}
+                  color={categoryProvided?.color}
+                />}
         </div>
 
         <div>
@@ -161,7 +166,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Header;

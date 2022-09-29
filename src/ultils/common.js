@@ -8,3 +8,13 @@ export const toBase64 = file => new Promise((resolve, reject) => {
 });
 
 export const bufferToBase64 = arrayBuffer => arrayBuffer ? new Buffer(arrayBuffer, 'base64').toString('binary') : ''
+
+// convert number to price
+export const convertPrice = (price) => {
+    price = Number(price);
+    price = price.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    });
+    return price;
+}; 

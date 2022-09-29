@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const BoxTopSeller = ({ color }) => {
   const { productsBestSeller, productsCurrentUpdate } = useSelector(state => state.app)
   return (
-    <div className="bg-[#d9d9d9] mb-[5px] p-[10px] rounded">
+    <div className="bg-[#d9d9d9] mb-[5px] p-4 rounded">
       <div className="mb-[3px] text-[15px] lg:text-[24px] flex">
         <div className="flex">
           <span className="font-bold">#Top </span>

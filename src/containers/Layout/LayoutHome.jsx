@@ -39,7 +39,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
       <div className="w-full lg:w-11/12 mx-auto">
         <div className="hidden lg:flex w-full mb-[12px] mt-[24px]">
           <div className="w-5/12">
-            <div className="w-5/6 items-center bg-[#d9d9d9] flex mx-auto rounded-[12px] place-content-center p-5">
+            <div className="w-[90%] items-center bg-[#d9d9d9] flex ml-0 rounded-[12px] place-content-center p-5">
               <p className="font-[600] text-center text-[20px]">
                 {vi_uf8.all_categories}
               </p>
@@ -88,7 +88,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
         </div>
         <div className=" w-full flex mb-[24px]">
           <div className="hidden lg:block w-5/12">
-            <div className="w-5/6 bg-[#d9d9d9] mx-auto rounded-[12px] h-full p-5">
+            <div className="w-[90%] bg-[#d9d9d9] ml-0 rounded-[12px] h-full p-5">
               {categories?.map((category) => {
                 let weight = "font-[400]";
                 if (params["*"] === category?.valueEn) {
@@ -123,6 +123,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
               <img
                 className="max-w-full mx-auto rounded"
                 src={image.fashionMan}
+                alt="img"
               />
             </div>
 
@@ -130,6 +131,7 @@ const LayoutHome = ({ setLoading, page, setPage,selectedOption, setSelectedOptio
               <img
                 className="max-w-full mx-auto rounded h-full"
                 src={image.fashionGirl}
+                alt="img"
               />
             </div>
           </div>

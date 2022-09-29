@@ -1,91 +1,152 @@
 import Footer from "../../components/Footer";
 import Header from "../public/Header";
 import { useSelector } from "react-redux";
+import { GroupImageCtWidth } from "../../components/GroupImageCtWidth";
+import { convertPrice } from "../../ultils/common";
+import icons from "../../ultils/icons";
+import BoxVariants from "../../components/BoxVariants";
+import { useState } from "react";
+import { GroupBtnsPurchase } from "../../components/GroupBtnsPurchase";
 
+const { AiTwotoneStar, AiOutlineShoppingCart, BiPurchaseTag } = icons
 const Detail = () => {
     const { currentProduct } = useSelector((state) => state.app);
-    
+    const {
+        categoryData,
+        name,
+        hashtags,
+        costPerUnit,
+        description,
+        scores,
+        soldCounter,
+        votedCounter
+    } = currentProduct
+    const [priceShowed, setPriceShowed] = useState(costPerUnit)
+
+    const variantsTest = [
+        {
+            name: 'size',
+            value: [
+                {
+                    type: 'X(sdfsd)',
+                    price: 0,
+                },
+                {
+                    type: 'M(fsdfsdf)',
+                    price: 0,
+                },
+                {
+                    type: 'L(fdsfs)',
+                    price: 0,
+                },
+                {
+                    type: 'XL',
+                    price: 50000,
+                },
+                {
+                    type: 'XXL',
+                    price: -50000,
+                },
+                {
+                    type: 'S',
+                    price: 80000,
+                },
+            ]
+        },
+        {
+            name: 'color',
+            value: [
+                {
+                    type: 'blue',
+                    price: 20000,
+                },
+                {
+                    type: 'red',
+                    price: 0,
+                },
+            ]
+        },
+        {
+            name: 'preSalePrice',
+            value: [
+                {
+                    type: 'fist',
+                    price: 5000000,
+                },
+            ]
+        }
+    ]
+
+    const getpreSalePrice = () => {
+        const prePriceObject = variantsTest?.filter(variant => variant.name === 'preSalePrice')[0]
+        return (prePriceObject.value[0].price)
+    }
 
     return (
         <section className="w-full">
-            <Header categoryProvided={currentProduct?.categoryData} />
+            <Header categoryProvided={categoryData} />
+            <div className="block lg:flex my-[12px]">
+                <div className="mb-[12px]">
+                    {currentProduct && <GroupImageCtWidth data={currentProduct} />}
+                </div>
+                <div className="w-[90%] mx-auto">
+                    <div className="text-xl font-semibold">{name}</div>
+                    {hashtags && <div className="my-[8px]">#hash-tags:
 
+                    </div>}
+                    <div className="flex">
+                        <div className="w-[50%] text-[#721016]">Đã bán:
+                            <p className="inline"> {soldCounter}</p>
+                        </div>
+                        <div className="w-[50%] text-[#721016]">Đánh giá:
+                            <p className="inline text-[#f6c800]">
+                                {votedCounter === 0 ? ' ...' : Math.round(scores / votedCounter)}
+                                <AiTwotoneStar className="inline" size={26} />
+                            </p>
+
+                        </div>
+                    </div>
+                    <div
+                        className="bg-sky-400 w-[80%] mx-auto rounded-[30px] my-[8px] py-[12px] text-[#fff]
+                     text-center text-lg  font-bold"
+                    >{convertPrice(priceShowed)}</div>
+                    <div className="w-full text-center text-rose-500 line-through"
+                    >{convertPrice(getpreSalePrice())}</div>
+                    {variantsTest.length>1&&<div className="">
+                        {
+                            variantsTest?.filter(variant => variant.name !== 'preSalePrice')?.map(
+                                (variant) => {
+                                    return (<BoxVariants 
+                                        defautPrice={costPerUnit} 
+                                        setPriceShowed={setPriceShowed}
+                                        variants={variant} />)
+                                }
+                            )
+                        }
+                    </div>}
+                    <div className="w-full">
+                        <GroupBtnsPurchase device={'laptop'} />
+                    </div>
+                </div>
+            </div>
+            <div className="w-[90%] mx-auto">
+                <p className="">Mô tả sản phẩm :</p>
+                {description}
+            </div>
+
+            <div className="w-full">
+                <GroupBtnsPurchase device={'mobile'} />
+            </div>
+
+            <div className="w-[90%] mt-[24px] mx-auto">
+                <p className="">Nhận xét sản phẩm :</p>
+            </div>
 
             <div className="w-full">
                 <Footer
-                    color={currentProduct?.categoryData?.color}
-                    category={currentProduct?.categoryData?.valueEn} />
+                    color={categoryData?.color}
+                    category={categoryData?.valueEn} />
             </div>
-            {/* <div className=" absolute top-[20px] left-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
-            <TbArrowBackUp className=" m-[10px]" size={28}></TbArrowBackUp>
-
-        </div>
-        <div className=" absolute top-[20px] right-[20px] rounded-[50%] border-[#d9d9d9] border-[1px] bg-[#fff] ">
-            <AiOutlineShoppingCart className=' m-[10px]' size={28}></AiOutlineShoppingCart>
-        </div>
-        <div>
-            <div className='w-full h-[372px]'>
-                <img src={image} alt='hi' className='w-full' />
-            </div>
-            <div className='flex justify-around mt-[20px]'>
-                <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full' />
-                </div>
-                <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full' />
-                </div>
-                <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full' />
-                </div>
-                <div className='w-[20%]'>
-                    <img src={image} alt='hi' className='w-full' />
-                </div>
-            </div>
-        </div>
-
-        <div className='px-[10px] mt-[10px] h-[400px] overflow-y-auto'>
-            <div className='font-extrabold text-[20px] h-[50px]'>
-                <p>Áo chống nắng nam nữ dày dặn cao cấp thấm hút mồ hôi , chống tia UV</p>
-            </div>
-
-            <div className='text-[#2898FF] text-[20px] mt-[10px]'>
-                <p>600.000 VND</p>
-            </div>
-
-            <div className="mb-[100px] text-[15px]">
-                <p>
-                    Áo chống nắng nam cực mát (Full size M, L, XL):
-                    • ngăn ngừa tia UV-400
-                    • Đủ 4 Size M/L/XL/XXL:
-                    + Size L: 50-60kg
-                    + Size XL :  60 – 70kg
-                    + Size XXL: 70-80kg
-                    ....
-                    Áo chống nắng nam cực mát (Full size M, L, XL):
-                    • ngăn ngừa tia UV-400
-                    • Đủ 4 Size M/L/XL/XXL:
-                    + Size L: 50-60kg
-                    + Size XL :  60 – 70kg
-                    + Size XXL: 70-80kg
-                    ....
-                    Áo chống nắng nam cực mát (Full size M, L, XL):
-                    • ngăn ngừa tia UV-400
-                    • Đủ 4 Size M/L/XL/XXL:
-                    + Size L: 50-60kg
-                    + Size XL :  60 – 70kg
-                    + Size XXL: 70-80kg
-                    ....
-
-                </p>
-            </div>
-        </div>
-        <div className='flex bg-[#2898FF] text-white fixed bottom-0 w-full h-[80px] text-[17px]'>
-            <button className='flex w-[70%] justify-center items-center'>
-                <AiOutlineShoppingCart size={28} className='translate-y-[-3px]'></AiOutlineShoppingCart>
-                <p className='ml-[10px]'>Thêm vào giỏ hàng</p>
-            </button>
-            <button className='bg-[#0083C2] w-[30%]'>Mua hàng</button>
-        </div> */}
 
         </section>
     );

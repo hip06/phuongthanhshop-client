@@ -7,8 +7,10 @@ import { LoadingPageDesktop } from "../../components/LoadingPage";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { constant_page } from "../../ultils/constant";
-import PopupCart from '../../components/Popup';
+
+
 import { filters } from "../../ultils/constant";
+import PopupCart from '../../components/Popup';
 
 const Home = () => {
   const dispatch = useDispatch();
