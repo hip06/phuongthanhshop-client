@@ -18,8 +18,8 @@ const BoxTopSeller = ({ color }) => {
         <div className="w-full 
         scrollbar-thin scrollbar-thumb-green-700 scrollbar-track-black-300 
         lg:w-[90%] overflow-x-auto flex mx-auto">
-          {productsBestSeller?.map((product) => (
-            <div className="[&:not(:last-child)]:mr-5 pb-[18px]">
+          {productsBestSeller?.map((product,i) => (
+            <div key={i} className="[&:not(:last-child)]:mr-5 pb-[18px]">
               <ProductCardCtHeight
                 id={product.id}
                 image={product.mainImage}
@@ -45,8 +45,8 @@ const BoxTopSeller = ({ color }) => {
         <div className="w-full">
           <div className="scrollbar-thin scrollbar-thumb-green-700 scrollbar-track-black-300 
            w-full lg:w-[90%] overflow-x-auto flex mx-auto ">
-            {productsCurrentUpdate?.map((product) => (
-              <div className="[&:not(:last-child)]:mr-5 pb-[18px]">
+            {productsCurrentUpdate?.map((product,i) => (
+              <div key={i} className="[&:not(:last-child)]:mr-5 pb-[18px]">
                 <ProductCardCtHeight
                   id={product.id}
                   image={product.mainImage}

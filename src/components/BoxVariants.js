@@ -10,7 +10,7 @@ const BoxVariants   = ({ variants, setPriceShowed, defautPrice }) => {
                 return(
                     <div 
                     key={type.id}
-                    onClick={() => setPriceShowed(defautPrice + type.price)}
+                    onClick={() => setPriceShowed(defautPrice*type.price/100)}
                     className={` border-solid border-2 text-center cursor-pointer p-[8px]`}>{type.type}</div>
                 )
             })}

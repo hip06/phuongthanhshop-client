@@ -7,3 +7,9 @@ export const togglePopup = (state)=>{
     }
   }
   
+export const togglePopupAddToCart=(state)=>{
+  return {
+      type: actionTypes.TOGGLE_POPUP_ADD_TO_CART,
+      data:state
+    } 
+}

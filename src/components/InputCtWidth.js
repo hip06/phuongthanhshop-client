@@ -82,9 +82,9 @@ const SelectCustomWidth = React.memo(
                                 return (
                                     <option
                                         key={option.code ? option.code : option.valueVi}
-                                        value={option.code ? option.code : JSON.stringify(option)}
+                                        value={option.code ?JSON.stringify(option) :option}
                                     >
-                                        {option.valueVi}
+                                        {option.valueVi?option.valueVi:option}
                                     </option>
                                 );
                             })

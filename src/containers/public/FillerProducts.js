@@ -52,9 +52,9 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
           <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 650: 3, 956: 4, 1286: 5 }}>
 
             <Masonry className="justify-center bg-[#d9d9d9] rounded-[12px] pb-[24px]">
-              {products?.map((product) => {
+              {products?.map((product,i) => {
                 return (
-                  <div className="flex justify-center mt-[20px]">
+                  <div key={i} className="flex justify-center mt-[20px]">
                     <ProductCardCtHeight
                       id={product.id}
                       image={product.mainImage}

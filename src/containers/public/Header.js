@@ -6,27 +6,33 @@ import LayoutMenu from "../Layout/LayoutMenu";
 import { useParams, Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import NameCategory from "../../components/NameCategories";
-import * as actions from '../../store/actions'
+import * as actions from "../../store/actions";
 
-const limitCategory = [0, 1, 2]
+const limitCategory = [0, 1, 2];
 const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const cart = useSelector((state) => state.cart);
-  const { categories } = useSelector((state) => state.app);
+  const { categories } = useSelector((state) => {
+    return state.app;
+  });
   const [modalShow, setModalShow] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const params = useParams();
-  const [mainColor, setMainColor] = useState('');
+  const [mainColor, setMainColor] = useState("");
 
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-    categories?.map((category) => {
-
-      if (params['*'] === category.valueEn) {
-
-        setMainColor(category.color);
-      }
-    })
+    if (!categoryProvided) {
+      categories?.map((category) => {
+        if (params["*"] === category.valueEn) {
+          setMainColor(category.color);
+        }
+      });
+    }
+    else {
+      
+          setMainColor(categoryProvided.color);
+    }
   }, [params, categories]);
 
   return (
@@ -72,23 +78,26 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
         </div>
 
         <div>
-        {!categoryProvided&&categories?.map((category) => {
-            if (params["*"] === category?.valueEn) {
-              let color = category?.color;
-              return (
-                <NameCategory
-                  id={category.id}
-                  category={category.valueEn}
-                  color={color}
-                />
-              );
-            }
-          })}
-          {categoryProvided&&<NameCategory
-                  id={'unique-id-nameCard$'}
-                  category={categoryProvided?.valueEn}
-                  color={categoryProvided?.color}
-                />}
+          {!categoryProvided &&
+            categories?.map((category) => {
+              if (params["*"] === category?.valueEn) {
+                let color = category?.color;
+                return (
+                  <NameCategory
+                    id={category.id}
+                    category={category.valueEn}
+                    color={color}
+                  />
+                );
+              }
+            })}
+          {categoryProvided && (
+            <NameCategory
+              id={"unique-id-nameCard$"}
+              category={categoryProvided?.valueEn}
+              color={categoryProvided?.color}
+            />
+          )}
         </div>
 
         <div>
@@ -105,47 +114,59 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
             className={`absolute top-[-5px] right-[-3px] rounded-[50%] w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
             style={{ backgroundColor: mainColor }}
           >
-            <p className='text-[white]'>{cart.count}</p>
+            <p className="text-[white]">{cart.count}</p>
           </div>
         </div>
       </div>
       <div className="hidden lg:flex items-center justify-around relative h-[70px]">
         <div className="pt-[8px]">
-          {!categoryProvided && categories?.map((category) => {
-            if (params["*"] === category?.valueEn) {
-              let color = category?.color;
-              return (
-                <NameCategory
-                  id={category.id}
-                  category={category.valueEn}
-                  color={color}
-                />
-              );
-            }
-          })}
-          {categoryProvided && <NameCategory
-            id={'unique-id-nameCard$'}
-            category={categoryProvided?.valueEn}
-            color={categoryProvided?.color}
-          />}
+          {!categoryProvided &&
+            categories?.map((category) => {
+              if (params["*"] === category?.valueEn) {
+                let color = category?.color;
+                return (
+                  <NameCategory
+                    id={category.id}
+                    category={category.valueEn}
+                    color={color}
+                  />
+                );
+              }
+            })}
+          {categoryProvided && (
+            <NameCategory
+              id={"unique-id-nameCard$"}
+              category={categoryProvided?.valueEn}
+              color={categoryProvided?.color}
+            />
+          )}
         </div>
-        {categories?.filter((category, index) => limitCategory.some(item => item === index))?.map((category) => {
-          return (
-            <div onClick={() => dispatch(actions.getCodeCategory(category?.code))}>
-              <NavLink
-                key={category.id}
-                to={`/home/${category?.valueEn}`}
-                style={{
-                  color: category.color,
-                  fontSize: params["*"] === category?.valueEn ? "25px" : "20px",
-                }}
-                className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+        {categories
+          ?.filter((category, index) =>
+            limitCategory.some((item) => item === index)
+          )
+          ?.map((category) => {
+            return (
+              <div
+                onClick={() =>
+                  dispatch(actions.getCodeCategory(category?.code))
+                }
               >
-                {category.valueVi}
-              </NavLink>
-            </div>
-          );
-        })}
+                <NavLink
+                  key={category.id}
+                  to={`/home/${category?.valueEn}`}
+                  style={{
+                    color: category.color,
+                    fontSize:
+                      params["*"] === category?.valueEn ? "25px" : "20px",
+                  }}
+                  className="animate-modalClose block border-b border-[rgba(0,0,0,60%)] [&:not(:first-child)]:mt-[20px]"
+                >
+                  {category.valueVi}
+                </NavLink>
+              </div>
+            );
+          })}
         <div className="flex min-w-[90px]">
           <div>
             <Link to="/user">
@@ -161,7 +182,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
             w-[60%] h-[60%] text-[10px] flex justify-center items-end`}
               style={{ backgroundColor: mainColor }}
             >
-              <p className='text-[white]'>{cart.count}</p>
+              <p className="text-[white]">{cart.count}</p>
             </div>
           </div>
         </div>

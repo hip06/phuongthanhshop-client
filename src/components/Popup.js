@@ -6,7 +6,9 @@ import { togglePopup } from '../store/actions/popupAction';
 import ApiChangePassword from '../apis/changePassword';
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
-import InputField from "../components/InputField"
+import InputField from "../components/InputField";
+import BoxVariants from "../components/BoxVariants";
+
 
 const PopupCart = () => {
     const dispatch = useDispatch();
@@ -51,6 +53,13 @@ const PopupCart = () => {
                 />
             </div>
         </div>
+    </div>)
+}
+
+export const PopupAddToCart=()=>{
+    const variants="";
+    return (<div className="fixed h-screen w-screen bg-[rgba(0,0,0,.25)] flex justify-center items-center" style={{ zIndex: 60 }} >
+        
     </div>)
 }
 

@@ -10,10 +10,12 @@ import { SelectCustomWidth } from "../../components/InputCtWidth"
 
 const Payment = () => {
     const dispatch = useDispatch();
-    const selectRef = useRef();
+    const nameRef=useRef();
+    const phoneNumberRef=useRef();
+    const emailRef=useRef();
+    const addressRef=useRef();
     const cartItem = useSelector(state => state.cart);
     const [totalPayment, setTotalPayment] = useState(0);
-
     const [cities, setCities] = useState(['Lào Cai']);
     const [citiesObject, setCitiesObject] = useState([]);
     const [towns, setTowns] = useState([]);
@@ -156,13 +158,14 @@ const Payment = () => {
             </div>
         </section>
 
-        <section className=" border-[1px] border-[#777] rounded-[10px] h-[340px] p-[10px] m-[10px] mt-[20px] mb-[50px] lg:mt-[30px] lg:mb-[20px]">
+        <section className=" border-[1px] border-[#777] rounded-[10px] p-[10px] m-[10px] mt-[20px] mb-[10px] lg:mt-[30px] lg:mb-[20px]">
 
             <div className="relative w-full mb-[13px]">
                 <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px] lg:text-[20px]">Thông tin người nhận</p>
             </div>
-            <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
-            <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
+            <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={nameRef}></input>
+            <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={phoneNumberRef}></input>
+            <input placeholder="Email" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={emailRef}></input>
 
             <div className='h-[50px] w-full'>
                 <SelectCustomWidth options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidth>
@@ -174,10 +177,9 @@ const Payment = () => {
                 <SelectCustomWidth options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidth>
             </div>
 
-            <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]'></input>
+            <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={addressRef}></input>
         </section>
-        <div className='h-[20px]'></div>
-        <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] fixed bottom-0 text-white lg:hidden' onClick={() => {
+        <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] text-white lg:hidden' onClick={() => {
             cartItem.productsPayment = []
         }}>
             Đặt hàng
