@@ -20,7 +20,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
   const headerRef = useRef();
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth" });
-    categories.map((category) => {
+    categories?.map((category) => {
 
       if (params['*'] === category.valueEn) {
 
@@ -72,7 +72,7 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
         </div>
 
         <div>
-        {!categoryProvided&&categories?.map((category) => {
+          {!categoryProvided && categories?.map((category) => {
             if (params["*"] === category?.valueEn) {
               let color = category?.color;
               return (
@@ -84,11 +84,11 @@ const Header = ({ isSearching, setIsSearching, categoryProvided }) => {
               );
             }
           })}
-          {categoryProvided&&<NameCategory
-                  id={'unique-id-nameCard$'}
-                  category={categoryProvided?.valueEn}
-                  color={categoryProvided?.color}
-                />}
+          {categoryProvided && <NameCategory
+            id={'unique-id-nameCard$'}
+            category={categoryProvided?.valueEn}
+            color={categoryProvided?.color}
+          />}
         </div>
 
         <div>

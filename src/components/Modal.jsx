@@ -10,6 +10,7 @@ import ApiCategory from "../apis/category";
 import ApiProduct from "../apis/product";
 import * as actions from "../../src/store/actions";
 import { useDispatch } from "react-redux";
+import avatar from "../assets/avatar-anon.png";
 
 export const ModalEditCate = ({ setIsShowEdit, selectCate }) => {
   const [newCategory, setNewCategory] = useState(`${selectCate.valueVi}`);
@@ -228,7 +229,7 @@ export const PopupDeleteProduct = ({
           height="2"
           onClick={async () => {
             await ApiProduct.delete({ id: [...product] });
-            setAddDelete([])
+            setAddDelete([]);
             setIsDelete(!isDelete);
             setIsLoading(!isLoading);
             cate(selectValue);
@@ -458,28 +459,96 @@ export const EditProduct = ({
     </>
   );
 };
-export const Profile = ({ currentUser }) => {
+export const Profile = ({ userCurrent, setIsShow }) => {
   return (
     <>
       <div
-        className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg"
+        className="fixed h-full w-full top-0 right-0 flex justify-center items-center bg-gray-500/[.09] drop-shadow-lg z-10"
         onClick={(e) => {
           e.stopPropagation();
+          setIsShow(false);
         }}
       >
         <div
-          className=" w-[600px]  rounded  flex flex-col  items-center z-10"
+          className=" w-4/5 rounded flex items-center z-10"
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <div className="w-full items-center bg-[#d9d9d9] rounded  justify-between p-5 h-[500px]">
-            <h1 className="text-3xl text-center">Thong tin ca nhan</h1>
-            <img
-              src="../assets/avatar-anon.png"
-              alt=""
-              className=" h-full w-full"
-            />
+          <div className="w-1/2 items-center bg-white rounded justify-center flex p-5 h-[500px] ">
+            <div className="rounded bg-gray-200 w-[90%] h-1/2 p-3">
+              <h1 className="text-xl bold text-center mb-5">
+                THÔNG TIN CÁ NHÂN
+              </h1>
+              <div className=" rounded-full mb-5 h-1/2 flex items-center">
+                <img src={avatar} alt="" className="h-full rounded-full" />
+                <div className="w-4/5 px-10">
+                  {/* <div className="">
+                    <b className="">Tên người dùng : </b>
+                    {userCurrent?.name ? userCurrent?.name : ""}
+                  </div> */}
+                  <div className="flex">
+                    <p className="">
+                      <b>Email : </b>
+                      {userCurrent.customer_email
+                        ? userCurrent.customer_email
+                        : ""}
+                    </p>
+                  </div>
+                  <div className="">
+                    <p className="">
+                      <b>Số điện thoại : </b>
+                    </p>
+                    <b className="">Số điện thoại</b>
+                    {userCurrent.customer_phone
+                      ? userCurrent.customer_phone
+                      : ""}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2 items-center bg-[#d9d9d9] rounded  flex-col flex p-5 h-[500px] ">
+            <div className="w-4/5 bg-white h-full rounded">
+              <div className="h-[15%] flex items-center justify-center">
+                <b>ĐƠN HÀNG</b>
+              </div>
+              <hr />
+
+              <div className="h-[85%] overflow-auto ">
+                {userCurrent.products.map((product) => {
+                  console.log(product);
+                  return (
+                    <div className="h-[25%] flex m-3 border-b-2">
+                      <div className="w-[80%] flex h-full ">
+                        <img
+                          src={product.product_mainImage}
+                          alt=""
+                          className="h-full "
+                        />
+                        <div className="flex flex-col justify-between">
+                          <b className="text-sm">{product.product_name}</b>
+                          <p className="text-xs">Ngày đặt: 12/08/2022</p>
+                        </div>
+                      </div>
+                      <div className="w-[20%] flex flex-col justify-between">
+                        <div className="flex justify-end">
+                          <div className="border rounded h-[85%] w-[35%] text-center text">
+                            {product.product_quantity}
+                          </div>
+                        </div>
+
+                        <div className="text-sm">
+                          <b>{product.product_totalCost}</b>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <hr />
+            </div>
           </div>
         </div>
       </div>

@@ -32,7 +32,9 @@ const Home = () => {
     dispatch(actions.getProductCurrentUpdate(
       { limitProduct: constant_page.limit_products_outstanding, order: ['updatedAt', 'DESC'], categoryCode: code }));
   }, [params["*"]]);
+
   //get products of category 25products per page =>> follow by category && oder
+
   useEffect(() => {
     const filter = Object.values(selectedOption.sort);
     dispatch(actions.getProduct({ limitProduct: constant_page.limit_products, order: [...filter], categoryCode: code, page: page, name: searchOnCategory }));

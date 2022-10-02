@@ -3,7 +3,6 @@ import icons from "../../ultils/icons";
 import avatar from "../../assets/avatar-anon.png";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { apiGetCurrent } from "../../apis/user";
 import { bufferToBase64 } from "../../ultils/common";
 import { Profile } from "../../components/Modal";
 const { FiMenu } = icons;
@@ -29,10 +28,10 @@ const Header = ({ setIsShowSidebar }) => {
           }
           alt="avatar"
           className="w-10 h-10 object-cover rounded-full"
-          onClick={() => setIsShow(!isShow)}
+          onClick={() => setIsShow(true)}
         />
       </div>
-      {isShow ? <Profile /> : ""}
+      {isShow ? <Profile setIsShow={setIsShow} userCurrent={userCurrent} /> : ""}
     </div>
   );
 };

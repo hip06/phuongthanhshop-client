@@ -24,6 +24,8 @@ import { path } from "./ultils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "./store/actions";
 import { useEffect } from "react";
+import ApiBill from "./apis/bill";
+
 
 function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -32,7 +34,14 @@ function App() {
   // Khi reload page get userdata again
   useEffect(() => {
     isLoggedIn && dispatch(actions.getCurrent());
-  }, [isLoggedIn]);
+    // isLoggedIn && ApiBill({
+    //   email: 'ducanh9x@gmail.com',
+    //   address: 'hanoi',
+    //   phone: '0326770098',
+    //   products: JSON.stringify({ productId: "069c8827-8f72-4ad8-adda-a48cd584270e", cost: " ", quantity: 1 })
+    // })
+  }, [isLoggedIn])
+
   useEffect(() => {
     dispatch(actions.getCategory());
     if (window.location.href.includes('verify-token')) {
