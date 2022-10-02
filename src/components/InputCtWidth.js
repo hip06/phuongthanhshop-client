@@ -99,6 +99,54 @@ const SelectCustomWidth = React.memo(
     }
 );
 
+const SelectPayment = React.memo(
+    ({ options, lable, widthP, selectValue, setSelectValue }) => {
+        return (
+            <div className={`w-${widthP} h-full`}>
+                <label
+                    htmlFor="field"
+                    className={`font-bold text-l ${lable ? "min-h-[42px]" : ""
+                        }  flex items-center`}
+                >
+                    {lable}
+                </label>
+                <div
+                    className={`flex items-center w-full ${lable ? "h-1/2" : "h-full"}`}
+                >
+                    <select
+                        className="mr-3  focus:ring-indigo-500 
+                focus:border-indigo-500 block w-full pl-2 pr-2 sm:text-sm 
+                border-gray-300 rounded-md min-h-[42px]"
+                        onChange={(e) => {
+
+                            setSelectValue(e.target.value);
+
+                        }}
+                        defaultValue={selectValue}
+                    >
+                        {options?.length !== 0 ? (
+                            options?.map((option, index) => {
+                                return (
+                                    <option
+                                        key={option}
+                                        value={option}
+                                    >
+                                        {option}
+                                    </option>
+                                );
+                            })
+                        ) : (
+                            <option value="null">Chưa có lựa chọn</option>
+                        )}
+                    </select>
+                    <BiSortAlt2 className="text-2xl" />
+                </div>
+            </div>
+        );
+    }
+);
+
+
 /* HashTag field Which can custom width
     WidthP : value of width
     @Anhtd
@@ -258,7 +306,7 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                         height="2"
 
                         onClick={() => {
-                            if (variantValue.value.length > 0) {
+                            if (variantValue.value) {
                                 setVariants((prev) => [...prev, variantValue])
                                 setVariantValue({ name: '', value: [] })
                                 setVariantChild({ type: '', price: '' })
@@ -266,6 +314,7 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                                 console.log(variantChild.type !== '')
                                 console.log(variantChild.price !== '');
                                 console.log(variantValue.name !== '');
+                                console.log(variantValue);
                             }
                         }}
                     ></Button>
@@ -303,12 +352,12 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                         onClick={() => {
 
                             if (Number.isInteger((Number(variantChild.price))) & variantChild.type !== '' & variantChild.price !== '' & variantValue.name !== '') {
-
+                                console.log(12);
                                 setVariantValue((prev) => {
                                     const type = 'value'
                                     return ({ ...prev, [type]: variantChild })
                                 })
-                                setVariantChild({ type: '', price: '' })
+
                             }
 
 
@@ -316,12 +365,12 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                     ></Button>
                 </div>
             </div>
-            <div className="flex flex-wrap">
+            {/* <div className="flex flex-wrap">
                 {variants?.map((variant, index) =>
                 (<div className="flex bg-slate-500 my-2 h-full rounded p-2 min-w-[350px]" key={index}>
-                    <b className=" ">{`${variant.name} : `}</b>
+                    <b className=" ">{`${variant?.name} : `}</b>
                     <div className="">
-                        {variant.value?.map((type, index) => {
+                        {variant?.value?.map((type, index) => {
 
                             const cost = Intl.NumberFormat("it-IT", {
                                 style: "currency",
@@ -342,7 +391,7 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
 
                 </div>)
                 )}
-            </div>
+            </div> */}
 
         </div >
     );
@@ -400,6 +449,7 @@ export {
     InputFileCustomWidth,
     InputSearch,
     InputVariant,
+    SelectPayment,
 };
 // setVariantValue((prev)=>({
 //     ...prev,
