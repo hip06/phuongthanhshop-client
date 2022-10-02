@@ -1,15 +1,6 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import takeParamsVerifyToken from "./ultils/takeParamsVerifyToken";
-import {
-  Home,
-  Login,
-  Feed,
-  Detail,
-  UserClient,
-  Payment,
-  Cart,
-  UserChangePassword,
-} from "./containers/public";
+import Login from "./containers/public/Login";
 import {
   System,
   General,
@@ -55,14 +46,14 @@ function App() {
     <div className="w-full h-full max-w-[1560px] mx-auto">
       <Routes>
         {/*Public routes */}
-        <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />
+        {/* <Route path="/" element={<Navigate to="/home/Households"></Navigate>} />
         <Route path="/changePassword" element={<UserChangePassword></UserChangePassword>}></Route>
         <Route path={path.HOME} element={<Home />} />
         <Route path={path.FEED} element={<Feed />} />
         <Route path={path.PAYMENT} element={<Payment />} />
         <Route path={path.CART} element={<Cart />} />
         <Route path={path.DETAIL} element={<Detail />} />
-        <Route path={path.USERCLIENT} element={<UserClient />} />
+        <Route path={path.USERCLIENT} element={<UserClient />} /> */}
 
         {/*Login route */}
         <Route path={path.LOGIN} element={<Login />} />
