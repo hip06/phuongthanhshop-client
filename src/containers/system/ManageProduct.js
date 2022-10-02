@@ -30,9 +30,6 @@ const ManageProduct = () => {
     categories.length > 0 && setSelectValue(categories[0].code);
   }, [categories]);
 
-  // console.log(selectFilter);
-
-
   useEffect(() => {
     const filter = Object.values(selectFilter.sort);
     selectValue &&

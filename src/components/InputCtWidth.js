@@ -139,7 +139,6 @@ const SelectPayment = React.memo(
                             <option value="null">Chưa có lựa chọn</option>
                         )}
                     </select>
-                    <BiSortAlt2 className="text-2xl" />
                 </div>
             </div>
         );
@@ -281,7 +280,6 @@ const InputFileCustomWidth = React.memo(
 
 const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, variantValue, setVariantValue }) => {
     useEffect(() => {
-        console.log(variants);
 
     }, [variants]);
     return (
@@ -311,10 +309,7 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                                 setVariantValue({ name: '', value: [] })
                                 setVariantChild({ type: '', price: '' })
                             } else {
-                                console.log(variantChild.type !== '')
-                                console.log(variantChild.price !== '');
-                                console.log(variantValue.name !== '');
-                                console.log(variantValue);
+                            
                             }
                         }}
                     ></Button>
@@ -352,7 +347,7 @@ const InputVariant = ({ setVariantChild, setVariants, variants, variantChild, va
                         onClick={() => {
 
                             if (Number.isInteger((Number(variantChild.price))) & variantChild.type !== '' & variantChild.price !== '' & variantValue.name !== '') {
-                                console.log(12);
+                               
                                 setVariantValue((prev) => {
                                     const type = 'value'
                                     return ({ ...prev, [type]: variantChild })

@@ -1,6 +1,7 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import {useEffect } from "react"
-const CartItem = ({id, image, name, cost, quantity, setTotalPayment, isChecked, addQuantity, minusQuantity, i }) => {
+const CartItem = ({id, image, name, cost, quantity, setTotalPayment, isChecked, addQuantity, minusQuantity, i,variant }) => {
+    
     let newCost = quantity * cost;
     useEffect(() => {
         isChecked ? setTotalPayment((prev) => { return prev + newCost }) : setTotalPayment((prev) => { return prev - newCost });
@@ -25,8 +26,9 @@ const CartItem = ({id, image, name, cost, quantity, setTotalPayment, isChecked, 
             <div className='w-[15%]'>
                 <img src={image} alt='hi' className='h-[58px] w-[50px] rounded-[3px] lg:h-[80px] lg:w-[72px]'></img>
             </div>
-            <div className='w-[50%]'>
-                <p className='font-medium text-[10px] lg:text-[18px] text-[#404040]'>{name}</p>
+            <div className='w-[40%]'>
+                <p className='font-medium text-[14px] lg:text-[18px] text-[#404040]'>{name}</p>
+                <p className='text-[12px]'>{variant}</p>
             </div>
             <div className='w-[15%]'>
                 {adjustQuantity}

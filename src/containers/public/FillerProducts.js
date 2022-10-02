@@ -61,6 +61,7 @@ const FillerProducts = ({ color, page, setPage, selectedOption, setSelectedOptio
                       name={product.name}
                       costPerUnit={product.costPerUnit}
                       color={color}
+                      variants={product.variants}
                     />
                   </div>
                 );

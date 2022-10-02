@@ -2,7 +2,7 @@ import axiosClients from "../axiosClients";
 
 const ApiPayment = {
   createBill: (data) => {
-    const url = "/api/v1/admin/bill/create";
+    const url = "/api/v1/bill/create";
     return axiosClients.post(url,{...data});  
   },
 };

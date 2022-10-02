@@ -80,14 +80,14 @@ const Cart = () => {
 
                 {cartItem.products.map((product, i) => {
                     product.quantity = quantities[i];
-
+                    
                     return <div key={i} className='flex justify-between w-full [&:not(:last-child)]:mb-[10px]'>
                         <input type='checkbox' className='w-10%' onChange={() => {
                             checkboxHandler(i);
                             checkedItems[i] === true ? dispatch(deleteFromPaymentAction(JSON.stringify(product))) : dispatch(addToPaymentAction(JSON.stringify(product)))
                         }}></input>
                         <div className='w-[90%]'>
-                            <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment}></CartItem>
+                            <CartItem i={i} id={product.id} image={product.image} name={product.name} cost={product.costPerUnit} quantity={quantities[i]} addQuantity={addQuantityHandle} minusQuantity={minusQuantityHandle} isChecked={checkedItems[i]} totalPayment={totalPayment} setTotalPayment={setTotalPayment} variant={product.variant}></CartItem>
                         </div>
                     </div>
                 })}

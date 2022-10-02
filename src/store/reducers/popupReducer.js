@@ -2,7 +2,11 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
   showPopup: false,
-  showPopupAddToCart: false,
+  showPopupAddToCart: {
+    isShow:false,
+    variants:[],
+    product:{},
+  },
 };
 
 const popupReducer = (state = initState, action) => {

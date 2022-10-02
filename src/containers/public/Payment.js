@@ -1,197 +1,274 @@
 import { AiOutlineHome } from "react-icons/ai";
 import { PaymentItem } from "../../components/CartItem";
-import Logo from "../../assets/logo.png"
-import { Link } from "react-router-dom"
-import { useSelector } from 'react-redux';
-import { useEffect, useState, useRef } from 'react'
-import { deleteAllPaymentsAction } from "../../store/actions/userAction"
-import { useDispatch } from "react-redux"
-import { SelectCustomWidth } from "../../components/InputCtWidth"
+import Logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState, useRef } from "react";
+import { deleteAllPaymentsAction } from "../../store/actions/userAction";
+import { useDispatch } from "react-redux";
+import { SelectPayment } from "../../components/InputCtWidth";
+import ApiPayment from "../../apis/payment";
 
 const Payment = () => {
-    const dispatch = useDispatch();
-    const nameRef=useRef();
-    const phoneNumberRef=useRef();
-    const emailRef=useRef();
-    const addressRef=useRef();
-    const cartItem = useSelector(state => state.cart);
-    const [totalPayment, setTotalPayment] = useState(0);
-    const [cities, setCities] = useState(['Lào Cai']);
-    const [citiesObject, setCitiesObject] = useState([]);
-    const [towns, setTowns] = useState([]);
-    const [townsObject, setTownsObject] = useState([]);
-    const [wards, setWards] = useState([]);
-    const [wardsObject, setWardsObject] = useState([]);
-    const [currentCity, setCurrentCity] = useState('Vui lòng chọn thành phố');
-    const [currentTowns, setCurrentTowns] = useState('Vui lòng chọn quận/huyện');
-    const [currentWard, setCurrentWard] = useState('Vui lòng chọn phường xã');
-    const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
-        product = JSON.parse(product);
-        return sum += product.costPerUnit * product.quantity
-    }, 0)
-    useEffect(() => {
-        citiesObject.map((city) => {
-            if (city['ProvinceName'] === currentCity) {
+  const dispatch = useDispatch();
+  const nameRef = useRef();
+  const phoneNumberRef = useRef();
+  const emailRef = useRef();
+  const addressRef = useRef();
+  const cartItem = useSelector((state) => state.cart);
+  const [totalPayment, setTotalPayment] = useState(0);
+  const [cities, setCities] = useState(["Vui lòng chọn thành phố"]);
+  const [citiesObject, setCitiesObject] = useState([]);
+  const [towns, setTowns] = useState(["Vui lòng chọn quận/huyện"]);
+  const [townsObject, setTownsObject] = useState([]);
+  const [wards, setWards] = useState(["Vui lòng chọn phường xã"]);
+  const [wardsObject, setWardsObject] = useState([]);
+  const [currentCity, setCurrentCity] = useState("Vui lòng chọn thành phố");
+  const [currentTowns, setCurrentTowns] = useState("Vui lòng chọn quận/huyện");
+  const [currentWard, setCurrentWard] = useState("Vui lòng chọn phường xã");
+  const getTotalPayment = cartItem.productsPayment.reduce((sum, product) => {
+    product = JSON.parse(product);
+    return (sum += product.costPerUnit * product.quantity);
+  }, 0);
+  useEffect(() => {
+    citiesObject.map((city) => {
+      if (city["ProvinceName"] === currentCity) {
+        fetchTownsHandler(city["ProvinceID"]);
+      }
+    });
+  }, [currentCity]);
 
-                fetchTownsHandler(city['ProvinceID']);
-            }
-        })
-    }, [currentCity])
+  useEffect(() => {
+    townsObject.map((town) => {
+      if (town["DistrictName"] === currentTowns) {
+        fetchWardsHandler(town["DistrictID"]);
+      }
+    });
+  }, [currentTowns, currentCity]);
 
-    useEffect(() => {
-        townsObject.map((town) => {
-            if (town['DistrictName'] === currentTowns) {
-
-                fetchWardsHandler(town['DistrictID']);
-            }
-        })
-    }, [currentTowns, currentCity])
-
-    const fetchTownsHandler = (cityId) => {
-
-        const fetchData = async () => {
-            const res = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=${cityId}`, {
-                method: 'GET',
-                headers: {
-                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
-                },
-            })
-            const data = await res.json();
-
-            const townsData = [];
-
-            data.data.map((town) => {
-                townsData.push(town['DistrictName']);
-            })
-            setTowns(townsData);
-            setTownsObject(data.data);
-
+  const fetchTownsHandler = (cityId) => {
+    const fetchData = async () => {
+      const res = await fetch(
+        `https://online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=${cityId}`,
+        {
+          method: "GET",
+          headers: {
+            token: "6dca80a5-3584-11ed-ad26-3a4226f77ff0",
+          },
         }
-        fetchData();
-    }
-    const fetchWardsHandler = (districtId) => {
+      );
+      const data = await res.json();
 
-        const fetchData = async () => {
-            const res = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${districtId}`, {
-                method: 'GET',
-                headers: {
-                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
-                },
-            })
-            const data = await res.json();
+      const townsData = [];
 
-            const wardsData = [];
-
-            data.data.map((ward) => {
-                wardsData.push(ward['WardName']);
-            })
-            setWards(wardsData);
-            setWardsObject(wardsData);
-
+      data.data.map((town) => {
+        townsData.push(town["DistrictName"]);
+      });
+      setTowns(townsData);
+      setTownsObject(data.data);
+    };
+    fetchData();
+  };
+  const fetchWardsHandler = (districtId) => {
+    const fetchData = async () => {
+      const res = await fetch(
+        `https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${districtId}`,
+        {
+          method: "GET",
+          headers: {
+            token: "6dca80a5-3584-11ed-ad26-3a4226f77ff0",
+          },
         }
-        fetchData();
-    }
+      );
+      const data = await res.json();
 
-    useEffect(() => {
+      const wardsData = [];
 
-        const fetchData = async () => {
-            const res = await fetch('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', {
-                method: 'GET',
-                headers: {
-                    'token': '6dca80a5-3584-11ed-ad26-3a4226f77ff0'
-                },
-            })
-            const data = await res.json();
+      data.data.map((ward) => {
+        wardsData.push(ward["WardName"]);
+      });
+      setWards(wardsData);
+      setWardsObject(wardsData);
+    };
+    fetchData();
+  };
 
-            const citiesData = [];
-
-            data.data.map((city) => {
-                citiesData.push(city['ProvinceName']);
-            })
-            setCities(citiesData);
-            setCitiesObject(data.data);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(
+        "https://online-gateway.ghn.vn/shiip/public-api/master-data/province",
+        {
+          method: "GET",
+          headers: {
+            token: "6dca80a5-3584-11ed-ad26-3a4226f77ff0",
+          },
         }
-        fetchData();
+      );
+      const data = await res.json();
 
-    }, [])
-    useEffect(() => {
-        setTotalPayment(getTotalPayment);
-    }, [cartItem.productsPayment])
-    // useEffect(() => {
-    //     const fetchProducts = async () => {
-    //         const res = await ApiPayment.createBill({
-    //             email: 'longn03@gmail.com',
-    //             address: 'hanoi',
-    //             current_products: '4b539927-ba04-4991-a219-bdebed7fc495:1,3fb0ecab-648b-4b55-8ddc-e959547940cd:2'
-    //         })
-    //         console.log(res);
-    //     }
+      const citiesData = [];
 
-    //     fetchProducts();
-    // }, [])
-    return (<div className='relative'>
-        <header className="flex items-center w-full h-[60px] lg:hidden">
-            <Link className='w-[15%] flex justify-center' to='/' onClick={() => {
-                dispatch(deleteAllPaymentsAction());
-            }}>
-                <AiOutlineHome size={28} className=""></AiOutlineHome>
-            </Link>
-            <Link className='w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]' to='/'>
-                <p style={{ fontFamily: 'Ruda, sans-serif' }} className='text-[30px]'>PhuongThanh</p>
-            </Link>
-        </header>
+      data.data.map((city) => {
+        citiesData.push(city["ProvinceName"]);
+      });
+      setCities(citiesData);
+      setCitiesObject(data.data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    setTotalPayment(getTotalPayment);
+  }, [cartItem.productsPayment]);
 
-        <section className=''>
-            <h1 className='text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px] lg:hidden'>THANH TOÁN</h1>
-            <div className='border-[1px] border-[#777] p-[10px] rounded-[10px] m-[10px] mt-[15px]'>
-                <div className='h-[200px] overflow-y-auto border-b-[1px] border-[#777] lg:h-[400px]'>
-                    {cartItem.productsPayment.map((product, i) => {
-                        product = JSON.parse(product);
-                        return <PaymentItem key={i} i={i} image={product.image} name={product.name} cost={product.costPerUnit * product.quantity} quantity={product.quantity} ></PaymentItem>
-                    })}
-                </div>
-                <div className='text-end mt-[10px] font-bold lg:text-[18px]'>
-                    <p>{`Tổng đơn hàng: ${totalPayment} đ`}</p>
-                    <p>{`+ Phí vận chuyển: 100000đ`}</p>
-                </div>
-            </div>
-        </section>
+  const submitHandler = (e) => {
+    const productsList = cartItem.productsPayment;
+    const products=productsList.map(product =>{
+      product=JSON.parse(product);
+      return {
+        productId: product.id,
+        cost:product.costPerUnit,
+        quantity:+product.quantity,
+      }
+    })
+    const fetchProducts = async () => {
+      const res = await ApiPayment.createBill({
+        name:nameRef.current.value,
+        email: emailRef.current.value,
+        address: addressRef.current.value,
+        phone: addressRef.current.value,
+        products:JSON.stringify(products),
+      });
+    
+    };
 
-        <section className=" border-[1px] border-[#777] rounded-[10px] p-[10px] m-[10px] mt-[20px] mb-[10px] lg:mt-[30px] lg:mb-[20px]">
+    fetchProducts();
+  };
 
-            <div className="relative w-full mb-[13px]">
-                <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px] lg:text-[20px]">Thông tin người nhận</p>
-            </div>
-            <input placeholder="Họ và tên" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={nameRef}></input>
-            <input placeholder="Số điện thoại" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={phoneNumberRef}></input>
-            <input placeholder="Email" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={emailRef}></input>
+  return (
+    <div className="relative">
+      <header className="flex items-center w-full h-[60px] lg:hidden">
+        <Link
+          className="w-[15%] flex justify-center"
+          to="/"
+          onClick={() => {
+            dispatch(deleteAllPaymentsAction());
+          }}
+        >
+          <AiOutlineHome size={28} className=""></AiOutlineHome>
+        </Link>
+        <Link
+          className="w-[85%] flex justify-center translate-x-[-7%] translate-y-[14%]"
+          to="/"
+        >
+          <p style={{ fontFamily: "Ruda, sans-serif" }} className="text-[30px]">
+            PhuongThanh
+          </p>
+        </Link>
+      </header>
 
-            <div className='h-[50px] w-full'>
-                <SelectCustomWidth options={cities} label='' widthP='full' selectValue={currentCity} setSelectValue={setCurrentCity}></SelectCustomWidth>
-            </div>
-            <div className='h-[50px] w-full'>
-                <SelectCustomWidth options={towns} label='' widthP='full' selectValue={currentTowns} setSelectValue={setCurrentTowns}></SelectCustomWidth>
-            </div>
-            <div className='h-[50px] w-full'>
-                <SelectCustomWidth options={wards} label='' widthP='full' selectValue={currentWard} setSelectValue={setCurrentWard}></SelectCustomWidth>
-            </div>
-
-            <input placeholder="Địa chỉ nhận hàng" className='w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]' ref={addressRef}></input>
-        </section>
-        <button className='w-full text-center text-[28px] bg-[#0083c2] py-[10px] text-white lg:hidden' onClick={() => {
-            cartItem.productsPayment = []
-        }}>
-            Đặt hàng
-        </button>
-        <div className='w-full flex justify-center'>
-            <button className='w-[95%] flex justify-center  text-center text-[28px] bg-[#0083c2] py-[10px] text-white hidden lg:block rounded-[10px]' onClick={() => {
-                cartItem.productsPayment = []
-            }}>
-                Đặt hàng
-            </button>
+      <section className="">
+        <h1 className="text-center font-bold text-[17px] bg-[#d9d9d9] py-[10px] lg:hidden">
+          THANH TOÁN
+        </h1>
+        <div className="border-[1px] border-[#777] p-[10px] rounded-[10px] m-[10px] mt-[15px]">
+          <div className="h-[200px] overflow-y-auto border-b-[1px] border-[#777] lg:h-[400px]">
+            {cartItem.productsPayment.map((product, i) => {
+              product = JSON.parse(product);
+              return (
+                <PaymentItem
+                  key={i}
+                  i={i}
+                  image={product.image}
+                  name={product.name}
+                  cost={product.costPerUnit * product.quantity}
+                  quantity={product.quantity}
+                ></PaymentItem>
+              );
+            })}
+          </div>
+          <div className="text-end mt-[10px] font-bold lg:text-[18px]">
+            <p>{`Tổng đơn hàng: ${totalPayment} đ`}</p>
+            <p>{`+ Phí vận chuyển: 100000đ`}</p>
+          </div>
         </div>
-    </div>);
-}
+      </section>
+
+      <section className=" border-[1px] border-[#777] rounded-[10px] p-[10px] m-[10px] mt-[20px] mb-[10px] lg:mt-[30px] lg:mb-[20px]">
+        <div className="relative w-full mb-[13px]">
+          <p className=" absolute font-bold top-[-28px] left-[50%] translate-x-[-50%] bg-white p-[5px] text-[15px] lg:text-[20px]">
+            Thông tin người nhận
+          </p>
+        </div>
+        <input
+          placeholder="Họ và tên"
+          className="w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]"
+          ref={nameRef}
+        ></input>
+        <input
+          placeholder="Số điện thoại"
+          className="w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]"
+          ref={phoneNumberRef}
+        ></input>
+        <input
+          placeholder="Email"
+          className="w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]"
+          ref={emailRef}
+        ></input>
+
+        <div className="h-[50px] w-full">
+          <SelectPayment
+            options={cities}
+            label=""
+            widthP="full"
+            selectValue={currentCity}
+            setSelectValue={setCurrentCity}
+          ></SelectPayment>
+        </div>
+        <div className="h-[50px] w-full">
+          <SelectPayment
+            options={towns}
+            label=""
+            widthP="full"
+            selectValue={currentTowns}
+            setSelectValue={setCurrentTowns}
+          ></SelectPayment>
+        </div>
+        <div className="h-[50px] w-full">
+          <SelectPayment
+            options={wards}
+            label=""
+            widthP="full"
+            selectValue={currentWard}
+            setSelectValue={setCurrentWard}
+          ></SelectPayment>
+        </div>
+
+        <input
+          placeholder="Địa chỉ nhận hàng"
+          className="w-full bg-[#d9d9d9] [&:not(last-child)]:mb-[10px] h-[40px] rounded-[10px] p-[10px]"
+          ref={addressRef}
+        ></input>
+      </section>
+      <button
+        className="w-full text-center text-[28px] bg-[#0083c2] py-[10px] text-white lg:hidden"
+        onClick={() => {
+          submitHandler();
+        }}
+      >
+        Đặt hàng
+      </button>
+      <div className="w-full flex justify-center">
+        <button
+          className="w-[95%] flex justify-center  text-center text-[28px] bg-[#0083c2] py-[10px] text-white hidden lg:block rounded-[10px]"
+          onClick={() => {
+            submitHandler();
+          }}
+        >
+          Đặt hàng
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Payment;

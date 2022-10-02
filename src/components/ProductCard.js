@@ -13,27 +13,16 @@ export const ProductCardCtHeight = ({
   name,
   color,
   costPerUnit,
+  variants,
 }) => {
-  const cartItem = useSelector((state) => state.cart);
   const [currentProduct, setCurrentProduct] = useState({});
   const isLoggedIn = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const [isAddToCartClick, setIsAddToCartClick] = useState(false);
   const navigate = useNavigate();
   const handleDispatch = async () => {
-    await dispatch(actions.getProductByIdClient({ id: id }));
     navigate(`/detail/${id}`);
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await ApiProduct.getProductByIdClient({ id: id });
-      setCurrentProduct(res.productData.rows[0]);
-    };
-    fetchData();
-    if (isAddToCartClick) {
-      setIsAddToCartClick(false);
-    }
-  }, [isAddToCartClick]);
+  const cartItem = useSelector((state) => state.cart);
   const isProductInCart = (id) => {
     for (let i = 0; i < cartItem.products.length; i++) {
       if (cartItem.products[i].id === id) {
@@ -68,18 +57,20 @@ export const ProductCardCtHeight = ({
           color={color}
           onClick={() => {
             if (isLoggedIn.isLoggedIn) {
-              setIsAddToCartClick(true);
-              if (!isProductInCart(id)) {
-                dispatch(
-                  actions.addToCartAction({
+              dispatch(
+                actions.togglePopupAddToCart({
+                  isShow: true,
+                  variants: variants,
+                  product: {
                     id,
                     image,
                     name,
                     color,
                     costPerUnit,
-                  })
-                );
-              }
+                  },
+                })
+              );
+              
             } else {
               dispatch(togglePopup(true));
             }

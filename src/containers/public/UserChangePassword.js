@@ -21,7 +21,7 @@ const UserChangePassword = () => {
     const passwordRef = useRef();
     const handleSubmit = async () => {
         const payload={ password: passwordRef.current.value, tokenVerifyEmailSuccess: tokenVerifyEmailSuccess };
-        console.log(payload);
+       
         const res=await changePassword.updatePassword(payload)
        
     }
@@ -31,6 +31,7 @@ const UserChangePassword = () => {
         {isVerified && <div>
             <p>Mật khẩu mới</p>
             <input className="bg-[#d9d9d9]" ref={passwordRef}></input>
+
             <p>Nhập lại mật khẩu mới</p>
             <input className="bg-[#d9d9d9]"></input>
             <button onClick={()=>{handleSubmit()}}>Xác nhận</button>

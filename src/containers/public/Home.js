@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <div className="w-full relative">
       {popup.showPopup && <PopupCart></PopupCart>}
-      {popup.showPopupAddToCart &&<PopupAddToCart></PopupAddToCart>}
+      {popup.showPopupAddToCart.isShow &&<PopupAddToCart></PopupAddToCart>}
       {loading && <LoadingPageDesktop />}
       <Header />
       <Outlet />
